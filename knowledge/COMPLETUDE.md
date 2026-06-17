@@ -8,24 +8,25 @@ Este arquivo acompanha a taxa de conclusão de cada fase do projeto.
 
 | Fase | Descrição | Status | Completude |
 | :--- | :--- | :---: | :---: |
-| **Fase 1** | Infraestrutura Básica e Documentação | Em Progresso | 25% |
+| **Fase 1** | Infraestrutura Básica e Documentação | Em Progresso | 75% |
 | **Fase 2** | Conectividade e Banco de Dados | Não Iniciado | 0% |
 | **Fase 3** | Módulo Scraper (BeautifulSoup) | Não Iniciado | 0% |
 | **Fase 4** | Sistema de Alertas (Telegram) | Não Iniciado | 0% |
 | **Fase 5** | Dashboard Streamlit | Não Iniciado | 0% |
 | **Fase 6** | Dockerização e Testes | Não Iniciado | 0% |
 
-**Progresso Total do Projeto**: 🔄 **4%**
+**Progresso Total do Projeto**: 🔄 **12%**
 
 ---
 
 ## 🔍 Detalhamento das Atividades
 
-### **Fase 1: Infraestrutura Básica e Documentação** (25%)
+### **Fase 1: Infraestrutura Básica e Documentação** (75%)
 - [x] Inicialização do repositório Git e `.gitignore`.
-- [ ] Criação dos arquivos na pasta `knowledge/`.
-- [ ] Criação da estrutura de pastas do projeto (POO).
+- [x] Criação dos arquivos na pasta `knowledge/`.
+- [x] Criação da estrutura de pastas do projeto (POO).
 - [ ] Definição do Modelo Entidade-Relacionamento (MER).
+
 
 ### **Fase 2: Conectividade e Banco de Dados** (0%)
 - [ ] Script de migração Supabase.
