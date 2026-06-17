@@ -10,12 +10,12 @@ Este arquivo acompanha a taxa de conclusão de cada fase do projeto.
 | :--- | :--- | :---: | :---: |
 | **Fase 1** | Infraestrutura Básica e Documentação | Concluído | 100% |
 | **Fase 2** | Conectividade e Banco de Dados | Concluído | 100% |
-| **Fase 3** | Módulo Scraper (BeautifulSoup) | Não Iniciado | 0% |
+| **Fase 3** | Módulo Scraper (BeautifulSoup) | Concluído | 100% |
 | **Fase 4** | Sistema de Alertas (Telegram) | Não Iniciado | 0% |
 | **Fase 5** | Dashboard Streamlit | Não Iniciado | 0% |
 | **Fase 6** | Dockerização e Testes | Não Iniciado | 0% |
 
-**Progresso Total do Projeto**: 🔄 **33%**
+**Progresso Total do Projeto**: 🔄 **50%**
 
 ---
 
@@ -34,11 +34,11 @@ Este arquivo acompanha a taxa de conclusão de cada fase do projeto.
 - [x] Implementação de conexão SQLite local.
 - [x] Lógica do `SyncService` (Sincronização offline-online).
 
-### **Fase 3: Módulo Scraper** (0%)
-- [ ] Script utilitário `lotes_config.json`.
-- [ ] Implementação do scraper orientada a objetos.
-- [ ] Lógica de retentativas e logs.
-- [ ] Configuração do Cron.
+### **Fase 3: Módulo Scraper** (100%)
+- [x] Script utilitário `lotes_config.json`.
+- [x] Implementação do scraper orientada a objetos.
+- [x] Lógica de retentativas e logs.
+- [x] Configuração do Cron.
 
 ### **Fase 4: Sistema de Alertas** (0%)
 - [ ] Inicialização do Bot Telegram (aiogram).

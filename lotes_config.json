@@ -1,0 +1,29 @@
+[
+    {
+        "EMPRESA": "Flávio Clayton Salvador",
+        "ESTABELECIMENTO": "Flávio Clayton Salvador",
+        "AVIARIO": "Aviário 1380",
+        "LOTE": 3,
+        "LINHAGEM": "Fêmeas Cobb ML",
+        "IDADE": 20,
+        "LINK": "https://s2.agrisolus.com.br/Home/Detalhes?idLote=6340000005"
+    },
+    {
+        "EMPRESA": "Flávio Clayton Salvador",
+        "ESTABELECIMENTO": "Flávio Clayton Salvador",
+        "AVIARIO": "Aviário 1379",
+        "LOTE": 3,
+        "LINHAGEM": "Fêmeas ROSS 308 AP",
+        "IDADE": 19,
+        "LINK": "https://s2.agrisolus.com.br/Home/Detalhes?idLote=6340000006"
+    },
+    {
+        "EMPRESA": "Marcelo Fumagalli",
+        "ESTABELECIMENTO": "Marcelo Fumagalli",
+        "AVIARIO": "Aviário 819",
+        "LOTE": 85,
+        "LINHAGEM": "Mistos ROSS 308 AP",
+        "IDADE": 12,
+        "LINK": "https://s2.agrisolus.com.br/Home/Detalhes?idLote=4200000019"
+    }
+]

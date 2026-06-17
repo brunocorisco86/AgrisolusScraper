@@ -20,10 +20,11 @@ Este arquivo define o planejamento e as metas de desenvolvimento para a soluçã
 
 
 ### **Fase 3: Módulo Scraper (BeautifulSoup)**
-- [ ] Criar script utilitário para gerar o `lotes_config.json` conforme `docs/GerarJson.md`.
-- [ ] Implementar classe `AgrisolusScraper` para login, navegação e extração de dados de saldo de ração.
-- [ ] Adicionar lógica de tratamento de falhas e logs detalhados.
-- [ ] Configurar agendamento (cron) para rodar o scraper a cada hora.
+- [x] Criar script utilitário para gerar o `lotes_config.json` conforme `docs/GerarJson.md`.
+- [x] Implementar classe `AgrisolusScraper` para login, navegação e extração de dados de saldo de ração.
+- [x] Adicionar lógica de tratamento de falhas e logs detalhados.
+- [x] Configurar agendamento (cron) para rodar o scraper a cada hora.
+
 
 ### **Fase 4: Alertas e Notificações (Telegram Bot - aiogram)**
 - [ ] Criar bot Telegram usando a biblioteca `aiogram`.
