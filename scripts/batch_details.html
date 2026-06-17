@@ -1,0 +1,2496 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agrisolus - AG.Aves</title>
+    <link href="/lib/sing-app/css/application.min.css" rel="stylesheet">
+    <link href="/lib/sing-app/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+    
+    <link href="/lib/jquery-timelify/css/animate.css" rel="stylesheet" />
+    <link href="/lib/jquery-timelify/css/timelify.css" rel="stylesheet" />
+    <link href="/lib/toastr/toastr.min.css" rel="stylesheet" />
+    <link href="/lib/Site.css" rel="stylesheet" />
+    <link href="/fonts/agrisolus-icon/style.css" rel="stylesheet" />
+    <!-- as of IE9 cannot parse css files with more that 4K classes separating in two files -->
+    <!--[if IE 9]>
+        <link href="/lib/sing-app/css/application-ie9-part2.css" rel="stylesheet">
+    <![endif]-->
+    <link rel="shortcut icon" href="/imagens/favicon.ico"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script>
+        /* yeah we need this empty stylesheet here. It's cool chrome & chromium fix
+         chrome fix https://code.google.com/p/chromium/issues/detail?id=167083
+         https://code.google.com/p/chromium/issues/detail?id=332189
+         */
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfcTpLNBU8oAcPyV8YhEMj7xmk5hgOj3M"></script>
+    <!-- common libraries. required for every page-->
+    <script src="/lib/sing-app/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/sing-app/bower_components/jquery-pjax/jquery.pjax.js"></script>
+    <script src="/lib/sing-app/bower_components/popper.js/dist/umd/popper.js"></script>
+    <script src="/lib/sing-app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/lib/sing-app/bower_components/bootstrap/js/dist/util.js"></script>
+    <script src="/lib/sing-app/bower_components/slimScroll/jquery.slimscroll.js"></script>
+    <script src="/lib/sing-app/bower_components/widgster/widgster.js"></script>
+    <script src="/lib/sing-app/bower_components/pace.js/pace.js" data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }'></script>
+    <script src="/lib/sing-app/bower_components/hammerjs/hammer.js"></script>
+    <script src="/lib/sing-app/bower_components/jquery-hammerjs/jquery.hammer.js"></script>
+    <!-- common app js -->
+    <script src="/lib/sing-app/js/settings.js"></script>
+    <script src="/lib/sing-app/js/app.js"></script>
+    
+    <!-- page specific libs -->
+    
+    <script src="/lib/sing-app/bower_components/underscore/underscore.js"></script>
+    <script src="/lib/sing-app/bower_components/jquery.sparkline/index.js"></script>
+    <script src="/lib/sing-app/bower_components/flot/jquery.flot.js"></script>
+    <script src="/lib/sing-app/bower_components/MetroJS/release/MetroJs.Full/MetroJs.js"></script>
+    <script src="/lib/sing-app/bower_components/skycons/skycons.js"></script>
+
+    <script src="/lib/sing-app/bower_components/jquery-autosize/jquery.autosize.min.js"></script>
+    <script src="/lib/sing-app/bower_components/select2/select2.min.js"></script>
+    <script src="/lib/sing-app/bower_components/moment/min/moment-with-locales.js"></script>
+    <script src="/lib/sing-app/bower_components/tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.js"></script>
+
+
+    <script src="/lib/sing-app/bower_components/jQuery-Mapael/js/raphael/raphael-min.js"></script>
+    <script src="/lib/sing-app/bower_components/morris.js/morris.min.js"></script>
+    
+    <script src="/lib/sing-app/bower_components/d3/d3.min.js"></script>
+    <script src="/lib/sing-app/bower_components/nvd3/build/nv.d3.min.js"></script>
+
+    <script src="/lib/sing-app/bower_components/datatables/media/js/jquery.dataTables.js"></script>
+    <script src="/lib/dataTables/dataTables.buttons.min.js"></script>
+    <script src="/lib/dataTables/jszip.min.js"></script>
+    <script src="/lib/dataTables/pdfmake.min.js"></script>
+    <script src="/lib/dataTables/vfs_fonts.js"></script>
+    <script src="/lib/dataTables/buttons.html5.min.js"></script>
+    <script src="/lib/dataTables/datetime-moment.js"></script>
+    <script src="/lib/dataTables/accent-neutralise.js"></script>
+    
+    <script src="/lib/jquery.mask.min.js"></script>
+
+    <script src="/lib/sing-app/bower_components/backbone/backbone.js"></script>
+    <script src="/lib/sing-app/bower_components/backbone.paginator/lib/backbone.paginator.min.js"></script>
+    <script src="/lib/sing-app/bower_components/backgrid/lib/backgrid.js"></script>
+    <script src="/lib/sing-app/bower_components/backgrid-paginator/backgrid-paginator.js"></script>
+    <script src="/lib/sing-app/bower_components/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="/lib/sing-app/bower_components/switchery/dist/switchery.min.js"></script>
+    <script src="/lib/sing-app/bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+
+    <script src="/lib/sing-app/bower_components/d3/d3.min.js"></script>
+    <script src="/lib/sing-app/bower_components/nvd3/build/nv.d3.min.js"></script>
+
+    <script src="/lib/sing-app/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+
+    <script src="/lib/sing-app/bower_components/flot/jquery.flot.pie.js"></script>
+    <script src="/lib/sing-app/bower_components/flot/jquery.flot.tooltip.js"></script>
+
+
+    <script src="/lib/highcharts/highcharts.js"></script>
+    <script src="/lib/highcharts/highcharts-more.js"></script>
+    <script src="/lib/highcharts/modules/treemap.js"></script>
+    <script src="/lib/highcharts/modules/exporting.js"></script>
+    <script src="/lib/highcharts/modules/drilldown.js"></script>
+
+    <script src="/lib/toastr/toastr.min.js"></script>
+
+    <script src="/lib/sing-app/bower_components/rickshaw/rickshaw.min.js"></script>
+
+    <script src="/lib/jquery-timelify/js/jquery.timelify.js"></script>
+
+    <!-- page specific libs -->
+    <!-- page specific js -->
+    <script>
+
+        function GetBaseUrl() {
+            var hostUrl = "/";
+            if (hostUrl[hostUrl.length - 1] == '/')
+                hostUrl = hostUrl.substring(0, hostUrl.length - 1);
+            return hostUrl;
+        }
+
+
+
+        $(function() {
+            moment.locale('pt-br');
+            $.fn.dataTable.moment( 'DD/MM/YYYY HH:mm:ss' );
+            $.fn.dataTable.moment( 'DD/MM/YYYY HH:mm' );
+            $.fn.dataTable.moment( 'DD/MM/YYYY' );
+
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": true,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+        });
+    </script>
+
+    <style>
+        .sidebar-nav .active .icon i {
+            color: #fff;
+        }
+
+        .sidebar-nav>.active>a, .sidebar-nav>.active>a:hover {
+            color: #3d8f52;
+        }
+    </style>
+
+<script type="text/javascript">!function(T,l,y){var S=T.location,k="script",D="instrumentationKey",C="ingestionendpoint",I="disableExceptionTracking",E="ai.device.",b="toLowerCase",w="crossOrigin",N="POST",e="appInsightsSDK",t=y.name||"appInsights";(y.name||T[e])&&(T[e]=t);var n=T[t]||function(d){var g=!1,f=!1,m={initialize:!0,queue:[],sv:"5",version:2,config:d};function v(e,t){var n={},a="Browser";return n[E+"id"]=a[b](),n[E+"type"]=a,n["ai.operation.name"]=S&&S.pathname||"_unknown_",n["ai.internal.sdkVersion"]="javascript:snippet_"+(m.sv||m.version),{time:function(){var e=new Date;function t(e){var t=""+e;return 1===t.length&&(t="0"+t),t}return e.getUTCFullYear()+"-"+t(1+e.getUTCMonth())+"-"+t(e.getUTCDate())+"T"+t(e.getUTCHours())+":"+t(e.getUTCMinutes())+":"+t(e.getUTCSeconds())+"."+((e.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:e,name:"Microsoft.ApplicationInsights."+e.replace(/-/g,"")+"."+t,sampleRate:100,tags:n,data:{baseData:{ver:2}}}}var h=d.url||y.src;if(h){function a(e){var t,n,a,i,r,o,s,c,u,p,l;g=!0,m.queue=[],f||(f=!0,t=h,s=function(){var e={},t=d.connectionString;if(t)for(var n=t.split(";"),a=0;a<n.length;a++){var i=n[a].split("=");2===i.length&&(e[i[0][b]()]=i[1])}if(!e[C]){var r=e.endpointsuffix,o=r?e.location:null;e[C]="https://"+(o?o+".":"")+"dc."+(r||"services.visualstudio.com")}return e}(),c=s[D]||d[D]||"",u=s[C],p=u?u+"/v2/track":d.endpointUrl,(l=[]).push((n="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",a=t,i=p,(o=(r=v(c,"Exception")).data).baseType="ExceptionData",o.baseData.exceptions=[{typeName:"SDKLoadFailed",message:n.replace(/\./g,"-"),hasFullStack:!1,stack:n+"\nSnippet failed to load ["+a+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(S&&S.pathname||"_unknown_")+"\nEndpoint: "+i,parsedStack:[]}],r)),l.push(function(e,t,n,a){var i=v(c,"Message"),r=i.data;r.baseType="MessageData";var o=r.baseData;return o.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+n+")").replace(/\"/g,"")+'"',o.properties={endpoint:a},i}(0,0,t,p)),function(e,t){if(JSON){var n=T.fetch;if(n&&!y.useXhr)n(t,{method:N,body:JSON.stringify(e),mode:"cors"});else if(XMLHttpRequest){var a=new XMLHttpRequest;a.open(N,t),a.setRequestHeader("Content-type","application/json"),a.send(JSON.stringify(e))}}}(l,p))}function i(e,t){f||setTimeout(function(){!t&&m.core||a()},500)}var e=function(){var n=l.createElement(k);n.src=h;var e=y[w];return!e&&""!==e||"undefined"==n[w]||(n[w]=e),n.onload=i,n.onerror=a,n.onreadystatechange=function(e,t){"loaded"!==n.readyState&&"complete"!==n.readyState||i(0,t)},n}();y.ld<0?l.getElementsByTagName("head")[0].appendChild(e):setTimeout(function(){l.getElementsByTagName(k)[0].parentNode.appendChild(e)},y.ld||0)}try{m.cookie=l.cookie}catch(p){}function t(e){for(;e.length;)!function(t){m[t]=function(){var e=arguments;g||m.queue.push(function(){m[t].apply(m,e)})}}(e.pop())}var n="track",r="TrackPage",o="TrackEvent";t([n+"Event",n+"PageView",n+"Exception",n+"Trace",n+"DependencyData",n+"Metric",n+"PageViewPerformance","start"+r,"stop"+r,"start"+o,"stop"+o,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),m.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4};var s=(d.extensionConfig||{}).ApplicationInsightsAnalytics||{};if(!0!==d[I]&&!0!==s[I]){var c="onerror";t(["_"+c]);var u=T[c];T[c]=function(e,t,n,a,i){var r=u&&u(e,t,n,a,i);return!0!==r&&m["_"+c]({message:e,url:t,lineNumber:n,columnNumber:a,error:i}),r},d.autoExceptionInstrumented=!0}return m}(y.cfg);function a(){y.onInit&&y.onInit(n)}(T[t]=n).queue&&0===n.queue.length?(n.queue.push(a),n.trackPageView({})):a()}(window,document,{
+src: "https://js.monitor.azure.com/scripts/b/ai.2.min.js", // The SDK URL Source
+crossOrigin: "anonymous", 
+cfg: { // Application Insights Configuration
+    connectionString: 'InstrumentationKey=e2fd029f-2a35-42f6-ae5a-d6926e69cd36;IngestionEndpoint=https://brazilsouth-1.in.applicationinsights.azure.com/'
+}});</script></head>
+<body>
+    <!--
+      Main sidebar seen on the left. may be static or collapsing depending on selected state.
+
+        * Collapsing - navigation automatically collapse when mouse leaves it and expand when enters.
+        * Static - stays always open.
+    -->
+    <nav id="sidebar" class="sidebar" role="navigation">
+        <!-- need this .js class to initiate slimscroll -->
+        <div class="js-sidebar-content">
+            <header class="logo d-none d-md-block">
+                <a href="/">
+                    <img src="/imagens/marca_fundoclaro_semslogan.png" width="180" style="margin-left: -6px;" />
+                </a>
+            </header>
+            <!-- seems like lots of recent admin template have this feature of user info in the sidebar.
+                 looks good, so adding it and enhancing with notifications -->
+            <div class="sidebar-status d-md-none">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="thumb-sm avatar float-right">
+                        <img class="img-circle" src="/imagens/avatar.png" alt="...">
+                    </span>
+                    Bruno Henrique Nielsen Conter
+                </a>
+                <!-- #notifications-dropdown-menu goes here when screen collapsed to xs or sm -->
+            </div>
+            <!-- main notification links are placed inside of .sidebar-nav -->
+            <ul class="sidebar-nav">
+                <li class="active">
+                    <!-- an example of nested submenu. basic bootstrap collapse component -->
+                    <a href="/" data-no-pjax>
+                        <span class="icon">
+                            <i class="fas fa-traffic-light"></i>
+                        </span>
+                        Semáforo
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/AGScan" data-no-pjax>
+                        <span class="icon">
+                            <i class="a-icon-camera-web-solid"></i>
+                        </span>
+                        AG.Scan
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/Home/AG500" data-no-pjax>
+                        <span class="icon" style="font-size: 22px; padding: 2px;">
+                            <i class="a-icon-light-switch3"></i>
+                        </span>
+                        AG500
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/Home/Peso" data-no-pjax>
+                        <span class="icon">
+                            <i class="a-icon-peso"></i>
+                        </span>
+                        Peso
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/Home/Pontuacao" data-no-pjax>
+                        <span class="icon">
+                            <i class="fas fa-medal"></i>
+                        </span>
+                        Score
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/Home/RacaoSilo" data-no-pjax>
+                        <span class="icon" style="font-size: 22px; padding: 2px;">
+                            <i class="a-icon-milho"></i>
+                        </span>
+                        Ração
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/Home/Agua" data-no-pjax>
+                        <span class="icon" style="font-size: 22px; padding: 2px;">
+                            <i class="a-icon-water-tank"></i>
+                        </span>
+                        Água
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/COFAnalise" data-no-pjax>
+                        <span class="icon">
+                            <i class="a-icon-dashboard"></i>
+                        </span>
+                        COF
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/Dashboard" data-no-pjax>
+                        <span class="icon" style="font-size: 24px; padding-top: 2px; padding-right: 2px;">
+                            <i class="fas fa-chart-line"></i>
+                        </span>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/Home/Listagem" data-no-pjax>
+                        <span class="icon">
+                            <i class="fas fa-list"></i>
+                        </span>
+                        Listagem
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/Home/Elias" data-no-pjax>
+                        <span class="icon">
+                            <i class="fas fa-brain"></i>
+                        </span>
+                        ELIAS
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/Home/AcessoRapido" data-no-pjax>
+                        <span class="icon">
+                            <i class="fas fa-bolt"></i>
+                        </span>
+                        Acesso Rápido
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/Home/Alertas" data-no-pjax>
+                        <span class="icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                        Alertas
+                    </a>
+                </li>                
+                <li class="">
+                    <a href="/Home/Frm" data-no-pjax>
+                        <span class="icon" style="font-size: 24px; padding-top: 2px; padding-right: 2px;">
+                            <i class="a-icon-farmer-hat3"></i>
+                        </span>
+                        FRM
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/Home/Analise" data-no-pjax>
+                        <span class="icon" style="font-size: 24px; padding-top: 2px; padding-right: 2px;">
+                            <i class="fas fa-chart-line"></i>
+                        </span>
+                        Análise
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/Home/Parametros" data-no-pjax>
+                        <span class="icon">
+                            <i class="fas fa-cogs"></i>
+                        </span>
+                        Parâmetros
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/Permissoes/Menu" data-no-pjax>
+                        <span class="icon">
+                            <i class="fas fa-users"></i>
+                        </span>
+                        Permissões
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- This is the white navigation bar seen on the top. A bit enhanced BS navbar. See .page-controls in _base.scss. -->
+    <nav class="page-controls navbar navbar-dashboard">
+        <div class="container-fluid">
+            <!-- .navbar-header contains links seen on xs & sm screens -->
+            <div class="navbar-header mr-md-3">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                        <!-- whether to automatically collapse sidebar on mouseleave. If activated acts more like usual admin templates -->
+                        <a class="d-none d-lg-block nav-link" id="nav-state-toggle" href="#">
+                            <i class="la la-bars"></i>
+                        </a>
+                        <!-- shown on xs & sm screen. collapses and expands navigation -->
+                        <a class="d-lg-none nav-link" id="nav-collapse-toggle" href="#">
+                            <span class="square square-lg bg-gray text-white d-md-none"><i class="la la-bars"></i></span>
+                            <i class="la la-bars d-none d-md-block"></i>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right d-md-none">
+                    <li class="nav-item">
+                        <!-- toggles chat -->
+                        <a class="nav-link" href="#" data-toggle="chat-sidebar">
+                            <span class="square square-lg bg-gray text-white"><i class="fa fa-cog"></i></span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- xs & sm screen logo -->
+                <a class="navbar-brand d-md-none" href="/">
+                    <img src="/imagens/marca_fundoclaro_semslogan.png" width="140" style="margin: auto;" />
+                </a>
+            </div>
+
+
+            <!-- this part is hidden for xs screens -->
+
+            <div class="navbar-header mobile-hidden">
+                <!-- search form! link it to your search server -->
+                <form class="navbar-form">
+                    <h4 id="main-title">Detalhe Lote </h4>
+                </form>
+                <ul class="nav navbar-nav float-right">
+                    <li class="dropdown nav-item">
+                        <a href="#"
+                           role="button"
+                           class="dropdown-toggle dropdown-toggle-notifications nav-link"
+                           id="notifications-dropdown-toggle"
+                           data-toggle="dropdown"
+                           aria-haspopup="true"
+                           aria-expanded="false">
+                            <span class="thumb-sm avatar float-left">
+                                <img class="img-circle" src="/imagens/avatar.png" alt="...">
+                            </span>
+                            &nbsp;
+                            Bruno Henrique Nielsen Conter &nbsp;
+                        </a>
+                    </li>
+                    <li class="dropdown nav-item">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <i class="la la-cog"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a class="dropdown-item" href="/Login/LogOff"><i class="la la-sign-out"></i> &nbsp; Log Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+    <div class="content-wrap">
+        <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
+        <main id="content" class="content" role="main">
+            <style>
+    .content {
+        /*height: 100%;*/
+        width: 100%;
+        position: absolute;
+        top: 0;
+    }
+
+    .theme-helper .theme-helper-toggler i {
+        animation: none;
+        vertical-align: initial !important;
+    }
+    .bg-filter {
+        background: #64bd63;
+    }
+    .theme-helper .theme-helper-content .widget-body {
+        max-height: 500px;
+        overflow: auto;
+    }
+    .theme-helper .theme-helper-content .widget-body li {
+        /*list-style: none;
+        margin: 0;
+        text-align: center;
+        width: 100%;
+        border: 1px solid green;
+        margin-bottom: 2px;
+        border-radius: 5px;
+        box-shadow: 1px 1px 1px grey;*/
+        width: 100%;
+        margin-bottom: 2px;
+    }
+    .theme-helper .theme-helper-content .widget-body ul {
+        padding: 0;
+    }
+    .theme-helper .theme-helper-content .theme-helper-header {
+        margin: -20px -10px;
+    }
+    .theme-helper .theme-helper-content {
+        padding: 20px 10px;
+    }
+    .theme-helper .theme-helper-spinner {
+        opacity: 0.7;
+    }
+    .filter-separator {
+        border-bottom: 1px solid #798892;
+        margin: 10px 0;
+    }
+ 
+
+    .widget-card {
+        min-height: auto;
+    }
+    .widget-text {
+        text-align: center;
+    }
+    .flotTip {
+        padding: 3px 5px;
+        background-color: #000;
+        z-index: 100;
+        color: #fff;
+        opacity: .80;
+        filter: alpha(opacity=85);
+    }
+    .stat-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .widget .widget-text {
+        margin-top: 7px;
+        margin-bottom: 7px;
+    }
+    .card-simple {
+        margin-bottom: 10px;
+    }
+    
+    .widget-body small {
+        display: block;
+    }
+
+    .widget-body small.danger {
+        font-size: 10px;
+        background: red;
+        border-radius: 5px;
+        color: #fff;
+        padding: 0 5px;
+    }
+    
+    .btn-left {
+        position: fixed;
+        right: 0;
+        top: 66px;
+        z-index: 100;
+    }
+    .btn-left .btn-left-content {
+        width: 56px;
+        margin-left: -56px;
+        cursor: pointer;
+    }
+    .btn-left .btn-left-content .btn-left-btn {
+        z-index: 200;
+        border-radius: 50% 0 0 50%;
+        padding: .8rem .5rem .8rem 1rem;
+        font-size: 1.75rem;
+        line-height: initial;
+        box-shadow: -1px 0 8px #c1ccd3;
+    }
+    
+    .bg-orange {
+        background: orange !important;
+    }
+
+    .bg-purple {
+        background: purple !important;
+    }
+</style>
+
+
+<style>
+    .avicam-img {
+        background-color: #cccccc;
+        height: 120px;
+        width: 120px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-4 col-md-6">
+        <div class="row">
+            
+            <div class="col-lg-12">
+                <section class="widget widget-card">
+                    <div class="widget-body clearfix">
+                        <table class="table col-lg-12" style="background-color: white">
+                            <tbody>
+                            <tr><td style="border-top: none;"><span class="pull-left">Empresa</span><b class="pull-right" style="font-size: 13px;">Marcelo Fumagalli</b></td></tr>
+                            <tr><td><span class="pull-left">Estabelecimento</span><b class="pull-right" style="font-size: 13px;">Marcelo Fumagalli</b></td></tr>
+                            <tr><td><span class="pull-left">Aviário</span><b class="pull-right" style="font-size: 13px;">Avi&#xE1;rio 819</b></td></tr>
+                            <tr><td><span class="pull-left">Código Lote</span><b class="pull-right" style="font-size: 13px;">85</b></td></tr>
+                            <tr><td><span class="pull-left">Linhagem</span><b class="pull-right" style="font-size: 13px;">Mistos ROSS 308 AP</b></td></tr>
+                            <tr><td><span class="pull-left">Data Alojamento</span><b class="pull-right" style="font-size: 13px;">05/06/2026 11:00:00</b></td></tr>
+                            <tr><td><span class="pull-left">Qtd. Alojamento</span><b class="pull-right" style="font-size: 13px;">26800</b></td></tr>
+                            <tr><td><span class="pull-left">Mortos</span><b class="pull-right" style="font-size: 13px;">0</b></td></tr>
+                            <tr><td><span class="pull-left">Saldo de Frangos</span><b class="pull-right" style="font-size: 13px;">26800</b></td></tr>
+                            <tr><td><span class="pull-left">&nbsp;</span><b class="pull-right" style="font-size: 13px;">&nbsp;</b></td></tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>
+                                            <button class="btn btn-xs btn-primary pull-left" onclick="abrirModalAcao(4200000019)"> Ação <i class="fa fa-check"></i></button>
+                                            <button class="btn btn-xs btn-success pull-right" onclick="maisGraficos(4200000019, 45)"> Mais Detalhes <i class="fas fa-list"></i></button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <section class="widget widget-card card-simple">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="widget-icon">
+                                    <i class="fa fa-birthday-cake"></i>
+                                </span>
+                            </div>
+                            <div class="col-9 widget-text">
+                                <h6 class="no-margin">Idade</h6>
+                                <p class="h2 no-margin fw-normal">12</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+                <section class="widget widget-card card-simple">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="widget-icon">
+                                    <i class="a-icon-assado"></i>
+                                </span>
+                            </div>
+                            <div class="col-9 widget-text">
+                                <h6 class="no-margin">Idade Fechamento</h6>
+                                <p class="h2 no-margin fw-normal">45</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-12 col-md-12">
+                <section class="widget widget-card card-simple">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-4">
+                                <span class="widget-icon">
+                                    <i class="a-icon-peso"></i>
+                                </span>
+                            </div>
+                            <div class="col-4 widget-text">
+                                <h6 class="no-margin">Peso Médio</h6>
+                                <p class="h2 no-margin fw-normal" style="position: relative;">
+                                    368
+                                    <span class="no-margin" style="font-size: 10px;position: absolute;bottom: -3px;right: -3px;font-weight: bold;color: #f55d5d;">95,34</span>
+                                </p>
+                            </div>
+                            <div class="col-4 widget-text">
+                                <h6 class="no-margin">Projetado</h6>
+                                <p class="h2 no-margin fw-normal">2845</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="col-lg-12 col-md-12">
+                <section class="widget widget-card card-simple">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-4">
+                                <span class="widget-icon">
+                                    <i class="a-icon-peso"></i>
+                                </span>
+                            </div>
+                            <div class="col-4 widget-text" style="margin: 0">
+                                <h6 class="no-margin">Peso Zootécnico</h6>
+                                <p class="h2 no-margin fw-normal" style="position: relative;">
+                                    429
+                                </p>
+                            </div>
+                            <div class="col-4 widget-text" style="margin: 0">
+                                <h6 class="no-margin">Projetado Zootécnico</h6>
+                                <p class="h2 no-margin fw-normal">3569</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="col-lg-6 col-md-12">
+                <section class="widget widget-card card-simple" style="padding-top: 10px; padding-bottom: 10px;">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="widget-icon">
+                                    <i class="a-icon-water-tank"></i>
+                                </span>
+                            </div>
+                            <div class="col-9 widget-text" style="margin-top: 0; margin-bottom: 0; padding-left: 15px; padding-right: 15px;">
+                                <h6 class="no-margin">Consumo Médio Água (2 Dias)</h6>
+                                <p class="h2 no-margin fw-normal">9486</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+                <section class="widget widget-card card-simple" style="padding-top: 10px; padding-bottom: 10px;">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="widget-icon">
+                                    <i class="a-icon-milho"></i>
+                                </span>
+                            </div>
+                            <div class="col-9 widget-text" style="margin-top: 0; margin-bottom: 0; padding-left: 15px; padding-right: 15px;">
+                                <h6 class="no-margin">Consumo Médio Ração (2 Dias)</h6>
+                                <p class="h2 no-margin fw-normal">29003</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <section class="widget widget-card card-simple">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="widget-icon">
+                                    <i class="a-icon-rip"></i>
+                                </span>
+                            </div>
+                            <div class="col-9 widget-text">
+                                <h6 class="no-margin">Mortalidade</h6>
+                                <p class="h2 no-margin fw-normal">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+                <section class="widget widget-card card-simple">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="widget-icon">
+                                    <i class="fas fa-medal"></i>
+                                </span>
+                            </div>
+                            <div class="col-9 widget-text">
+                                <h6 class="no-margin">Score</h6>
+                                <p class="h2 no-margin fw-normal">78</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="col-lg-12 col-md-12">
+                <section class="widget widget-card card-simple">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-3" style="margin: auto;">
+                                <span class="widget-icon">
+                                    <i class="a-icon-peso"></i>
+                                </span>
+                            </div>
+                            <div class="col-9">
+                                <div class="row">
+                                            <div class="col-4 widget-text">
+                                                <h6 class="no-margin">00012982 (Exaustor)</h6>
+                                                <p class="h2 no-margin fw-normal">387</p>
+                                            </div>
+                                            <div class="col-4 widget-text">
+                                                <h6 class="no-margin">00012665 (Centro)</h6>
+                                                <p class="h2 no-margin fw-normal">361</p>
+                                            </div>
+                                            <div class="col-4 widget-text">
+                                                <h6 class="no-margin">00012666 (Placa)</h6>
+                                                <p class="h2 no-margin fw-normal">354</p>
+                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="col-lg-12 col-md-12">
+                <section class="widget widget-card card-simple">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="widget-icon">
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                </span>
+                            </div>
+                            <div class="col-9 widget-text">
+                                <h6 class="no-margin">Alerta de Peso</h6>
+                                <p class="h2 no-margin fw-normal">Sim</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+    <div class="col-lg-8 col-md-6" style="display: none">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-4">
+                <section class="widget widget-card card-simple">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="widget-icon">
+                                    <i class="fa fa-birthday-cake"></i>
+                                </span>
+                            </div>
+                            <div class="col-9 widget-text">
+                                <h6 class="no-margin">Idade</h6>
+                                <p class="h2 no-margin fw-normal">12</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-3 col-md-4">
+                <section class="widget widget-card card-simple">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="widget-icon">
+                                    <i class="a-icon-assado"></i>
+                                </span>
+                            </div>
+                            <div class="col-9 widget-text">
+                                <h6 class="no-margin">Idade Fechamento</h6>
+                                <p class="h2 no-margin fw-normal">45</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-3 col-md-4">
+                <section class="widget widget-card card-simple">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="widget-icon">
+                                    <i class="a-icon-rip"></i>
+                                </span>
+                            </div>
+                            <div class="col-9 widget-text">
+                                <h6 class="no-margin">Mortalidade</h6>
+                                <p class="h2 no-margin fw-normal">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-3 col-md-4">
+                <section class="widget widget-card card-simple">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="widget-icon">
+                                    <i class="fas fa-medal"></i>
+                                </span>
+                            </div>
+                            <div class="col-9 widget-text">
+                                <h6 class="no-margin">Score</h6>
+                                <p class="h2 no-margin fw-normal">78</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-6 col-md-9">
+                <section class="widget widget-card card-simple">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-4">
+                                <span class="widget-icon">
+                                    <i class="a-icon-peso"></i>
+                                </span>
+                            </div>
+                            <div class="col-4 widget-text">
+                                <h6 class="no-margin">Peso Médio</h6>
+                                <p class="h2 no-margin fw-normal" style="position: relative;">
+                                    368
+                                    <span class="no-margin" style="font-size: 10px;position: absolute;bottom: -3px;right: -3px;font-weight: bold;color: #f55d5d;">95,34</span>
+                                </p>
+                            </div>
+                            <div class="col-4 widget-text">
+                                <h6 class="no-margin">Projetado</h6>
+                                <p class="h2 no-margin fw-normal">2845</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-6 col-md-9">
+                <section class="widget widget-card card-simple">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-3" style="margin: auto;">
+                                <span class="widget-icon">
+                                    <i class="a-icon-peso"></i>
+                                </span>
+                            </div>
+                            <div class="col-9">
+                                <div class="row">
+                                    <div class="col-4 widget-text">
+                                        <h6 class="no-margin">Exaustor</h6>
+                                        <p class="h2 no-margin fw-normal">387</p>
+                                    </div>
+                                    <div class="col-4 widget-text">
+                                        <h6 class="no-margin">Centro</h6>
+                                        <p class="h2 no-margin fw-normal">361</p>
+                                    </div>
+                                    <div class="col-4 widget-text">
+                                        <h6 class="no-margin">Placa</h6>
+                                        <p class="h2 no-margin fw-normal">354</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-6 col-md-9">
+                <section class="widget widget-card card-simple">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-4">
+                                <span class="widget-icon">
+                                    <i class="a-icon-peso"></i>
+                                </span>
+                            </div>
+                            <div class="col-4 widget-text" style="margin: 0">
+                                <h6 class="no-margin">Peso Zootécnico</h6>
+                                <p class="h2 no-margin fw-normal" style="position: relative;">
+                                    429
+                                </p>
+                            </div>
+                            <div class="col-4 widget-text" style="margin: 0">
+                                <h6 class="no-margin">Projetado Zootécnico</h6>
+                                <p class="h2 no-margin fw-normal">3569</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-6 col-md-9">
+                <section class="widget widget-card card-simple">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="widget-icon">
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                </span>
+                            </div>
+                            <div class="col-9 widget-text">
+                                <h6 class="no-margin">Alerta de Peso</h6>
+                                <p class="h2 no-margin fw-normal">Sim</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            
+            <div class="col-lg-3 col-md-12">
+                <section class="widget widget-card card-simple" style="padding-top: 10px; padding-bottom: 10px;">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="widget-icon">
+                                    <i class="a-icon-water-tank"></i>
+                                </span>
+                            </div>
+                            <div class="col-9 widget-text" style="margin-top: 0; margin-bottom: 0; padding-left: 15px; padding-right: 15px;">
+                                <h6 class="no-margin">Consumo Médio Água (2 Dias)</h6>
+                                <p class="h2 no-margin fw-normal">9486</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-3 col-md-12">
+                <section class="widget widget-card card-simple" style="padding-top: 10px; padding-bottom: 10px;">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="widget-icon">
+                                    <i class="a-icon-milho"></i>
+                                </span>
+                            </div>
+                            <div class="col-9 widget-text" style="margin-top: 0; margin-bottom: 0; padding-left: 15px; padding-right: 15px;">
+                                <h6 class="no-margin">Consumo Médio Ração (2 Dias)</h6>
+                                <p class="h2 no-margin fw-normal">29003</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <section class="widget">
+            <header>
+                <h5>
+                    Evolução de Pesos(Média Diária)
+                </h5>
+                <div class="widget-controls">
+                    <a data-widgster="expand" title="Expand" href="#">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a data-widgster="collapse" title="Collapse" href="#">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+            </header>
+            <div class="widget-body">
+                <div id="chartPesoMedio"></div>
+                    <img src="/imagens/selo-elias.png" width="100" style="position: absolute;bottom: 0px; right: 0;">
+            </div>
+        </section>
+
+        <section class="widget">
+            <header>
+                <h5>
+                    Consumo de Água
+                </h5>
+                <div class="widget-controls">
+                    <button class="btn btn-xs btn-primary pull-left" onclick="exportConsumoAgua(4200000019)" style="margin-right: 10px;">
+                        Exportar <i class="fa fa-download"></i>
+                    </button>
+                    <a data-widgster="expand" title="Expand" href="#">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a data-widgster="collapse" title="Collapse" href="#">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+            </header>
+            <div class="widget-body">
+                <div id="chartAgua"></div>
+            </div>
+        </section>
+
+        <section class="widget">
+            <header>
+                <h5>
+                    Co2
+                </h5>
+                <div class="widget-controls">
+                    <a data-widgster="expand" title="Expand" href="#">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a data-widgster="collapse" title="Collapse" href="#">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+            </header>
+            <div class="widget-body">
+                <div id="chartCo2"></div>
+            </div>
+        </section>
+            <section class="widget">
+                <header>
+                <h5>
+                    Peso Médio Semanal
+                </h5>
+                <div class="widget-controls">
+                    <a data-widgster="expand" title="Expand" href="#">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a data-widgster="collapse" title="Collapse" href="#">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+            </header>
+            <div class="widget-body">
+                <div id="chartPesoAvicam"></div>
+            </div>
+        </section>
+        <section class="widget">
+            <header>
+                <h5>
+                    Alertas
+                </h5>
+                <div class="widget-controls">
+                    <a data-widgster="expand" title="Expand" href="#">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a data-widgster="collapse" title="Collapse" href="#">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+            </header>
+            <div class="widget-body">
+                <div class='table-responsive'>
+                    <table class='table table-striped table-hover' id='alertas-table'></table>
+                </div>
+            </div>
+        </section>
+        
+
+    </div>
+
+    <div class="col-lg-6">
+        
+        <section class="widget">
+            <header>
+                <h5>
+                    Ração
+                </h5>
+                <div class="widget-controls">
+                    <a data-widgster="expand" title="Expand" href="#">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a data-widgster="collapse" title="Collapse" href="#">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+            </header>
+            <div class="widget-body">
+                <div class="row" style="margin-bottom: 30px;">
+
+                                <div class="col-lg-6">
+                                    <h2 class="no-margins" style="text-align: center;">Silo-819-01</h2>
+                                    <div style="position: relative; height: 300px; width: 212px; margin: auto;">
+                                        <div style="height: 100%; width: 100%; background-color: #ccc; position: absolute; top: 0; left: 9px;"></div>
+                                        <div style="width: 100%; position: absolute; top: 0; left: 9px; margin-top: 26px; margin-bottom: 34px; height: 240px;">
+                                            <div style="height: 100%; background-color: #faecbf; position: absolute; width: 85%; bottom: 0; left: 9px;"></div>
+                                        </div>
+                                        <img src="/imagens/silo-trans.png" style="position: absolute; top: 0; left: 9px; height: 100%; width: 100%;" />
+                                        <h2 class="no-margins" style="position: absolute; top: 45%; text-align: center; width: 212px; font-weight: bold;">2.133,65</h2>
+                                    </div>
+                                </div>                            
+                                <div class="col-lg-6">
+                                    <h2 class="no-margins" style="text-align: center;">Silo-819-02</h2>
+                                    <div style="position: relative; height: 300px; width: 212px; margin: auto;">
+                                        <div style="height: 100%; width: 100%; background-color: #ccc; position: absolute; top: 0; left: 9px;"></div>
+                                        <div style="width: 100%; position: absolute; top: 0; left: 9px; margin-top: 26px; margin-bottom: 34px; height: 240px;">
+                                            <div style="height: 100%; background-color: #faecbf; position: absolute; width: 85%; bottom: 0; left: 9px;"></div>
+                                        </div>
+                                        <img src="/imagens/silo-trans.png" style="position: absolute; top: 0; left: 9px; height: 100%; width: 100%;" />
+                                        <h2 class="no-margins" style="position: absolute; top: 45%; text-align: center; width: 212px; font-weight: bold;">1.788,37</h2>
+                                    </div>
+                                </div>                            
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div style="margin-bottom: 25px">
+                            <h2 class="no-margins" style="margin-bottom: 0px">110.816,00 kg</h2>
+                            <small>Total de Ração Consumida</small>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div style="margin-bottom: 25px">
+                            <h2 class="no-margins " style="margin-bottom: 0px">8.656,00 kg</h2>
+                            <small>Total de Ração Prevista</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div style="margin-bottom: 25px">
+                            <h2 class="no-margins " style="margin-bottom: 0px">11,24</h2>
+                            <small>Conversão Alimentar</small>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div style="margin-bottom: 25px">
+                            <h2 class="no-margins " style="margin-bottom: 0px">19,73</h2>
+                            <small>C.A Diária</small>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div style="margin-bottom: 25px">
+                            <h2 class="no-margins " style="margin-bottom: 0px">24,09</h2>
+                            <small>C.A Projetada</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div style="margin-bottom: 25px">
+                            <h2 class="no-margins " style="margin-bottom: 0px">11,24</h2>
+                            <small>C.A Bruta</small>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div style="margin-bottom: 25px">
+                            <h2 class="no-margins " style="margin-bottom: 0px">19,73</h2>
+                            <small>C.A Diária Bruta</small>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div style="margin-bottom: 25px">
+                            <h2 class="no-margins " style="margin-bottom: 0px">24,05</h2>
+                            <small>C.A.P.A</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div style="margin-bottom: 25px">
+                                    <h2 class="no-margins " style="margin-bottom: 0px">3.922.023,80 kg</h2>
+                                    <small>Saldo Ração</small>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-12">
+                                <div style="margin-bottom: 25px">
+                                    <h2 class="no-margins " style="margin-bottom: 0px">19/07/2026</h2>
+                                    <small>Data Prevista Termino Ração</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="row">
+                                        <div class="col-lg-6">
+                                            <div style="margin-bottom: 25px">
+                                                <h2 class='no-margins' style='margin-bottom: 0px'>17/06/2026</h2>
+                                                <small>Data Saldo Ração</small>
+                                                <small>Horario: 16:00</small>
+                                                <small>Silo-819-01</small>
+                                            </div>
+                                        </div>                         
+                                        <div class="col-lg-6">
+                                            <div style="margin-bottom: 25px">
+                                                <h2 class='no-margins' style='margin-bottom: 0px'>17/06/2026</h2>
+                                                <small>Data Saldo Ração</small>
+                                                <small>Horario: 09:00</small>
+                                                <small>Silo-819-02</small>
+                                            </div>
+                                        </div>                         
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    
+                </div>
+            </div>
+        </section>
+
+
+        <section class="widget">
+            <header>
+                <h5>
+                    Temperatura
+                </h5>
+                <div class="widget-controls">
+                    <a data-widgster="expand" title="Expand" href="#">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a data-widgster="collapse" title="Collapse" href="#">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+            </header>
+            <div class="widget-body">
+                <div id="chartTemperatura"></div>
+            </div>
+        </section>
+
+        <section class="widget">
+            <header>
+                <h5>
+                    Umidade
+                </h5>
+                <div class="widget-controls">
+                    <a data-widgster="expand" title="Expand" href="#">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a data-widgster="collapse" title="Collapse" href="#">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+            </header>
+            <div class="widget-body">
+                <div id="chartUmidade"></div>
+            </div>
+        </section>
+        
+        <section class="widget">
+            <header>
+                <h5>
+                    Calibrações
+                </h5>
+                <div class="widget-controls">
+                    <a data-widgster="expand" title="Expand" href="#">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a data-widgster="collapse" title="Collapse" href="#">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+            </header>
+            <div class="widget-body">
+                <div class='table-responsive'>
+                    <table class='table table-striped table-hover' id='calibracoes-table'></table>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <div class="col-lg-12">
+        <section class="widget">
+            <header>
+                <h5>
+                    Dados Gerais
+                </h5>
+                <div class="widget-controls">
+                    <a data-widgster="expand" title="Expand" href="#">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a data-widgster="collapse" title="Collapse" href="#">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+            </header>
+
+            <div class="widget-body">
+                <div class="row">
+                    <div class="col-sm-3 col-xs-6">
+                        <small class="stats-label">Qtd. Exaustores</small>
+                        <h4> - </h4>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <small class="stats-label">Características</small>
+                        <h4> - </h4>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <small class="stats-label">Pressão</small>
+                        <h4> - </h4>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <small class="stats-label">Forno</small>
+                        <h4> - </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-body">
+                <div class="row">
+                    <div class="col-sm-3 col-xs-6">
+                        <small class="stats-label">Intervalo de Sono</small>
+                        <h4> - </h4>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <small class="stats-label">Dark</small>
+                        <h4> - </h4>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <small class="stats-label">Comedouros</small>
+                        <h4> - </h4>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <small class="stats-label">Lâmpadas de Led Com Timing</small>
+                        <h4> - </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-body">
+                <div class="row">
+                    <div class="col-sm-3 col-xs-6">
+                        <small class="stats-label">Abatedouro</small>
+                        <h4 style="color: #1c84c6;"> - </h4>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <small class="stats-label">Ração Peletizada</small>
+                        <h4> - </h4>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <small class="stats-label">Silo</small>
+                        <h4> - </h4>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <small class="stats-label">Técnico Responsável</small>
+                        <h4> - </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-body">
+                <div class="row">
+                    <div class="col-sm-3 col-xs-6">
+                        <small class="stats-label">Incubatório</small>
+                        <h4> - </h4>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <small class="stats-label">Idade Média Matriz</small>
+                        <h4> - </h4>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <small class="stats-label">Peso Abate</small>
+                        <h4> - </h4>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <small class="stats-label">Intervalo em Dias</small>
+                        <h4> - </h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+</div>
+
+<div class="modal fade" id="acaoModal" tabindex="-1" role="dialog" aria-labelledby="Acao" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="acaoModal-title">Ação</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-12 b-r">
+                            
+                                <input id="IdAcaoLote-Acao" type="hidden">
+                                <input id="IdLote-Acao" type="hidden">
+                                <div class="form-group">
+                                    <label>Aviário</label>
+                                    <input id="Aviario-Acao" type="text" disabled class="form-control">                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Macro</label>
+                                            <input id="Macro-Acao" type="text" disabled class="form-control">                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Micro</label>
+                                            <input id="Micro-Acao" type="text" disabled class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="Idade-Acao">Idade</label>
+                                            <input type="number" id="Idade-Acao" name="Idade-Acao" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Data/Hora</label>
+                                            <input id="DataHora-Acao" type="text" disabled class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Diferenca de Balança para Balança</label>
+                                    <textarea id="DiferencaBalanca-Acao" type="text" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Consumo de Água</label>
+                                    <textarea id="ConsumoAgua-Acao" type="text" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Principais Alertas</label>
+                                    <textarea id="Alertas-Acao" type="text" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Calibrações</label>
+                                    <textarea id="Calibracoes-Acao" type="text" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Qunatidade de Pesos</label>
+                                    <textarea id="QuantidadePesos-Acao" type="text" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Lançamento de Mortalidade Diária</label>
+                                    <textarea id="Mortalidade-Acao" type="text" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Temperatura Média</label>
+                                    <textarea id="Temperatura-Acao" type="text" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Co2</label>
+                                    <textarea id="Co2-Acao" type="text" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Observações</label>
+                                    <textarea id="Observacoes-Acao" type="text" class="form-control"></textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-danger pull-left" onclick="limparAcoes()">Limpar</button>
+                                        <button class="btn btn-success pull-right" onclick="salvarAcoes()">Salvar</button>
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="btn-left" style="top: 76px;">
+    <div class="btn-left-content">
+        <div class="btn-left-btn bg-primary text-white" title="AG.SCAN" onclick="abrirAgScan(4200000019)">
+            <i class="a-icon-camera-web-solid"></i>
+        </div>
+    </div>
+</div>
+    <div class="btn-left" style="top: 130px;">
+        <div class="btn-left-content">
+            <div class="btn-left-btn bg-orange text-white" title="AG.CONN" onclick="abrirAgConn(4200000019)">
+                <i class="a-icon-circle-nodes-solid"></i>
+            </div>
+        </div>
+    </div>
+<div class="theme-helper" style="top: 184px;">
+    <section class="widget theme-helper-content">
+        <header class="theme-helper-header d-flex p-0">
+            <div class="theme-helper-toggler">
+                <div class="theme-helper-spinner bg-success text-white">
+                    <i class="la la-filter"></i>
+                </div>
+            </div>
+            <h6>Filtros</h6>
+        </header>
+        <div class="widget-body mt-3">
+            <form method="POST" onsubmit="validateForm()">
+                <div class="form-group">
+                    <label class="control-label" for="IdEmpresa">Empresa</label>
+                    <div class="">
+                        <select data-placeholder="Selecione..." class="select2 form-control" id="IdEmpresa" name="IdEmpresa">
+                            <option value='0'>Selecione...</option>
+<option value='6340000001'>Flávio Clayton Salvador</option><option value='4200000001'>Marcelo Fumagalli</option>                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="IdLote">Lote</label>
+                    <div class="">
+                        <select data-placeholder="Selecione..." class="select2 form-control" id="IdLote" name="IdLote">
+                            <option value='0'>Selecione...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="PesoAbate">Peso Objetivo</label>
+                    <input type="number" id="PesoAbate" name="PesoAbate" class="form-control" placeholder="Peso Objetivo">
+                </div>
+                <div class="form-group">
+                    <label for="IdadeAbate">Idade Fechamento</label>
+                    <input type="number" id="IdadeAbate" name="IdadeAbate" class="form-control" placeholder="Idade Fechamento">
+                </div>
+                <div class="form-group">
+                    <label for="DataAbate">Data Fechamento</label>
+                    <div class="input-group date datepicker-group" id="dpDataAbate" data-target-input="nearest">
+                        <input id="DataAbate" name="DataAbate" type="text" class="form-control datetimepicker-input" data-target="#dpDataAbate" />
+                        <div class="input-group-append" data-target="#dpDataAbate" data-toggle="datetimepicker">
+                            <div class="input-group-text">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="" style="text-align: right;">
+                    <button type="submit" class="btn btn-success">Filtrar</button>
+                </div>
+            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8N4fT4gB3lBIgzzSansiX3Oc-AvCk00EyAlONIcHaCkDdbHi9-6KH3qsIUkXOQv5r32iEdpPwNxijbDEX2pwidlk4WnTZBALtyObNMBbgHGY_yQ7Yg6l2oLKCpxdqTU7tPnf_REAqSosRjB7ucYJXQ0J56qeieOE-cZftk_hnwBYqMUkCpnzFNYJOlDwz6xy_A" /></form>
+        </div>
+    </section>
+</div>
+<script src="/js/utils/graficosHelper.js"></script>
+<script>
+    var lotes = [{"IdLote":4200000019,"IdEmpresa":4200000001,"Empresa":"Marcelo Fumagalli","Estabelecimento":"Marcelo Fumagalli","Aviario":"Aviário 819","CodigoLote":"85","IdLinhagem":13,"Linhagem":"Mistos ROSS 308 AP","IdEstabelecimento":0,"IdAviario":0,"DataAlojamento":"0001-01-01T00:00:00","DataAbate":"0001-01-01T00:00:00","DataFechamento":null,"QtdAlojamento":0,"PesoChegada":0.0,"Mortalidade":0,"EficienciaPeso":0,"UltimaVisita":"0001-01-01T00:00:00","QuantidadeVisista":0,"Macro":null,"Micro":null,"Status1":null,"Status2":null,"IdadeAtual":739783,"DataAlojamentoStr":"01/01/0001 00:00","DataAbateStr":"01/01/0001 00:00","DataFechamentoStr":null,"UltimaVisitaStr":"01/01/0001","Manejos":null},{"IdLote":6340000005,"IdEmpresa":6340000001,"Empresa":"Flávio Clayton Salvador","Estabelecimento":"Flávio Clayton Salvador","Aviario":"Aviário 1380","CodigoLote":"3","IdLinhagem":26,"Linhagem":"Fêmeas Cobb ML","IdEstabelecimento":0,"IdAviario":0,"DataAlojamento":"0001-01-01T00:00:00","DataAbate":"0001-01-01T00:00:00","DataFechamento":null,"QtdAlojamento":0,"PesoChegada":0.0,"Mortalidade":0,"EficienciaPeso":0,"UltimaVisita":"0001-01-01T00:00:00","QuantidadeVisista":0,"Macro":null,"Micro":null,"Status1":null,"Status2":null,"IdadeAtual":739783,"DataAlojamentoStr":"01/01/0001 00:00","DataAbateStr":"01/01/0001 00:00","DataFechamentoStr":null,"UltimaVisitaStr":"01/01/0001","Manejos":null},{"IdLote":6340000006,"IdEmpresa":6340000001,"Empresa":"Flávio Clayton Salvador","Estabelecimento":"Flávio Clayton Salvador","Aviario":"Aviário 1379","CodigoLote":"3","IdLinhagem":12,"Linhagem":"Fêmeas ROSS 308 AP","IdEstabelecimento":0,"IdAviario":0,"DataAlojamento":"0001-01-01T00:00:00","DataAbate":"0001-01-01T00:00:00","DataFechamento":null,"QtdAlojamento":0,"PesoChegada":0.0,"Mortalidade":0,"EficienciaPeso":0,"UltimaVisita":"0001-01-01T00:00:00","QuantidadeVisista":0,"Macro":null,"Micro":null,"Status1":null,"Status2":null,"IdadeAtual":739783,"DataAlojamentoStr":"01/01/0001 00:00","DataAbateStr":"01/01/0001 00:00","DataFechamentoStr":null,"UltimaVisitaStr":"01/01/0001","Manejos":null}];
+    var manejos = [{"Idade":5,"PesoMedio":95.0000,"PesoZootecnico":134.0000,"PesoIdeal":132.0000,"PesoProjetado":2311.0,"Temperatura":30.64,"Umidade":63.77,"TemperaturaEx":18.03,"UmidadeEx":0.00,"PesoExaustor":0.0,"PesoCentro":95.0000,"PesoPlaca":0.0,"PesoProjetadoDistribuicao":0.0,"TemperaturaIdeal":31.0},{"Idade":6,"PesoMedio":120.0000,"PesoZootecnico":144.0000,"PesoIdeal":159.0000,"PesoProjetado":2423.0,"Temperatura":29.82,"Umidade":63.76,"TemperaturaEx":17.83,"UmidadeEx":0.00,"PesoExaustor":0.0,"PesoCentro":120.0000,"PesoPlaca":0.0,"PesoProjetadoDistribuicao":0.0,"TemperaturaIdeal":30.0},{"Idade":7,"PesoMedio":146.0000,"PesoZootecnico":175.0000,"PesoIdeal":189.0000,"PesoProjetado":2480.0,"Temperatura":29.48,"Umidade":67.97,"TemperaturaEx":21.24,"UmidadeEx":97.37,"PesoExaustor":0.0,"PesoCentro":141.0000,"PesoPlaca":159.0000,"PesoProjetadoDistribuicao":0.0,"TemperaturaIdeal":30.0},{"Idade":8,"PesoMedio":181.0000,"PesoZootecnico":228.0000,"PesoIdeal":222.0000,"PesoProjetado":2618.0,"Temperatura":28.59,"Umidade":57.79,"TemperaturaEx":0.00,"UmidadeEx":0.00,"PesoExaustor":0.0,"PesoCentro":165.0000,"PesoPlaca":201.0000,"PesoProjetadoDistribuicao":0.0,"TemperaturaIdeal":29.0},{"Idade":9,"PesoMedio":219.0000,"PesoZootecnico":278.0000,"PesoIdeal":259.0000,"PesoProjetado":2715.0,"Temperatura":29.24,"Umidade":64.26,"TemperaturaEx":0.00,"UmidadeEx":0.00,"PesoExaustor":0.0,"PesoCentro":194.0000,"PesoPlaca":244.0000,"PesoProjetadoDistribuicao":0.0,"TemperaturaIdeal":29.0},{"Idade":10,"PesoMedio":266.0000,"PesoZootecnico":334.0000,"PesoIdeal":298.0000,"PesoProjetado":2866.0,"Temperatura":28.93,"Umidade":70.39,"TemperaturaEx":27.96,"UmidadeEx":72.07,"PesoExaustor":0.0,"PesoCentro":224.0000,"PesoPlaca":293.0000,"PesoProjetadoDistribuicao":0.0,"TemperaturaIdeal":29.0},{"Idade":11,"PesoMedio":314.0000,"PesoZootecnico":378.0000,"PesoIdeal":340.0000,"PesoProjetado":2965.0,"Temperatura":27.46,"Umidade":62.05,"TemperaturaEx":17.06,"UmidadeEx":81.01,"PesoExaustor":335.0000,"PesoCentro":295.0000,"PesoPlaca":318.0000,"PesoProjetadoDistribuicao":0.0,"TemperaturaIdeal":28.0},{"Idade":12,"PesoMedio":368.0000,"PesoZootecnico":429.0000,"PesoIdeal":386.0000,"PesoProjetado":3061.0,"Temperatura":27.81,"Umidade":61.90,"TemperaturaEx":15.83,"UmidadeEx":75.58,"PesoExaustor":387.0000,"PesoCentro":361.0000,"PesoPlaca":354.0000,"PesoProjetadoDistribuicao":0.0,"TemperaturaIdeal":28.0}];
+    var manejosSexo = {};
+    var temperaturaUmidadeRanges = [{"Idade":5,"TemperaturaMin":29.37,"TemperaturaMax":30.09,"UmidadeMin":62.04,"UmidadeMax":65.37,"Temperatura":0.0,"Umidade":0.0,"TemperaturaEx":0.0,"TemperaturaExMin":0.0,"TemperaturaExMax":0.0,"UmidadeEx":0.0,"UmidadeExMin":0.0,"UmidadeExMax":0.0,"DataHora":"0001-01-01T00:00:00","DataHoraStr":"01/01/0001 00:00"},{"Idade":6,"TemperaturaMin":28.95,"TemperaturaMax":31.79,"UmidadeMin":60.35,"UmidadeMax":66.23,"Temperatura":0.0,"Umidade":0.0,"TemperaturaEx":0.0,"TemperaturaExMin":0.0,"TemperaturaExMax":0.0,"UmidadeEx":0.0,"UmidadeExMin":0.0,"UmidadeExMax":0.0,"DataHora":"0001-01-01T00:00:00","DataHoraStr":"01/01/0001 00:00"},{"Idade":7,"TemperaturaMin":28.33,"TemperaturaMax":32.86,"UmidadeMin":59.77,"UmidadeMax":72.24,"Temperatura":0.0,"Umidade":0.0,"TemperaturaEx":0.0,"TemperaturaExMin":0.0,"TemperaturaExMax":0.0,"UmidadeEx":0.0,"UmidadeExMin":0.0,"UmidadeExMax":0.0,"DataHora":"0001-01-01T00:00:00","DataHoraStr":"01/01/0001 00:00"},{"Idade":8,"TemperaturaMin":27.53,"TemperaturaMax":29.60,"UmidadeMin":52.79,"UmidadeMax":67.22,"Temperatura":0.0,"Umidade":0.0,"TemperaturaEx":0.0,"TemperaturaExMin":0.0,"TemperaturaExMax":0.0,"UmidadeEx":0.0,"UmidadeExMin":0.0,"UmidadeExMax":0.0,"DataHora":"0001-01-01T00:00:00","DataHoraStr":"01/01/0001 00:00"},{"Idade":9,"TemperaturaMin":28.22,"TemperaturaMax":31.37,"UmidadeMin":51.81,"UmidadeMax":73.14,"Temperatura":0.0,"Umidade":0.0,"TemperaturaEx":0.0,"TemperaturaExMin":0.0,"TemperaturaExMax":0.0,"UmidadeEx":0.0,"UmidadeExMin":0.0,"UmidadeExMax":0.0,"DataHora":"0001-01-01T00:00:00","DataHoraStr":"01/01/0001 00:00"},{"Idade":10,"TemperaturaMin":27.93,"TemperaturaMax":30.84,"UmidadeMin":65.46,"UmidadeMax":73.90,"Temperatura":0.0,"Umidade":0.0,"TemperaturaEx":0.0,"TemperaturaExMin":0.0,"TemperaturaExMax":0.0,"UmidadeEx":0.0,"UmidadeExMin":0.0,"UmidadeExMax":0.0,"DataHora":"0001-01-01T00:00:00","DataHoraStr":"01/01/0001 00:00"},{"Idade":11,"TemperaturaMin":23.14,"TemperaturaMax":31.72,"UmidadeMin":45.23,"UmidadeMax":80.35,"Temperatura":0.0,"Umidade":0.0,"TemperaturaEx":0.0,"TemperaturaExMin":0.0,"TemperaturaExMax":0.0,"UmidadeEx":0.0,"UmidadeExMin":0.0,"UmidadeExMax":0.0,"DataHora":"0001-01-01T00:00:00","DataHoraStr":"01/01/0001 00:00"},{"Idade":12,"TemperaturaMin":24.24,"TemperaturaMax":31.19,"UmidadeMin":46.49,"UmidadeMax":74.80,"Temperatura":0.0,"Umidade":0.0,"TemperaturaEx":0.0,"TemperaturaExMin":0.0,"TemperaturaExMax":0.0,"UmidadeEx":0.0,"UmidadeExMin":0.0,"UmidadeExMax":0.0,"DataHora":"0001-01-01T00:00:00","DataHoraStr":"01/01/0001 00:00"}];
+    var alertas = [{"TipoAlerta":11,"Data":"2026-06-10T10:28:22","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"10/06/2026 10:28:22"},{"TipoAlerta":11,"Data":"2026-06-10T11:28:25","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"10/06/2026 11:28:25"},{"TipoAlerta":11,"Data":"2026-06-10T12:28:28","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"10/06/2026 12:28:28"},{"TipoAlerta":11,"Data":"2026-06-10T13:28:32","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"10/06/2026 13:28:32"},{"TipoAlerta":11,"Data":"2026-06-10T14:28:47","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"10/06/2026 14:28:47"},{"TipoAlerta":11,"Data":"2026-06-10T15:28:51","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"10/06/2026 15:28:51"},{"TipoAlerta":11,"Data":"2026-06-10T16:28:55","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"10/06/2026 16:28:55"},{"TipoAlerta":11,"Data":"2026-06-10T17:28:58","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"10/06/2026 17:28:58"},{"TipoAlerta":11,"Data":"2026-06-10T18:29:00","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"10/06/2026 18:29:00"},{"TipoAlerta":11,"Data":"2026-06-10T19:29:12","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"10/06/2026 19:29:12"},{"TipoAlerta":11,"Data":"2026-06-10T20:29:16","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"10/06/2026 20:29:16"},{"TipoAlerta":11,"Data":"2026-06-10T21:29:19","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"10/06/2026 21:29:19"},{"TipoAlerta":11,"Data":"2026-06-10T22:29:22","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"10/06/2026 22:29:22"},{"TipoAlerta":11,"Data":"2026-06-10T23:29:25","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"10/06/2026 23:29:25"},{"TipoAlerta":11,"Data":"2026-06-11T00:29:31","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 00:29:31"},{"TipoAlerta":11,"Data":"2026-06-11T01:29:45","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 01:29:45"},{"TipoAlerta":11,"Data":"2026-06-11T02:29:55","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 02:29:55"},{"TipoAlerta":11,"Data":"2026-06-11T03:30:05","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 03:30:05"},{"TipoAlerta":11,"Data":"2026-06-11T04:30:13","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 04:30:13"},{"TipoAlerta":11,"Data":"2026-06-11T05:30:20","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 05:30:20"},{"TipoAlerta":11,"Data":"2026-06-11T06:30:23","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 06:30:23"},{"TipoAlerta":11,"Data":"2026-06-11T07:30:28","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 07:30:28"},{"TipoAlerta":11,"Data":"2026-06-11T08:30:29","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 08:30:29"},{"TipoAlerta":11,"Data":"2026-06-11T09:30:47","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 09:30:47"},{"TipoAlerta":11,"Data":"2026-06-11T10:30:50","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 10:30:50"},{"TipoAlerta":17,"Data":"2026-06-11T11:00:00","Mensagem":"O sistema detectou consumo de água menor que o dia anterior no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Consumo Água","DataStr":"11/06/2026 11:00:00"},{"TipoAlerta":11,"Data":"2026-06-11T11:30:52","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 11:30:52"},{"TipoAlerta":11,"Data":"2026-06-11T12:30:56","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 12:30:56"},{"TipoAlerta":11,"Data":"2026-06-11T13:31:01","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 13:31:01"},{"TipoAlerta":11,"Data":"2026-06-11T14:31:12","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 14:31:12"},{"TipoAlerta":11,"Data":"2026-06-11T15:31:15","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 15:31:15"},{"TipoAlerta":11,"Data":"2026-06-11T16:31:19","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 16:31:19"},{"TipoAlerta":11,"Data":"2026-06-11T17:31:22","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 17:31:22"},{"TipoAlerta":11,"Data":"2026-06-11T18:31:25","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 18:31:25"},{"TipoAlerta":11,"Data":"2026-06-11T19:31:28","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 19:31:28"},{"TipoAlerta":11,"Data":"2026-06-11T20:31:31","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 20:31:31"},{"TipoAlerta":11,"Data":"2026-06-11T21:31:45","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 21:31:45"},{"TipoAlerta":11,"Data":"2026-06-11T22:31:49","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 22:31:49"},{"TipoAlerta":11,"Data":"2026-06-11T23:31:51","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"11/06/2026 23:31:51"},{"TipoAlerta":11,"Data":"2026-06-12T00:31:56","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 00:31:56"},{"TipoAlerta":11,"Data":"2026-06-12T02:32:15","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 02:32:15"},{"TipoAlerta":11,"Data":"2026-06-12T03:32:22","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 03:32:22"},{"TipoAlerta":11,"Data":"2026-06-12T04:32:25","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 04:32:25"},{"TipoAlerta":11,"Data":"2026-06-12T05:32:28","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 05:32:28"},{"TipoAlerta":11,"Data":"2026-06-12T06:32:31","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 06:32:31"},{"TipoAlerta":11,"Data":"2026-06-12T07:32:48","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 07:32:48"},{"TipoAlerta":11,"Data":"2026-06-12T08:32:52","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 08:32:52"},{"TipoAlerta":11,"Data":"2026-06-12T09:32:54","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 09:32:54"},{"TipoAlerta":11,"Data":"2026-06-12T10:32:59","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 10:32:59"},{"TipoAlerta":11,"Data":"2026-06-12T11:33:14","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 11:33:14"},{"TipoAlerta":11,"Data":"2026-06-12T12:33:18","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 12:33:18"},{"TipoAlerta":11,"Data":"2026-06-12T13:33:21","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 13:33:21"},{"TipoAlerta":11,"Data":"2026-06-12T14:33:24","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 14:33:24"},{"TipoAlerta":11,"Data":"2026-06-12T15:33:27","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 15:33:27"},{"TipoAlerta":11,"Data":"2026-06-12T16:33:30","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 16:33:30"},{"TipoAlerta":11,"Data":"2026-06-12T18:34:01","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 18:34:01"},{"TipoAlerta":11,"Data":"2026-06-12T19:34:17","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 19:34:17"},{"TipoAlerta":11,"Data":"2026-06-12T20:34:19","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 20:34:19"},{"TipoAlerta":11,"Data":"2026-06-12T21:34:22","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 21:34:22"},{"TipoAlerta":11,"Data":"2026-06-12T22:34:28","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"12/06/2026 22:34:28"},{"TipoAlerta":11,"Data":"2026-06-13T00:34:46","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"13/06/2026 00:34:46"},{"TipoAlerta":11,"Data":"2026-06-13T01:34:49","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"13/06/2026 01:34:49"},{"TipoAlerta":10,"Data":"2026-06-15T11:02:37","Mensagem":"A temperatura atual do Aviário Aviário 819 deveria estar em torno de 29 e atualmente está em 23.14.","Id":0,"TipoAlertaStr":"Temperatura(Alerta Amarelo)","DataStr":"15/06/2026 11:02:37"},{"TipoAlerta":10,"Data":"2026-06-15T14:28:44","Mensagem":"A temperatura atual do Aviário Aviário 819 deveria estar em torno de 29 e atualmente está em 24.96.","Id":0,"TipoAlertaStr":"Temperatura(Alerta Amarelo)","DataStr":"15/06/2026 14:28:44"},{"TipoAlerta":14,"Data":"2026-06-15T18:37:13","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"15/06/2026 18:37:13"},{"TipoAlerta":14,"Data":"2026-06-15T19:10:13","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"15/06/2026 19:10:13"},{"TipoAlerta":14,"Data":"2026-06-15T19:43:02","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"15/06/2026 19:43:02"},{"TipoAlerta":14,"Data":"2026-06-15T20:16:02","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"15/06/2026 20:16:02"},{"TipoAlerta":14,"Data":"2026-06-15T20:51:21","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"15/06/2026 20:51:21"},{"TipoAlerta":14,"Data":"2026-06-15T21:26:23","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"15/06/2026 21:26:23"},{"TipoAlerta":14,"Data":"2026-06-15T21:59:23","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"15/06/2026 21:59:23"},{"TipoAlerta":10,"Data":"2026-06-15T22:29:07","Mensagem":"A temperatura atual do Aviário Aviário 819 deveria estar em torno de 29 e atualmente está em 24.92.","Id":0,"TipoAlertaStr":"Temperatura(Alerta Amarelo)","DataStr":"15/06/2026 22:29:07"},{"TipoAlerta":14,"Data":"2026-06-15T22:32:07","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"15/06/2026 22:32:07"},{"TipoAlerta":14,"Data":"2026-06-15T23:08:07","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"15/06/2026 23:08:07"},{"TipoAlerta":14,"Data":"2026-06-15T23:39:29","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"15/06/2026 23:39:29"},{"TipoAlerta":14,"Data":"2026-06-16T00:12:29","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 00:12:29"},{"TipoAlerta":14,"Data":"2026-06-16T00:42:36","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 00:42:36"},{"TipoAlerta":14,"Data":"2026-06-16T01:15:36","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 01:15:36"},{"TipoAlerta":14,"Data":"2026-06-16T01:48:17","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 01:48:17"},{"TipoAlerta":14,"Data":"2026-06-16T02:21:17","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 02:21:17"},{"TipoAlerta":14,"Data":"2026-06-16T02:54:04","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 02:54:04"},{"TipoAlerta":10,"Data":"2026-06-16T03:09:04","Mensagem":"A temperatura atual do Aviário Aviário 819 deveria estar em torno de 29 e atualmente está em 24.96.","Id":0,"TipoAlertaStr":"Temperatura(Alerta Amarelo)","DataStr":"16/06/2026 03:09:04"},{"TipoAlerta":14,"Data":"2026-06-16T03:27:04","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 03:27:04"},{"TipoAlerta":14,"Data":"2026-06-16T03:59:18","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 03:59:18"},{"TipoAlerta":10,"Data":"2026-06-16T04:11:18","Mensagem":"A temperatura atual do Aviário Aviário 819 deveria estar em torno de 29 e atualmente está em 24.86.","Id":0,"TipoAlertaStr":"Temperatura(Alerta Amarelo)","DataStr":"16/06/2026 04:11:18"},{"TipoAlerta":14,"Data":"2026-06-16T04:32:18","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 04:32:18"},{"TipoAlerta":14,"Data":"2026-06-16T05:07:45","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 05:07:45"},{"TipoAlerta":10,"Data":"2026-06-16T05:13:45","Mensagem":"A temperatura atual do Aviário Aviário 819 deveria estar em torno de 29 e atualmente está em 24.93.","Id":0,"TipoAlertaStr":"Temperatura(Alerta Amarelo)","DataStr":"16/06/2026 05:13:45"},{"TipoAlerta":14,"Data":"2026-06-16T05:43:45","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 05:43:45"},{"TipoAlerta":10,"Data":"2026-06-16T06:14:03","Mensagem":"A temperatura atual do Aviário Aviário 819 deveria estar em torno de 29 e atualmente está em 24.83.","Id":0,"TipoAlertaStr":"Temperatura(Alerta Amarelo)","DataStr":"16/06/2026 06:14:03"},{"TipoAlerta":14,"Data":"2026-06-16T06:17:03","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 06:17:03"},{"TipoAlerta":14,"Data":"2026-06-16T06:53:03","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 06:53:03"},{"TipoAlerta":10,"Data":"2026-06-16T07:14:08","Mensagem":"A temperatura atual do Aviário Aviário 819 deveria estar em torno de 29 e atualmente está em 24.85.","Id":0,"TipoAlertaStr":"Temperatura(Alerta Amarelo)","DataStr":"16/06/2026 07:14:08"},{"TipoAlerta":14,"Data":"2026-06-16T07:26:08","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 07:26:08"},{"TipoAlerta":14,"Data":"2026-06-16T08:02:08","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 08:02:08"},{"TipoAlerta":14,"Data":"2026-06-16T08:34:19","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 08:34:19"},{"TipoAlerta":14,"Data":"2026-06-16T09:07:19","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 09:07:19"},{"TipoAlerta":14,"Data":"2026-06-16T09:40:16","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 09:40:16"},{"TipoAlerta":14,"Data":"2026-06-16T10:13:16","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 10:13:16"},{"TipoAlerta":11,"Data":"2026-06-16T10:46:07","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"16/06/2026 10:46:07"},{"TipoAlerta":17,"Data":"2026-06-16T11:00:00","Mensagem":"O sistema detectou consumo de água menor que o dia anterior no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Consumo Água","DataStr":"16/06/2026 11:00:00"},{"TipoAlerta":11,"Data":"2026-06-16T11:23:24","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"16/06/2026 11:23:24"},{"TipoAlerta":11,"Data":"2026-06-16T12:24:25","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"16/06/2026 12:24:25"},{"TipoAlerta":11,"Data":"2026-06-16T13:24:28","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"16/06/2026 13:24:28"},{"TipoAlerta":11,"Data":"2026-06-16T14:24:31","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"16/06/2026 14:24:31"},{"TipoAlerta":11,"Data":"2026-06-16T14:40:26","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"16/06/2026 14:40:26"},{"TipoAlerta":11,"Data":"2026-06-16T16:02:18","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"16/06/2026 16:02:18"},{"TipoAlerta":11,"Data":"2026-06-16T16:35:17","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"16/06/2026 16:35:17"},{"TipoAlerta":11,"Data":"2026-06-16T16:42:22","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"16/06/2026 16:42:22"},{"TipoAlerta":11,"Data":"2026-06-16T17:42:54","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"16/06/2026 17:42:54"},{"TipoAlerta":14,"Data":"2026-06-16T18:37:09","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 18:37:09"},{"TipoAlerta":11,"Data":"2026-06-16T18:42:57","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"16/06/2026 18:42:57"},{"TipoAlerta":14,"Data":"2026-06-16T19:09:30","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 19:09:30"},{"TipoAlerta":14,"Data":"2026-06-16T19:42:30","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 19:42:30"},{"TipoAlerta":11,"Data":"2026-06-16T19:43:00","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"16/06/2026 19:43:00"},{"TipoAlerta":14,"Data":"2026-06-16T20:14:56","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 20:14:56"},{"TipoAlerta":11,"Data":"2026-06-16T20:43:14","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"16/06/2026 20:43:14"},{"TipoAlerta":14,"Data":"2026-06-16T20:47:56","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 20:47:56"},{"TipoAlerta":14,"Data":"2026-06-16T21:20:24","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 21:20:24"},{"TipoAlerta":11,"Data":"2026-06-16T21:43:17","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"16/06/2026 21:43:17"},{"TipoAlerta":14,"Data":"2026-06-16T21:53:24","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 21:53:24"},{"TipoAlerta":14,"Data":"2026-06-16T22:28:07","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 22:28:07"},{"TipoAlerta":11,"Data":"2026-06-16T22:43:21","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"16/06/2026 22:43:21"},{"TipoAlerta":14,"Data":"2026-06-16T23:04:07","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 23:04:07"},{"TipoAlerta":14,"Data":"2026-06-16T23:36:38","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"16/06/2026 23:36:38"},{"TipoAlerta":11,"Data":"2026-06-16T23:43:23","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"16/06/2026 23:43:23"},{"TipoAlerta":14,"Data":"2026-06-17T00:09:38","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 00:09:38"},{"TipoAlerta":11,"Data":"2026-06-17T00:43:25","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 00:43:25"},{"TipoAlerta":14,"Data":"2026-06-17T00:45:32","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 00:45:32"},{"TipoAlerta":14,"Data":"2026-06-17T01:18:32","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 01:18:32"},{"TipoAlerta":11,"Data":"2026-06-17T01:43:27","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 01:43:27"},{"TipoAlerta":14,"Data":"2026-06-17T01:50:49","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 01:50:49"},{"TipoAlerta":14,"Data":"2026-06-17T02:23:49","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 02:23:49"},{"TipoAlerta":11,"Data":"2026-06-17T02:43:30","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 02:43:30"},{"TipoAlerta":14,"Data":"2026-06-17T02:56:38","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 02:56:38"},{"TipoAlerta":14,"Data":"2026-06-17T03:29:38","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 03:29:38"},{"TipoAlerta":11,"Data":"2026-06-17T03:43:46","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 03:43:46"},{"TipoAlerta":14,"Data":"2026-06-17T03:59:41","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 03:59:41"},{"TipoAlerta":14,"Data":"2026-06-17T04:32:41","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 04:32:41"},{"TipoAlerta":11,"Data":"2026-06-17T04:43:51","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 04:43:51"},{"TipoAlerta":14,"Data":"2026-06-17T05:04:07","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 05:04:07"},{"TipoAlerta":14,"Data":"2026-06-17T05:37:07","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 05:37:07"},{"TipoAlerta":11,"Data":"2026-06-17T05:43:54","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 05:43:54"},{"TipoAlerta":14,"Data":"2026-06-17T06:07:57","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 06:07:57"},{"TipoAlerta":14,"Data":"2026-06-17T06:40:57","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 06:40:57"},{"TipoAlerta":11,"Data":"2026-06-17T06:43:57","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 06:43:57"},{"TipoAlerta":14,"Data":"2026-06-17T07:12:31","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 07:12:31"},{"TipoAlerta":11,"Data":"2026-06-17T07:44:01","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 07:44:01"},{"TipoAlerta":14,"Data":"2026-06-17T07:48:31","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 07:48:31"},{"TipoAlerta":14,"Data":"2026-06-17T08:21:21","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 08:21:21"},{"TipoAlerta":11,"Data":"2026-06-17T08:44:19","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 08:44:19"},{"TipoAlerta":14,"Data":"2026-06-17T08:54:21","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 08:54:21"},{"TipoAlerta":14,"Data":"2026-06-17T09:27:47","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 09:27:47"},{"TipoAlerta":11,"Data":"2026-06-17T09:44:21","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 09:44:21"},{"TipoAlerta":14,"Data":"2026-06-17T10:00:47","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 10:00:47"},{"TipoAlerta":14,"Data":"2026-06-17T10:31:06","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 10:31:06"},{"TipoAlerta":11,"Data":"2026-06-17T10:44:26","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 10:44:26"},{"TipoAlerta":11,"Data":"2026-06-17T11:44:27","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 11:44:27"},{"TipoAlerta":11,"Data":"2026-06-17T12:44:30","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 12:44:30"},{"TipoAlerta":11,"Data":"2026-06-17T13:44:45","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 13:44:45"},{"TipoAlerta":10,"Data":"2026-06-17T14:09:56","Mensagem":"A temperatura atual do Aviário Aviário 819 deveria estar em torno de 28 e atualmente está em 33.70.","Id":0,"TipoAlertaStr":"Temperatura(Alerta Amarelo)","DataStr":"17/06/2026 14:09:56"},{"TipoAlerta":11,"Data":"2026-06-17T14:44:48","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 14:44:48"},{"TipoAlerta":10,"Data":"2026-06-17T15:12:29","Mensagem":"A temperatura atual do Aviário Aviário 819 deveria estar em torno de 28 e atualmente está em 34.37.","Id":0,"TipoAlertaStr":"Temperatura(Alerta Amarelo)","DataStr":"17/06/2026 15:12:29"},{"TipoAlerta":11,"Data":"2026-06-17T15:44:51","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 15:44:51"},{"TipoAlerta":11,"Data":"2026-06-17T16:44:54","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 16:44:54"},{"TipoAlerta":11,"Data":"2026-06-17T17:44:57","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 17:44:57"},{"TipoAlerta":14,"Data":"2026-06-17T18:00:00","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 18:00:00"},{"TipoAlerta":14,"Data":"2026-06-17T18:34:33","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 18:34:33"},{"TipoAlerta":11,"Data":"2026-06-17T18:45:01","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 18:45:01"},{"TipoAlerta":14,"Data":"2026-06-17T19:06:32","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 19:06:32"},{"TipoAlerta":14,"Data":"2026-06-17T19:42:32","Mensagem":"O sistema detectou um nível elevado de CO2 no lote 85 do aviário Aviário 819. Favor verificar.","Id":0,"TipoAlertaStr":"Co2 Elevado","DataStr":"17/06/2026 19:42:32"},{"TipoAlerta":11,"Data":"2026-06-17T19:45:14","Mensagem":"Energia no Aviário Aviário 819 do estabelecimento Marcelo Fumagalli ou o Tablet deste mesmo aviário foi restabelecida.","Id":0,"TipoAlertaStr":"Energia","DataStr":"17/06/2026 19:45:14"}];
+    var saldoAgua = [{"Idade":1,"Tipo":1,"Quantidade":0.0},{"Idade":2,"Tipo":1,"Quantidade":0.0},{"Idade":3,"Tipo":1,"Quantidade":0.0},{"Idade":4,"Tipo":1,"Quantidade":0.0},{"Idade":5,"Tipo":1,"Quantidade":11184.0},{"Idade":6,"Tipo":1,"Quantidade":3871.0},{"Idade":7,"Tipo":1,"Quantidade":4097.0},{"Idade":8,"Tipo":1,"Quantidade":4164.0},{"Idade":9,"Tipo":1,"Quantidade":6706.0},{"Idade":10,"Tipo":1,"Quantidade":9187.0},{"Idade":11,"Tipo":1,"Quantidade":8653.0},{"Idade":12,"Tipo":1,"Quantidade":10320.0}];
+    var saldoAguaEx = [];
+    var saldoAguaIdeal = [{"Idade":1,"Tipo":0,"Quantidade":1072.0000},{"Idade":2,"Tipo":0,"Quantidade":1340.0000},{"Idade":3,"Tipo":0,"Quantidade":1340.0000},{"Idade":4,"Tipo":0,"Quantidade":1340.0000},{"Idade":5,"Tipo":0,"Quantidade":1608.0000},{"Idade":6,"Tipo":0,"Quantidade":1876.0000},{"Idade":7,"Tipo":0,"Quantidade":2144.0000},{"Idade":8,"Tipo":0,"Quantidade":2144.0000},{"Idade":9,"Tipo":0,"Quantidade":2412.0000},{"Idade":10,"Tipo":0,"Quantidade":2680.0000},{"Idade":11,"Tipo":0,"Quantidade":2948.0000},{"Idade":12,"Tipo":0,"Quantidade":3242.8000}];
+    var saldoRacao = [{"Descricao":"Silo-819-01","Capacidade":18000.0000,"Quantidade":2133650.7935,"Data":"2026-06-17T16:00:00","PercentualSilo":100.0},{"Descricao":"Silo-819-02","Capacidade":18000.0000,"Quantidade":1788373.0020,"Data":"2026-06-17T09:00:00","PercentualSilo":100.0}];
+    var graficoCo2 = [{"Key":11,"Value":1704.0},{"Key":12,"Value":1757.0}];
+    var graficoCo2Range = [{"Key":11,"Value":[471.0,2592.0]},{"Key":12,"Value":[703.0,2462.0]}];
+    var idadeDesc = ["sex. 05/06/2026","sáb. 06/06/2026","dom. 07/06/2026","seg. 08/06/2026","ter. 09/06/2026","qua. 10/06/2026","qui. 11/06/2026","sex. 12/06/2026","sáb. 13/06/2026","dom. 14/06/2026","seg. 15/06/2026","ter. 16/06/2026","qua. 17/06/2026"];
+    var calibracoes = [{"NumeroSerial":"00012665","Zona":2,"DataCalibracao":"2026-06-10T09:44:16","Idade":4,"ZonaStr":"Centro","DataCalibracaoStr":"10/06/2026 09:44:16"},{"NumeroSerial":"00012665","Zona":2,"DataCalibracao":"2026-06-15T10:57:25","Idade":9,"ZonaStr":"Centro","DataCalibracaoStr":"15/06/2026 10:57:25"},{"NumeroSerial":"00012665","Zona":2,"DataCalibracao":"2026-06-15T10:59:33","Idade":9,"ZonaStr":"Centro","DataCalibracaoStr":"15/06/2026 10:59:33"},{"NumeroSerial":"00012665","Zona":2,"DataCalibracao":"2026-06-15T11:10:23","Idade":10,"ZonaStr":"Centro","DataCalibracaoStr":"15/06/2026 11:10:23"},{"NumeroSerial":"00012665","Zona":2,"DataCalibracao":"2026-06-15T11:41:22","Idade":10,"ZonaStr":"Centro","DataCalibracaoStr":"15/06/2026 11:41:22"},{"NumeroSerial":"00012665","Zona":2,"DataCalibracao":"2026-06-15T11:43:23","Idade":10,"ZonaStr":"Centro","DataCalibracaoStr":"15/06/2026 11:43:23"},{"NumeroSerial":"00012666","Zona":3,"DataCalibracao":"2026-06-10T09:44:02","Idade":4,"ZonaStr":"Placa","DataCalibracaoStr":"10/06/2026 09:44:02"},{"NumeroSerial":"00012666","Zona":3,"DataCalibracao":"2026-06-15T11:41:56","Idade":10,"ZonaStr":"Placa","DataCalibracaoStr":"15/06/2026 11:41:56"},{"NumeroSerial":"00012666","Zona":3,"DataCalibracao":"2026-06-15T11:43:24","Idade":10,"ZonaStr":"Placa","DataCalibracaoStr":"15/06/2026 11:43:24"},{"NumeroSerial":"00012666","Zona":3,"DataCalibracao":"2026-06-15T11:49:02","Idade":10,"ZonaStr":"Placa","DataCalibracaoStr":"15/06/2026 11:49:02"},{"NumeroSerial":"00012666","Zona":3,"DataCalibracao":"2026-06-15T12:04:13","Idade":10,"ZonaStr":"Placa","DataCalibracaoStr":"15/06/2026 12:04:13"},{"NumeroSerial":"00012982","Zona":1,"DataCalibracao":"2026-06-15T11:06:47","Idade":10,"ZonaStr":"Exaustor","DataCalibracaoStr":"15/06/2026 11:06:47"},{"NumeroSerial":"00012982","Zona":1,"DataCalibracao":"2026-06-15T11:07:13","Idade":10,"ZonaStr":"Exaustor","DataCalibracaoStr":"15/06/2026 11:07:13"},{"NumeroSerial":"00012982","Zona":1,"DataCalibracao":"2026-06-15T11:42:34","Idade":10,"ZonaStr":"Exaustor","DataCalibracaoStr":"15/06/2026 11:42:34"},{"NumeroSerial":"00012982","Zona":1,"DataCalibracao":"2026-06-15T11:43:30","Idade":10,"ZonaStr":"Exaustor","DataCalibracaoStr":"15/06/2026 11:43:30"},{"NumeroSerial":"00012982","Zona":1,"DataCalibracao":"2026-06-15T11:56:17","Idade":10,"ZonaStr":"Exaustor","DataCalibracaoStr":"15/06/2026 11:56:17"}];
+</script>
+<script>
+    var seriePesos = [];
+    var seriePesosZootecnico = [];
+    var seriePesosIdeais = [];
+    var seriePesosProj = [];
+    var serieTemperaturas = [];
+    var serieTemperaturasIdeais = [];
+    var serieTemperaturasRange = [];
+    var serieUmidades = [];
+    var serieUmidadesRange = [];
+    var serieAgua = [];
+    var serieAguaIdeal = [];
+    var serieAguaEx = [];
+    var serieTemperaturasEx = [];
+    var serieUmidadesEx = [];
+    var seriePesosSemanal = [];
+    var seriesPesosSexos = [];    
+
+    for (var i = 0; i < manejos.length; i++) {
+        var item = manejos[i];
+        seriePesos.push([item.Idade, parseInt(item.PesoMedio)]);
+        seriePesosZootecnico.push([item.Idade, parseInt(item.PesoZootecnico)]);
+        seriePesosIdeais.push([item.Idade, parseInt(item.PesoIdeal)]);
+        seriePesosProj.push([item.Idade, parseInt(item.PesoProjetado)]);
+        if(parseInt(item.Temperatura) > 0)
+            serieTemperaturas.push([item.Idade, parseFloat(item.Temperatura)]);
+        if(parseInt(item.TemperaturaIdeal) > 0)
+            serieTemperaturasIdeais.push([item.Idade, parseFloat(item.TemperaturaIdeal)]);
+        if(parseInt(item.Umidade) > 0)
+            serieUmidades.push([item.Idade, parseFloat(item.Umidade)]);
+        if(parseInt(item.TemperaturaEx) > 0)
+            serieTemperaturasEx.push([item.Idade, parseFloat(item.TemperaturaEx)]);
+        if(parseInt(item.UmidadeEx) > 0)
+            serieUmidadesEx.push([item.Idade, parseFloat(item.UmidadeEx)]);
+        if ((item.Idade%7) == 0)
+            seriePesosSemanal.push([item.Idade, parseInt(item.PesoMedio)]);
+    }
+    for (var sexo in manejosSexo) {
+        var itens = manejosSexo[sexo]; // array de Macho ou Fêmea
+        var serieSexo = [];
+
+        for (var j = 0; j < itens.length; j++) {
+            var item = itens[j];
+            serieSexo.push([item.Key, parseInt(item.Value)]);
+        }
+
+        seriesPesosSexos.push({
+            name: sexo,        // "Macho" ou "Fêmea"
+            type: 'spline',
+            data: serieSexo,
+            zIndex: 20
+        });
+    }
+
+    for (var i = 0; i < temperaturaUmidadeRanges.length; i++) {
+        var item = temperaturaUmidadeRanges[i];
+        serieTemperaturasRange.push([item.Idade, parseFloat(item.TemperaturaMin), parseFloat(item.TemperaturaMax)]);
+        serieUmidadesRange.push([item.Idade, parseFloat(item.UmidadeMin), parseFloat(item.UmidadeMax)]);
+    }
+
+    for (var i = 0; i < saldoAgua.length; i++) {
+        var item = saldoAgua[i];
+        serieAgua.push([item.Idade, parseInt(item.Quantidade)]);
+    }
+
+    for (var i = 0; i < saldoAguaEx.length; i++) {
+        var item = saldoAguaEx[i];
+        serieAguaEx.push([item.Idade, parseInt(item.Quantidade)]);
+    }
+
+    for (var i = 0; i < saldoAguaIdeal.length; i++) {
+        var item = saldoAguaIdeal[i];
+        serieAguaIdeal.push([item.Idade, parseInt(item.Quantidade)]);
+    }
+
+    function pageLoad() {
+        $('.widget').widgster();
+    }
+
+    function ChartPesoMedio(seriePesos, seriePesosZootecnico, seriePesosIdeais, seriePesosProj) {
+
+        var chartsOptions = {
+            colors: [/*'rgba(26, 132, 198, 0.4)', */'rgba(26,179,148, 0.7)', '#BA2B86', '#423891'],
+            chart: {
+                renderTo: "chartPesoMedio",
+                type: 'spline',
+                backgroundColor: {
+                    radialGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                    stops: [
+                        [0, 'rgb(255, 255, 255)'],
+                        [1, 'rgb(255, 255, 255)']
+                    ]
+                },
+                height: 300
+            },
+            title: {
+                text: ''
+            },
+            legend: {
+                itemDistance: 50,
+            },
+            xAxis: {
+                title: {
+                    text: 'Idade (Dias)'
+                },
+                borderWidth: 0,
+                lineColor: '#5555FF',
+                tickColor: '#555555',
+                tickWidth: 0,
+                lineWidth: 0,
+                tickInterval: 1
+            },
+            yAxis: {
+                title: {
+                    text: 'Peso (g)'
+                },
+                lineColor: '#5555FF',
+                tickColor: '#555555',
+                borderWidth: 0,
+                tickWidth: 0,
+                lineWidth: 0,
+                gridLineWidth: 0
+            },
+            tooltip: {
+                shared: true,
+                valueSuffix: '',
+                formatter: function (tooltip) {
+                    return this.points.reduce(function (s, point) {
+                        return s + '<br/>' + point.series.name + ': <b>' + point.y + ' gramas</b>';
+                    }, '<b>' + this.x + 'dias - ' + idadeDesc[this.x] + '</b>');
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                column: {
+                    fillOpacity: 0.5
+                },
+                areaspline: {
+                    radius: 1,
+                    marker: {
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true,
+                                lineWidth: 0,
+                                radius: 3
+                            }
+                        },
+                    },
+                    lineWidth: 0,
+                    fillOpacity: 0.5
+                }
+            },
+            series: [
+                //{
+                //    name: 'Peso Projetado', type: 'column', data: seriePesosProj
+                //},
+                {
+                    name: 'Peso Médio', type: 'spline', data: seriePesos, zIndex: 20
+                },
+                {
+                    name: 'Peso Zootécnico', type: 'spline', data: seriePesosZootecnico, zIndex: 20
+                },
+                {
+                    name: 'Peso Ideal', type: 'spline', data: seriePesosIdeais, zIndex: 20
+                }
+            ]
+        };
+        
+        if (seriesPesosSexos.length > 0) { 
+            chartsOptions.series = seriesPesosSexos;
+        }
+
+        redrawChart(chartsOptions);
+    }
+
+    function ChartUmidade(serieUmidades, serieUmidadesRange, serieUmidadesEx) {
+
+        var chartsOptions = {
+            colors: ['rgba(26, 132, 198, 0.8)', 'rgba(116, 209, 180, 0.8)', 'rgba(26,179,148, 0.8)'],
+            chart: {
+                renderTo: "chartUmidade",
+                type: 'spline',
+                backgroundColor: {
+                    radialGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                    stops: [
+                        [0, 'rgb(255, 255, 255)'],
+                        [1, 'rgb(255, 255, 255)']
+                    ]
+                },
+                height: 325
+            },
+            title: {
+                text: ''
+            },
+            legend: {
+                itemDistance: 50,
+            },
+            xAxis: {
+                title: {
+                    text: 'Idade (Dias)'
+                },
+                borderWidth: 0,
+                lineColor: '#5555FF',
+                tickColor: '#555555',
+                tickWidth: 0,
+                lineWidth: 0,
+                tickInterval: 1,
+            },
+            yAxis: {
+                title: {
+                    text: 'Umidade (%)'
+                },
+                lineColor: '#5555FF',
+                tickColor: '#555555',
+                borderWidth: 0,
+                tickWidth: 0,
+                lineWidth: 0,
+                gridLineWidth: 0
+            },
+            tooltip: {
+                shared: true,
+                valueSuffix: '',
+                formatter: function (tooltip) {
+                    return this.points.reduce(function (s, point) {
+                        if(point.series.type == 'areasplinerange')
+                            return s + '<br/>' + point.series.name + ': <b>' + point.point.low + ' - ' + point.point.high + ' %</b>';
+                        else
+                            return s + '<br/>' + point.series.name + ': <b>' + point.y + ' %</b>';
+                    }, '<b>' + this.x + 'dias - ' + idadeDesc[this.x] + '</b>');
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                spline: {
+                    marker: {
+                        lineWidth: 0,
+                        radius: 2,
+                        lineColor: "#FFFFFF",
+                        symbol: 'circle'//'url(Images\pipe.png)'
+                    }
+                }
+            },
+            series: [
+                {
+                    name: 'Umidade Média', type: 'spline', data: serieUmidades, zIndex: 20
+                }, {
+                    name: 'Umidade Externa Média', type: 'spline', data: serieUmidadesEx, zIndex: 20
+                }, {
+                    name: 'Variação', type: 'areasplinerange', color: 'rgba(205, 225, 255, 1)', data: serieUmidadesRange
+                }
+            ]
+        };
+                
+        redrawChart(chartsOptions);
+    }
+
+    function ChartTemperatura(serieTemperatura, serieTemperaturasRange, serieTemperaturaEx) {
+
+        var chartsOptions = {
+            colors: ['rgba(248, 172, 89, 1)', 'rgba(247, 141, 142, 1)', 'rgba(116, 209, 180, 1)', 'rgba(248, 172, 89, 1)'],
+            chart: {
+                renderTo: "chartTemperatura",
+                type: 'line',
+                backgroundColor: {
+                    radialGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                    stops: [
+                        [0, 'rgb(255, 255, 255)'],
+                        [1, 'rgb(255, 255, 255)']
+                    ]
+                },
+                height: 325
+            },
+            title: {
+                text: ''
+            },
+            legend: {
+                itemDistance: 50,
+            },
+            xAxis: {
+                title: {
+                    text: 'Idade (Dias)'
+                },
+                borderWidth: 0,
+                lineColor: '#5555FF',
+                tickColor: '#555555',
+                tickWidth: 0,
+                lineWidth: 0,
+                tickInterval: 1,
+            },
+            yAxis: {
+                title: {
+                    text: 'Temperatura ºC'
+                },
+                lineColor: '#5555FF',
+                tickColor: '#555555',
+                borderWidth: 0,
+                tickWidth: 0,
+                lineWidth: 0,
+                gridLineWidth: 0
+            },
+            tooltip: {
+                shared: true,
+                valueSuffix: ' ºC',
+                formatter: function (tooltip) {
+                    return this.points.reduce(function (s, point) {
+                        if(point.series.type == 'areasplinerange')
+                            return s + '<br/>' + point.series.name + ': <b>' + point.point.low + ' - ' + point.point.high + ' ºC</b>';
+                        else
+                            return s + '<br/>' + point.series.name + ': <b>' + point.y + ' ºC</b>';
+                    }, '<b>' + this.x + 'dias - ' + idadeDesc[this.x] + '</b>');
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                spline: {
+                    marker: {
+                        lineWidth: 0,
+                        radius: 2,
+                        lineColor: "#FFFFFF",
+                        symbol: 'circle'//'url(Images\pipe.png)'
+                    }
+                }
+            },
+            series: [
+                {
+                    name: 'Temperatura Média', type: 'spline', data: serieTemperatura, zIndex: 20
+                }, {
+                    name: 'Temperatura Externa Média', type: 'spline', data: serieTemperaturaEx, zIndex: 20
+                }, {
+                    name: 'Temperatura Ideal', type: 'spline', data: serieTemperaturasIdeais, zIndex: 20
+                }, {
+                    name: 'Variação', type: 'areasplinerange', color: 'rgba(255, 225, 205, 1)', data: serieTemperaturasRange
+                }
+            ]
+        };
+                
+        redrawChart(chartsOptions);
+    }
+
+    function ChartAgua(serieAgua, serieAguaEx) {
+
+        var chartsOptions = {
+            colors: ['#0073b7', '#00a1ff'],
+            chart: {
+                renderTo: "chartAgua",
+                type: 'spline',
+                backgroundColor: {
+                    radialGradient: { x1: 0, y1: 0, x2: 0.2, y2: 0.2 },
+                    stops: [
+                        [0, 'rgb(255, 255, 255)'],
+                        [1, 'rgb(255, 255, 255)']
+                    ]
+                },
+                zoomType: 'yx'
+            },
+            title: {
+                text: 'Consumo de Água'
+            },
+            legend: {
+                itemDistance: 50,
+            },
+            xAxis: {
+                title: {
+                    text: 'Idade (Dias)'
+                },
+                borderWidth: 0,
+                lineColor: '#5555FF',
+                tickColor: '#555555',
+                tickInterval: 1,
+                tickWidth: 0,
+                lineWidth: 0
+
+            },
+            yAxis: {
+                title: {
+                    text: 'Água'
+                },
+                borderWidth: 0,
+                lineColor: '#5555FF',
+                tickColor: '#555555',
+                tickWidth: 0,
+                lineWidth: 0,
+                gridLineWidth: 0
+            },
+            tooltip: {
+                shared: true,
+                valueSuffix: '',
+                formatter: function (tooltip) {
+                    return this.points.reduce(function (s, point) {
+                        return s + '<br/>' + point.series.name + ': <b>' + point.y + ' </b>';
+                    }, '<b>' + this.x + 'dias - ' + idadeDesc[this.x] + '</b>');
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                areaspline: {
+                    marker: {
+                        lineWidth: 0,
+                        radius: 2,
+                        lineColor: "#FFFFFF",
+                        symbol: 'circle'
+                    },
+                    lineWidth: 1,
+                    fillOpacity: 0.3
+                }
+            },
+            series: [
+                {
+                    name: 'Água',
+                    data: serieAgua
+                }, {
+                    name: 'Água Ideal',
+                    data: serieAguaIdeal
+                }, {
+                    name: 'Água Externa',
+                    data: serieAguaEx
+                }
+            ]
+        };
+                
+        redrawChart(chartsOptions);
+    }
+
+    function ChartCo2(graficoCo2, graficoCo2Range) {
+
+        var chartsOptions = {
+            colors: ['#0073b7'],
+            chart: {
+                renderTo: "chartCo2",
+                type: 'spline',
+                backgroundColor: {
+                    radialGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                    stops: [
+                        [0, 'rgb(255, 255, 255)'],
+                        [1, 'rgb(255, 255, 255)']
+                    ]
+                },
+                zoomType: 'yx'
+            },
+            title: {
+                text: 'Co2'
+            },
+            legend: {
+                itemDistance: 50,
+            },
+            xAxis: {
+                title: {
+                    text: 'Idade (Dias)'
+                },
+                borderWidth: 0,
+                lineColor: '#5555FF',
+                tickColor: '#555555',
+                tickWidth: 0,
+                lineWidth: 0,
+                type: 'category',
+            },
+            yAxis: {
+                title: {
+                    text: 'Valor'
+                },
+                borderWidth: 0,
+                lineColor: '#5555FF',
+                tickColor: '#555555',
+                tickWidth: 0,
+                lineWidth: 0,
+                gridLineWidth: 0
+            },
+            tooltip: {
+                shared: true,
+                valueSuffix: '',
+                formatter: function (tooltip) {
+                    if(this.points[0].series.chart.drilldownLevels != undefined && this.points[0].series.chart.drilldownLevels.length > 0)
+                        return tooltip.defaultFormatter.call(this, tooltip);
+                    else{
+                        return this.points.reduce(function (s, point) {
+                            if(point.series.type == 'areasplinerange')
+                                return s + '<br/>' + point.series.name + ': <b>' + point.point.low + ' - ' + point.point.high + ' </b>';
+                            else
+                                return s + '<br/>' + point.series.name + ': <b>' + point.y + ' </b>';
+                        }, '<b>' + this.x + 'dias - ' + idadeDesc[this.x] + '</b>');
+                    }
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                spline: {
+                    marker: {
+                        lineWidth: 0,
+                        radius: 2,
+                        lineColor: "#FFFFFF",
+                        symbol: 'circle' //'url(Images\pipe.png)'
+                    }
+                },
+                dataLabels: {
+                    enabled: true
+                }
+            },
+            series: [
+                { name: 'Co2', data: valuePairToArray(graficoCo2) },
+                { name: 'Variação', type: 'areasplinerange', color: 'rgba(205, 225, 255, 1)', data: valuePairToArray(graficoCo2Range) }
+            ]
+        };
+
+        redrawChart(chartsOptions);
+    }
+
+    function ChartPesoAvicam(seriePesosSemanal) {
+
+        var chartsOptions = {
+            colors: [/*'rgba(26, 132, 198, 0.4)', */'rgba(26,179,148, 0.7)', '#BA2B86', '#423891'],
+            chart: {
+                renderTo: "chartPesoAvicam",
+                type: 'spline',
+                backgroundColor: {
+                    radialGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                    stops: [
+                        [0, 'rgb(255, 255, 255)'],
+                        [1, 'rgb(255, 255, 255)']
+                    ]
+                },
+                height: 300
+            },
+            title: {
+                text: ''
+            },
+            legend: {
+                itemDistance: 50,
+            },
+            xAxis: {
+                title: {
+                    text: 'Idade (Dias)'
+                },
+                borderWidth: 0,
+                lineColor: '#5555FF',
+                tickColor: '#555555',
+                tickWidth: 0,
+                lineWidth: 0,
+                tickInterval: 7
+            },
+            yAxis: {
+                title: {
+                    text: 'Peso (g)'
+                },
+                lineColor: '#5555FF',
+                tickColor: '#555555',
+                borderWidth: 0,
+                tickWidth: 0,
+                lineWidth: 0,
+                gridLineWidth: 0
+            },
+            tooltip: {
+                shared: true,
+                valueSuffix: '',
+                formatter: function (tooltip) {
+                    return this.points.reduce(function (s, point) {
+                        return s + '<br/>' + point.series.name + ': <b>' + point.y + ' gramas</b>';
+                    }, '<b>' + this.x + 'dias - ' + idadeDesc[this.x] + '</b>') + 
+                    '<div><img class="avicam-img" src="/AgScan/GetImagemFrango?idLote=4200000019&idade='+this.x+'" /></div>';
+                },
+                useHTML: true,
+                // formatter: function (tooltip) {
+                //     return '<div id="avicam-2" class="avicam-img"></div>';
+                // }
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {               
+            },
+            series: [
+                {
+                    name: 'Peso Médio', type: 'spline', data: seriePesosSemanal, zIndex: 20
+                }
+            ]
+        };
+
+        redrawChart(chartsOptions);
+    }
+    function maisGraficos(idLote, idadeAbate) {
+        if (confirm("Tem certeza que deseja abrir a tela de gráficos do Lote?"))
+            window.location = "/Home/Graficos" + "?idLote=" + idLote + "&idadeAbate=" + (idadeAbate|| 0);
+    }
+    
+    function abrirAgScan(idLote) {
+        if (confirm("Tem certeza que deseja abrir o AG.Scan?"))
+            window.location = "/AGScan/Lote" + "?idLote=" + idLote;
+    }
+
+    function abrirAgConn(idLote) {
+        if (confirm("Tem certeza que deseja abrir o AG.Conn?"))
+            window.location = "/AGConn" + "?idLote=" + idLote;
+    }
+
+    function abrirAg500(idLote) {
+        if (confirm("Tem certeza que deseja abrir o AG500?"))
+            window.location = "/AG500" + "?idLote=" + idLote;
+    }
+
+    function validateForm() {
+        if ($('#IdLote').val() == 0) {
+            alert("É necessario selecionar um Lote/Aviário!");
+            return false;
+        }
+        return true;
+    }
+    
+    function limparAcoes() {
+        $('#DiferencaBalanca-Acao').val('');
+        $('#ConsumoAgua-Acao').val('');
+        $('#Alertas-Acao').val('');
+        $('#Calibracoes-Acao').val('');
+        $('#QuantidadePesos-Acao').val('');
+        $('#Mortalidade-Acao').val('');
+        $('#Temperatura-Acao').val('');
+        $('#Co2-Acao').val('');
+        $('#Observacoes-Acao').val('');
+    }
+
+    function acaoModel() {
+        return {
+            IdAcaoLote: $('#IdAcaoLote-Acao').val(),
+            IdLote: $('#IdLote-Acao').val(),
+            /*Aviario: $('#Aviario-Acao').val(),
+            Macro: $('#Macro-Acao').val(),
+            Micro: $('#Micro-Acao').val(),
+            DataHora: $('#DataHora-Acao').val(),*/
+            Idade: $('#Idade-Acao').val(),
+            DiferencaBalanca: $('#DiferencaBalanca-Acao').val(),
+            ConsumoAgua: $('#ConsumoAgua-Acao').val(),
+            Alertas: $('#Alertas-Acao').val(),
+            Calibracoes: $('#Calibracoes-Acao').val(),
+            QuantidadePesos: $('#QuantidadePesos-Acao').val(),
+            Mortalidade: $('#Mortalidade-Acao').val(),
+            Temperatura: $('#Temperatura-Acao').val(),
+            Co2: $('#Co2-Acao').val(),
+            Observacoes: $('#Observacoes-Acao').val(),
+        }
+    }
+
+    function abrirModalAcao(idLote, idade) {
+        
+        $('body').addClass('cursor-loading');
+
+        $.post('/Home/PesoAcao', {idLote, idade})
+            .success(function (result) {
+
+                if(result.success){
+
+                    var model = acaoModel();
+
+                    $('#IdAcaoLote-Acao').val(result.data.IdAcaoLote);
+                    $('#IdLote-Acao').val(result.data.IdLote);
+                    $('#Aviario-Acao').val(result.data.Aviario);
+                    $('#Macro-Acao').val(result.data.Macro);
+                    $('#Micro-Acao').val(result.data.Micro);
+                    $('#DataHora-Acao').val(result.data.DataHoraStr);
+                    $('#Idade-Acao').val(result.data.Idade);
+                    $('#DiferencaBalanca-Acao').val(result.data.DiferencaBalanca || model.DiferencaBalanca);
+                    $('#ConsumoAgua-Acao').val(result.data.ConsumoAgua || model.ConsumoAgua);
+                    $('#Alertas-Acao').val(result.data.Alertas || model.Alertas);
+                    $('#Calibracoes-Acao').val(result.data.Calibracoes || model.Calibracoes);
+                    $('#QuantidadePesos-Acao').val(result.data.QuantidadePesos || model.QuantidadePesos);
+                    $('#Mortalidade-Acao').val(result.data.Mortalidade || model.Mortalidade);
+                    $('#Temperatura-Acao').val(result.data.Temperatura || model.Temperatura);
+                    $('#Co2-Acao').val(result.data.Co2 || model.Co2);
+                    $('#Observacoes-Acao').val(result.data.Observacoes || model.Observacoes);
+
+                    $("#acaoModal").modal('show');
+                }
+                else
+                {
+                    $('body').removeClass('cursor-loading');
+                    alert(result.msg);
+                }
+                                
+            }).error(function (error, msg) {
+                console.log(error);
+                $('body').removeClass('cursor-loading');
+            });
+    }
+
+    function salvarAcoes() {
+
+        $('body').addClass('cursor-loading');
+        var model = acaoModel();
+
+        $.post('/Home/SalvarPesoAcao', model)
+            .success(function (result) {
+
+                if(result.success){
+
+                    $("#acaoModal").modal('hide');
+
+                }
+                else
+                {
+                    $('body').removeClass('cursor-loading');
+                    alert(result.msg);
+                }
+                                
+            }).error(function (error, msg) {
+                console.log(error);
+                $('body').removeClass('cursor-loading');
+            });
+    }
+
+
+    function download(filename, data) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/csv;base64,' + data);
+        element.setAttribute('download', filename);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    }
+
+    function exportConsumoAgua(idLote) {
+
+        $('body').addClass('cursor-loading');
+        $.post('/Home/ExportConsumoAgua', { idLote })
+            .success(function (result) {
+
+                if (result.name != "") {
+                    download(result.name, result.data);
+                }
+                else {
+                    alert("Não foi possivel exportar os dados!");
+                }
+
+                $('body').removeClass('cursor-loading');
+            }).error(function (error, msg) {
+                console.log(error);
+                $('body').removeClass('cursor-loading');
+            });
+    }
+
+
+    $(document).ready(function () {
+
+        $(".select2").each(function() {
+            $(this).select2($(this).data());
+        });
+
+        $('.datepicker-group').each(function() {
+            $(this).datetimepicker({
+                locale: 'pt-br'
+            });
+        });
+
+        $('#IdEmpresa').on('change', function() {
+            var idEmpresa = $('#IdEmpresa').val();
+            $('#IdLote').html('');
+            var newOption = new Option('Selecione...', 0, true, true);
+            $('#IdLote').append(newOption).trigger('change');
+
+            for (var i = 0; i < lotes.length; i++) {
+                var item = lotes[i];
+                if(idEmpresa == item.IdEmpresa){
+                    newOption = new Option(item.Aviario + ' - ' + item.CodigoLote, item.IdLote, false, false);
+                    $('#IdLote').append(newOption).trigger('change');
+                }
+            }
+
+        });
+                       
+        $('#Idade-Acao').change(function(){
+            abrirModalAcao($('#IdLote-Acao').val(), $('#Idade-Acao').val());
+        });
+
+        //$('#acaoModal').on('hide.bs.modal', function (e) {            
+        //    $('#IdAcaoLote-Acao').val('');
+        //    $('#IdLote-Acao').val('');
+        //    $('#Aviario-Acao').val('');
+        //    $('#Macro-Acao').val('');
+        //    $('#Micro-Acao').val('');
+        //    $('#DataHora-Acao').val('');
+        //    $('#Idade-Acao').val('');
+        //    limparAcoes();
+        //});
+        
+        pageLoad();
+        SingApp.onPageLoad(pageLoad);
+
+        //var dataMort = [];
+        //dataMort.push({
+        //    label: "Mortalidade",
+        //    data: 1380
+        //});
+        //dataMort.push({
+        //    label: "Saldo",
+        //    data: 28620
+        //});
+        //
+        //var mortalidadeChart = $.plot($('#mortalidade-donut'), dataMort, {
+        //    series: {
+        //        pie: {
+        //            innerRadius: 0.4,
+        //            show: true,
+        //            fill: 0.5
+        //        }
+        //    },
+        //    colors: [
+        //        '#000',
+        //        '#888'
+        //    ],
+        //    grid: {
+        //        hoverable: true
+        //    },
+        //    tooltip: true,
+        //    tooltipOpts: {
+        //        cssClass: "flotTip",
+        //        content: "%s: %n",
+        //        shifts: { x: 20, y: 0 },
+        //        defaultTheme: false
+        //    },
+        //    legend: {
+        //        noColumns: 1,
+        //        container: $('#flot-donut-legend'),
+        //        labelBoxBorderColor: Sing.colors['white']
+        //    }
+        //});
+
+        ChartPesoMedio(seriePesos, seriePesosZootecnico, seriePesosIdeais, seriePesosProj);
+        ChartTemperatura(serieTemperaturas, serieTemperaturasRange, serieTemperaturasEx);
+        ChartUmidade(serieUmidades, serieUmidadesRange, serieUmidadesEx);
+        ChartAgua(serieAgua, serieAguaEx);
+        ChartCo2(graficoCo2, graficoCo2Range);
+        ChartPesoAvicam(seriePesosSemanal);
+        var dataTable = $('#alertas-table').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.7/i18n/Portuguese-Brasil.json"
+            },
+            dom: 'Bfrtip',
+            paging: true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50], [5, 10, 25, 50]],
+            order: [[1, "desc"]],
+            buttons: [
+                {
+                    extend: 'excel',
+                    text: "<i class='fa fa-file-excel-o' title='Exportar para Excel'></i> Exportar",
+                    className: 'btn btn-default'
+
+                }
+            ],
+            columns: [
+                { data: "TipoAlertaStr", title: 'Tipo', columnType: 'text' },
+                { data: 'Data', title: 'Data', columnType: 'date', render: function ( data, type, full, meta ) { return full['DataStr']; }},
+                { data: 'Mensagem', title: 'Mensagem', columnType: 'text' }
+            ],
+            data: alertas
+        });
+        
+        var calibracoesDataTable = $('#calibracoes-table').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.7/i18n/Portuguese-Brasil.json"
+            },
+            paging: true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50], [5, 10, 25, 50]],
+            order: [[1, "desc"]],
+            columns: [
+                { data: 'DataCalibracao', title: 'Data', columnType: 'date', render: function ( data, type, full, meta ) { return full['DataCalibracaoStr']; }},
+                { data: "Idade", title: 'Idade', columnType: 'number' },
+                { data: "NumeroSerial", title: 'Serial', columnType: 'text' },
+                { data: 'ZonaStr', title: 'Zona', columnType: 'text' }
+            ],
+            data: calibracoes
+        });
+    });
+
+</script>
+            <footer class="content-footer">
+                <strong>Copyright</strong> Agrisolus &copy; 2026
+            </footer>
+        </main>
+    </div>
+    <!-- The Loader. Is shown when pjax happens -->
+    <div class="loader-wrap hiding hide">
+        <i class="fa fa-circle-o-notch fa-spin-fast"></i>
+    </div>
+    <script>
+
+        $(document).ready(function () {
+            $('.sidebar-nav li a').unbind('click');
+        });
+
+    </script>
+</body>
+</html>

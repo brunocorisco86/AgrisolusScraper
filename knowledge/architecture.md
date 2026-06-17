@@ -32,57 +32,64 @@ A solução foi projetada de forma modular e baseada em Programação Orientada 
 
 ## 📐 Modelo de Entidade e Relacionamento (MER)
 
-O MER abaixo é implementado tanto no Postgres do Supabase quanto replicado no SQLite local para garantir a compatibilidade estrutural.
+O MER definitivo abaixo reflete de forma exata os campos disponíveis nos objetos coletados (`lotes`, `saldoRacao`, `alertas` e `calibracoes`). Ele garante compatibilidade estrutural tanto no Supabase quanto no SQLite local.
 
 ```mermaid
 erDiagram
-    PRODUTORES ||--o{ SILOS : possui
-    SILOS ||--o{ LEITURAS : registra
-    SILOS ||--o{ ALERTAS : gera
-    SILOS ||--o{ CALIBRACOES : contem
+    LOTES ||--o{ SILOS : "contém"
+    LOTES ||--o{ ALERTAS : "registra"
+    LOTES ||--o{ CALIBRACOES : "possui"
+    SILOS ||--o{ LEITURAS : "registra"
 
-    PRODUTORES {
-        uuid id PK
-        string nome
+    LOTES {
+        bigint id_lote PK
+        string codigo_lote
+        string empresa
         string estabelecimento
         string aviario
-        int lote
         string linhagem
+        int qtd_alojamento
+        timestamp data_alojamento
+        int saldo_frangos
+        timestamp updated_at
     }
 
     SILOS {
         string id_silo PK
-        uuid produtor_id FK
-        float capacidade
+        bigint lote_id FK
+        numeric capacidade_kg
     }
 
     LEITURAS {
         serial id PK
         string silo_id FK
-        date data_saldo
-        time horario
-        float valor_racao
-        float consumo
+        timestamp data_leitura UK
+        numeric valor_racao_g
+        numeric valor_racao_kg
+        numeric consumo_kg
         timestamp created_at
     }
 
     ALERTAS {
         serial id PK
-        string silo_id FK
-        string tipo
-        timestamp timestamp PK "Unique"
+        bigint lote_id FK
+        int tipo_alerta
+        string tipo_alerta_str
+        timestamp data_alerta UK
         string mensagem
     }
 
     CALIBRACOES {
         serial id PK
-        string silo_id FK
-        timestamp timestamp PK "Unique"
+        bigint lote_id FK
+        string numero_serial
+        int zona
+        string zona_str
+        timestamp data_calibracao UK
         int idade
-        string serial
-        string zona
     }
 ```
+
 
 ---
 
