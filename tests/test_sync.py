@@ -54,13 +54,15 @@ def test_sync_process(test_db):
     sqlite_conn.commit()
     sqlite_conn.close()
 
-    # 2. Mockar a conexão com o Supabase
-    mock_pg_conn = MagicMock()
-    mock_pg_cursor = MagicMock()
-    mock_pg_conn.cursor.return_value = mock_pg_cursor
+    # 2. Mockar o cliente Supabase
+    mock_client = MagicMock()
+    mock_table = MagicMock()
+    mock_client.table.return_value = mock_table
+    mock_table.upsert.return_value = mock_table
+    mock_table.execute.return_value = MagicMock()
     
-    # Faz o mock do método get_supabase_connection da conexão
-    test_db.get_supabase_connection = MagicMock(return_value=mock_pg_conn)
+    # Faz o mock do método get_supabase_client
+    test_db.get_supabase_client = MagicMock(return_value=mock_client)
 
     # 3. Executar o SyncService
     sync_service = SyncService(test_db)
@@ -68,31 +70,15 @@ def test_sync_process(test_db):
     
     assert success is True, "O serviço de sincronização falhou."
 
-    # 4. Validar se os métodos do cursor PostgreSQL (Supabase) foram chamados com o SQL correto
-    # Deve ter chamado execute para lotes, silos, leituras, alertas e calibrações
-    calls = mock_pg_cursor.execute.call_args_list
-    assert len(calls) == 5, f"Esperava 5 execuções SQL no Postgres, obteve {len(calls)}"
+    # 4. Validar se os métodos do cliente Supabase foram chamados para as tabelas corretas
+    table_calls = [call[0][0] for call in mock_client.table.call_args_list]
+    assert len(table_calls) == 5, f"Esperava 5 chamadas de tabela, obteve {len(table_calls)}"
+    assert "lotes" in table_calls
+    assert "silos" in table_calls
+    assert "leituras" in table_calls
+    assert "alertas" in table_calls
+    assert "calibracoes" in table_calls
 
-    # Verificar se as chamadas de SQL executaram as tabelas corretas
-    inserted_tables = []
-    for call in calls:
-        sql = call[0][0].lower()
-        if "insert into lotes" in sql:
-            inserted_tables.append("lotes")
-        elif "insert into silos" in sql:
-            inserted_tables.append("silos")
-        elif "insert into leituras" in sql:
-            inserted_tables.append("leituras")
-        elif "insert into alertas" in sql:
-            inserted_tables.append("alertas")
-        elif "insert into calibracoes" in sql:
-            inserted_tables.append("calibracoes")
-
-    assert "lotes" in inserted_tables
-    assert "silos" in inserted_tables
-    assert "leituras" in inserted_tables
-    assert "alertas" in inserted_tables
-    assert "calibracoes" in inserted_tables
 
     # 5. Validar que as tabelas de leituras, alertas e calibrações foram apagadas localmente no SQLite
     # enquanto lotes e silos persistem localmente como cache

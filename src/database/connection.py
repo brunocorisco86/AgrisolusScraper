@@ -1,51 +1,57 @@
 import os
 import sqlite3
-import psycopg2
+from supabase import create_client, Client
 from dotenv import load_dotenv
 from src.utils.logger import setup_logger
 
-# Configura o logger do módulo
 logger = setup_logger(name="database_connection", log_file="test_run.log")
 
 class DatabaseConnection:
     """
-    Gerencia as conexões com o banco de dados remoto (Supabase PostgreSQL)
+    Gerencia as conexões com o banco de dados remoto (Supabase via HTTP Client)
     e o banco de dados local (SQLite Fallback).
     """
-    def __init__(self):
-        # Carrega variáveis de ambiente
+    def __init__(self, supabase_url=None, secret_key=None, sqlite_path=None):
         load_dotenv()
-        self.database_url = os.getenv("DATABASE_URL")
-        self.sqlite_path = os.getenv("SQLITE_PATH", "local_fallback.db")
-        
-        logger.info(f"Classe DatabaseConnection inicializada.")
-        logger.info(f"Caminho do SQLite configurado: {self.sqlite_path}")
-        if not self.database_url:
-            logger.warning("DATABASE_URL não configurada no arquivo .env. Conexão remota com o Supabase falhará.")
+        self.api_url = supabase_url if supabase_url is not None else os.getenv("SUPABASE_API_URL")
+        self.secret_key = secret_key if secret_key is not None else os.getenv("SECRET_KEY")
+        self.sqlite_path = sqlite_path if sqlite_path is not None else os.getenv("SQLITE_PATH", "local_fallback.db")
 
-    def get_supabase_connection(self):
+        
+        # Se a URL contiver o caminho REST do supabase (/rest/v1/), limpamos para obter a URL base
+        if self.api_url and "/rest/v1" in self.api_url:
+            self.supabase_url = self.api_url.split("/rest/v1")[0]
+        else:
+            self.supabase_url = self.api_url
+
+
+        logger.info("DatabaseConnection inicializada.")
+        logger.info(f"Caminho do SQLite: {self.sqlite_path}")
+        if self.supabase_url:
+            logger.info(f"URL base do Supabase resolvida: {self.supabase_url}")
+        else:
+            logger.warning("SUPABASE_API_URL não configurada no arquivo .env.")
+
+    def get_supabase_client(self) -> Client:
         """
-        Tenta abrir e retornar uma conexão direta com o PostgreSQL do Supabase.
+        Instancia e retorna o cliente oficial do Supabase utilizando a SECRET_KEY (acesso administrativo/bypass RLS).
         Retorna:
-            psycopg2.connection ou None se a conexão falhar (ex: sem internet ou credenciais incorretas).
+            supabase.Client ou None se falhar ou se credenciais estiverem ausentes.
         """
-        if not self.database_url:
-            logger.error("Tentativa de conexão com Supabase sem DATABASE_URL configurada.")
+        if not self.supabase_url or not self.secret_key:
+            logger.error("Tentativa de conexão com o Supabase sem credenciais completas (SUPABASE_API_URL e SECRET_KEY).")
             return None
         
         try:
-            logger.info("Tentando conectar ao banco de dados do Supabase...")
-            conn = psycopg2.connect(self.database_url)
-            logger.info("Conexão com o Supabase estabelecida com sucesso!")
-            return conn
-        except psycopg2.OperationalError as e:
-            logger.error(f"Erro de conexão com o Supabase (banco offline ou sem internet): {e}")
-            return None
+            logger.info("Criando cliente do Supabase...")
+            client: Client = create_client(self.supabase_url, self.secret_key)
+            logger.info("Cliente Supabase criado com sucesso!")
+            return client
         except Exception as e:
             logger.error(f"Erro inesperado ao conectar ao Supabase: {e}")
             return None
 
-    def get_sqlite_connection(self):
+    def get_sqlite_connection(self) -> sqlite3.Connection:
         """
         Abre e retorna uma conexão com o SQLite local, garantindo que as tabelas estejam criadas.
         Retorna:
@@ -54,8 +60,6 @@ class DatabaseConnection:
         try:
             logger.info(f"Conectando ao banco SQLite local: {self.sqlite_path}")
             conn = sqlite3.connect(self.sqlite_path)
-            
-            # Habilita suporte a chaves estrangeiras no SQLite (desativado por padrão)
             conn.execute("PRAGMA foreign_keys = ON;")
             
             # Inicializa a estrutura das tabelas localmente

@@ -43,12 +43,12 @@ def test_sqlite_initialization(monkeypatch):
 
     conn.close()
 
-def test_supabase_connection_without_url(monkeypatch):
-    # Remove a DATABASE_URL para testar o comportamento resiliente da classe
-    monkeypatch.delenv("DATABASE_URL", raising=False)
-    
-    db = DatabaseConnection()
-    conn = db.get_supabase_connection()
+def test_supabase_client_without_credentials():
+    # Instancia explicitamente sem credenciais para testar o comportamento resiliente
+    db = DatabaseConnection(supabase_url="", secret_key="")
+    client = db.get_supabase_client()
     
     # Deve retornar None amigavelmente sem levantar exceção
-    assert conn is None
+    assert client is None
+
+
