@@ -9,7 +9,8 @@ Este arquivo define o planejamento e as metas de desenvolvimento para a soluçã
 ### **Fase 1: Infraestrutura Básica e Documentação**
 - [x] Criar estrutura de pastas orientada a objetos (POO).
 - [x] Desenvolver documentações iniciais na pasta `knowledge/`.
-- [ ] Definir o modelo de banco de dados (MER) para o Supabase.
+- [x] Definir o modelo de banco de dados (MER) para o Supabase.
+
 
 
 ### **Fase 2: Conectividade e Banco de Dados**
