@@ -9,13 +9,13 @@ Este arquivo acompanha a taxa de conclusão de cada fase do projeto.
 | Fase | Descrição | Status | Completude |
 | :--- | :--- | :---: | :---: |
 | **Fase 1** | Infraestrutura Básica e Documentação | Concluído | 100% |
-| **Fase 2** | Conectividade e Banco de Dados | Não Iniciado | 0% |
+| **Fase 2** | Conectividade e Banco de Dados | Concluído | 100% |
 | **Fase 3** | Módulo Scraper (BeautifulSoup) | Não Iniciado | 0% |
 | **Fase 4** | Sistema de Alertas (Telegram) | Não Iniciado | 0% |
 | **Fase 5** | Dashboard Streamlit | Não Iniciado | 0% |
 | **Fase 6** | Dockerização e Testes | Não Iniciado | 0% |
 
-**Progresso Total do Projeto**: 🔄 **16%**
+**Progresso Total do Projeto**: 🔄 **33%**
 
 ---
 
@@ -29,10 +29,10 @@ Este arquivo acompanha a taxa de conclusão de cada fase do projeto.
 
 
 
-### **Fase 2: Conectividade e Banco de Dados** (0%)
-- [ ] Script de migração Supabase.
-- [ ] Implementação de conexão SQLite local.
-- [ ] Lógica do `SyncService` (Sincronização offline-online).
+### **Fase 2: Conectividade e Banco de Dados** (100%)
+- [x] Script de migração Supabase.
+- [x] Implementação de conexão SQLite local.
+- [x] Lógica do `SyncService` (Sincronização offline-online).
 
 ### **Fase 3: Módulo Scraper** (0%)
 - [ ] Script utilitário `lotes_config.json`.

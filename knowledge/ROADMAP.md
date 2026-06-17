@@ -14,9 +14,10 @@ Este arquivo define o planejamento e as metas de desenvolvimento para a soluçã
 
 
 ### **Fase 2: Conectividade e Banco de Dados**
-- [ ] Implementar classe de conexão e migração do **Supabase (PostgreSQL)**.
-- [ ] Implementar persistência local **SQLite** (fallback para quedas de internet).
-- [ ] Desenvolver serviço de sincronização (`SyncService`) local-remoto.
+- [x] Implementar classe de conexão e migração do **Supabase (PostgreSQL)**.
+- [x] Implementar persistência local **SQLite** (fallback para quedas de internet).
+- [x] Desenvolver serviço de sincronização (`SyncService`) local-remoto.
+
 
 ### **Fase 3: Módulo Scraper (BeautifulSoup)**
 - [ ] Criar script utilitário para gerar o `lotes_config.json` conforme `docs/GerarJson.md`.
