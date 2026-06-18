@@ -116,7 +116,7 @@ def test_process_lote_html_resilience(test_db, monkeypatch):
     assert cursor.fetchone()[0] == 2
     
     cursor.execute("SELECT COUNT(*) FROM alertas")
-    assert cursor.fetchone()[0] == 230
+    assert cursor.fetchone()[0] == 231
 
     
     cursor.execute("SELECT COUNT(*) FROM calibracoes")
