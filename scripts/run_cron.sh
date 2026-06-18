@@ -2,8 +2,8 @@
 # Script utilitário para ser chamado pelo cron
 # Ele garante que o ambiente virtual python 'env' seja ativado e o script executado no diretório correto.
 
-# Caminho absoluto da pasta do projeto
-PROJECT_DIR="/media/brunoconter/DOCUMENTOS3/11_AGRISOLUS_SCRAPER"
+# Caminho absoluto da pasta do projeto dinâmico
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 cd "$PROJECT_DIR" || exit 1
 
