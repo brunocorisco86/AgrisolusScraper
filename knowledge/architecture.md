@@ -10,9 +10,9 @@ A solução foi projetada de forma modular e baseada em Programação Orientada 
 
 ### Fluxo de Dados e Fallback Offline
 1. **Scraper (BeautifulSoup)**: Executado periodicamente via `cron` (a cada 1 hora).
-2. **Persistência Principal**: Tenta inserir os dados coletados diretamente no **Supabase (PostgreSQL)**.
+2. **Persistência Principal**: Tenta inserir os dados coletados diretamente no **Supabase (PostgreSQL)** via SDK HTTP Client.
 3. **Fallback Offline**: Se a conexão de rede falhar (comum em ambientes rurais/aviários), os dados são salvos localmente em um banco de dados **SQLite** (`local_fallback.db`).
-4. **Sincronizador (`SyncService`)**: A cada execução bem-sucedida com internet, verifica se existem registros pendentes no SQLite e faz o upload incremental para o Supabase.
+4. **Sincronizador (`SyncService`)**: A cada execução bem-sucedida com internet, verifica se existem registros pendentes no SQLite e faz o upload incremental (upsert) para o Supabase, limpando os buffers locais.
 
 ---
 
@@ -20,12 +20,12 @@ A solução foi projetada de forma modular e baseada em Programação Orientada 
 
 | Componente | Tecnologia | Racional de Escolha |
 | :--- | :--- | :--- |
-| **Ambiente de Execução** | Raspberry Pi 3B (Alpine Linux) | Baixo consumo de energia, ideal para ambiente físico (aviário), 1GB de RAM exige eficiência. |
-| **Linguagem** | Python 3 | Excelente suporte para scraping, IA, bancos de dados e bots. |
+| **Ambiente de Execução** | Raspberry Pi 3B (Debian/Alpine Linux) | Baixo consumo de energia, ideal para ambiente físico (aviário), 1GB de RAM exige eficiência. |
+| **Linguagem** | Python 3 | Excelente suporte para scraping, bancos de dados, gráficos e bots. |
 | **Scraper** | BeautifulSoup4 / Requests | Leve e eficiente. Evitamos Selenium/Playwright devido ao limite de 1GB de RAM do Raspberry Pi. |
-| **Banco Remoto** | Supabase (PostgreSQL) | Banco de dados relacional gratuito na nuvem, com ótima API e dashboards internos. |
+| **Banco Remoto** | Supabase (PostgreSQL) | Banco de dados relacional gratuito na nuvem, com ótima API RESTful. |
 | **Banco Local** | SQLite | Serverless, sem consumo de RAM adicional, embutido no Python, ideal para fallback local. |
-| **Telegram Bot** | aiogram (v3) | Assíncrono, robusto, ideal para rodar em segundo plano sem travar a CPU. |
+| **Telegram Bot** | aiogram (v3) | Serviço push-only leve executado via Cron periódico, eliminando uso contínuo de RAM (Option B). |
 | **Dashboard** | Streamlit | Permite criar dashboards de dados dinâmicos de forma rápida e com ótima estética visual. |
 
 ---
@@ -51,6 +51,7 @@ erDiagram
         int qtd_alojamento
         timestamp data_alojamento
         int saldo_frangos
+        string aviario_lote UK "concatenacao unica"
         timestamp updated_at
     }
 
@@ -95,6 +96,13 @@ erDiagram
 
 ## 📝 Changelog
 
+### v1.0.0 (2026-06-18)
+- Migração completa de todas as conexões diretas SQL para o SDK oficial do Supabase.
+- Implementação de alertas imediatos, resumos periódicos e relatórios de SLA baseados em Cron (Option B).
+- Criação do dashboard Streamlit interativo com suporte a fallback offline (SQLite).
+- Criação de scripts de implantação sequencial (`scripts/deploy/`).
+- Criação de suíte de testes com cobertura para scripts e dashboard (100% aprovada).
+
 ### v0.1.0 (2026-06-17)
 - Inicialização do repositório Git.
 - Configuração do `.gitignore` para proteção de credenciais (`.env`).
@@ -104,4 +112,5 @@ erDiagram
 ---
 
 ## 💡 Lições Aprendidas
-- *Alpine Linux no Raspberry Pi 3B*: Como o Alpine usa `musl` em vez de `glibc`, bibliotecas que dependem de C pré-compiladas (como `psycopg2` ou `cryptography`) podem precisar ser instaladas via gerenciador de pacotes do sistema (`apk`) ou compiladas localmente. Recomenda-se utilizar `psycopg2-binary` para desenvolvimento inicial ou SQLAlchemy.
+- *Alpine Linux vs Debian Slim no Docker*: Ao utilizar pacotes que requerem compilação C local (como `lxml` ou `cryptography`), o Debian Slim é preferível pois suporta downloads diretos de wheels pré-compiladas para arquiteturas ARM (Raspberry Pi), poupando tempo de build e evitando estouro de memória no Pi 3B.
+- *Push-Only Notifier*: Evitar daemons de bot que escutam mensagens (polling/webhooks) economiza RAM preciosa no Raspberry Pi 3B e melhora a confiabilidade contra falhas do processo em background.

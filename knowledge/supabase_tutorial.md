@@ -1,69 +1,84 @@
 # Conectando ao Supabase com Python
 
-Este tutorial descreve como conectar a aplicação Python ao Supabase utilizando PostgreSQL diretamente ou através de SDKs.
+Este tutorial descreve como conectar a aplicação Python ao Supabase utilizando a biblioteca oficial.
 
 ---
 
-## 🔌 Opções de Conectividade
+## 🔌 Opção Recomendada: SDK Oficial do Supabase
 
-Como o Supabase expõe um banco de dados PostgreSQL padrão, temos duas opções principais para nos conectar a ele em Python:
-
-### Opção 1: Via biblioteca oficial do Supabase (Recomendado para APIs/Auth)
-A biblioteca `supabase-py` fornece um cliente HTTP para interagir com o Supabase via APIs REST geradas automaticamente pelo PostgREST.
+Para máxima compatibilidade, facilidade de autenticação e bypass de políticas RLS em ambiente administrativo/produção, utilizamos o SDK oficial `supabase-py`. Ela se comunica de forma transparente via requisições HTTPS e PostgREST.
 
 **Instalação**:
 ```bash
 pip install supabase
 ```
 
-**Exemplo de uso**:
+### Configurando o Cliente
+O cliente é instanciado na classe `DatabaseConnection` localizada em [connection.py](file:///media/brunoconter/DOCUMENTOS3/11_AGRISOLUS_SCRAPER/src/database/connection.py):
+
 ```python
 import os
 from supabase import create_client, Client
 
-url: str = os.environ.get("SUPABASE_URL")
-key: str = os.environ.get("SUPABASE_KEY")
+url = os.getenv("SUPABASE_API_URL")
+key = os.getenv("SECRET_KEY") # Service role/bypass RLS key
 supabase: Client = create_client(url, key)
-
-# Exemplo de inserção
-response = supabase.table("leituras").insert({
-    "silo_id": "silo_01",
-    "data_saldo": "2026-06-17",
-    "horario": "20:00:00",
-    "valor_racao": 15200.5
-}).execute()
-```
-
-### Opção 2: Conexão Direta ao PostgreSQL (Recomendado para o Scraper/Dashboard)
-Para consultas complexas, inserções eficientes em lote e compatibilidade com o SQLite (usando a mesma sintaxe SQL), podemos utilizar o **Psycopg2** ou **asyncpg** para se conectar diretamente à porta do Postgres (`5432` ou `6543` para transaction pooler).
-
-**Instalação**:
-```bash
-pip install psycopg2-binary
-# ou
-pip install sqlalchemy
-```
-
-**Exemplo de uso com SQLAlchemy**:
-```python
-import os
-from sqlalchemy import create_engine
-
-# A string de conexão é fornecida no painel do Supabase em Project Settings -> Database
-db_url = os.environ.get("DATABASE_URL") # postgresql://postgres:[password]@db.[project-id].supabase.co:5432/postgres
-
-engine = create_engine(db_url)
-
-with engine.connect() as conn:
-    result = conn.execute("SELECT * FROM produtores")
-    for row in result:
-        print(row)
 ```
 
 ---
 
-## 🔒 Boas Práticas de Segurança
+## 📥 Exemplos de Operações Comuns (CRUD)
 
-1. **Nunca comite chaves de API ou strings de conexão**: Mantenha chaves como `SUPABASE_KEY` e `DATABASE_URL` apenas no arquivo `.env`.
-2. **Habilite Row Level Security (RLS)**: No painel do Supabase, sempre habilite RLS para as tabelas a fim de impedir acessos não autorizados se as chaves públicas forem vazadas.
-3. **Use Transaction Pooling**: Como o scraper roda no cron a cada hora e o Telegram bot rodará constantemente, use a string de conexão do pooler de transação (porta `6543`) se houver problemas de limite de conexões no plano gratuito do Supabase.
+### 1. Inserção / Upsert (Atualização em Conflito)
+Para evitar falhas de chaves duplicadas (por exemplo, leituras com o mesmo timestamp), utilize o método `upsert` com a cláusula `on_conflict` especificando as colunas únicas:
+
+```python
+# Inserir ou Atualizar leituras garantindo unicidade
+client.table("leituras").upsert(
+    [
+        {
+            "silo_id": "Silo-819-01",
+            "data_leitura": "2026-06-17T12:00:00",
+            "valor_racao_kg": 5000.0,
+            "consumo_kg": 15.2
+        }
+    ],
+    on_conflict="silo_id,data_leitura"
+).execute()
+```
+
+### 2. Seleção de Dados com Filtros
+Para obter os registros de lotes específicos do seu aviário:
+
+```python
+# Seleciona todos os lotes do Aviário 819
+response = client.table("lotes") \
+    .select("id_lote") \
+    .ilike("aviario", "%Aviário 819%") \
+    .execute()
+
+lote_ids = [row["id_lote"] for row in response.data]
+```
+
+### 3. Seleção Ordenada e Limitada
+Para calcular alertas ou resumos baseados no último registro de envio do silo:
+
+```python
+response = client.table("leituras") \
+    .select("data_leitura") \
+    .eq("silo_id", "Silo-819-01") \
+    .order("data_leitura", desc=True) \
+    .limit(1) \
+    .execute()
+
+if response.data:
+    ultima_data = response.data[0]["data_leitura"]
+```
+
+---
+
+## 🔒 Boas Práticas de Segurança e Recursos
+
+1. **Proteção das Chaves de API**: Mantenha as credenciais `SUPABASE_API_URL` e `SECRET_KEY` exclusivas do arquivo local `.env` (nunca comitadas no Git). O arquivo `.gitignore` já está pré-configurado para ignorar `.env`.
+2. **Utilização da Key de Acesso Administrativo (Service Role)**: A chave `SECRET_KEY` (service role) é necessária em ambientes autônomos (como cron scraper no Raspberry Pi) para que o sistema consiga gravar os dados diretamente sem restrições de RLS.
+3. **Consumo de Memória Zero**: Como a API funciona inteiramente via HTTP REST, as conexões são encerradas imediatamente após a requisição, eliminando o consumo contínuo de recursos ou limites de pooler de conexões PostgreSQL.
