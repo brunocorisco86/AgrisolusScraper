@@ -1,1 +1,2 @@
-[ ] - Conferir se "IDADE" em lotes_config.json vai gerar algum problema no dia seguinte quando for para 13 e se é possivel retirar deste arquivo e desconsiderar nos demais códigos.
+[x] - Conferir se "IDADE" em lotes_config.json vai gerar algum problema no dia seguinte quando for para 13 e se é possivel retirar deste arquivo e desconsiderar nos demais códigos.
+[x] - Será que precisaremos mesmo do docker com postgres se ja estamos com a base no supabase? Não poderiamos fazer um select la pra gerar o relatorio?
