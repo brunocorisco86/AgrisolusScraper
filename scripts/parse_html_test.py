@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 
-file_path = "/media/brunoconter/DOCUMENTOS3/11_AGRISOLUS_SCRAPER/scripts/batch_details.html"
+import os
+file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "batch_details.html")
 
 with open(file_path, "r", encoding="utf-8") as f:
     html_content = f.read()

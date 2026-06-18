@@ -51,8 +51,7 @@ try:
     print(f"Status do lote: {response_lote.status_code}")
 
     if response_lote.status_code == 200:
-        # Salvar o HTML para análise posterior
-        output_file = "/media/brunoconter/DOCUMENTOS3/11_AGRISOLUS_SCRAPER/scripts/batch_details.html"
+        output_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "batch_details.html")
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(response_lote.text)
         print(f"Sucesso! HTML da página de detalhes salvo em: {output_file}")
