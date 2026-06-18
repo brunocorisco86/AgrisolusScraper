@@ -1,4 +1,4 @@
-#!/bash
+#!/bin/bash
 # -----------------------------------------------------------------------------
 # Script: 5_test_offline.sh
 # Descrição: Executa a simulação de perda de rede e salvamento no SQLite local.
