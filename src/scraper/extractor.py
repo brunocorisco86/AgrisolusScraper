@@ -8,6 +8,7 @@ from datetime import datetime
 from src.database.connection import DatabaseConnection
 from src.database.sync import SyncService
 from src.utils.logger import setup_logger
+from src.utils.datetime_parser import parse_iso_datetime
 
 logger = setup_logger(name="agrisolus_scraper", log_file="test_run.log")
 
@@ -111,7 +112,6 @@ class AgrisolusScraper:
                     "AVIARIO": aviario,
                     "LOTE": int(lote.get("CodigoLote", 0)) if lote.get("CodigoLote") else None,
                     "LINHAGEM": lote.get("Linhagem"),
-                    "IDADE": lote.get("Idade"),
                     "LINK": link_detalhes
                 })
 
@@ -280,6 +280,42 @@ class AgrisolusScraper:
                     "data_calibracao": item.get("DataCalibracao"),
                     "idade": item.get("Idade")
                 })
+
+        # Checagem de Silo Offline (>2 horas)
+        for lei in leituras_list:
+            silo_id = lei["silo_id"]
+            data_leitura_str = lei["data_leitura"]
+            
+            try:
+                dt_leitura = parse_iso_datetime(data_leitura_str)
+                
+                now = datetime.now()
+                diff_seconds = (now - dt_leitura).total_seconds()
+                diff_hours = diff_seconds / 3600.0
+                
+                if diff_hours > 2.0:
+                    logger.info(f"Silo {silo_id} offline há {diff_hours:.1f} horas. Verificando se alerta já foi enviado...")
+                    
+                    if not self._alert_already_sent(id_lote, silo_id, data_leitura_str):
+                        logger.warning(f"Silo {silo_id} offline recém-detectado. Enviando alerta no Telegram...")
+                        
+                        alertas_list.append({
+                            "lote_id": id_lote,
+                            "tipo_alerta": 99,
+                            "tipo_alerta_str": "Silo Offline",
+                            "data_alerta": data_leitura_str,
+                            "mensagem": f"O {silo_id} está sem enviar dados há {diff_hours:.1f} horas. Último envio: {data_leitura_str}"
+                        })
+                        
+                        # Dispara Telegram
+                        from src.bot.notifier import TelegramNotifier
+                        notifier = TelegramNotifier()
+                        notifier.send_immediate_alert(silo_id, data_leitura_str, diff_hours)
+                    else:
+                        logger.info(f"Alerta de offline para {silo_id} na data {data_leitura_str} já foi enviado.")
+            except Exception as e:
+                logger.error(f"Erro ao checar status offline de {silo_id}: {e}")
+
 
         # Filtra duplicados em leituras_list (silo_id, data_leitura)
         unique_leituras = {}
@@ -505,3 +541,22 @@ class AgrisolusScraper:
                 logger.error(f"Falha ao decodificar JSON de '{var_name}': {e}")
                 return None
         return None
+
+    def _alert_already_sent(self, lote_id: int, silo_id: str, data_leitura: str) -> bool:
+        """
+        Verifica se o alerta de silo offline para este silo e data de leitura já existe localmente no SQLite.
+        """
+        try:
+            conn = self.db_conn.get_sqlite_connection()
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT COUNT(*) FROM alertas 
+                WHERE lote_id = ? AND data_alerta = ? AND tipo_alerta = 99 AND mensagem LIKE ?
+            """, (lote_id, data_leitura, f"%{silo_id}%"))
+            count = cursor.fetchone()[0]
+            conn.close()
+            return count > 0
+        except Exception as e:
+            logger.error(f"Erro ao verificar alertas antigos no SQLite: {e}")
+            return False
+

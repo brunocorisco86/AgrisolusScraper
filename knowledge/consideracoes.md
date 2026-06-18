@@ -1,0 +1,1 @@
+[ ] - Conferir se "IDADE" em lotes_config.json vai gerar algum problema no dia seguinte quando for para 13 e se é possivel retirar deste arquivo e desconsiderar nos demais códigos.

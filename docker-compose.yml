@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  # Serviço principal do Cron que executa o scraper e dispara as notificações periodicamente
+  cron-scraper:
+    build: .
+    container_name: agrisolus-cron-scraper
+    restart: always
+    volumes:
+      # Mapeamento do banco local SQLite e configuração para persistência dos dados
+      - ./local_fallback.db:/app/local_fallback.db
+      - ./lotes_config.json:/app/lotes_config.json
+      - ./test_run.log:/app/test_run.log
+    env_file:
+      - .env
+
+  # Serviço do Dashboard Streamlit para monitoramento em tempo real
+  dashboard:
+    build: .
+    container_name: agrisolus-dashboard
+    command: streamlit run src/dashboard/app.py --server.port 8501 --server.address 0.0.0.0
+    restart: always
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./local_fallback.db:/app/local_fallback.db
+      - ./lotes_config.json:/app/lotes_config.json
+    env_file:
+      - .env

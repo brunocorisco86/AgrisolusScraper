@@ -70,11 +70,15 @@ def test_calculate_consumo(test_db):
     consumo_abastecimento = scraper._calculate_consumo("Silo-Test", 8000.0, "2026-06-17T13:00:00")
     assert consumo_abastecimento == 0.0
 
-def test_process_lote_html_resilience(test_db):
+def test_process_lote_html_resilience(test_db, monkeypatch):
     scraper = AgrisolusScraper(db_conn=test_db)
     
     # Força o mock do Supabase client para None (simula offline)
     test_db.get_supabase_client = MagicMock(return_value=None)
+    
+    # Mock do envio de alertas do Telegram para evitar disparos reais nos testes
+    mock_send_alert = MagicMock()
+    monkeypatch.setattr("src.bot.notifier.TelegramNotifier.send_immediate_alert", mock_send_alert)
     
     # Carrega o HTML real do dump
     dump_path = "scripts/batch_details.html"
@@ -87,15 +91,20 @@ def test_process_lote_html_resilience(test_db):
     link_lote = "https://s2.agrisolus.com.br/Home/Detalhes?idLote=4200000019"
     scraper._process_lote_html(html_content, link_lote)
     
+    # Verifica se os alertas de Telegram foram de fato disparados para os dois silos offline
+    assert mock_send_alert.call_count == 2
+    
     # Verifica se os dados foram persistidos no SQLite local devido ao fallback do Supabase
     conn = test_db.get_sqlite_connection()
     cursor = conn.cursor()
     
-    cursor.execute("SELECT id_lote, empresa, aviario FROM lotes WHERE id_lote = 4200000019")
+    cursor.execute("SELECT id_lote, empresa, aviario, aviario_lote FROM lotes WHERE id_lote = 4200000019")
     lote = cursor.fetchone()
     assert lote is not None
     assert lote[1] == "Marcelo Fumagalli"
     assert lote[2] == "Aviário 819"
+    assert lote[3] == "85-Aviário 819"
+
     
     cursor.execute("SELECT id_silo, capacidade_kg FROM silos WHERE lote_id = 4200000019")
     silos = cursor.fetchall()
@@ -107,7 +116,8 @@ def test_process_lote_html_resilience(test_db):
     assert cursor.fetchone()[0] == 2
     
     cursor.execute("SELECT COUNT(*) FROM alertas")
-    assert cursor.fetchone()[0] == 172
+    assert cursor.fetchone()[0] == 177
+
     
     cursor.execute("SELECT COUNT(*) FROM calibracoes")
     assert cursor.fetchone()[0] == 16
