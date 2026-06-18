@@ -126,6 +126,25 @@ class SyncService:
                 sqlite_cursor.execute("DELETE FROM calibracoes")
                 logger.info("Calibrações locais removidas pós-sincronização.")
 
+            # --- 6. Sincronizar Histórico de Scraping (Insert/Upsert + Delete local após sucesso) ---
+            sqlite_cursor.execute("SELECT id, silo_id, data_tentativa, sucesso_conexao, achou_dados_novos, peso_kg FROM historico_scraping")
+            historico = sqlite_cursor.fetchall()
+            if historico:
+                logger.info(f"Sincronizando {len(historico)} registros de histórico de scraping...")
+                data_historico = []
+                for row in historico:
+                    data_historico.append({
+                        "silo_id": row[1],
+                        "data_tentativa": row[2],
+                        "sucesso_conexao": bool(row[3]),
+                        "achou_dados_novos": bool(row[4]),
+                        "peso_kg": row[5]
+                    })
+                client.table("historico_scraping").upsert(data_historico, on_conflict="silo_id,data_tentativa").execute()
+                
+                sqlite_cursor.execute("DELETE FROM historico_scraping")
+                logger.info("Histórico de scraping local removido pós-sincronização.")
+
             # Comita as deleções no SQLite local
             sqlite_conn.commit()
             logger.info("Sincronização concluída com sucesso via Supabase SDK!")

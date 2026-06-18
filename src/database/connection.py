@@ -152,6 +152,21 @@ class DatabaseConnection:
             );
             """)
 
+            # 6. Tabela de Histórico de Scraping (SLA)
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS historico_scraping (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                silo_id TEXT NOT NULL,
+                data_tentativa TEXT NOT NULL,
+                sucesso_conexao INTEGER DEFAULT 1,
+                achou_dados_novos INTEGER DEFAULT 0,
+                peso_kg REAL,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (silo_id) REFERENCES silos(id_silo) ON DELETE CASCADE,
+                UNIQUE (silo_id, data_tentativa)
+            );
+            """)
+
             conn.commit()
             logger.info("Estrutura do SQLite local validada com sucesso.")
         except Exception as e:

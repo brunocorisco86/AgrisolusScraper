@@ -152,6 +152,9 @@ class AgrisolusScraper:
                 response = self.session.get(link, headers=self.headers)
                 if response.status_code != 200:
                     logger.error(f"Erro ao carregar detalhes do lote. Status: {response.status_code}")
+                    match_id = re.search(r"idLote=(\d+)", link)
+                    if match_id:
+                        self._record_scraping_failure(int(match_id.group(1)))
                     continue
                 
                 # Executa o parse e extração dos dados
@@ -159,6 +162,9 @@ class AgrisolusScraper:
                 
             except Exception as e:
                 logger.error(f"Erro ao processar lote {config.get('AVIARIO')}: {e}")
+                match_id = re.search(r"idLote=(\d+)", link)
+                if match_id:
+                    self._record_scraping_failure(int(match_id.group(1)))
 
         # Tenta sincronizar dados locais acumulados se houver internet
         logger.info("Tentando executar serviço de sincronização pós-execução do scraper...")
@@ -226,6 +232,7 @@ class AgrisolusScraper:
         # 5. Estruturar Silos e Leituras (Calculando consumo)
         silos_list = []
         leituras_list = []
+        historico_scraping_list = []
         if saldo_racao_js:
             for item in saldo_racao_js:
                 silo_id = item.get("Descricao")
@@ -242,6 +249,18 @@ class AgrisolusScraper:
                     "id_silo": silo_id,
                     "lote_id": id_lote,
                     "capacidade_kg": capacidade
+                })
+
+                # Verifica se é uma leitura nova
+                dado_novo = self._is_new_reading(silo_id, data_leitura)
+                
+                # Adiciona tentativa ao histórico de scraping
+                historico_scraping_list.append({
+                    "silo_id": silo_id,
+                    "data_tentativa": datetime.now().isoformat(),
+                    "sucesso_conexao": True,
+                    "achou_dados_novos": dado_novo,
+                    "peso_kg": qty_kg
                 })
 
                 # Calcula o consumo de ração
@@ -339,7 +358,7 @@ class AgrisolusScraper:
         calibracoes_list = list(unique_calibracoes.values())
 
         # 8. Persistir de forma Resiliente
-        self._persist_all(lote_info, silos_list, leituras_list, alertas_list, calibracoes_list)
+        self._persist_all(lote_info, silos_list, leituras_list, alertas_list, calibracoes_list, historico_scraping_list)
 
 
     def _calculate_consumo(self, silo_id: str, current_weight_kg: float, current_date_str: str) -> float:
@@ -386,7 +405,7 @@ class AgrisolusScraper:
             logger.error(f"Erro ao calcular consumo para {silo_id}: {e}")
             return 0.0
 
-    def _persist_all(self, lote, silos, leituras, alertas, calibracoes):
+    def _persist_all(self, lote, silos, leituras, alertas, calibracoes, historico_scraping=None):
         """
         Salva os dados extraídos no Supabase. Se falhar, faz o fallback para o SQLite local.
         """
@@ -414,13 +433,17 @@ class AgrisolusScraper:
                 # Calibrações
                 if calibracoes:
                     client.table("calibracoes").upsert(calibracoes, on_conflict="lote_id,data_calibracao").execute()
+
+                # Histórico de Scraping
+                if historico_scraping:
+                    client.table("historico_scraping").upsert(historico_scraping, on_conflict="silo_id,data_tentativa").execute()
                 
                 logger.info("Dados persistidos com sucesso no Supabase!")
                 
                 # Importante: Como o método _calculate_consumo lê o histórico de leituras do SQLite local
                 # para calcular a diferença e consumo, precisamos gravar as leituras no SQLite local
                 # mesmo que o envio ao Supabase funcione, para servir de histórico local para a próxima execução.
-                self._save_to_sqlite(lote, silos, leituras, alertas=[], calibracoes=[])
+                self._save_to_sqlite(lote, silos, leituras, alertas=[], calibracoes=[], historico_scraping=[])
                 return
                 
             except Exception as e:
@@ -428,9 +451,9 @@ class AgrisolusScraper:
 
         # Se não houver cliente ou a chamada do Supabase falhou, salva tudo localmente no SQLite
         logger.warning("Salvando dados no buffer local do SQLite...")
-        self._save_to_sqlite(lote, silos, leituras, alertas, calibracoes)
+        self._save_to_sqlite(lote, silos, leituras, alertas, calibracoes, historico_scraping)
 
-    def _save_to_sqlite(self, lote, silos, leituras, alertas, calibracoes):
+    def _save_to_sqlite(self, lote, silos, leituras, alertas, calibracoes, historico_scraping=None):
         """
         Grava os dados no banco local SQLite utilizando sintaxe ON CONFLICT / INSERT OR IGNORE.
         """
@@ -494,6 +517,15 @@ class AgrisolusScraper:
                     VALUES (?, ?, ?, ?, ?, ?)
                     ON CONFLICT (lote_id, data_calibracao) DO NOTHING
                 """, (cal.get("lote_id"), cal.get("numero_serial"), cal.get("zona"), cal.get("zona_str"), cal.get("data_calibracao"), cal.get("idade")))
+
+            # 6. Salvar Histórico de Scraping (Insert or Ignore)
+            if historico_scraping:
+                for hist in historico_scraping:
+                    cursor.execute("""
+                        INSERT INTO historico_scraping (silo_id, data_tentativa, sucesso_conexao, achou_dados_novos, peso_kg)
+                        VALUES (?, ?, ?, ?, ?)
+                        ON CONFLICT (silo_id, data_tentativa) DO NOTHING
+                    """, (hist.get("silo_id"), hist.get("data_tentativa"), int(hist.get("sucesso_conexao")), int(hist.get("achou_dados_novos")), hist.get("peso_kg")))
 
             conn.commit()
             conn.close()
@@ -560,3 +592,96 @@ class AgrisolusScraper:
             logger.error(f"Erro ao verificar alertas antigos no SQLite: {e}")
             return False
 
+    def _is_new_reading(self, silo_id: str, data_leitura: str) -> bool:
+        """
+        Verifica se a leitura informada já existe no banco de dados local SQLite.
+        Retorna True se for uma leitura nova (não existe no SQLite), caso contrário False.
+        """
+        try:
+            conn = self.db_conn.get_sqlite_connection()
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT COUNT(*) FROM leituras 
+                WHERE silo_id = ? AND data_leitura = ?
+            """, (silo_id, data_leitura))
+            count = cursor.fetchone()[0]
+            conn.close()
+            return count == 0
+        except Exception as e:
+            logger.error(f"Erro ao verificar se leitura {silo_id}/{data_leitura} é nova: {e}")
+            return True
+
+    def _record_scraping_failure(self, id_lote: int):
+        """
+        Registra uma tentativa de scraping falha (sem conexão) para todos os silos associados a este lote.
+        """
+        try:
+            conn = self.db_conn.get_sqlite_connection()
+            cursor = conn.cursor()
+            cursor.execute("SELECT id_silo FROM silos WHERE lote_id = ?", (id_lote,))
+            silos = [row[0] for row in cursor.fetchall()]
+            conn.close()
+            
+            if silos:
+                logger.warning(f"Registrando falha de conexão de scraping para os silos do lote {id_lote}: {silos}")
+                historico_falha = []
+                data_tentativa = datetime.now().isoformat()
+                for silo_id in silos:
+                    historico_falha.append({
+                        "silo_id": silo_id,
+                        "data_tentativa": data_tentativa,
+                        "sucesso_conexao": False,
+                        "achou_dados_novos": False,
+                        "peso_kg": None
+                    })
+                
+                # Salva no banco (SQLite e Supabase)
+                self._persist_historico_only(historico_falha)
+        except Exception as e:
+            logger.error(f"Erro ao registrar falha de conexão no histórico: {e}")
+
+    def record_global_login_failure(self, config_path="lotes_config.json"):
+        """
+        Registra uma tentativa falha globalmente (falha de login) para todos os silos configurados.
+        """
+        if not os.path.exists(config_path):
+            return
+        try:
+            with open(config_path, "r", encoding="utf-8") as f:
+                lotes_config = json.load(f)
+            
+            for config in lotes_config:
+                link = config.get("LINK")
+                match_id = re.search(r"idLote=(\d+)", link)
+                if match_id:
+                    self._record_scraping_failure(int(match_id.group(1)))
+        except Exception as e:
+            logger.error(f"Erro ao registrar falha global de login no histórico: {e}")
+
+    def _persist_historico_only(self, historico_list):
+        """
+        Persiste apenas o histórico de scraping no Supabase ou no SQLite local em caso de falha.
+        """
+        client = self.db_conn.get_supabase_client()
+        if client:
+            try:
+                logger.info("Persistindo histórico de falha de scraping no Supabase...")
+                client.table("historico_scraping").upsert(historico_list).execute()
+                return
+            except Exception as e:
+                logger.error(f"Falha ao persistir histórico no Supabase (salvando localmente): {e}")
+        
+        # Fallback local
+        try:
+            conn = self.db_conn.get_sqlite_connection()
+            cursor = conn.cursor()
+            for hist in historico_list:
+                cursor.execute("""
+                    INSERT INTO historico_scraping (silo_id, data_tentativa, sucesso_conexao, achou_dados_novos, peso_kg)
+                    VALUES (?, ?, ?, ?, ?)
+                    ON CONFLICT (silo_id, data_tentativa) DO NOTHING
+                """, (hist.get("silo_id"), hist.get("data_tentativa"), int(hist.get("sucesso_conexao")), int(hist.get("achou_dados_novos")), hist.get("peso_kg")))
+            conn.commit()
+            conn.close()
+        except Exception as e:
+            logger.error(f"Erro ao salvar histórico de falha localmente no SQLite: {e}")

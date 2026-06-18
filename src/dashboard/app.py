@@ -70,6 +70,7 @@ def load_dashboard_data():
     readings_list = []
     alertas_list = []
     calibracoes_list = []
+    historico_list = []
     
     using_supabase = False
     
@@ -97,6 +98,15 @@ def load_dashboard_data():
                         .limit(1000) \
                         .execute()
                     readings_list = readings_res.data
+
+                    # Carrega histórico de scraping
+                    historico_res = client.table("historico_scraping") \
+                        .select("*") \
+                        .in_("silo_id", silo_ids) \
+                        .order("data_tentativa", desc=True) \
+                        .limit(2000) \
+                        .execute()
+                    historico_list = historico_res.data
                     
                 # 4. Carrega alertas e calibrações
                 alertas_res = client.table("alertas").select("*").in_("lote_id", lote_ids).order("data_alerta", desc=True).limit(200).execute()
@@ -134,6 +144,13 @@ def load_dashboard_data():
                         conn, params=silo_ids
                     )
                     readings_list = df_readings.to_dict(orient="records")
+
+                    # Carrega histórico de scraping
+                    df_historico = pd.read_sql_query(
+                        f"SELECT * FROM historico_scraping WHERE silo_id IN ({silo_placeholders}) ORDER BY data_tentativa DESC LIMIT 2000",
+                        conn, params=silo_ids
+                    )
+                    historico_list = df_historico.to_dict(orient="records")
                     
                 # 4. Carrega alertas e calibrações
                 df_alertas = pd.read_sql_query(f"SELECT * FROM alertas WHERE lote_id IN ({placeholders}) ORDER BY data_alerta DESC LIMIT 200", conn, params=lote_ids)
@@ -152,14 +169,15 @@ def load_dashboard_data():
     df_readings = pd.DataFrame(readings_list)
     df_alertas = pd.DataFrame(alertas_list)
     df_calibracoes = pd.DataFrame(calibracoes_list)
+    df_historico = pd.DataFrame(historico_list)
     
     # Formata datas
-    for df in [df_readings, df_alertas, df_calibracoes]:
+    for df in [df_readings, df_alertas, df_calibracoes, df_historico]:
         if not df.empty:
-            date_col = "data_leitura" if "data_leitura" in df.columns else ("data_alerta" if "data_alerta" in df.columns else "data_calibracao")
+            date_col = "data_leitura" if "data_leitura" in df.columns else ("data_alerta" if "data_alerta" in df.columns else ("data_calibracao" if "data_calibracao" in df.columns else "data_tentativa"))
             df["data_leitura_dt"] = df[date_col].apply(parse_iso_datetime)
             
-    return df_lotes, df_silos, df_readings, df_alertas, df_calibracoes, using_supabase
+    return df_lotes, df_silos, df_readings, df_alertas, df_calibracoes, df_historico, using_supabase
 
 def main():
     st.set_page_config(page_title="Monitoramento de Silos - Agrisolus", layout="wide", initial_sidebar_state="expanded")
@@ -184,7 +202,7 @@ def main():
     )
     
     # Carregamento dos dados
-    df_lotes, df_silos, df_readings, df_alertas, df_calibracoes, using_supabase = load_dashboard_data()
+    df_lotes, df_silos, df_readings, df_alertas, df_calibracoes, df_historico, using_supabase = load_dashboard_data()
     
     # Sidebar
     st.sidebar.markdown("### ⚙️ Configurações & Filtros")
@@ -274,6 +292,18 @@ def main():
             (df_filtered_calibracoes["data_leitura_dt"] >= start_dt) & 
             (df_filtered_calibracoes["data_leitura_dt"] <= end_dt)
         ]
+
+    # Aplica o filtro de período no histórico de scraping
+    df_filtered_historico = df_historico.copy()
+    if selected_silo != "Todos":
+        if not df_filtered_historico.empty:
+            df_filtered_historico = df_filtered_historico[df_filtered_historico["silo_id"] == selected_silo]
+    
+    if not df_filtered_historico.empty:
+        df_filtered_historico = df_filtered_historico[
+            (df_filtered_historico["data_leitura_dt"] >= start_dt) & 
+            (df_filtered_historico["data_leitura_dt"] <= end_dt)
+        ]
         
     if df_filtered_readings.empty:
         st.warning(f"Nenhuma leitura encontrada no período selecionado (de {start_date.strftime('%d/%m/%Y')} a {end_date.strftime('%d/%m/%Y')}).")
@@ -331,15 +361,30 @@ def main():
     with col4:
         num_silos = len(df_silos) if selected_silo == "Todos" else 1
         num_days = max(1, (end_date - start_date).days + 1)
-        expected_readings = 24 * num_days * num_silos
-        actual_readings = len(df_filtered_readings["data_leitura"].unique())
-        sla_perc = min(100.0, (actual_readings / expected_readings) * 100.0) if expected_readings > 0 else 0.0
+        expected_attempts = 24 * num_days * num_silos
+        
+        # O SLA é calculado como a taxa de tentativas que obtiveram dados novos de forma bem-sucedida
+        if not df_filtered_historico.empty:
+            # Converte valores do sqlite ou supabase para bool
+            df_filtered_historico["achou_dados_novos_bool"] = df_filtered_historico["achou_dados_novos"].astype(bool)
+            # Conta apenas as tentativas que obtiveram sucesso e acharam dados novos
+            achou_novos_count = len(df_filtered_historico[
+                (df_filtered_historico["achou_dados_novos_bool"] == True) & 
+                (df_filtered_historico["sucesso_conexao"].astype(bool) == True)
+            ])
+            # Se não houver histórico registrado no período selecionado, realiza o fallback anterior
+            if len(df_filtered_historico) == 0:
+                achou_novos_count = len(df_filtered_readings["data_leitura"].unique())
+        else:
+            achou_novos_count = len(df_filtered_readings["data_leitura"].unique())
+            
+        sla_perc = min(100.0, (achou_novos_count / expected_attempts) * 100.0) if expected_attempts > 0 else 0.0
         
         st.markdown(f"""
         <div class="metric-card">
             <div class="metric-title">SLA Conectividade</div>
             <div class="metric-value">{sla_perc:.1f}%</div>
-            <div class="metric-sub">Esperadas {expected_readings} leituras</div>
+            <div class="metric-sub">Esperadas {expected_attempts} tentativas</div>
         </div>
         """, unsafe_allow_html=True)
         

@@ -34,6 +34,7 @@ def run():
     # 4. Efetua Login
     if not scraper.login():
         logger.error("Falha ao efetuar login. A execução do scraper foi cancelada.")
+        scraper.record_global_login_failure()
         return
 
     # 5. Mapeia e processa os lotes

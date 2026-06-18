@@ -29,6 +29,10 @@ def setup_test_db(monkeypatch):
         INSERT INTO leituras (silo_id, data_leitura, valor_racao_g, valor_racao_kg, consumo_kg)
         VALUES ('Silo-Test-819', '2026-06-17T12:00:00', 5000000.0, 5000.0, 10.0)
     """)
+    cursor.execute("""
+        INSERT INTO historico_scraping (silo_id, data_tentativa, sucesso_conexao, achou_dados_novos, peso_kg)
+        VALUES ('Silo-Test-819', '2026-06-17T12:00:00', 1, 1, 5000.0)
+    """)
     conn.commit()
     conn.close()
     
@@ -43,7 +47,7 @@ def test_dashboard_loader_sqlite(mock_get_supabase, setup_test_db):
     Testa se o carregador de dados do dashboard lê corretamente do SQLite local
     quando o Supabase está offline.
     """
-    df_lotes, df_silos, df_readings, df_alertas, df_calibracoes, using_supabase = load_dashboard_data()
+    df_lotes, df_silos, df_readings, df_alertas, df_calibracoes, df_historico, using_supabase = load_dashboard_data()
     
     assert using_supabase is False
     assert not df_lotes.empty
@@ -53,3 +57,8 @@ def test_dashboard_loader_sqlite(mock_get_supabase, setup_test_db):
     assert not df_readings.empty
     assert df_readings.iloc[0]["silo_id"] == "Silo-Test-819"
     assert "data_leitura_dt" in df_readings.columns
+    assert not df_historico.empty
+    assert df_historico.iloc[0]["silo_id"] == "Silo-Test-819"
+    assert df_historico.iloc[0]["sucesso_conexao"] == 1
+    assert df_historico.iloc[0]["achou_dados_novos"] == 1
+    assert "data_leitura_dt" in df_historico.columns
