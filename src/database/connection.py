@@ -90,9 +90,11 @@ class DatabaseConnection:
                 qtd_alojamento INTEGER,
                 data_alojamento TEXT,
                 saldo_frangos INTEGER,
+                aviario_lote TEXT UNIQUE,
                 updated_at TEXT DEFAULT CURRENT_TIMESTAMP
             );
             """)
+
 
             # 2. Tabela de Silos
             cursor.execute("""

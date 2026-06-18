@@ -34,12 +34,18 @@ def test_sqlite_initialization(monkeypatch):
     for table in expected_tables:
         assert table in tables, f"A tabela '{table}' não foi criada no SQLite."
 
+    # Verifica se a tabela 'lotes' possui a coluna aviario_lote
+    cursor.execute("PRAGMA table_info(lotes);")
+    lotes_columns = [col[1] for col in cursor.fetchall()]
+    assert "aviario_lote" in lotes_columns
+
     # Verifica se a tabela 'silos' possui a coluna capacidade_kg e lote_id
     cursor.execute("PRAGMA table_info(silos);")
     columns = [col[1] for col in cursor.fetchall()]
     assert "id_silo" in columns
     assert "lote_id" in columns
     assert "capacidade_kg" in columns
+
 
     conn.close()
 

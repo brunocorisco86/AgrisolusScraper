@@ -97,18 +97,24 @@ class AgrisolusScraper:
             lotes_formatados = []
             
             for lote in lotes_data:
+                aviario = lote.get("Aviario")
+                # Foca somente no 'Aviário 819' e ignora os demais
+                if not aviario or "Aviário 819" not in aviario:
+                    continue
+
                 id_lote = lote.get("IdLote")
                 link_detalhes = f"{self.url_acesso.rstrip('/')}/Home/Detalhes?idLote={id_lote}"
                 
                 lotes_formatados.append({
                     "EMPRESA": lote.get("Empresa"),
                     "ESTABELECIMENTO": lote.get("Estabelecimento"),
-                    "AVIARIO": lote.get("Aviario"),
+                    "AVIARIO": aviario,
                     "LOTE": int(lote.get("CodigoLote", 0)) if lote.get("CodigoLote") else None,
                     "LINHAGEM": lote.get("Linhagem"),
                     "IDADE": lote.get("Idade"),
                     "LINK": link_detalhes
                 })
+
                 
             with open(output_path, "w", encoding="utf-8") as f:
                 json.dump(lotes_formatados, f, indent=4, ensure_ascii=False)
@@ -187,16 +193,19 @@ class AgrisolusScraper:
         lote_info = {}
         if lotes_js and len(lotes_js) > 0:
             lote_data = lotes_js[0]
+            codigo_lote = lote_data.get("CodigoLote")
+            aviario = lote_data.get("Aviario")
             lote_info = {
                 "id_lote": id_lote,
-                "codigo_lote": lote_data.get("CodigoLote"),
+                "codigo_lote": codigo_lote,
                 "empresa": lote_data.get("Empresa"),
                 "estabelecimento": lote_data.get("Estabelecimento"),
-                "aviario": lote_data.get("Aviario"),
+                "aviario": aviario,
                 "linhagem": lote_data.get("Linhagem"),
                 "qtd_alojamento": table1_data.get("qtd_alojamento", lote_data.get("QtdAlojamento", 0)),
                 "data_alojamento": table1_data.get("data_alojamento"),
-                "saldo_frangos": table1_data.get("saldo_frangos", lote_data.get("QtdAlojamento", 0))
+                "saldo_frangos": table1_data.get("saldo_frangos", lote_data.get("QtdAlojamento", 0)),
+                "aviario_lote": f"{codigo_lote}-{aviario}" if codigo_lote and aviario else None
             }
         else:
             # Fallback se não achar a variável lotes no JS
@@ -209,8 +218,10 @@ class AgrisolusScraper:
                 "linhagem": None,
                 "qtd_alojamento": table1_data.get("qtd_alojamento", 0),
                 "data_alojamento": table1_data.get("data_alojamento"),
-                "saldo_frangos": table1_data.get("saldo_frangos", 0)
+                "saldo_frangos": table1_data.get("saldo_frangos", 0),
+                "aviario_lote": None
             }
+
 
         # 5. Estruturar Silos e Leituras (Calculando consumo)
         silos_list = []
@@ -393,8 +404,8 @@ class AgrisolusScraper:
 
             # 1. Salvar Lote (Upsert)
             cursor.execute("""
-                INSERT INTO lotes (id_lote, codigo_lote, empresa, estabelecimento, aviario, linhagem, qtd_alojamento, data_alojamento, saldo_frangos)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO lotes (id_lote, codigo_lote, empresa, estabelecimento, aviario, linhagem, qtd_alojamento, data_alojamento, saldo_frangos, aviario_lote)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT (id_lote) DO UPDATE SET
                     codigo_lote = EXCLUDED.codigo_lote,
                     empresa = EXCLUDED.empresa,
@@ -404,12 +415,15 @@ class AgrisolusScraper:
                     qtd_alojamento = EXCLUDED.qtd_alojamento,
                     data_alojamento = EXCLUDED.data_alojamento,
                     saldo_frangos = EXCLUDED.saldo_frangos,
+                    aviario_lote = EXCLUDED.aviario_lote,
                     updated_at = CURRENT_TIMESTAMP
             """, (
                 lote.get("id_lote"), lote.get("codigo_lote"), lote.get("empresa"),
                 lote.get("estabelecimento"), lote.get("aviario"), lote.get("linhagem"),
-                lote.get("qtd_alojamento"), lote.get("data_alojamento"), lote.get("saldo_frangos")
+                lote.get("qtd_alojamento"), lote.get("data_alojamento"), lote.get("saldo_frangos"),
+                lote.get("aviario_lote")
             ))
+
 
             # 2. Salvar Silos (Upsert)
             for silo in silos:

@@ -30,7 +30,7 @@ class SyncService:
             logger.info("Iniciando sincronização local -> remota via Supabase SDK...")
             
             # --- 1. Sincronizar Lotes (Upsert) ---
-            sqlite_cursor.execute("SELECT id_lote, codigo_lote, empresa, estabelecimento, aviario, linhagem, qtd_alojamento, data_alojamento, saldo_frangos FROM lotes")
+            sqlite_cursor.execute("SELECT id_lote, codigo_lote, empresa, estabelecimento, aviario, linhagem, qtd_alojamento, data_alojamento, saldo_frangos, aviario_lote FROM lotes")
             lotes = sqlite_cursor.fetchall()
             if lotes:
                 logger.info(f"Sincronizando {len(lotes)} lotes...")
@@ -45,10 +45,12 @@ class SyncService:
                         "linhagem": row[5],
                         "qtd_alojamento": row[6],
                         "data_alojamento": row[7],
-                        "saldo_frangos": row[8]
+                        "saldo_frangos": row[8],
+                        "aviario_lote": row[9]
                     })
                 # Executa o upsert no Supabase
                 client.table("lotes").upsert(data_lotes).execute()
+
 
             # --- 2. Sincronizar Silos (Upsert) ---
             sqlite_cursor.execute("SELECT id_silo, lote_id, capacidade_kg FROM silos")

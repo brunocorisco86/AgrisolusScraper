@@ -31,9 +31,10 @@ def test_sync_process(test_db):
     
     # Inserir Lote
     cursor.execute("""
-        INSERT INTO lotes (id_lote, codigo_lote, empresa, estabelecimento, aviario, linhagem, qtd_alojamento, data_alojamento, saldo_frangos)
-        VALUES (12345, '85', 'Marcelo Fumagalli', 'Marcelo Fumagalli', 'Aviário 819', 'ROSS 308', 26800, '2026-06-05 11:00:00', 26800)
+        INSERT INTO lotes (id_lote, codigo_lote, empresa, estabelecimento, aviario, linhagem, qtd_alojamento, data_alojamento, saldo_frangos, aviario_lote)
+        VALUES (12345, '85', 'Marcelo Fumagalli', 'Marcelo Fumagalli', 'Aviário 819', 'ROSS 308', 26800, '2026-06-05 11:00:00', 26800, '85-Aviário 819')
     """)
+
     # Inserir Silo
     cursor.execute("INSERT INTO silos (id_silo, lote_id, capacidade_kg) VALUES ('Silo-01', 12345, 18000.0)")
     # Inserir Leitura

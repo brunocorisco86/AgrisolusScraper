@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS lotes (
     qtd_alojamento INTEGER,
     data_alojamento TIMESTAMP WITH TIME ZONE,
     saldo_frangos INTEGER,
+    aviario_lote VARCHAR(255) UNIQUE,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
