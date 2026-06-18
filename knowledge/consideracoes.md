@@ -1,2 +1,6 @@
 [x] - Conferir se "IDADE" em lotes_config.json vai gerar algum problema no dia seguinte quando for para 13 e se é possivel retirar deste arquivo e desconsiderar nos demais códigos.
 [x] - Será que precisaremos mesmo do docker com postgres se ja estamos com a base no supabase? Não poderiamos fazer um select la pra gerar o relatorio?
+[ ] - O cron não está funcionando no ambiente produtivo, é um raspberry pi 3b com alpine linux. Está executando os codigos deste repositorio pelo python do sistema e não do ambiente python em /env do repositorio.
+[ ] - Eu desejo criar o SLA pelas vezes que a placa tentou fazer o scraping e achou dados novos, preciso que o scraper faça anotações no banco no supabase pra quantas vezes ele achou dados novos ou não, e o dashboard deve usar essa metrica para calcular o SLA.
+[ ] - preciso que seja criado um teste para os comando cron criados por este repositorio
+[ ] - Se o docker não estiver sendo utilizado neste repositorio, gostaria que os arquivos relacionados a ele sejam removidos.
