@@ -1,69 +1,130 @@
-Repositorio destinado a fazer o scraping de dados dos lotes C.Vale com dispositivos Agrisolus
+# 🌾 Agrisolus Silo Monitor & Scraper
 
+[![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/)
+[![Database](https://img.shields.io/badge/database-Supabase%20%28Postgres%29%20%7C%20SQLite-green)](https://supabase.com/)
+[![Dashboard](https://img.shields.io/badge/dashboard-Streamlit-FF4B4B)](https://streamlit.io/)
+[![Status](https://img.shields.io/badge/SLA%20Target-95%25%2B-brightgreen)]()
+[![Repository](https://img.shields.io/badge/Origin-GitHub-black)](https://github.com/brunocorisco86/AgrisolusScraper)
 
-Stack tecnologica (hardware + software
-- Raspberry 3b (alpine linux) 1Gb de ram
-- SQLite local para fallback
-- Supabase (postgres)
-- Streamlit community
-- Docker / Docker compose
-- Telegram bot (aiogram)
+Este repositório contém a solução completa para o monitoramento de células de carga (silos) de ração do **Aviário 819** (Lote 85, C.Vale), baseando-se em três pilares:
+1. **Comunicação Eficiente**: Notificações e relatórios periódicos integrados ao Telegram.
+2. **Processos Otimizados**: Acompanhamento dinâmico de consumo e SLA.
+3. **Tecnologia Habilitadora**: Scraper resiliente com persistência principal na nuvem (Supabase) e fallback offline automático local (SQLite) otimizado para o Raspberry Pi 3B (1GB RAM).
 
-# Premissas:
-- O scraper (BeautifulSoup) deverá ser configurado pra rodar no cron a cada hora
-- salvar as leituras no postgres no supabase, com salvamento incremental. Esperamos que o aviario mande dados de forma intermitente (problema com conexão de internet)
-- construir um dashboard no streamlit community
-Objetivo: Ver como está funcionando a célula de carga (silo) neste aviario.
-- Criar um código de alertas se o silo ficar mais de 2 horas sem enviar dados novos na plataforma
-- criar scripts de teste
-- criar um bot telegram para me avisar quando ficar sem enviar dados por mais de 3 horas. As 6 da manhã, 11 da manhã, 13 da tarde e 16 da tarde. Resumindo as ocorrencias de quantas horas ficaram sem enviar dados
-- enviar no telegram o SLA do silo do das 17h do dia anterior até as 17h do dia atual. Enviar as 18h. Enviar a curva de saldo de ração, o consumo de ração por silo
+---
 
-# Bibliotecas python sugeridas
-- BeautifulSoup
-- numpy
-- mapplotlib
-- streamlit
-- aiogram
+## 📂 Árvore de Arquivos e Funções
 
-# O que deve ser salvo no banco de dados com o scrapper (gerar MER para contexto e documentação)
+Abaixo está detalhada a estrutura do projeto com as respectivas funções de cada arquivo e diretório:
 
-## Dados do produtor Marcelo Fumagalli (pegar dados do aviario no *.json a ser gerado conforme premissas do arquivo /docs/GerarJson.md)
-- Nome Produtor
-- Aviario
-- Lote
-- Linhagem
-- O que for importante
+```
+.
+├── .env.example                # Template de configuração de variáveis de ambiente
+├── Dockerfile                  # Containerização otimizada para o Raspberry Pi 3B (Debian Slim)
+├── docker-compose.yml          # Orquestração do Cron Scraper e do Dashboard Streamlit
+├── docker-crontab              # Agenda cron configurada no ambiente do container
+├── requirements.txt            # Dependências Python instaladas no projeto
+├── lotes_config.json           # Lista local configurada do lote monitorado (Aviário 819)
+│
+├── docs/                       # Requisitos e especificações fornecidas
+│   └── GerarJson.md            # Regras originais para geração de mapeamento de lotes
+│
+├── knowledge/                  # Base de conhecimento, planejamento e logs do projeto
+│   ├── COMPLETUDE.md           # Taxa de conclusão detalhada por fase (100% concluído)
+│   ├── ROADMAP.md              # Metas e divisões em fases do desenvolvimento
+│   ├── architecture.md         # Detalhes de arquitetura, stack de software e diagrama MER
+│   ├── consideracoes.md        # Registro de decisões de desenvolvimento sanadas
+│   ├── supabase_tutorial.md    # Guia de conectividade e CRUD usando o SDK oficial do Supabase
+│   └── dashboard_community_deploy.md # Tutorial de publicação do dashboard no Streamlit Cloud
+│
+├── scripts/                    # Scripts auxiliares, testes manuais e rotinas de deploy
+│   ├── comissioning.py         # Valida credenciais e insere/remove lote teste no Supabase
+│   ├── simulate_offline.py     # Simula queda de rede forçando a persistência no SQLite
+│   ├── test_telegram.py        # Testa envio de mensagem no chat de destino via Bot Telegram
+│   ├── run_cron.sh             # Script executado de hora em hora pelo cron do host
+│   ├── run_periodic_summary.py # Processo do cron para resumos de silos offline às 06, 11, 13 e 16h
+│   ├── run_sla_report.py       # Processo do cron para relatório diário de SLA e Consumo às 18h
+│   │
+│   └── deploy/                 # Roteiro passo a passo interativo para implantação em produção
+│       ├── 1_install_env.sh    # [Passo 1] Cria o ambiente virtual python 'env' e instala pacotes
+│       ├── 2_setup_env.sh      # [Passo 2] Copia o .env.example e guia a configuração de senhas
+│       ├── 3_test_db.sh        # [Passo 3] Dispara o teste de comunicação com o Supabase
+│       ├── 4_setup_cron.sh     # [Passo 4] Adiciona regras cron locais no crontab do host
+│       ├── 5_test_offline.sh   # [Passo 5] Executa a simulação offline salvando dados no SQLite
+│       └── 6_test_telegram.sh  # [Passo 6] Dispara mensagem de teste no Telegram para comissionar
+│
+├── src/                        # Código-fonte principal estruturado em POO
+│   ├── main.py                 # Ponto de entrada executado de hora em hora pelo cron
+│   │
+│   ├── bot/                    # Integração com o canal de comunicação do Telegram
+│   │   └── notifier.py         # Classe wrapper do aiogram para envio de alertas/relatórios
+│   │
+│   ├── dashboard/              # Interface gráfica web do usuário
+│   │   └── app.py              # Interface Streamlit com gráficos Plotly e tolerância a falhas
+│   │
+│   ├── database/               # Módulo responsável pela persistência de dados
+│   │   ├── connection.py       # Gerencia instâncias do Supabase SDK e conexões SQLite local
+│   │   └── sync.py             # Sincroniza dados temporários locais para a nuvem quando há rede
+│   │
+│   ├── scraper/                # Módulo coletor de dados
+│   │   └── extractor.py        # Autentica, extrai variáveis via Regex do HTML e calcula o consumo
+│   │
+│   └── utils/                  # Ferramentas globais e auxiliares
+│       ├── logger.py           # Configura logs com rotação/sobregravação por execução
+│       └── datetime_parser.py  # Conversor de datas ISO robusto com remoção de timezone
+│
+└── tests/                      # Suíte de testes unitários e de integração (pytest)
+    ├── test_basic.py           # Validação básica de estruturas de dados e datas
+    ├── test_dashboard.py       # Testa a tolerância a falhas e carregamento do Streamlit
+    ├── test_database.py        # Testa criação de tabelas SQLite e comportamento sem chaves
+    ├── test_periodic_scripts.py# Testa lógica de cálculo de SLA e resumos de offline
+    └── test_scraper.py         # Testa processamento de HTML e comportamento resiliente do Scraper
+```
 
-## Dados do Silo
-- Dados do silo
-- idSilo
-- DataSaldo
-- Horario
-- Valor de Ração no Silo
-- registrar o consumo do silo
+---
 
-## Alertas
-- Tipo
-- Datetime (unique)
-- Mensagem (not null)
+## ⚡ Guia Rápido de Instalação (Raspberry Pi)
 
-## Calibrações
-- Datetime (unique)
-- Idade
-- Serial
-- Zona
+Para colocar o projeto de pé de forma nativa e extremamente leve (minimizando o consumo de RAM):
 
-# Tarefas adicionais
-- Gerar tutorial de se conectar ao supabase (nunca usei)
-- Criar pastas para os arquivos com base em computacao orientada a objetos
-- Crie um arquivo de roadmap
-- Crie um arquivo de completude do Roadmap
-- Crie uma pasta de knowledge para conceitos a serem aprendidos durante a criação do codigo
-- Crie um arquivo na pasta knowledge com o changelog, lições aprendidas, arquitetura, stack
-- crie arquivo .gitignore para proteger nossos secrets antes de dar o primeiro commit
-- crie uma pasta /tests para salvar os testes
-- crie uma pasta /scripts para os scripts de comissionamento, manutenção e reparo
+1. **Clone o repositório** e entre na pasta do projeto.
+2. **Execute os scripts sequenciais de deploy** localizados em `scripts/deploy/`:
 
-# Perfil
-- liberado para commit no repositorio remoto após executar testes
+```bash
+# 1. Instale o ambiente virtual python e pacotes
+./scripts/deploy/1_install_env.sh
+
+# 2. Crie e preencha suas variáveis de ambiente no .env
+./scripts/deploy/2_setup_env.sh
+nano .env
+
+# 3. Teste o banco de dados Supabase
+./scripts/deploy/3_test_db.sh
+
+# 4. Instale os agendamentos no Cron do sistema
+./scripts/deploy/4_setup_cron.sh
+
+# 5. Valide a persistência offline do SQLite
+./scripts/deploy/5_test_offline.sh
+
+# 6. Teste o recebimento de mensagens no seu Telegram
+./scripts/deploy/6_test_telegram.sh
+```
+
+---
+
+## 📊 Executando o Dashboard Localmente
+Para abrir a interface gráfica do Streamlit e visualizar o comportamento dos silos:
+```bash
+source env/bin/activate
+streamlit run src/dashboard/app.py
+```
+Acesse no navegador: `http://localhost:8501`.
+
+---
+
+## 🧪 Rodando os Testes Automatizados
+O projeto conta com 10 testes unitários integrados. Para rodá-los:
+```bash
+env/bin/pytest
+```
