@@ -212,82 +212,134 @@ def main():
     silos_disponiveis = ["Todos"] + list(df_silos["id_silo"].unique())
     selected_silo = st.sidebar.selectbox("Filtrar por Silo", silos_disponiveis)
     
-    # Filtro de Leituras
-    df_filtered_readings = df_readings.copy()
+    # Filtro de Data na Sidebar
+    min_date = df_readings["data_leitura_dt"].min().date() if not df_readings.empty else (datetime.now() - timedelta(days=30)).date()
+    max_date = df_readings["data_leitura_dt"].max().date() if not df_readings.empty else datetime.now().date()
+    
+    # Período padrão: últimos 7 dias (ou o que houver disponível)
+    default_start = max(min_date, max_date - timedelta(days=7))
+    
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("### 📅 Filtro de Período")
+    
+    date_range = st.sidebar.date_input(
+        "Selecione o intervalo",
+        value=(default_start, max_date),
+        min_value=min_date,
+        max_value=max_date
+    )
+    
+    # Garante que temos as duas datas selecionadas
+    if isinstance(date_range, tuple) and len(date_range) == 2:
+        start_date, end_date = date_range
+    elif isinstance(date_range, tuple) and len(date_range) == 1:
+        start_date = date_range[0]
+        end_date = max_date
+    else:
+        start_date = default_start
+        end_date = max_date
+        
+    start_dt = datetime.combine(start_date, datetime.min.time())
+    end_dt = datetime.combine(end_date, datetime.max.time())
+    
+    # Filtro de Leituras por Silo
+    df_silo_filtered = df_readings.copy()
     if selected_silo != "Todos":
-        df_filtered_readings = df_filtered_readings[df_filtered_readings["silo_id"] == selected_silo]
+        df_silo_filtered = df_silo_filtered[df_silo_filtered["silo_id"] == selected_silo]
+        
+    if df_silo_filtered.empty:
+        st.warning(f"Sem leituras registradas para o silo selecionado.")
+        return
+        
+    # Guarda a leitura absoluta mais recente para calcular o status atual online/offline
+    absolute_latest_reading = df_silo_filtered.iloc[0]
+    
+    # Aplica o filtro de período nas leituras
+    df_filtered_readings = df_silo_filtered[
+        (df_silo_filtered["data_leitura_dt"] >= start_dt) & 
+        (df_silo_filtered["data_leitura_dt"] <= end_dt)
+    ]
+    
+    # Aplica o filtro de período nos alertas e calibrações
+    df_filtered_alertas = df_alertas.copy()
+    if not df_filtered_alertas.empty:
+        df_filtered_alertas = df_filtered_alertas[
+            (df_filtered_alertas["data_leitura_dt"] >= start_dt) & 
+            (df_filtered_alertas["data_leitura_dt"] <= end_dt)
+        ]
+        
+    df_filtered_calibracoes = df_calibracoes.copy()
+    if not df_filtered_calibracoes.empty:
+        df_filtered_calibracoes = df_filtered_calibracoes[
+            (df_filtered_calibracoes["data_leitura_dt"] >= start_dt) & 
+            (df_filtered_calibracoes["data_leitura_dt"] <= end_dt)
+        ]
         
     if df_filtered_readings.empty:
-        st.warning(f"Sem leituras registradas para o filtro selecionado.")
+        st.warning(f"Nenhuma leitura encontrada no período selecionado (de {start_date.strftime('%d/%m/%Y')} a {end_date.strftime('%d/%m/%Y')}).")
         return
         
     # KPIs do Dashboard
-    st.markdown("### 📈 Indicadores Chave (Últimas 24 horas)")
+    st.markdown("### 📈 Indicadores Chave no Período Selecionado")
     
     col1, col2, col3, col4 = st.columns(4)
     
-    # 1. Silo Selecionado / Status
+    # 1. Status de Envio (Atual)
     with col1:
-        # Pega a última leitura
-        latest_r = df_filtered_readings.iloc[0]
-        latest_time = latest_r["data_leitura_dt"]
+        latest_time = absolute_latest_reading["data_leitura_dt"]
         diff_hours = (datetime.now() - latest_time).total_seconds() / 3600.0
         
         status_text = "Online 🟢" if diff_hours <= 2.0 else "Offline 🔴"
         st.markdown(f"""
         <div class="metric-card">
-            <div class="metric-title">Status de Envio</div>
+            <div class="metric-title">Status Atual</div>
             <div class="metric-value" style="color: {'#10b981' if diff_hours <= 2.0 else '#ef4444'}">{status_text}</div>
             <div class="metric-sub">Última leitura: {latest_time.strftime('%d/%m %H:%M')} ({diff_hours:.1f}h atrás)</div>
         </div>
         """, unsafe_allow_html=True)
         
-    # 2. Saldo de Ração Atual
+    # 2. Saldo de Ração (Fim do Período)
     with col2:
         if selected_silo == "Todos":
-            # Soma do saldo mais recente de cada silo
-            silo_latest = df_readings.groupby("silo_id").first().reset_index()
+            # Soma do saldo mais recente de cada silo dentro do período
+            silo_latest = df_filtered_readings.groupby("silo_id").first().reset_index()
             saldo_atual_kg = silo_latest["valor_racao_kg"].sum()
         else:
-            saldo_atual_kg = latest_r["valor_racao_kg"]
+            saldo_atual_kg = df_filtered_readings.iloc[0]["valor_racao_kg"]
             
         st.markdown(f"""
         <div class="metric-card">
-            <div class="metric-title">Saldo Total de Ração</div>
+            <div class="metric-title">Saldo no Período</div>
             <div class="metric-value">{saldo_atual_kg:,.2f} kg</div>
             <div class="metric-sub">{(saldo_atual_kg / 1000.0):.2f} toneladas</div>
         </div>
         """, unsafe_allow_html=True)
         
-    # 3. Consumo 24h
+    # 3. Consumo no Período
     with col3:
-        now = datetime.now()
-        yesterday = now - timedelta(days=1)
-        readings_24h = df_filtered_readings[df_filtered_readings["data_leitura_dt"] >= yesterday]
-        consumo_24h = readings_24h["consumo_kg"].sum()
+        consumo_total = df_filtered_readings["consumo_kg"].sum()
         
         st.markdown(f"""
         <div class="metric-card">
-            <div class="metric-title">Consumo (Últimas 24h)</div>
-            <div class="metric-value">{consumo_24h:,.2f} kg</div>
-            <div class="metric-sub">Soma de quedas de nível registradas</div>
+            <div class="metric-title">Consumo no Período</div>
+            <div class="metric-value">{consumo_total:,.2f} kg</div>
+            <div class="metric-sub">Soma no período selecionado</div>
         </div>
         """, unsafe_allow_html=True)
         
-    # 4. SLA de Conectividade 24h
+    # 4. SLA no Período
     with col4:
-        # SLA = (leituras recebidas nas últimas 24h / 24h esperadas) * 100
-        # Se for "Todos", tiramos a média de leituras por silo
         num_silos = len(df_silos) if selected_silo == "Todos" else 1
-        expected_readings = 24 * num_silos
-        actual_readings = len(readings_24h["data_leitura"].unique())
+        num_days = max(1, (end_date - start_date).days + 1)
+        expected_readings = 24 * num_days * num_silos
+        actual_readings = len(df_filtered_readings["data_leitura"].unique())
         sla_perc = min(100.0, (actual_readings / expected_readings) * 100.0) if expected_readings > 0 else 0.0
         
         st.markdown(f"""
         <div class="metric-card">
-            <div class="metric-title">SLA Conectividade (24h)</div>
+            <div class="metric-title">SLA Conectividade</div>
             <div class="metric-value">{sla_perc:.1f}%</div>
-            <div class="metric-sub">Meta recomendada: 95.0%</div>
+            <div class="metric-sub">Esperadas {expected_readings} leituras</div>
         </div>
         """, unsafe_allow_html=True)
         
@@ -295,16 +347,12 @@ def main():
     st.markdown("### 📊 Gráficos de Comportamento")
     
     # 1. Curva de Nível de Ração (Plotly)
-    # Filtra para os últimos 7 dias para melhor visualização
-    seven_days_ago = datetime.now() - timedelta(days=7)
-    df_chart = df_filtered_readings[df_filtered_readings["data_leitura_dt"] >= seven_days_ago].copy()
-    
     fig_line = px.line(
-        df_chart,
+        df_filtered_readings,
         x="data_leitura_dt",
         y="valor_racao_kg",
         color="silo_id",
-        title="Curva de Saldo de Ração (kg) - Últimos 7 dias",
+        title=f"Curva de Saldo de Ração (kg) - De {start_date.strftime('%d/%m/%Y')} a {end_date.strftime('%d/%m/%Y')}",
         labels={"data_leitura_dt": "Data/Hora", "valor_racao_kg": "Quantidade (kg)", "silo_id": "Silo"},
         template="plotly_dark",
         color_discrete_sequence=["#38bdf8", "#fbbf24"]
@@ -317,6 +365,7 @@ def main():
     st.plotly_chart(fig_line, use_container_width=True)
     
     # 2. Consumo Diário
+    df_chart = df_filtered_readings.copy()
     df_chart["data_dia"] = df_chart["data_leitura_dt"].dt.date
     df_cons_daily = df_chart.groupby(["data_dia", "silo_id"])["consumo_kg"].sum().reset_index()
     
@@ -326,7 +375,7 @@ def main():
         y="consumo_kg",
         color="silo_id",
         barmode="group",
-        title="Consumo Diário de Ração (kg) - Últimos 7 dias",
+        title=f"Consumo Diário de Ração (kg) - De {start_date.strftime('%d/%m/%Y')} a {end_date.strftime('%d/%m/%Y')}",
         labels={"data_dia": "Data", "consumo_kg": "Consumo (kg)", "silo_id": "Silo"},
         template="plotly_dark",
         color_discrete_sequence=["#06b6d4", "#fb923c"]
@@ -343,20 +392,20 @@ def main():
     c_alert, c_cal = st.columns(2)
     
     with c_alert:
-        st.markdown("### 🚨 Histórico de Alertas Recentes")
-        if df_alertas.empty:
-            st.info("Nenhum alerta registrado no lote.")
+        st.markdown("### 🚨 Histórico de Alertas no Período")
+        if df_filtered_alertas.empty:
+            st.info("Nenhum alerta registrado no período.")
         else:
-            df_alert_view = df_alertas[["data_leitura_dt", "tipo_alerta_str", "mensagem"]].copy()
+            df_alert_view = df_filtered_alertas[["data_leitura_dt", "tipo_alerta_str", "mensagem"]].copy()
             df_alert_view.columns = ["Data/Hora", "Tipo", "Mensagem"]
             st.dataframe(df_alert_view, use_container_width=True, height=250)
             
     with c_cal:
-        st.markdown("### 🔧 Últimas Calibrações Realizadas")
-        if df_calibracoes.empty:
-            st.info("Nenhuma calibração registrada no lote.")
+        st.markdown("### 🔧 Últimas Calibrações no Período")
+        if df_filtered_calibracoes.empty:
+            st.info("Nenhuma calibração registrada no período.")
         else:
-            df_cal_view = df_calibracoes[["data_leitura_dt", "numero_serial", "zona_str", "idade"]].copy()
+            df_cal_view = df_filtered_calibracoes[["data_leitura_dt", "numero_serial", "zona_str", "idade"]].copy()
             df_cal_view.columns = ["Data/Hora", "Nº Serial", "Zona", "Idade (Dias)"]
             st.dataframe(df_cal_view, use_container_width=True, height=250)
 

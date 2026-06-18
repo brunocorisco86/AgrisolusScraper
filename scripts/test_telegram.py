@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.bot.notifier import TelegramNotifier
 
-def test_telegram_connection():
+def run_telegram_commissioning():
     print("==================================================")
     print("        TESTE DE COMISSIONAMENTO DO TELEGRAM      ")
     print("==================================================")
@@ -51,4 +51,4 @@ def test_telegram_connection():
     print("==================================================")
 
 if __name__ == "__main__":
-    test_telegram_connection()
+    run_telegram_commissioning()
