@@ -13,9 +13,9 @@ echo "=================================================="
 echo "Configurando os horários de leituras e relatórios..."
 
 # Define as tarefas cron absolutizadas
-SCRAPER_CRON="30 * * * * /bin/bash $PROJECT_DIR/scripts/run_cron.sh >> $PROJECT_DIR/test_run.log 2>&1"
-SUMMARY_CRON="45 6,11,13,16 * * * /bin/bash $PROJECT_DIR/scripts/run_periodic_summary.sh >> $PROJECT_DIR/test_run.log 2>&1"
-SLA_CRON="0 18 * * * /bin/bash $PROJECT_DIR/scripts/run_sla_report.sh >> $PROJECT_DIR/test_run.log 2>&1"
+SCRAPER_CRON="30 * * * * /bin/bash $PROJECT_DIR/scripts/run_cron.sh >> $PROJECT_DIR/cron_exec.log 2>&1"
+SUMMARY_CRON="45 6,11,13,16 * * * /bin/bash $PROJECT_DIR/scripts/run_periodic_summary.sh >> $PROJECT_DIR/cron_exec.log 2>&1"
+SLA_CRON="0 18 * * * /bin/bash $PROJECT_DIR/scripts/run_sla_report.sh >> $PROJECT_DIR/cron_exec.log 2>&1"
 
 echo ""
 echo "As seguintes linhas serão inseridas no seu crontab:"
