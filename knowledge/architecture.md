@@ -98,6 +98,7 @@ erDiagram
         boolean sucesso_conexao
         boolean achou_dados_novos
         numeric peso_kg
+        timestamp data_leitura
         timestamp created_at
     }
 ```
@@ -106,6 +107,11 @@ erDiagram
 ---
 
 ## 📝 Changelog
+
+### v1.1.1 (2026-06-19)
+- **Correção na Lógica de Dados Novos**: Atualização do processo de verificação `achou_dados_novos` para considerar tanto a unicidade de data quanto a alteração de peso físico do silo comparado com a última medição bem-sucedida, prevenindo falsos positivos causados pela limpeza periódica das tabelas locais do SQLite pós-sincronização.
+- **Campo data_leitura no Histórico**: Adicionada a coluna `data_leitura` na tabela `historico_scraping` para validação robusta de unicidade.
+- **Comissionamento Integrado**: Atualização do script de comissionamento para validar a inserção de silos e do histórico de scraping (incluindo `data_leitura`), servindo como ferramenta de diagnóstico imediata da estrutura física no Supabase.
 
 ### v1.1.0 (2026-06-18)
 - **Cálculo do SLA Redesenhado**: Implementação de histórico de tentativas de scraping de hora em hora via tabela `historico_scraping`.
