@@ -40,6 +40,7 @@ erDiagram
     LOTES ||--o{ ALERTAS : "registra"
     LOTES ||--o{ CALIBRACOES : "possui"
     SILOS ||--o{ LEITURAS : "registra"
+    SILOS ||--o{ HISTORICO_SCRAPING : "registra"
 
     LOTES {
         bigint id_lote PK
@@ -89,12 +90,28 @@ erDiagram
         timestamp data_calibracao UK
         int idade
     }
+
+    HISTORICO_SCRAPING {
+        serial id PK
+        string silo_id FK
+        timestamp data_tentativa UK "com silo_id"
+        boolean sucesso_conexao
+        boolean achou_dados_novos
+        numeric peso_kg
+        timestamp created_at
+    }
 ```
 
 
 ---
 
 ## 📝 Changelog
+
+### v1.1.0 (2026-06-18)
+- **Cálculo do SLA Redesenhado**: Implementação de histórico de tentativas de scraping de hora em hora via tabela `historico_scraping`.
+- **Tolerância a Falhas**: O histórico é salvo no SQLite local caso o Supabase esteja offline e sincronizado via `SyncService` no próximo ciclo online.
+- **Limpeza de Arquivos (Docker)**: Remoção de todos os arquivos de containerização e orquestração Docker (`Dockerfile`, `docker-compose.yml`, `docker-crontab`), simplificando a infraestrutura para execução direta e nativa no Raspberry Pi / Alpine Linux através do ambiente virtual Python (`env/`).
+- **Refatoração de Scripts**: Atualização de caminhos absolutos para caminhos relativos dinâmicos nos utilitários da pasta `scripts/`, prevenindo erros de coleta de testes com o Pytest.
 
 ### v1.0.0 (2026-06-18)
 - Migração completa de todas as conexões diretas SQL para o SDK oficial do Supabase.
@@ -113,4 +130,5 @@ erDiagram
 
 ## 💡 Lições Aprendidas
 - *Alpine Linux vs Debian Slim no Docker*: Ao utilizar pacotes que requerem compilação C local (como `lxml` ou `cryptography`), o Debian Slim é preferível pois suporta downloads diretos de wheels pré-compiladas para arquiteturas ARM (Raspberry Pi), poupando tempo de build e evitando estouro de memória no Pi 3B.
+- *Execução direta no host (Nativa)*: Rodar o projeto de forma direta no Alpine Linux via ambiente virtual (`venv`) consome substancialmente menos RAM e CPU do que virtualização por container (Docker) em hardware limitado como o Raspberry Pi 3B de 1GB.
 - *Push-Only Notifier*: Evitar daemons de bot que escutam mensagens (polling/webhooks) economiza RAM preciosa no Raspberry Pi 3B e melhora a confiabilidade contra falhas do processo em background.

@@ -20,14 +20,12 @@ Abaixo está detalhada a estrutura do projeto com as respectivas funções de ca
 ```
 .
 ├── .env.example                # Template de configuração de variáveis de ambiente
-├── Dockerfile                  # Containerização otimizada para o Raspberry Pi 3B (Debian Slim)
-├── docker-compose.yml          # Orquestração do Cron Scraper e do Dashboard Streamlit
-├── docker-crontab              # Agenda cron configurada no ambiente do container
 ├── requirements.txt            # Dependências Python instaladas no projeto
 ├── lotes_config.json           # Lista local configurada do lote monitorado (Aviário 819)
 │
-├── docs/                       # Requisitos e especificações fornecidas
-│   └── GerarJson.md            # Regras originais para geração de mapeamento de lotes
+├── docs/                       # Requisitos, especificações e scripts de migração do banco
+│   ├── GerarJson.md            # Regras originais para geração de mapeamento de lotes
+│   └── create_historico_scraping.sql # Script SQL para criar a tabela de histórico no Supabase
 │
 ├── knowledge/                  # Base de conhecimento, planejamento e logs do projeto
 │   ├── COMPLETUDE.md           # Taxa de conclusão detalhada por fase (100% concluído)
@@ -83,6 +81,20 @@ Abaixo está detalhada a estrutura do projeto com as respectivas funções de ca
 
 ---
 
+## 📈 Cálculo do SLA & Histórico de Scraping
+
+A disponibilidade e a conectividade de transmissão de dados dos silos são aferidas de forma contínua:
+1. **Registro de Tentativas**: A cada hora, o scraper grava na tabela `historico_scraping` uma nova linha por silo contendo:
+   - `sucesso_conexao` (boolean): Se o scraper conseguiu efetuar o login e acessar o portal Agrisolus.
+   - `achou_dados_novos` (boolean): Se a leitura atualizada no portal é diferente da última leitura registrada na base local.
+   - `peso_kg` (numeric): O peso atualizado da ração no silo.
+2. **Resiliência Offline**: Se houver falha de conexão com a internet ou o Supabase estiver fora do ar, o registro é salvo no SQLite local e enviado automaticamente para a nuvem (`historico_scraping` no Supabase) via `SyncService` no próximo ciclo com internet disponível.
+3. **Métrica do SLA**: A conectividade e a transmissão ativa são avaliadas diretamente no dashboard Streamlit através da fórmula:
+   $$\text{SLA} = \frac{\text{Tentativas com sucesso\_conexao = True} \land \text{achou\_dados\_novos = True}}{\text{Número de tentativas esperadas no período}}$$
+   *Nota: O script SQL de migração para o Supabase pode ser encontrado em [docs/create_historico_scraping.sql](file:///media/brunoconter/DOCUMENTOS3/11_AGRISOLUS_SCRAPER/docs/create_historico_scraping.sql).*
+
+---
+
 ## ⚡ Guia Rápido de Instalação (Raspberry Pi)
 
 Para colocar o projeto de pé de forma nativa e extremamente leve (minimizando o consumo de RAM):
@@ -124,7 +136,7 @@ Acesse no navegador: `http://localhost:8501`.
 ---
 
 ## 🧪 Rodando os Testes Automatizados
-O projeto conta com 10 testes unitários integrados. Para rodá-los:
+O projeto conta com 13 testes unitários e de integração estruturados. Para executá-los:
 ```bash
-env/bin/pytest
+env/bin/pytest tests/
 ```
