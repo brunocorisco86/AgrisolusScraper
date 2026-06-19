@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS public.historico_scraping (
     sucesso_conexao BOOLEAN DEFAULT TRUE,
     achou_dados_novos BOOLEAN DEFAULT FALSE,
     peso_kg REAL,
+    data_leitura TIMESTAMP WITH TIME ZONE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT unique_silo_data_tentativa UNIQUE (silo_id, data_tentativa)
 );

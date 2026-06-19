@@ -125,3 +125,43 @@ def test_process_lote_html_resilience(test_db, monkeypatch):
     assert cursor.fetchone()[0] == 2
     
     conn.close()
+
+def test_is_new_reading_logic(test_db):
+    scraper = AgrisolusScraper(db_conn=test_db)
+    
+    # Força mock do Supabase como None para testar comportamento offline (SQLite local)
+    test_db.get_supabase_client = MagicMock(return_value=None)
+    
+    conn = test_db.get_sqlite_connection()
+    cursor = conn.cursor()
+    
+    # Garante estrutura limpa para o teste
+    cursor.execute("DELETE FROM historico_scraping")
+    cursor.execute("DELETE FROM leituras")
+    cursor.execute("DELETE FROM silos")
+    cursor.execute("DELETE FROM lotes")
+    
+    # Insere lote e silo para satisfazer chaves estrangeiras
+    cursor.execute("INSERT INTO lotes (id_lote) VALUES (99999)")
+    cursor.execute("INSERT INTO silos (id_silo, lote_id, capacidade_kg) VALUES ('Silo-NewTest', 99999, 10000.0)")
+    
+    # 1. Inserir um registro inicial com sucesso no historico_scraping
+    # Peso: 4000.0, data_leitura: '2026-06-17T12:00:00'
+    cursor.execute("""
+        INSERT INTO historico_scraping (silo_id, data_tentativa, sucesso_conexao, achou_dados_novos, peso_kg, data_leitura)
+        VALUES ('Silo-NewTest', '2026-06-17T12:05:00', 1, 1, 4000.0, '2026-06-17T12:00:00')
+    """)
+    conn.commit()
+    conn.close()
+    
+    # 2. Testar se a mesma data_leitura (mesmo que com peso diferente) é rejeitada como dado novo
+    is_new = scraper._is_new_reading("Silo-NewTest", "2026-06-17T12:00:00", 3500.0)
+    assert is_new is False, "Não deveria considerar novo se a data_leitura já existe no banco de dados."
+    
+    # 3. Testar se uma data_leitura nova com o mesmo peso é rejeitada como dado novo
+    is_new = scraper._is_new_reading("Silo-NewTest", "2026-06-17T13:00:00", 4000.0)
+    assert is_new is False, "Não deveria considerar novo se o peso for igual ao peso da leitura mais recente do silo."
+    
+    # 4. Testar se uma data_leitura nova com peso diferente é aceita como dado novo
+    is_new = scraper._is_new_reading("Silo-NewTest", "2026-06-17T13:00:00", 3800.0)
+    assert is_new is True, "Deveria considerar novo se a data_leitura for inédita e o peso mudou."

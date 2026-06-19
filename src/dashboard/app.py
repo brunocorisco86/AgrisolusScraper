@@ -174,7 +174,14 @@ def load_dashboard_data():
     # Formata datas
     for df in [df_readings, df_alertas, df_calibracoes, df_historico]:
         if not df.empty:
-            date_col = "data_leitura" if "data_leitura" in df.columns else ("data_alerta" if "data_alerta" in df.columns else ("data_calibracao" if "data_calibracao" in df.columns else "data_tentativa"))
+            if "data_tentativa" in df.columns:
+                date_col = "data_tentativa"
+            elif "data_leitura" in df.columns:
+                date_col = "data_leitura"
+            elif "data_alerta" in df.columns:
+                date_col = "data_alerta"
+            else:
+                date_col = "data_calibracao"
             df["data_leitura_dt"] = df[date_col].apply(parse_iso_datetime)
             
     return df_lotes, df_silos, df_readings, df_alertas, df_calibracoes, df_historico, using_supabase

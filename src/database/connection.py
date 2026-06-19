@@ -161,11 +161,19 @@ class DatabaseConnection:
                 sucesso_conexao INTEGER DEFAULT 1,
                 achou_dados_novos INTEGER DEFAULT 0,
                 peso_kg REAL,
+                data_leitura TEXT,
                 created_at TEXT DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (silo_id) REFERENCES silos(id_silo) ON DELETE CASCADE,
                 UNIQUE (silo_id, data_tentativa)
             );
             """)
+
+            # Garantir de forma incremental que a coluna data_leitura exista
+            try:
+                cursor.execute("ALTER TABLE historico_scraping ADD COLUMN data_leitura TEXT;")
+            except sqlite3.OperationalError:
+                # Se a coluna já existir, o SQLite lançará um erro operacional, ignoramos.
+                pass
 
             conn.commit()
             logger.info("Estrutura do SQLite local validada com sucesso.")

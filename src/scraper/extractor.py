@@ -252,7 +252,7 @@ class AgrisolusScraper:
                 })
 
                 # Verifica se é uma leitura nova
-                dado_novo = self._is_new_reading(silo_id, data_leitura)
+                dado_novo = self._is_new_reading(silo_id, data_leitura, qty_kg)
                 
                 # Adiciona tentativa ao histórico de scraping
                 historico_scraping_list.append({
@@ -260,7 +260,8 @@ class AgrisolusScraper:
                     "data_tentativa": datetime.now().isoformat(),
                     "sucesso_conexao": True,
                     "achou_dados_novos": dado_novo,
-                    "peso_kg": qty_kg
+                    "peso_kg": qty_kg,
+                    "data_leitura": data_leitura
                 })
 
                 # Calcula o consumo de ração
@@ -522,10 +523,10 @@ class AgrisolusScraper:
             if historico_scraping:
                 for hist in historico_scraping:
                     cursor.execute("""
-                        INSERT INTO historico_scraping (silo_id, data_tentativa, sucesso_conexao, achou_dados_novos, peso_kg)
-                        VALUES (?, ?, ?, ?, ?)
+                        INSERT INTO historico_scraping (silo_id, data_tentativa, sucesso_conexao, achou_dados_novos, peso_kg, data_leitura)
+                        VALUES (?, ?, ?, ?, ?, ?)
                         ON CONFLICT (silo_id, data_tentativa) DO NOTHING
-                    """, (hist.get("silo_id"), hist.get("data_tentativa"), int(hist.get("sucesso_conexao")), int(hist.get("achou_dados_novos")), hist.get("peso_kg")))
+                    """, (hist.get("silo_id"), hist.get("data_tentativa"), int(hist.get("sucesso_conexao")), int(hist.get("achou_dados_novos")), hist.get("peso_kg"), hist.get("data_leitura")))
 
             conn.commit()
             conn.close()
@@ -592,24 +593,112 @@ class AgrisolusScraper:
             logger.error(f"Erro ao verificar alertas antigos no SQLite: {e}")
             return False
 
-    def _is_new_reading(self, silo_id: str, data_leitura: str) -> bool:
+    def _is_new_reading(self, silo_id: str, data_leitura: str, peso_kg: float) -> bool:
         """
-        Verifica se a leitura informada já existe no banco de dados local SQLite.
-        Retorna True se for uma leitura nova (não existe no SQLite), caso contrário False.
+        Verifica se a leitura informada é de fato nova (não é duplicada e tem peso diferente da última).
+        Retorna True se for uma leitura nova, caso contrário False.
         """
+        client = self.db_conn.get_supabase_client()
+        
+        # 1. Verificar se silo_id + data_leitura já existe no Supabase (se online) ou no SQLite local
+        if client:
+            try:
+                # Verifica na tabela historico_scraping do Supabase
+                res_hist = client.table("historico_scraping")\
+                    .select("id")\
+                    .eq("silo_id", silo_id)\
+                    .eq("data_leitura", data_leitura)\
+                    .execute()
+                if res_hist.data and len(res_hist.data) > 0:
+                    logger.info(f"Leitura {silo_id} com data {data_leitura} já existe no histórico do Supabase. Não é dado novo.")
+                    return False
+                
+                # Verifica na tabela leituras do Supabase
+                res_leit = client.table("leituras")\
+                    .select("id")\
+                    .eq("silo_id", silo_id)\
+                    .eq("data_leitura", data_leitura)\
+                    .execute()
+                if res_leit.data and len(res_leit.data) > 0:
+                    logger.info(f"Leitura {silo_id} com data {data_leitura} já existe na tabela de leituras do Supabase. Não é dado novo.")
+                    return False
+            except Exception as e:
+                logger.error(f"Erro ao verificar unicidade da data no Supabase: {e}")
+
+        # Se não achou/erro no Supabase, ou offline, verifica no SQLite local
         try:
             conn = self.db_conn.get_sqlite_connection()
             cursor = conn.cursor()
+            
+            # Verifica na tabela historico_scraping local
+            cursor.execute("""
+                SELECT COUNT(*) FROM historico_scraping 
+                WHERE silo_id = ? AND data_leitura = ?
+            """, (silo_id, data_leitura))
+            count_hist = cursor.fetchone()[0]
+            
+            # Verifica na tabela leituras local
             cursor.execute("""
                 SELECT COUNT(*) FROM leituras 
                 WHERE silo_id = ? AND data_leitura = ?
             """, (silo_id, data_leitura))
-            count = cursor.fetchone()[0]
+            count_leit = cursor.fetchone()[0]
+            
             conn.close()
-            return count == 0
+            
+            if count_hist > 0 or count_leit > 0:
+                logger.info(f"Leitura {silo_id} com data {data_leitura} já existe no SQLite local. Não é dado novo.")
+                return False
         except Exception as e:
-            logger.error(f"Erro ao verificar se leitura {silo_id}/{data_leitura} é nova: {e}")
-            return True
+            logger.error(f"Erro ao verificar unicidade da data no SQLite: {e}")
+
+        # 2. Comparar o peso com o peso da leitura mais recente do mesmo silo (no Supabase ou SQLite local)
+        # "Considere somente o peso de silo para tal, desconsidere os demais atributos para que o codigo considere que o dado é o mais recente"
+        last_peso = None
+        if client:
+            try:
+                # Busca o histórico mais recente com peso válido no Supabase
+                res_last = client.table("historico_scraping")\
+                    .select("peso_kg")\
+                    .eq("silo_id", silo_id)\
+                    .eq("sucesso_conexao", True)\
+                    .not_.is_("peso_kg", "null")\
+                    .order("data_tentativa", desc=True)\
+                    .limit(1)\
+                    .execute()
+                if res_last.data and len(res_last.data) > 0:
+                    last_peso = res_last.data[0].get("peso_kg")
+            except Exception as e:
+                logger.error(f"Erro ao obter último peso no Supabase: {e}")
+                
+        # Se não conseguiu no Supabase, ou offline, busca no SQLite local
+        if last_peso is None:
+            try:
+                conn = self.db_conn.get_sqlite_connection()
+                cursor = conn.cursor()
+                cursor.execute("""
+                    SELECT peso_kg FROM historico_scraping 
+                    WHERE silo_id = ? AND sucesso_conexao = 1 AND peso_kg IS NOT NULL 
+                    ORDER BY data_tentativa DESC LIMIT 1
+                """, (silo_id,))
+                row = cursor.fetchone()
+                if row:
+                    last_peso = row[0]
+                conn.close()
+            except Exception as e:
+                logger.error(f"Erro ao obter último peso no SQLite: {e}")
+                
+        # Se encontrou um peso anterior, compara
+        if last_peso is not None:
+            try:
+                if float(last_peso) == float(peso_kg):
+                    logger.info(f"Leitura de silo {silo_id} tem o mesmo peso ({peso_kg} kg) que a leitura anterior ({last_peso} kg). Não é dado novo.")
+                    return False
+            except Exception as e:
+                logger.error(f"Erro ao comparar pesos: {e}")
+
+        logger.info(f"Leitura de silo {silo_id} com data {data_leitura} e peso {peso_kg} kg é um dado NOVO.")
+        return True
 
     def _record_scraping_failure(self, id_lote: int):
         """
@@ -632,7 +721,8 @@ class AgrisolusScraper:
                         "data_tentativa": data_tentativa,
                         "sucesso_conexao": False,
                         "achou_dados_novos": False,
-                        "peso_kg": None
+                        "peso_kg": None,
+                        "data_leitura": None
                     })
                 
                 # Salva no banco (SQLite e Supabase)
@@ -677,10 +767,10 @@ class AgrisolusScraper:
             cursor = conn.cursor()
             for hist in historico_list:
                 cursor.execute("""
-                    INSERT INTO historico_scraping (silo_id, data_tentativa, sucesso_conexao, achou_dados_novos, peso_kg)
-                    VALUES (?, ?, ?, ?, ?)
+                    INSERT INTO historico_scraping (silo_id, data_tentativa, sucesso_conexao, achou_dados_novos, peso_kg, data_leitura)
+                    VALUES (?, ?, ?, ?, ?, ?)
                     ON CONFLICT (silo_id, data_tentativa) DO NOTHING
-                """, (hist.get("silo_id"), hist.get("data_tentativa"), int(hist.get("sucesso_conexao")), int(hist.get("achou_dados_novos")), hist.get("peso_kg")))
+                """, (hist.get("silo_id"), hist.get("data_tentativa"), int(hist.get("sucesso_conexao")), int(hist.get("achou_dados_novos")), hist.get("peso_kg"), hist.get("data_leitura")))
             conn.commit()
             conn.close()
         except Exception as e:

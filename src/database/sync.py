@@ -127,7 +127,7 @@ class SyncService:
                 logger.info("Calibrações locais removidas pós-sincronização.")
 
             # --- 6. Sincronizar Histórico de Scraping (Insert/Upsert + Delete local após sucesso) ---
-            sqlite_cursor.execute("SELECT id, silo_id, data_tentativa, sucesso_conexao, achou_dados_novos, peso_kg FROM historico_scraping")
+            sqlite_cursor.execute("SELECT id, silo_id, data_tentativa, sucesso_conexao, achou_dados_novos, peso_kg, data_leitura FROM historico_scraping")
             historico = sqlite_cursor.fetchall()
             if historico:
                 logger.info(f"Sincronizando {len(historico)} registros de histórico de scraping...")
@@ -138,7 +138,8 @@ class SyncService:
                         "data_tentativa": row[2],
                         "sucesso_conexao": bool(row[3]),
                         "achou_dados_novos": bool(row[4]),
-                        "peso_kg": row[5]
+                        "peso_kg": row[5],
+                        "data_leitura": row[6]
                     })
                 client.table("historico_scraping").upsert(data_historico, on_conflict="silo_id,data_tentativa").execute()
                 
