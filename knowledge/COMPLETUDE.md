@@ -13,9 +13,10 @@ Este arquivo acompanha a taxa de conclusão de cada fase do projeto.
 | **Fase 3** | Módulo Scraper (BeautifulSoup) | Concluído | 100% |
 | **Fase 4** | Sistema de Alertas (Telegram) | Concluído | 100% |
 | **Fase 5** | Dashboard Streamlit | Concluído | 100% |
-| **Fase 6** | Implantação Local, Testes e Docker (Opcional) | Concluído | 100% |
+| **Fase 6** | Implantação Local, Testes e Otimizações | Concluído | 100% |
+| **Fase 7** | Otimizações e Observabilidade | Planejado | 0% |
 
-**Progresso Total do Projeto**: 🏆 **100%**
+**Progresso Total do Projeto**: 📊 **85.7%**
 
 ---
 
@@ -49,8 +50,14 @@ Este arquivo acompanha a taxa de conclusão de cada fase do projeto.
 - [x] Componente gráfico de saldo e consumo de ração com Plotly.
 - [x] Painel de métricas de SLA e log de alertas com resiliência a quedas (leitura do SQLite local).
 
-### **Fase 6: Agendamento Local, Testes e Docker (Opcional)** (100%)
-- [x] Testes unitários e de integração na pasta `/tests` (10 passed).
+### **Fase 6: Agendamento Local, Testes e Otimizações de Recursos** (100%)
+- [x] Testes unitários e de integração na pasta `/tests` (13 passed).
 - [x] Scripts de comissionamento e testes de rede/simulação.
-- [x] Configuração de Dockerfile e docker-compose.yml (opcionais, com Debian Slim).
+- [x] Decisão pela execução nativa no host (venv) no Raspberry Pi e remoção dos arquivos Docker.
 - [x] Configuração do agendamento cron nativo no host (preferido para economia de recursos).
+
+### **Fase 7: Otimizações e Observabilidade (Melhorias de Produção)** (0%)
+- [ ] Lógica de re-tentativas automáticas de login no Scraper.
+- [ ] Rotação e limpeza do SQLite local (expurgo de logs após 90 dias).
+- [ ] Monitoramento de recursos de hardware do Raspberry Pi no Telegram.
+- [ ] Tela básica de login no dashboard do Streamlit.

@@ -33,8 +33,14 @@ Este arquivo define o planejamento e as metas de desenvolvimento para a soluçã
 - [x] Exibir gráficos de curva de consumo de ração (usando Plotly).
 - [x] Exibir histórico de alertas e métricas de SLA do silo.
 
-### **Fase 6: Agendamento Local, Testes e Docker (Opcional)**
+### **Fase 6: Agendamento Local, Testes e Otimizações de Recursos**
 - [x] Criar testes unitários para a classe Scraper e classes de Banco de Dados na pasta `/tests`.
 - [x] Criar scripts de comissionamento e testes manuais na pasta `/scripts`.
 - [x] Configurar scripts cron locais na máquina host (economia máxima de memória no Raspberry Pi 3B).
-- [x] Disponibilizar `Dockerfile` e `docker-compose.yml` como opção de implantação alternativa.
+- [x] Decidir pela execução nativa no host (venv) no Raspberry Pi, removendo os arquivos Docker (`Dockerfile`, `docker-compose.yml`, `docker-crontab`) para poupar RAM e disco.
+
+### **Fase 7: Otimizações e Observabilidade (Melhorias de Produção)**
+- [ ] **Mecanismo de Retries (Re-tentativas) no Scraper**: Adicionar re-tentativas de login/acesso (até 2 vezes com intervalo de 1 min) em caso de timeout temporário do portal Agrisolus, evitando falsos alertas no Telegram.
+- [ ] **Rotação e Limpeza do SQLite Local**: Implementar rotina para expurgar leituras locais mais antigas que 90 dias no `local_fallback.db`, controlando o uso de espaço em disco e o desgaste do cartão SD do Raspberry Pi.
+- [ ] **Monitoramento de Saúde do Raspberry Pi (Host)**: Incluir status de temperatura, uso de CPU e RAM nos relatórios das 18h no Telegram para prevenir travamentos de hardware em dias quentes no aviário.
+- [ ] **Proteção do Dashboard (Autenticação Básica)**: Adicionar autenticação simples no Streamlit se a visualização for hospedada publicamente.
