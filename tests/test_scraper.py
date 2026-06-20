@@ -91,10 +91,10 @@ def test_process_lote_html_resilience(test_db, monkeypatch):
     link_lote = "https://s2.agrisolus.com.br/Home/Detalhes?idLote=4200000019"
     scraper._process_lote_html(html_content, link_lote)
     
-    # Verifica se os alertas de Telegram foram de fato disparados para os dois silos offline
-    assert mock_send_alert.call_count == 2
+    # Verifica que os alertas de Telegram imediatos NÃO foram disparados pelo scraper
+    assert mock_send_alert.call_count == 0
     
-    # Verifica se os dados foram persistidos no SQLite local devido ao fallback do Supabase
+    # Verifica se os alertas do tipo 99 (Silo Offline) foram persistidos localmente no SQLite devido ao fallback do Supabase
     conn = test_db.get_sqlite_connection()
     cursor = conn.cursor()
     

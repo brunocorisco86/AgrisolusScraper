@@ -83,9 +83,15 @@ class SyncService:
                 # Upsert especificando on_conflict para garantir unicidade da leitura por silo/data
                 client.table("leituras").upsert(data_leituras, on_conflict="silo_id,data_leitura").execute()
                 
-                # Após sucesso no Supabase, limpamos as leituras no SQLite
-                sqlite_cursor.execute("DELETE FROM leituras")
-                logger.info("Leituras locais removidas pós-sincronização.")
+                # Após sucesso no Supabase, limpamos as leituras no SQLite, mas preservamos a mais recente de cada silo
+                # para que o cálculo de consumo da próxima execução funcione corretamente.
+                sqlite_cursor.execute("""
+                    DELETE FROM leituras 
+                    WHERE id NOT IN (
+                        SELECT MAX(id) FROM leituras GROUP BY silo_id
+                    )
+                """)
+                logger.info("Leituras locais limpas pós-sincronização (preservando o último registro de cada silo).")
 
             # --- 4. Sincronizar Alertas (Insert/Upsert + Delete local após sucesso) ---
             sqlite_cursor.execute("SELECT id, lote_id, tipo_alerta, tipo_alerta_str, data_alerta, mensagem FROM alertas")

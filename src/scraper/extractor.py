@@ -317,7 +317,7 @@ class AgrisolusScraper:
                     logger.info(f"Silo {silo_id} offline há {diff_hours:.1f} horas. Verificando se alerta já foi enviado...")
                     
                     if not self._alert_already_sent(id_lote, silo_id, data_leitura_str):
-                        logger.warning(f"Silo {silo_id} offline recém-detectado. Enviando alerta no Telegram...")
+                        logger.warning(f"Silo {silo_id} offline recém-detectado. Gravando alerta no banco...")
                         
                         alertas_list.append({
                             "lote_id": id_lote,
@@ -327,10 +327,9 @@ class AgrisolusScraper:
                             "mensagem": f"O {silo_id} está sem enviar dados há {diff_hours:.1f} horas. Último envio: {data_leitura_str}"
                         })
                         
-                        # Dispara Telegram
-                        from src.bot.notifier import TelegramNotifier
-                        notifier = TelegramNotifier()
-                        notifier.send_immediate_alert(silo_id, data_leitura_str, diff_hours)
+                        # Disparo imediato do Telegram removido a pedido do usuário
+                        # para evitar perturbações horárias. O status de offline será notificado consolidado
+                        # pelo run_periodic_summary.sh.
                     else:
                         logger.info(f"Alerta de offline para {silo_id} na data {data_leitura_str} já foi enviado.")
             except Exception as e:

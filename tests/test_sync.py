@@ -37,10 +37,15 @@ def test_sync_process(test_db):
 
     # Inserir Silo
     cursor.execute("INSERT INTO silos (id_silo, lote_id, capacidade_kg) VALUES ('Silo-01', 12345, 18000.0)")
-    # Inserir Leitura
+    # Inserir Leitura 1 (mais antiga)
     cursor.execute("""
         INSERT INTO leituras (silo_id, data_leitura, valor_racao_g, valor_racao_kg, consumo_kg)
-        VALUES ('Silo-01', '2026-06-17 16:00:00', 2133650.0, 2133.65, 150.0)
+        VALUES ('Silo-01', '2026-06-17 15:00:00', 2200000.0, 2200.0, 50.0)
+    """)
+    # Inserir Leitura 2 (mais recente)
+    cursor.execute("""
+        INSERT INTO leituras (silo_id, data_leitura, valor_racao_g, valor_racao_kg, consumo_kg)
+        VALUES ('Silo-01', '2026-06-17 16:00:00', 2133650.0, 2133.65, 66.35)
     """)
     # Inserir Alerta
     cursor.execute("""
@@ -93,7 +98,10 @@ def test_sync_process(test_db):
     assert cursor2.fetchone()[0] == 1, "A tabela de silos local foi limpa incorretamente!"
 
     cursor2.execute("SELECT COUNT(*) FROM leituras")
-    assert cursor2.fetchone()[0] == 0, "A tabela de leituras local não foi limpa pós-sincronização!"
+    assert cursor2.fetchone()[0] == 1, "A tabela de leituras local deveria preservar o último registro de cada silo pós-sincronização!"
+    
+    cursor2.execute("SELECT data_leitura FROM leituras LIMIT 1")
+    assert cursor2.fetchone()[0] == '2026-06-17 16:00:00', "A leitura preservada localmente deveria ser a mais recente!"
 
     cursor2.execute("SELECT COUNT(*) FROM alertas")
     assert cursor2.fetchone()[0] == 0, "A tabela de alertas local não foi limpa pós-sincronização!"
