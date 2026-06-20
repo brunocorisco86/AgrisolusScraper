@@ -140,3 +140,18 @@ O projeto conta com 13 testes unitários e de integração estruturados. Para ex
 ```bash
 env/bin/pytest tests/
 ```
+
+---
+
+## 🔧 Notas de Produção (Alpine Linux & Cron)
+
+No ambiente de produção (Alpine Linux VM), deve-se atentar para a configuração do agendador de tarefas:
+1. **Daemon Recomendado:** Use exclusivamente o daemon **`cronie`** (em vez do `crond` padrão do BusyBox) para garantir suporte a arquivos de spool e diretórios externos de cron (como `/etc/cron.d/pihole`, exigido pelo Pi-hole).
+2. **Conflito de Serviços:** Desative o serviço concorrente do BusyBox no OpenRC para evitar conflito de PID e escuta:
+   ```bash
+   rc-update del crond default || true
+   rc-service crond stop || true
+   rc-update add cronie default
+   rc-service cronie start
+   ```
+3. **Parâmetros do Serviço:** Certifique-se de que o daemon do `cronie` não seja iniciado com a flag `-c` (muito usada em scripts padrões do BusyBox). No `cronie`, a flag `-c` ativa o "clustering support" e desativa a execução normal de tarefas locais. As opções no arquivo `/etc/conf.d/cronie` devem ser `CRON_OPTS=""`.
