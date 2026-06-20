@@ -44,3 +44,4 @@ Este arquivo define o planejamento e as metas de desenvolvimento para a soluçã
 - [ ] **Rotação e Limpeza do SQLite Local**: Implementar rotina para expurgar leituras locais mais antigas que 90 dias no `local_fallback.db`, controlando o uso de espaço em disco e o desgaste do cartão SD do Raspberry Pi.
 - [ ] **Monitoramento de Saúde do Raspberry Pi (Host)**: Incluir status de temperatura, uso de CPU e RAM nos relatórios das 18h no Telegram para prevenir travamentos de hardware em dias quentes no aviário.
 - [ ] **Proteção do Dashboard (Autenticação Básica)**: Adicionar autenticação simples no Streamlit se a visualização for hospedada publicamente.
+- [ ] **Auditoria e Monitoramento de Logs do Cron**: Desenvolver rotina ou script de monitoramento para conferir periodicamente os logs de execução do cron (`cron_exec.log`), garantindo que erros silenciosos ou exceções de infraestrutura sejam devidamente identificados e alertados.
