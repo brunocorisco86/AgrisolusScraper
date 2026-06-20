@@ -20,6 +20,7 @@ from src.database.connection import DatabaseConnection
 from src.bot.notifier import TelegramNotifier
 from src.utils.logger import setup_logger
 from src.utils.datetime_parser import parse_iso_datetime
+from src.utils.log_monitor import CronLogMonitor
 
 logger = setup_logger(name="run_daily_summary_telegram", log_file="test_run.log")
 
@@ -287,6 +288,24 @@ def main():
         for al in alertas_filtrados[:5]:  # limita aos 5 primeiros
             message += f"• [{al['tipo_alerta_str']}] {al['mensagem']} ({al['data_alerta']})\n"
         message += "\n"
+        
+    # E. Auditoria de Logs do Cron
+    logger.info("Executando auditoria de logs do cron...")
+    log_monitor = CronLogMonitor()
+    audit_res = log_monitor.analyze_logs(hours_back=24)
+    
+    message += f"📋 <b>Auditoria do Sistema e Logs (24h):</b>\n"
+    if audit_res["cron_active"]:
+        message += f"• Status do Cron: {emoji_check} <b>Ativo</b> (última execução: {audit_res['last_execution_time']})\n"
+    else:
+        message += f"• Status do Cron: {emoji_warn} <b>Inativo / Travado!</b> (última execução: {audit_res['last_execution_time']})\n"
+        
+    audit_errors = audit_res["errors"]
+    if audit_errors:
+        message += f"• Erros/Exceções detectados: {emoji_warn} <b>{len(audit_errors)} ocorrências</b>\n"
+        message += f"  <i>Exemplo:</i> <code>{audit_errors[0][:100]}...</code>\n\n"
+    else:
+        message += f"• Erros/Exceções detectados: {emoji_check} <b>Nenhum erro encontrado</b>\n\n"
         
     message += "<i>Pilares Agrisolus: Comunicação Eficiente, Processos Otimizados & Tecnologia Habilitadora.</i>"
     

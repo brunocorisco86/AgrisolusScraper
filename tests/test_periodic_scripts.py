@@ -40,8 +40,16 @@ def setup_test_db(monkeypatch):
         os.remove(TEST_DB_PATH)
 
 @patch("src.database.connection.DatabaseConnection.get_supabase_client", return_value=None)
+@patch("src.utils.log_monitor.CronLogMonitor.analyze_logs")
 @patch("src.bot.notifier.TelegramNotifier.send_message")
-def test_daily_summary_telegram_script(mock_send_message, mock_get_supabase, setup_test_db):
+def test_daily_summary_telegram_script(mock_send_message, mock_analyze_logs, mock_get_supabase, setup_test_db):
+    # Mock do analisador de logs para retornar dados limpos nos testes
+    mock_analyze_logs.return_value = {
+        "cron_active": True,
+        "last_execution_time": "2026-06-20 11:30:00",
+        "errors": [],
+        "warnings": []
+    }
     conn = setup_test_db.get_sqlite_connection()
     cursor = conn.cursor()
     
@@ -89,3 +97,8 @@ def test_daily_summary_telegram_script(mock_send_message, mock_get_supabase, set
     assert "SLA de Conexão: <b>50.0%</b>" in sent_text  # 12 leituras de 24h esperadas
     assert "Consumo 24h: <b>120.00 kg</b>" in sent_text
     assert "Saldo de Ração: <b>3890.00 kg</b>" in sent_text  # 4000.0 - 110.0
+    
+    # Validações da seção de Auditoria de Logs
+    assert "Auditoria do Sistema e Logs (24h)" in sent_text
+    assert "Status do Cron: ✅ <b>Ativo</b>" in sent_text
+    assert "Erros/Exceções detectados: ✅ <b>Nenhum erro encontrado</b>" in sent_text
