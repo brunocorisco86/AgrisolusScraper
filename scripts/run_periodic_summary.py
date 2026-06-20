@@ -116,10 +116,11 @@ def main():
         except Exception as e:
             logger.error(f"Erro ao calcular diferença de tempo para o silo {silo_id}: {e}")
 
-    # Envia o resumo periódico
-    logger.info(f"Enviando resumo com {len(occurrences)} ocorrências para o Telegram...")
-    notifier.send_periodic_summary(occurrences)
-    logger.info("Resumo periódico enviado.")
+    # O envio de mensagens ao Telegram foi removido a pedido do usuário
+    # para centralizar a comunicação de forma unificada no final do dia (às 19h).
+    logger.info(f"Ocorrências identificadas de silos offline: {len(occurrences)}")
+    # notifier.send_periodic_summary(occurrences)
+    logger.info("Execução do resumo periódico finalizada (logs registrados).")
 
 if __name__ == "__main__":
     main()

@@ -4,8 +4,7 @@ import pytest
 from datetime import datetime, timedelta
 from unittest.mock import MagicMock, patch
 from src.database.connection import DatabaseConnection
-from scripts.run_periodic_summary import main as run_summary_main
-from scripts.run_sla_report import main as run_sla_main
+from scripts.run_daily_summary_telegram import main as run_daily_main
 
 TEST_DB_PATH = "local_periodic_test.db"
 
@@ -41,64 +40,31 @@ def setup_test_db(monkeypatch):
         os.remove(TEST_DB_PATH)
 
 @patch("src.database.connection.DatabaseConnection.get_supabase_client", return_value=None)
-@patch("src.bot.notifier.TelegramNotifier.send_periodic_summary")
-def test_periodic_summary_script(mock_send_summary, mock_get_supabase, setup_test_db):
+@patch("src.bot.notifier.TelegramNotifier.send_message")
+def test_daily_summary_telegram_script(mock_send_message, mock_get_supabase, setup_test_db):
     conn = setup_test_db.get_sqlite_connection()
     cursor = conn.cursor()
     
-    # 1. Caso de silo ONLINE (última leitura há 1 hora)
-    last_leitura_online = (datetime.now() - timedelta(hours=1)).strftime("%Y-%m-%dT%H:%M:%S")
+    # 1. Inserir histórico de scraping fictício para o dia de hoje
+    today_str = datetime.now().strftime("%Y-%m-%d")
     cursor.execute("""
-        INSERT INTO leituras (silo_id, data_leitura, valor_racao_g, valor_racao_kg, consumo_kg)
-        VALUES ('Silo-Test-819', ?, 5000000.0, 5000.0, 10.0)
-    """, (last_leitura_online,))
-    conn.commit()
-    conn.close()
-    
-    # Executa o script de resumo
-    run_summary_main()
-    
-    # O silo está online, logo occurrences deve estar vazia []
-    mock_send_summary.assert_called_once_with([])
-    
-    # 2. Caso de silo OFFLINE (última leitura há 5 horas)
-    conn = setup_test_db.get_sqlite_connection()
-    cursor = conn.cursor()
-    cursor.execute("DELETE FROM leituras") # Limpa leituras anteriores
-    
-    last_leitura_offline = (datetime.now() - timedelta(hours=5)).strftime("%Y-%m-%dT%H:%M:%S")
+        INSERT INTO historico_scraping (silo_id, data_tentativa, sucesso_conexao, achou_dados_novos, peso_kg, data_leitura)
+        VALUES ('Silo-Test-819', ?, 1, 1, 5000.0, ?)
+    """, (f"{today_str}T10:00:00", f"{today_str}T10:00:00"))
     cursor.execute("""
-        INSERT INTO leituras (silo_id, data_leitura, valor_racao_g, valor_racao_kg, consumo_kg)
-        VALUES ('Silo-Test-819', ?, 5000000.0, 5000.0, 10.0)
-    """, (last_leitura_offline,))
-    conn.commit()
-    conn.close()
+        INSERT INTO historico_scraping (silo_id, data_tentativa, sucesso_conexao, achou_dados_novos, peso_kg, data_leitura)
+        VALUES ('Silo-Test-819', ?, 1, 0, 5000.0, ?)
+    """, (f"{today_str}T11:00:00", f"{today_str}T10:00:00"))
     
-    mock_send_summary.reset_mock()
-    run_summary_main()
-    
-    # Deve disparar o resumo periódico com a ocorrência do silo offline
-    assert mock_send_summary.call_count == 1
-    call_args = mock_send_summary.call_args[0][0]
-    assert len(call_args) == 1
-    assert call_args[0]["silo_id"] == "Silo-Test-819"
-    assert call_args[0]["offline_hours"] >= 4.9
-
-@patch("src.database.connection.DatabaseConnection.get_supabase_client", return_value=None)
-@patch("src.bot.notifier.TelegramNotifier.send_daily_sla_report")
-def test_sla_report_script(mock_send_sla, mock_get_supabase, setup_test_db):
     # Inserir leituras para o período de SLA
-    # Período é das 17h de ontem às 17h de hoje.
+    # Período é de 24 horas anteriores à execução (das 19h de ontem às 19h de hoje)
     now = datetime.now()
-    end_dt = now.replace(hour=17, minute=0, second=0, microsecond=0)
-    start_dt = end_dt - timedelta(days=1)
+    end_24h = now.replace(hour=19, minute=0, second=0, microsecond=0)
+    start_24h = end_24h - timedelta(days=1)
     
-    # Vamos gerar exatamente 12 leituras de hora em hora
-    conn = setup_test_db.get_sqlite_connection()
-    cursor = conn.cursor()
-    
+    # Vamos gerar exatamente 12 leituras de hora em hora a partir do início do período de 24h
     for i in range(12):
-        leitura_time = (start_dt + timedelta(hours=i)).strftime("%Y-%m-%dT%H:%M:%S")
+        leitura_time = (start_24h + timedelta(hours=i+1)).strftime("%Y-%m-%dT%H:%M:%S")
         cursor.execute("""
             INSERT INTO leituras (silo_id, data_leitura, valor_racao_g, valor_racao_kg, consumo_kg)
             VALUES ('Silo-Test-819', ?, 4000000.0, ?, 10.0)
@@ -107,19 +73,19 @@ def test_sla_report_script(mock_send_sla, mock_get_supabase, setup_test_db):
     conn.commit()
     conn.close()
     
-    # Executa o script de SLA
-    run_sla_main()
+    # Executa o novo script de resumo consolidado diário
+    run_daily_main()
     
-    # Esperamos que send_daily_sla_report tenha sido chamado
-    assert mock_send_sla.call_count == 1
-    silos_sla = mock_send_sla.call_args[0][1]
+    # Valida se send_message foi chamado
+    assert mock_send_message.call_count == 1
+    sent_text = mock_send_message.call_args[0][0]
     
-    assert len(silos_sla) == 1
-    silo_metrics = silos_sla[0]
-    assert silo_metrics["silo_id"] == "Silo-Test-819"
-    # SLA deve ser de 50.0% (12 leituras das 24 esperadas)
-    assert silo_metrics["sla_percentage"] == 50.0
-    # Consumo total deve ser 12 leituras * 10 kg = 120 kg
-    assert silo_metrics["total_consumed_kg"] == 120.0
-    # Saldo atual de ração (última das leituras) deve ser 4000.0 - 11 * 10 = 3890.0 kg
-    assert silo_metrics["current_balance_kg"] == 3890.0
+    # Validações do texto consolidado
+    assert "RESUMO DIÁRIO AGRISOLUS" in sent_text
+    assert "Tentativas de scraping hoje: <b>2</b>" in sent_text
+    assert "Sucessos de conexão: <b>2</b>" in sent_text
+    assert "Dados novos/exclusivos: <b>1 leituras</b>" in sent_text
+    assert "Silo-Test-819" in sent_text
+    assert "SLA de Conexão: <b>50.0%</b>" in sent_text  # 12 leituras de 24h esperadas
+    assert "Consumo 24h: <b>120.00 kg</b>" in sent_text
+    assert "Saldo de Ração: <b>3890.00 kg</b>" in sent_text  # 4000.0 - 110.0

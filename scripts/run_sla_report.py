@@ -141,12 +141,11 @@ def main():
             "current_balance_kg": current_balance
         })
 
-    # Envia o relatório diário
+    # O envio de mensagens ao Telegram foi removido a pedido do usuário
+    # para centralizar a comunicação de forma unificada no final do dia (às 19h).
     if silos_sla:
-        date_str = now.strftime("%d/%m/%Y")
-        logger.info(f"Enviando Relatório Diário de SLA para o Telegram...")
-        notifier.send_daily_sla_report(date_str, silos_sla)
-        logger.info("Relatório Diário enviado com sucesso.")
+        logger.info("Relatório Diário de SLA gerado com sucesso nos logs.")
+        # notifier.send_daily_sla_report(date_str, silos_sla)
     else:
         logger.warning("Nenhum dado encontrado para gerar o relatório de SLA.")
 

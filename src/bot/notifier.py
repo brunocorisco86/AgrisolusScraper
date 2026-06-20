@@ -28,7 +28,14 @@ class TelegramNotifier:
             return False
             
         try:
-            bot = Bot(token=self.token)
+            import aiohttp
+            from aiogram.client.session.aiohttp import AiohttpSession
+            
+            # Define timeout curto (10 segundos) para evitar travamentos infinitos do processo
+            timeout = aiohttp.ClientTimeout(total=10)
+            session = AiohttpSession(timeout=timeout)
+            
+            bot = Bot(token=self.token, session=session)
             # parse_mode="HTML" permite formatações estilosas com <b>, <i>, etc.
             await bot.send_message(chat_id=self.chat_id, text=text, parse_mode="HTML")
             await bot.session.close()
