@@ -39,9 +39,14 @@ Este arquivo define o planejamento e as metas de desenvolvimento para a soluçã
 - [x] Configurar scripts cron locais na máquina host (economia máxima de memória no Raspberry Pi 3B).
 - [x] Decidir pela execução nativa no host (venv) no Raspberry Pi, removendo os arquivos Docker (`Dockerfile`, `docker-compose.yml`, `docker-crontab`) para poupar RAM e disco.
 
-### **Fase 7: Otimizações e Observabilidade (Melhorias de Produção)**
-- [ ] **Mecanismo de Retries (Re-tentativas) no Scraper**: Adicionar re-tentativas de login/acesso (até 2 vezes com intervalo de 1 min) em caso de timeout temporário do portal Agrisolus, evitando falsos alertas no Telegram.
-- [ ] **Rotação e Limpeza do SQLite Local**: Implementar rotina para expurgar leituras locais mais antigas que 90 dias no `local_fallback.db`, controlando o uso de espaço em disco e o desgaste do cartão SD do Raspberry Pi.
-- [ ] **Monitoramento de Saúde do Raspberry Pi (Host)**: Incluir status de temperatura, uso de CPU e RAM nos relatórios das 18h no Telegram para prevenir travamentos de hardware em dias quentes no aviário.
-- [ ] **Proteção do Dashboard (Autenticação Básica)**: Adicionar autenticação simples no Streamlit se a visualização for hospedada publicamente.
-- [ ] **Auditoria e Monitoramento de Logs do Cron**: Desenvolver rotina ou script de monitoramento para conferir periodicamente os logs de execução do cron (`cron_exec.log`), garantindo que erros silenciosos ou exceções de infraestrutura sejam devidamente identificados e alertados.
+### **Fase 7: Otimizações, API REST e Painel Frontend**
+- [x] **Rotação e Limpeza do SQLite Local**: Desenvolver utilitário de Housekeeping para expurgar logs com mais de 45 dias.
+- [x] **API REST Integrada**: Criar API REST com FastAPI servindo endpoints estruturados para o Hermes Agent e para o front-end na porta 8090.
+- [x] **Dashboard SPA Premium**: Desenvolver Dashboard SPA dinâmico em HTML5/CSS/JS (Chart.js) com estética glassmorphism dark-mode e logotipos C.Vale/Agrisolus.
+- [x] **Série Temporal de Conjunto**: Implementar visualização consolidada do somatório dos silos, ordenando a linha do tempo cronologicamente da esquerda para a direita.
+- [x] **Console de Alertas Emulado**: Criar mini-terminal retrô interativo no dashboard para depuração dos logs e alertas do sistema.
+
+### **Fase 8: Estabilização e Alta Disponibilidade (Keepalive & Watchdog na VPS)**
+- [ ] **Script de Watchdog (Cão de Guarda)**: Desenvolver um script leve (ex: cron a cada 5 mins) para testar o endpoint `/api/health`. Se a API não responder, reiniciar o processo uvicorn.
+- [ ] **Configuração do Keepalive (Serviço Systemd/OpenRC)**: Criar o template de arquivo service para Systemd (VPS Ubuntu/Debian) ou OpenRC (Alpine Linux) para garantir a persistência em background pós-boot da máquina.
+- [ ] **Monitoramento de Hardware do Host**: Incluir dados de consumo de CPU e RAM do Raspberry Pi / VPS nos relatórios diários de produção.

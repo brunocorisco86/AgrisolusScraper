@@ -13,9 +13,10 @@ echo "=================================================="
 echo "Configurando os horários de leituras e relatórios..."
 
 # Define as tarefas cron absolutizadas
-SCRAPER_CRON="30 * * * * /bin/bash $PROJECT_DIR/scripts/run_cron.sh >> $PROJECT_DIR/cron_exec.log 2>&1"
-SUMMARY_CRON="45 6,11,13,16 * * * /bin/bash $PROJECT_DIR/scripts/run_periodic_summary.sh >> $PROJECT_DIR/cron_exec.log 2>&1"
-SLA_CRON="0 18 * * * /bin/bash $PROJECT_DIR/scripts/run_sla_report.sh >> $PROJECT_DIR/cron_exec.log 2>&1"
+SCRAPER_CRON="30 * * * * $PROJECT_DIR/scripts/run_cron.sh >> $PROJECT_DIR/cron_exec.log 2>&1"
+SUMMARY_CRON="45 6,11,13,16 * * * $PROJECT_DIR/scripts/run_periodic_summary.sh >> $PROJECT_DIR/cron_exec.log 2>&1"
+SLA_CRON="0 18 * * * $PROJECT_DIR/scripts/run_sla_report.sh >> $PROJECT_DIR/cron_exec.log 2>&1"
+HOUSEKEEP_CRON="0 3 * * * $PROJECT_DIR/env/bin/python $PROJECT_DIR/scripts/housekeep_logs.py >> $PROJECT_DIR/cron_exec.log 2>&1"
 
 echo ""
 echo "As seguintes linhas serão inseridas no seu crontab:"
@@ -26,6 +27,8 @@ echo "2. Resumos offline (minuto 45 das 06h, 11h, 13h, 16h):"
 echo "   $SUMMARY_CRON"
 echo "3. Relatório diário de SLA (18:00h diariamente):"
 echo "   $SLA_CRON"
+echo "4. Housekeeping de Logs (03:00h diariamente):"
+echo "   $HOUSEKEEP_CRON"
 echo "--------------------------------------------------"
 echo ""
 
@@ -42,6 +45,7 @@ if [[ "$CONFIRM" =~ ^[sS]$ ]]; then
     echo "$SCRAPER_CRON" >> "$TMP_CRON"
     echo "$SUMMARY_CRON" >> "$TMP_CRON"
     echo "$SLA_CRON" >> "$TMP_CRON"
+    echo "$HOUSEKEEP_CRON" >> "$TMP_CRON"
     echo "# -------------------------------" >> "$TMP_CRON"
     
     # 3. Carrega o crontab do temporário

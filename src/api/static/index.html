@@ -429,6 +429,76 @@
             display: none;
             z-index: 1000;
         }
+
+        /* Terminal Emulado CSS */
+        .terminal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(6px);
+        }
+        .terminal-window {
+            width: 90%;
+            max-width: 800px;
+            height: 480px;
+            background: #030712;
+            border: 1px solid #10b981;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.15);
+        }
+        .terminal-header {
+            background: #111827;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            font-weight: bold;
+            color: #10b981;
+        }
+        .terminal-close {
+            background: transparent;
+            border: none;
+            color: var(--danger);
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .terminal-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            font-family: 'Courier New', Courier, monospace;
+            color: #34d399;
+            font-size: 13px;
+            line-height: 1.6;
+            text-shadow: 0 0 2px rgba(52, 211, 153, 0.4);
+        }
+        .terminal-line {
+            margin-bottom: 10px;
+        }
+        .terminal-prompt {
+            color: #38bdf8;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .blink {
+            animation: blink 1s infinite;
+        }
     </style>
 </head>
 <body>
@@ -440,12 +510,15 @@
                 <h1>Painel de Monitoramento de Silos</h1>
                 <p>Aviário 819 — Marcelo Fumagalli</p>
             </div>
-            <div class="header-logos">
-                <div class="logo-container">
-                    <img src="/images/cvale_logo.jpeg" alt="C.Vale Logo">
-                </div>
-                <div class="logo-container">
-                    <img src="/images/agrisolus_logo.jpeg" alt="Agrisolus Logo">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <button class="btn" style="border: 1px solid #10b981; color: #10b981; padding: 8px 16px; font-weight: 600;" onclick="toggleTerminal()">📟 Terminal de Alertas</button>
+                <div class="header-logos">
+                    <div class="logo-container">
+                        <img src="/images/cvale_logo.jpeg" alt="C.Vale Logo">
+                    </div>
+                    <div class="logo-container">
+                        <img src="/images/agrisolus_logo.jpeg" alt="Agrisolus Logo">
+                    </div>
                 </div>
             </div>
         </header>
@@ -516,6 +589,7 @@
                     <h2 class="section-header" style="margin-bottom: 0;">Série Temporal de Nível</h2>
                     <div style="display: flex; gap: 10px; align-items: center;">
                         <select class="select-silo" id="chart-silo-select" onchange="updateChartData()">
+                            <option value="combined" selected>Conjunto (Soma dos Silos)</option>
                             <option value="Silo-819-01">Silo 1 (Silo-819-01)</option>
                             <option value="Silo-819-02">Silo 2 (Silo-819-02)</option>
                         </select>
@@ -636,10 +710,23 @@
     <!-- Toast Notifications -->
     <div class="toast" id="toast">Operação realizada com sucesso!</div>
 
+    <!-- Terminal Emulado de Alertas -->
+    <div class="terminal-overlay" id="terminal-modal" style="display:none;">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span>SYSTEM ALERTS CONSOLE v1.0.0</span>
+                <button class="terminal-close" onclick="toggleTerminal()">X</button>
+            </div>
+            <div class="terminal-body" id="terminal-content">
+                <!-- Alertas injetados via JS -->
+            </div>
+        </div>
+    </div>
+
     <script>
         let chartInstance = null;
         let showSmoothed = false;
-        let activeSilo = "Silo-819-01";
+        let activeSilo = "combined";
         let apiData = null;
 
         // Ao carregar a página
@@ -698,13 +785,34 @@
                     document.getElementById('gauge-silo2-fill').setAttribute('stroke-dasharray', `${s2.porcentagem_ocupacao}, 100`);
                 }
 
-                // Atualiza forecast com base no silo ativo selecionado
-                const activeSiloData = data.silos.find(s => s.silo_id === activeSilo);
-                if (activeSiloData) {
-                    document.getElementById('forecast-rate').innerText = `${activeSiloData.consumo_diario_medio_kg.toLocaleString()} kg/dia`;
-                    document.getElementById('forecast-days').innerText = activeSiloData.dias_restantes ? `${activeSiloData.dias_restantes} dias` : 'N/A';
-                    document.getElementById('forecast-date').innerText = activeSiloData.previsao_esvaziamento ? formatDate(activeSiloData.previsao_esvaziamento) : 'Sem consumo';
+                // Atualiza forecast com base no silo ativo selecionado (ou conjunto)
+                let rate = 0.0;
+                let days = null;
+                let forecast = 'Sem consumo';
+
+                if (activeSilo === "combined") {
+                    data.silos.forEach(s => rate += s.consumo_diario_medio_kg);
+                    if (rate > 5.0 && data.total_peso_atual_kg > 0.0) {
+                        days = data.total_peso_atual_kg / rate;
+                        const estDt = new Date();
+                        estDt.setDate(estDt.getDate() + days);
+                        const y = estDt.getFullYear();
+                        const m = String(estDt.getMonth() + 1).padStart(2, '0');
+                        const d = String(estDt.getDate()).padStart(2, '0');
+                        forecast = `${d}/${m}/${y}`;
+                    }
+                } else {
+                    const activeSiloData = data.silos.find(s => s.silo_id === activeSilo);
+                    if (activeSiloData) {
+                        rate = activeSiloData.consumo_diario_medio_kg;
+                        days = activeSiloData.dias_restantes;
+                        forecast = activeSiloData.previsao_esvaziamento ? formatDate(activeSiloData.previsao_esvaziamento) : 'Sem consumo';
+                    }
                 }
+
+                document.getElementById('forecast-rate').innerText = `${rate.toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})} kg/dia`;
+                document.getElementById('forecast-days').innerText = days ? `${days.toFixed(1)} dias` : 'N/A';
+                document.getElementById('forecast-date').innerText = forecast;
             } catch (err) {
                 console.error("Erro ao carregar estatísticas", err);
             }
@@ -712,7 +820,10 @@
 
         async function fetchSiloAnalysis() {
             try {
-                const res = await fetch(`/api/silos/${activeSilo}/analysis?window=3&threshold=400`);
+                const url = activeSilo === "combined" 
+                    ? `/api/silos/combined/analysis?window=3&threshold=400`
+                    : `/api/silos/${activeSilo}/analysis?window=3&threshold=400`;
+                const res = await fetch(url);
                 apiData = await res.json();
                 
                 // Atualiza Tabela de Carregamentos
@@ -739,7 +850,8 @@
 
         async function fetchSiloAccuracy() {
             try {
-                const res = await fetch(`/api/silos/${activeSilo}/accuracy?hours=24`);
+                const targetSilo = activeSilo === "combined" ? "Silo-819-01" : activeSilo;
+                const res = await fetch(`/api/silos/${targetSilo}/accuracy?hours=24`);
                 const data = await res.json();
                 
                 document.getElementById('kpi-overall-accuracy').innerText = data.status === 'OK' ? `${data.overall_accuracy_pct}%` : 'N/A';
@@ -766,6 +878,43 @@
                 }
             } catch (err) {
                 console.error("Erro ao carregar acurácia", err);
+            }
+        }
+
+        async function toggleTerminal() {
+            const modal = document.getElementById('terminal-modal');
+            if (modal.style.display === 'none') {
+                modal.style.display = 'flex';
+                await fetchTerminalAlerts();
+            } else {
+                modal.style.display = 'none';
+            }
+        }
+
+        async function fetchTerminalAlerts() {
+            const content = document.getElementById('terminal-content');
+            content.innerHTML = '<div class="terminal-line"><span class="terminal-prompt">root@cvale-monitor:~$</span> fetching latest system alerts...</div>';
+            try {
+                const res = await fetch('/api/alerts?limit=20');
+                const alerts = await res.json();
+                
+                content.innerHTML = '<div class="terminal-line"><span class="terminal-prompt">root@cvale-monitor:~$</span> list-alerts --limit=20</div>';
+                
+                if (!alerts || alerts.length === 0) {
+                    content.innerHTML += '<div class="terminal-line">[INFO] No system alerts logged.</div>';
+                } else {
+                    alerts.forEach(a => {
+                        const dateStr = formatDateTime(a.data);
+                        content.innerHTML += `
+                            <div class="terminal-line">
+                                [${dateStr}] <span style="color: #fbbf24">${a.tipo}</span>: ${a.mensagem}
+                            </div>
+                        `;
+                    });
+                }
+                content.innerHTML += '<div class="terminal-line"><span class="terminal-prompt">root@cvale-monitor:~$</span> <span class="blink">_</span></div>';
+            } catch (err) {
+                content.innerHTML += `<div class="terminal-line" style="color: var(--danger)">[ERROR] Failed to fetch alerts: ${err}</div>`;
             }
         }
 
@@ -839,8 +988,11 @@
 
             const ctx = document.getElementById('weightChart').getContext('2d');
             
-            const labels = apiData.readings.map(r => formatDateTime(r.data));
-            const dataPoints = apiData.readings.map(r => showSmoothed ? r.peso_suavizado : r.peso_bruto);
+            // Garante ordenação cronológica (tempo mais antigo à esquerda, mais recente à direita)
+            const sortedReadings = [...apiData.readings].sort((a, b) => new Date(a.data) - new Date(b.data));
+            
+            const labels = sortedReadings.map(r => formatDateTime(r.data));
+            const dataPoints = sortedReadings.map(r => showSmoothed ? r.peso_suavizado : r.peso_bruto);
 
             if (chartInstance) {
                 chartInstance.destroy();

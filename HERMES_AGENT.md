@@ -93,3 +93,22 @@ Se o seu Hermes Agent utiliza definições estruturadas de ferramentas (como Ope
   }
 ]
 ```
+
+---
+
+## 📐 Regras de Negócio Importantes para o Hermes
+
+Para garantir que o Hermes tome decisões corretas e responda com precisão aos usuários, o agente deve respeitar as seguintes regras de negócio do domínio de silos:
+
+1. **Filtro de Ruído do Sensor (Threshold de Abastecimento):**
+   - Os sensores físicos de peso geram flutuações e ruído térmico/de vento. O sistema assume que houve um **Abastecimento Físico** apenas se o aumento de peso suavizado for de no mínimo **400 kg** (`load_threshold`). Diferenças positivas menores que 400 kg devem ser ignoradas ou consideradas pequenas flutuações.
+2. **Janela Temporal de Associação de Carga (Associação de NFs):**
+   - Caminhões de entrega podem atrasar e as pesagens podem demorar para serem atualizadas pelo portal. Para auditar a acurácia, o Hermes deve associar uma Nota Fiscal com um abastecimento detectado pelo sensor em uma janela de tempo de no máximo **±24 horas** (`window_hours`) em relação à data descrita na NF.
+3. **Cálculo de Acurácia do Sensor:**
+   - A acurácia percentual é calculada com base no desvio em relação ao peso oficial da Nota Fiscal:
+     $$\text{Erro} = \frac{|\text{Peso Sensor} - \text{Peso Nota}|}{\text{Peso Nota}} \times 100$$
+     $$\text{Acurácia} = 100\% - \text{Erro}$$
+4. **Housekeeping de Logs e Armazenamento:**
+   - O sistema mantém um script diário de limpeza (`scripts/housekeep_logs.py`) que roda via Cron às **03:00 da manhã**, expurgando qualquer arquivo de log (`*.log`) antigo com mais de **45 dias** de criação. Isso evita esgotamento de espaço em disco no Raspberry Pi / VPS.
+5. **Previsão de Esvaziamento (Forecast):**
+   - O cálculo de dias restantes usa a média móvel de consumo dos **últimos 7 dias**. Se o consumo médio for muito baixo (< 5 kg/dia), a previsão é classificada como "Sem consumo". O Hermes deve usar esses dados para avisar o usuário preventivamente quando o silo estiver com menos de 3 dias de ração restante.
