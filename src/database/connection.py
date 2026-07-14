@@ -139,6 +139,17 @@ class DatabaseConnection:
                 # Se a coluna já existir, o SQLite lançará um erro operacional, ignoramos.
                 pass
 
+            # 7. Tabela de Notas Fiscais (Entrada de Ração)
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS notas_fiscais (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                data_nf TEXT NOT NULL,
+                numero_nf TEXT UNIQUE NOT NULL,
+                quantidade_kg REAL NOT NULL,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP
+            );
+            """)
+
             conn.commit()
             logger.info("Estrutura do SQLite local validada com sucesso.")
         except Exception as e:
