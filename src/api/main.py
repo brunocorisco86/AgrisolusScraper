@@ -213,6 +213,7 @@ def get_dashboard_stats():
                    MIN(data_tentativa)
             FROM historico_scraping
             WHERE data_tentativa >= datetime('now', '-7 days')
+              AND silo_id = (SELECT id_silo FROM silos LIMIT 1)
         """)
         sla_row = cursor.fetchone()
         success_attempts = sla_row[0] if sla_row and sla_row[0] is not None else 0
