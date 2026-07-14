@@ -207,16 +207,31 @@ def get_dashboard_stats():
                 "previsao_esvaziamento": forecast_depletion_date
             })
             
-        # Calcula SLA de comunicação do sensor nos últimos 7 dias
+        # Calcula SLA de comunicação do sensor nos últimos 7 dias (espera-se 1 leitura por hora)
         cursor.execute("""
-            SELECT COUNT(*), SUM(CASE WHEN sucesso_conexao = 1 THEN 1 ELSE 0 END)
+            SELECT SUM(CASE WHEN sucesso_conexao = 1 THEN 1 ELSE 0 END),
+                   MIN(data_tentativa)
             FROM historico_scraping
             WHERE data_tentativa >= datetime('now', '-7 days')
         """)
         sla_row = cursor.fetchone()
-        total_attempts = sla_row[0] if sla_row else 0
-        success_attempts = sla_row[1] if sla_row and sla_row[1] is not None else 0
-        communication_sla = (success_attempts / total_attempts) * 100.0 if total_attempts > 0 else 100.0
+        success_attempts = sla_row[0] if sla_row and sla_row[0] is not None else 0
+        min_date_str = sla_row[1] if sla_row and sla_row[1] is not None else None
+
+        if min_date_str:
+            try:
+                # Limpa sufixos de milissegundos se existirem
+                clean_date_str = min_date_str.split('.')[0].replace('T', ' ')
+                min_date = datetime.strptime(clean_date_str, "%Y-%m-%d %H:%M:%S")
+                delta_hours = int((datetime.now() - min_date).total_seconds() / 3600) + 1
+                expected_attempts = min(168, max(1, delta_hours))
+            except Exception:
+                expected_attempts = 168
+        else:
+            expected_attempts = 168
+
+        communication_sla = (success_attempts / expected_attempts) * 100.0 if expected_attempts > 0 else 0.0
+        communication_sla = max(0.0, min(100.0, communication_sla))
 
         total_occupancy_pct = (total_current_weight / total_capacity) * 100.0 if total_capacity > 0 else 0.0
         
