@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoramento de Silos - C.Vale & Agrisolus</title>
+    <!-- Favicon com logo da C.Vale -->
+    <link rel="shortcut icon" href="/images/cvale_logo.jpeg" type="image/jpeg">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary: #0ea5e9;
+            --primary-glow: rgba(14, 165, 233, 0.15);
+            --accent: #f59e0b;
+            --accent-glow: rgba(245, 158, 11, 0.15);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --success: #10b981;
+            --danger: #ef4444;
+            --glass-blur: blur(16px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 20px;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(245, 158, 11, 0.03) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Header Premium */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 25px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            backdrop-filter: var(--glass-blur);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-title h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(to right, #38bdf8, #0284c7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+        }
+
+        .header-title p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .header-logos {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-container {
+            height: 48px;
+            width: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border-radius: 8px;
+            padding: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .logo-container img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        /* Grid de KPIs */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 20px;
+            backdrop-filter: var(--glass-blur);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s, border-color 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .kpi-title {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .kpi-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Medidor de Ocupação */
+        .gauge-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .gauge-circle {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gauge-svg {
+            transform: rotate(-90deg);
+            width: 100%;
+            height: 100%;
+        }
+
+        .gauge-bg {
+            fill: none;
+            stroke: rgba(255,255,255,0.05);
+            stroke-width: 8;
+        }
+
+        .gauge-fill {
+            fill: none;
+            stroke: var(--primary);
+            stroke-width: 8;
+            stroke-linecap: round;
+            transition: stroke-dasharray 0.5s ease;
+        }
+
+        .gauge-text {
+            position: absolute;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Layout Grid Principal */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Seção do Gráfico */
+        .chart-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chart-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            background: rgba(255,255,255,0.03);
+            padding: 4px;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+        }
+
+        .btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .btn.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .select-silo {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+        }
+
+        /* Forecast Card */
+        .forecast-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .forecast-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .forecast-metric:last-child {
+            border-bottom: none;
+        }
+
+        .forecast-label {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .forecast-val {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .forecast-highlight {
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* Formulários e Tabelas (Notas Fiscais e Acurácia) */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .bottom-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-header {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #38bdf8;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            width: 100%;
+            transition: opacity 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+
+        /* Estilização de Tabelas */
+        .table-container {
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(255,255,255,0.02);
+            color: var(--text-muted);
+            padding: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 10px;
+            position: sticky;
+            top: 0;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            color: var(--text-main);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Notificações do Sistema */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1e293b;
+            border: 1px solid var(--success);
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-title">
+                <h1>Painel de Monitoramento de Silos</h1>
+                <p>Aviário 819 — Marcelo Fumagalli</p>
+            </div>
+            <div class="header-logos">
+                <div class="logo-container">
+                    <img src="/images/cvale_logo.jpeg" alt="C.Vale Logo">
+                </div>
+                <div class="logo-container">
+                    <img src="/images/agrisolus_logo.jpeg" alt="Agrisolus Logo">
+                </div>
+            </div>
+        </header>
+
+        <!-- KPI Grid -->
+        <div class="kpi-grid">
+            <!-- KPI Ocupação Geral -->
+            <div class="card gauge-card">
+                <div>
+                    <div class="kpi-title">Ocupação Total</div>
+                    <div class="kpi-value" id="kpi-total-occupancy">0%</div>
+                    <div class="kpi-sub" id="kpi-total-weight">0 / 0 kg</div>
+                </div>
+                <div class="gauge-circle">
+                    <svg class="gauge-svg" viewBox="0 0 36 36">
+                        <path class="gauge-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path class="gauge-fill" id="gauge-total-fill" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                    <div class="gauge-text" id="gauge-total-text">0%</div>
+                </div>
+            </div>
+
+            <!-- Silo 1 -->
+            <div class="card gauge-card">
+                <div>
+                    <div class="kpi-title">Silo 1 (Silo-819-01)</div>
+                    <div class="kpi-value" id="kpi-silo1-occupancy">0%</div>
+                    <div class="kpi-sub" id="kpi-silo1-weight">0 kg</div>
+                </div>
+                <div class="gauge-circle">
+                    <svg class="gauge-svg" viewBox="0 0 36 36">
+                        <path class="gauge-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path class="gauge-fill" id="gauge-silo1-fill" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                    <div class="gauge-text" id="gauge-silo1-text">0%</div>
+                </div>
+            </div>
+
+            <!-- Silo 2 -->
+            <div class="card gauge-card">
+                <div>
+                    <div class="kpi-title">Silo 2 (Silo-819-02)</div>
+                    <div class="kpi-value" id="kpi-silo2-occupancy">0%</div>
+                    <div class="kpi-sub" id="kpi-silo2-weight">0 kg</div>
+                </div>
+                <div class="gauge-circle">
+                    <svg class="gauge-svg" viewBox="0 0 36 36">
+                        <path class="gauge-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path class="gauge-fill" id="gauge-silo2-fill" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                    <div class="gauge-text" id="gauge-silo2-text">0%</div>
+                </div>
+            </div>
+
+            <!-- KPI Acurácia -->
+            <div class="card">
+                <div class="kpi-title">Acurácia do Sensor</div>
+                <div class="kpi-value" id="kpi-overall-accuracy" style="color: var(--accent);">-- %</div>
+                <div class="kpi-sub">Média dos carregamentos validados</div>
+            </div>
+        </div>
+
+        <!-- Grid Principal (Gráfico + Forecast) -->
+        <div class="main-grid">
+            <!-- Seção do Gráfico -->
+            <div class="card chart-section">
+                <div class="chart-controls">
+                    <h2 class="section-header" style="margin-bottom: 0;">Série Temporal de Nível</h2>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <select class="select-silo" id="chart-silo-select" onchange="updateChartData()">
+                            <option value="Silo-819-01">Silo 1 (Silo-819-01)</option>
+                            <option value="Silo-819-02">Silo 2 (Silo-819-02)</option>
+                        </select>
+                        <div class="btn-group">
+                            <button class="btn active" id="btn-raw" onclick="toggleSmoothing(false)">Bruto</button>
+                            <button class="btn" id="btn-smoothed" onclick="toggleSmoothing(true)">Suavizado</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="weightChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Previsão e Forecast -->
+            <div class="card forecast-card">
+                <div>
+                    <h2 class="section-header">Previsão e Taxa de Esvaziamento</h2>
+                    <div class="forecast-metric">
+                        <span class="forecast-label">Taxa de Consumo Médio (Dia)</span>
+                        <span class="forecast-val" id="forecast-rate">0.0 kg/dia</span>
+                    </div>
+                    <div class="forecast-metric">
+                        <span class="forecast-label">Dias Estimados Restantes</span>
+                        <span class="forecast-val" id="forecast-days">0 dias</span>
+                    </div>
+                    <div class="forecast-metric">
+                        <span class="forecast-label">Previsão de Esvaziamento</span>
+                        <span class="forecast-val forecast-highlight" id="forecast-date">--/--/----</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 15px;">
+                    <h3 class="kpi-title" style="margin-bottom: 8px;">Últimos Carregamentos no Sensor</h3>
+                    <div class="table-container" style="max-height: 120px;">
+                        <table id="table-loadings">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Quantidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" style="text-align: center; color: var(--text-muted);">Carregando dados...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seções Inferiores (Formulário NF + Tabela Acurácia) -->
+        <div class="bottom-grid">
+            <!-- Notas Fiscais -->
+            <div class="card">
+                <h2 class="section-header">Lançar Nota Fiscal de Entrada</h2>
+                <form id="form-invoice" onsubmit="submitInvoice(event)" style="margin-bottom: 15px;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="inv-number">Número da NF</label>
+                            <input type="text" id="inv-number" required placeholder="Ex: 5893">
+                        </div>
+                        <div class="form-group">
+                            <label for="inv-qty">Quantidade (kg)</label>
+                            <input type="number" id="inv-qty" required step="0.1" placeholder="Ex: 5000">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inv-date">Data da Entrega</label>
+                        <input type="datetime-local" id="inv-date" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Registrar Nota Fiscal</button>
+                </form>
+
+                <h3 class="kpi-title" style="margin-bottom: 8px;">Notas Fiscais de Ração</h3>
+                <div class="table-container">
+                    <table id="table-invoices">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>NF Nº</th>
+                                <th>Qtd (kg)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- preenchido dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Acurácia Comparativa -->
+            <div class="card">
+                <h2 class="section-header">Auditoria de Acurácia do Sensor</h2>
+                <div class="table-container" style="max-height: 380px;">
+                    <table id="table-accuracy">
+                        <thead>
+                            <tr>
+                                <th>NF Nº</th>
+                                <th>Entrega</th>
+                                <th>Nota (kg)</th>
+                                <th>Sensor (kg)</th>
+                                <th>Erro (kg)</th>
+                                <th>Acurácia</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- preenchido dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast" id="toast">Operação realizada com sucesso!</div>
+
+    <script>
+        let chartInstance = null;
+        let showSmoothed = false;
+        let activeSilo = "Silo-819-01";
+        let apiData = null;
+
+        // Ao carregar a página
+        window.addEventListener('DOMContentLoaded', () => {
+            // Seta data atual no formulário de NF
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            document.getElementById('inv-date').value = now.toISOString().slice(0, 16);
+
+            refreshDashboard();
+        });
+
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.style.borderColor = isError ? 'var(--danger)' : 'var(--success)';
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        async function refreshDashboard() {
+            await fetchDashboardStats();
+            await fetchSiloAnalysis();
+            await fetchSiloAccuracy();
+            await fetchInvoices();
+        }
+
+        async function fetchDashboardStats() {
+            try {
+                const res = await fetch('/api/dashboard/stats');
+                const data = await res.json();
+                
+                // KPI Ocupação Geral
+                document.getElementById('kpi-total-occupancy').innerText = data.total_ocupacao_pct + '%';
+                document.getElementById('kpi-total-weight').innerText = `${data.total_peso_atual_kg.toLocaleString()} / ${data.total_capacidade_kg.toLocaleString()} kg`;
+                document.getElementById('gauge-total-text').innerText = data.total_ocupacao_pct + '%';
+                document.getElementById('gauge-total-fill').setAttribute('stroke-dasharray', `${data.total_ocupacao_pct}, 100`);
+
+                // Silo 1
+                const s1 = data.silos.find(s => s.silo_id === 'Silo-819-01');
+                if (s1) {
+                    document.getElementById('kpi-silo1-occupancy').innerText = s1.porcentagem_ocupacao + '%';
+                    document.getElementById('kpi-silo1-weight').innerText = `${s1.peso_atual_kg.toLocaleString()} kg`;
+                    document.getElementById('gauge-silo1-text').innerText = s1.porcentagem_ocupacao + '%';
+                    document.getElementById('gauge-silo1-fill').setAttribute('stroke-dasharray', `${s1.porcentagem_ocupacao}, 100`);
+                }
+
+                // Silo 2
+                const s2 = data.silos.find(s => s.silo_id === 'Silo-819-02');
+                if (s2) {
+                    document.getElementById('kpi-silo2-occupancy').innerText = s2.porcentagem_ocupacao + '%';
+                    document.getElementById('kpi-silo2-weight').innerText = `${s2.peso_atual_kg.toLocaleString()} kg`;
+                    document.getElementById('gauge-silo2-text').innerText = s2.porcentagem_ocupacao + '%';
+                    document.getElementById('gauge-silo2-fill').setAttribute('stroke-dasharray', `${s2.porcentagem_ocupacao}, 100`);
+                }
+
+                // Atualiza forecast com base no silo ativo selecionado
+                const activeSiloData = data.silos.find(s => s.silo_id === activeSilo);
+                if (activeSiloData) {
+                    document.getElementById('forecast-rate').innerText = `${activeSiloData.consumo_diario_medio_kg.toLocaleString()} kg/dia`;
+                    document.getElementById('forecast-days').innerText = activeSiloData.dias_restantes ? `${activeSiloData.dias_restantes} dias` : 'N/A';
+                    document.getElementById('forecast-date').innerText = activeSiloData.previsao_esvaziamento ? formatDate(activeSiloData.previsao_esvaziamento) : 'Sem consumo';
+                }
+            } catch (err) {
+                console.error("Erro ao carregar estatísticas", err);
+            }
+        }
+
+        async function fetchSiloAnalysis() {
+            try {
+                const res = await fetch(`/api/silos/${activeSilo}/analysis?window=3&threshold=400`);
+                apiData = await res.json();
+                
+                // Atualiza Tabela de Carregamentos
+                const tbody = document.querySelector('#table-loadings tbody');
+                tbody.innerHTML = '';
+                if (!apiData.loadings || apiData.loadings.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="2" style="text-align: center;">Nenhum abastecimento detectado</td></tr>';
+                } else {
+                    apiData.loadings.slice().reverse().forEach(ld => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${formatDateTime(ld.data)}</td>
+                            <td style="color: var(--success); font-weight: 600;">+${ld.quantidade_carregada.toLocaleString()} kg</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+
+                renderChart();
+            } catch (err) {
+                console.error("Erro ao carregar análise", err);
+            }
+        }
+
+        async function fetchSiloAccuracy() {
+            try {
+                const res = await fetch(`/api/silos/${activeSilo}/accuracy?hours=24`);
+                const data = await res.json();
+                
+                document.getElementById('kpi-overall-accuracy').innerText = data.status === 'OK' ? `${data.overall_accuracy_pct}%` : 'N/A';
+
+                // Tabela de Acurácia
+                const tbody = document.querySelector('#table-accuracy tbody');
+                tbody.innerHTML = '';
+                if (!data.accuracy_report || data.accuracy_report.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Nenhuma nota fiscal ou carregamento correspondente</td></tr>';
+                } else {
+                    data.accuracy_report.forEach(r => {
+                        const tr = document.createElement('tr');
+                        const errorClass = r.diferenca_kg < 0 ? 'style="color: var(--danger)"' : 'style="color: var(--success)"';
+                        tr.innerHTML = `
+                            <td>${r.numero_nf}</td>
+                            <td>${formatDateTime(r.data_nf)}</td>
+                            <td>${r.quantidade_nf.toLocaleString()} kg</td>
+                            <td>${r.quantidade_sensor ? r.quantidade_sensor.toLocaleString() + ' kg' : '---'}</td>
+                            <td ${errorClass}>${r.diferenca_kg.toLocaleString()} kg</td>
+                            <td style="font-weight: 600; color: ${r.acuracia_pct >= 90 ? 'var(--success)' : 'var(--accent)'}">${r.acuracia_pct}%</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+            } catch (err) {
+                console.error("Erro ao carregar acurácia", err);
+            }
+        }
+
+        async function fetchInvoices() {
+            try {
+                const res = await fetch('/api/invoices');
+                const data = await res.json();
+                
+                const tbody = document.querySelector('#table-invoices tbody');
+                tbody.innerHTML = '';
+                if (!data || data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="3" style="text-align: center;">Nenhuma nota fiscal registrada</td></tr>';
+                } else {
+                    data.forEach(inv => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${formatDateTime(inv.data_nf)}</td>
+                            <td>${inv.numero_nf}</td>
+                            <td style="font-weight: 600;">${inv.quantidade_kg.toLocaleString()} kg</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+            } catch (err) {
+                console.error("Erro ao carregar notas fiscais", err);
+            }
+        }
+
+        async function submitInvoice(event) {
+            event.preventDefault();
+            const num = document.getElementById('inv-number').value;
+            const qty = parseFloat(document.getElementById('inv-qty').value);
+            const rawDate = document.getElementById('inv-date').value; // YYYY-MM-DDTHH:MM
+            const formattedDate = rawDate.replace('T', ' ') + ':00';
+
+            try {
+                const res = await fetch('/api/invoices', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ data_nf: formattedDate, numero_nf: num, quantidade_kg: qty })
+                });
+                
+                if (res.ok) {
+                    showToast("Nota Fiscal registrada com sucesso!");
+                    document.getElementById('inv-number').value = '';
+                    document.getElementById('inv-qty').value = '';
+                    refreshDashboard();
+                } else {
+                    const data = await res.json();
+                    showToast(data.detail || "Erro ao registrar Nota Fiscal", true);
+                }
+            } catch (err) {
+                showToast("Falha de rede ao registrar Nota Fiscal", true);
+            }
+        }
+
+        function updateChartData() {
+            activeSilo = document.getElementById('chart-silo-select').value;
+            refreshDashboard();
+        }
+
+        function toggleSmoothing(val) {
+            showSmoothed = val;
+            document.getElementById('btn-raw').classList.toggle('active', !val);
+            document.getElementById('btn-smoothed').classList.toggle('active', val);
+            renderChart();
+        }
+
+        function renderChart() {
+            if (!apiData || !apiData.readings) return;
+
+            const ctx = document.getElementById('weightChart').getContext('2d');
+            
+            const labels = apiData.readings.map(r => formatDateTime(r.data));
+            const dataPoints = apiData.readings.map(r => showSmoothed ? r.peso_suavizado : r.peso_bruto);
+
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: `Nível do Silo (${showSmoothed ? 'Suavizado' : 'Bruto'})`,
+                        data: dataPoints,
+                        borderColor: '#0ea5e9',
+                        backgroundColor: 'rgba(14, 165, 233, 0.05)',
+                        borderWidth: 2,
+                        tension: 0.1,
+                        fill: true,
+                        pointRadius: 1,
+                        pointHoverRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.03)' },
+                            ticks: { color: '#9ca3af', font: { size: 10 } }
+                        },
+                        y: {
+                            grid: { color: 'rgba(255, 255, 255, 0.03)' },
+                            ticks: { color: '#9ca3af', font: { size: 10 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Helpers de Formatação
+        function formatDate(dateStr) {
+            const parts = dateStr.split('-');
+            if (parts.length === 3) {
+                return `${parts[2]}/${parts[1]}/${parts[0]}`;
+            }
+            return dateStr;
+        }
+
+        function formatDateTime(dateTimeStr) {
+            const cleanStr = dateTimeStr.replace('T', ' ');
+            const parts = cleanStr.split(' ');
+            if (parts.length >= 1) {
+                const dateParts = parts[0].split('-');
+                if (dateParts.length === 3) {
+                    const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+                    const timePart = parts[1] ? parts[1].substring(0, 5) : '';
+                    return timePart ? `${formattedDate} ${timePart}` : formattedDate;
+                }
+            }
+            return dateTimeStr;
+        }
+    </script>
+</body>
+</html>
