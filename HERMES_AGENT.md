@@ -8,7 +8,7 @@ Este documento descreve como o agente autônomo **Hermes** estabelecido na VPS p
 
 O Hermes pode interagir com o sistema de duas formas:
 1. **Via CLI (Recomendado na VPS):** Executando o script wrapper `./scripts/analyze_silos.sh`.
-2. **Via REST API (HTTP):** Enviando requisições JSON para a porta `8000` (FastAPI).
+2. **Via REST API (HTTP):** Enviando requisições JSON para a porta `8090` (FastAPI).
 
 ---
 
