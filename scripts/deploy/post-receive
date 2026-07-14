@@ -1,0 +1,51 @@
+#!/bin/sh
+# Hook de deploy Git para silosagrisolus
+# Executado automaticamente após receber um push no repositório bare.
+
+TARGET="/root/projetos/silosagrisolus"
+GIT_DIR="/root/repos/silosagrisolus.git"
+
+echo "=================================================="
+echo "      INICIANDO DEPLOY VIA GIT NA VPS             "
+echo "=================================================="
+
+# 1. Checkout dos arquivos
+echo "-> Extraindo código em $TARGET..."
+mkdir -p "$TARGET"
+git --work-tree="$TARGET" --git-dir="$GIT_DIR" checkout -f main
+
+cd "$TARGET" || exit 1
+
+# 2. Configura e ativa virtualenv
+if [ ! -d "env" ]; then
+    echo "-> Criando ambiente virtual Python..."
+    python3 -m venv env
+fi
+
+echo "-> Instalando/atualizando dependências com pip..."
+./env/bin/pip install --upgrade pip
+./env/bin/pip install -r requirements.txt
+
+# 3. Dá permissão de execução aos scripts
+echo "-> Configurando permissões de execução dos scripts..."
+chmod +x scripts/*.sh scripts/deploy/*.sh 2>/dev/null || true
+
+# 4. Inicializa/migra banco SQLite se necessário (comissionamento)
+echo "-> Validando banco de dados local SQLite..."
+./env/bin/python -c "
+from src.database.connection import DatabaseConnection
+db = DatabaseConnection()
+conn = db.get_sqlite_connection()
+conn.close()
+print('Banco SQLite inicializado com sucesso!')
+"
+
+# 5. Reinicia a API do Silo Monitor
+echo "-> Reiniciando servidor FastAPI do Silo Monitor na porta 8090..."
+pkill -f uvicorn || true
+sleep 2
+nohup ./scripts/run_api.sh > api_server.log 2>&1 &
+
+echo "=================================================="
+echo "🎉 DEPLOY CONCLUÍDO COM SUCESSO NA VPS!"
+echo "=================================================="
