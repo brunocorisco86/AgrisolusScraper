@@ -41,11 +41,9 @@ def setup_test_db(monkeypatch):
     if os.path.exists(TEST_DB_PATH):
         os.remove(TEST_DB_PATH)
 
-@patch("src.database.connection.DatabaseConnection.get_supabase_client", return_value=None)
-def test_dashboard_loader_sqlite(mock_get_supabase, setup_test_db):
+def test_dashboard_loader_sqlite(setup_test_db):
     """
-    Testa se o carregador de dados do dashboard lê corretamente do SQLite local
-    quando o Supabase está offline.
+    Testa se o carregador de dados do dashboard lê corretamente do SQLite local.
     """
     df_lotes, df_silos, df_readings, df_alertas, df_calibracoes, df_historico, using_supabase = load_dashboard_data()
     

@@ -1,6 +1,5 @@
 import os
 import sqlite3
-from supabase import create_client, Client
 from dotenv import load_dotenv
 from src.utils.logger import setup_logger
 
@@ -8,48 +7,14 @@ logger = setup_logger(name="database_connection", log_file="test_run.log")
 
 class DatabaseConnection:
     """
-    Gerencia as conexões com o banco de dados remoto (Supabase via HTTP Client)
-    e o banco de dados local (SQLite Fallback).
+    Gerencia as conexões com o banco de dados local (SQLite).
     """
-    def __init__(self, supabase_url=None, secret_key=None, sqlite_path=None):
+    def __init__(self, sqlite_path=None):
         load_dotenv()
-        self.api_url = supabase_url if supabase_url is not None else os.getenv("SUPABASE_API_URL")
-        self.secret_key = secret_key if secret_key is not None else os.getenv("SECRET_KEY")
         self.sqlite_path = sqlite_path if sqlite_path is not None else os.getenv("SQLITE_PATH", "local_fallback.db")
-
-        
-        # Se a URL contiver o caminho REST do supabase (/rest/v1/), limpamos para obter a URL base
-        if self.api_url and "/rest/v1" in self.api_url:
-            self.supabase_url = self.api_url.split("/rest/v1")[0]
-        else:
-            self.supabase_url = self.api_url
-
 
         logger.info("DatabaseConnection inicializada.")
         logger.info(f"Caminho do SQLite: {self.sqlite_path}")
-        if self.supabase_url:
-            logger.info(f"URL base do Supabase resolvida: {self.supabase_url}")
-        else:
-            logger.warning("SUPABASE_API_URL não configurada no arquivo .env.")
-
-    def get_supabase_client(self) -> Client:
-        """
-        Instancia e retorna o cliente oficial do Supabase utilizando a SECRET_KEY (acesso administrativo/bypass RLS).
-        Retorna:
-            supabase.Client ou None se falhar ou se credenciais estiverem ausentes.
-        """
-        if not self.supabase_url or not self.secret_key:
-            logger.error("Tentativa de conexão com o Supabase sem credenciais completas (SUPABASE_API_URL e SECRET_KEY).")
-            return None
-        
-        try:
-            logger.info("Criando cliente do Supabase...")
-            client: Client = create_client(self.supabase_url, self.secret_key)
-            logger.info("Cliente Supabase criado com sucesso!")
-            return client
-        except Exception as e:
-            logger.error(f"Erro inesperado ao conectar ao Supabase: {e}")
-            return None
 
     def get_sqlite_connection(self) -> sqlite3.Connection:
         """
@@ -94,7 +59,6 @@ class DatabaseConnection:
                 updated_at TEXT DEFAULT CURRENT_TIMESTAMP
             );
             """)
-
 
             # 2. Tabela de Silos
             cursor.execute("""
@@ -181,3 +145,4 @@ class DatabaseConnection:
             conn.rollback()
             logger.error(f"Erro ao inicializar tabelas do SQLite: {e}")
             raise
+

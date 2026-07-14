@@ -73,9 +73,6 @@ def test_calculate_consumo(test_db):
 def test_process_lote_html_resilience(test_db, monkeypatch):
     scraper = AgrisolusScraper(db_conn=test_db)
     
-    # Força o mock do Supabase client para None (simula offline)
-    test_db.get_supabase_client = MagicMock(return_value=None)
-    
     # Mock do envio de alertas do Telegram para evitar disparos reais nos testes
     mock_send_alert = MagicMock()
     monkeypatch.setattr("src.bot.notifier.TelegramNotifier.send_immediate_alert", mock_send_alert)
@@ -128,9 +125,6 @@ def test_process_lote_html_resilience(test_db, monkeypatch):
 
 def test_is_new_reading_logic(test_db):
     scraper = AgrisolusScraper(db_conn=test_db)
-    
-    # Força mock do Supabase como None para testar comportamento offline (SQLite local)
-    test_db.get_supabase_client = MagicMock(return_value=None)
     
     conn = test_db.get_sqlite_connection()
     cursor = conn.cursor()

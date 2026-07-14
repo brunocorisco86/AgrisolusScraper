@@ -59,11 +59,10 @@ THEME_CSS = """
 @st.cache_data(ttl=60)
 def load_dashboard_data():
     """
-    Carrega todos os dados do banco de dados (Supabase principal, fallback SQLite).
+    Carrega todos os dados do banco de dados SQLite local.
     Retorna dataframes formatados.
     """
     db_conn = DatabaseConnection()
-    client = db_conn.get_supabase_client()
     
     lotes_list = []
     silos_list = []
@@ -74,94 +73,47 @@ def load_dashboard_data():
     
     using_supabase = False
     
-    if client:
-        try:
-            # 1. Carrega lotes do Aviário 819
-            lotes_res = client.table("lotes").select("*").ilike("aviario", "%Aviário 819%").execute()
-            lotes_list = lotes_res.data
+    try:
+        conn = db_conn.get_sqlite_connection()
+        # 1. Carrega lotes
+        df_lotes = pd.read_sql_query("SELECT * FROM lotes WHERE aviario LIKE '%Aviário 819%'", conn)
+        lotes_list = df_lotes.to_dict(orient="records")
+        
+        if lotes_list:
+            lote_ids = [l["id_lote"] for l in lotes_list]
+            placeholders = ",".join("?" for _ in lote_ids)
             
-            if lotes_list:
-                lote_ids = [l["id_lote"] for l in lotes_list]
-                
-                # 2. Carrega silos
-                silos_res = client.table("silos").select("*").in_("lote_id", lote_ids).execute()
-                silos_list = silos_res.data
-                silo_ids = [s["id_silo"] for s in silos_list]
-                
-                if silo_ids:
-                    # 3. Carrega leituras
-                    # Limitamos para as últimas 1000 leituras para não sobrecarregar
-                    readings_res = client.table("leituras") \
-                        .select("*") \
-                        .in_("silo_id", silo_ids) \
-                        .order("data_leitura", desc=True) \
-                        .limit(1000) \
-                        .execute()
-                    readings_list = readings_res.data
-
-                    # Carrega histórico de scraping
-                    historico_res = client.table("historico_scraping") \
-                        .select("*") \
-                        .in_("silo_id", silo_ids) \
-                        .order("data_tentativa", desc=True) \
-                        .limit(2000) \
-                        .execute()
-                    historico_list = historico_res.data
-                    
-                # 4. Carrega alertas e calibrações
-                alertas_res = client.table("alertas").select("*").in_("lote_id", lote_ids).order("data_alerta", desc=True).limit(200).execute()
-                alertas_list = alertas_res.data
-                
-                calibracoes_res = client.table("calibracoes").select("*").in_("lote_id", lote_ids).order("data_calibracao", desc=True).limit(100).execute()
-                calibracoes_list = calibracoes_res.data
-                
-            using_supabase = True
-        except Exception as e:
-            st.sidebar.error(f"Erro ao conectar ao Supabase: {e}. Carregando do SQLite local...")
-            client = None
-
-    if not client:
-        try:
-            conn = db_conn.get_sqlite_connection()
-            # 1. Carrega lotes
-            df_lotes = pd.read_sql_query("SELECT * FROM lotes WHERE aviario LIKE '%Aviário 819%'", conn)
-            lotes_list = df_lotes.to_dict(orient="records")
+            # 2. Carrega silos
+            df_silos = pd.read_sql_query(f"SELECT * FROM silos WHERE lote_id IN ({placeholders})", conn, params=lote_ids)
+            silos_list = df_silos.to_dict(orient="records")
+            silo_ids = [s["id_silo"] for s in silos_list]
             
-            if lotes_list:
-                lote_ids = [l["id_lote"] for l in lotes_list]
-                placeholders = ",".join("?" for _ in lote_ids)
-                
-                # 2. Carrega silos
-                df_silos = pd.read_sql_query(f"SELECT * FROM silos WHERE lote_id IN ({placeholders})", conn, params=lote_ids)
-                silos_list = df_silos.to_dict(orient="records")
-                silo_ids = [s["id_silo"] for s in silos_list]
-                
-                if silo_ids:
-                    silo_placeholders = ",".join("?" for _ in silo_ids)
-                    # 3. Carrega leituras
-                    df_readings = pd.read_sql_query(
-                        f"SELECT * FROM leituras WHERE silo_id IN ({silo_placeholders}) ORDER BY data_leitura DESC LIMIT 1000",
-                        conn, params=silo_ids
-                    )
-                    readings_list = df_readings.to_dict(orient="records")
+            if silo_ids:
+                silo_placeholders = ",".join("?" for _ in silo_ids)
+                # 3. Carrega leituras
+                df_readings = pd.read_sql_query(
+                    f"SELECT * FROM leituras WHERE silo_id IN ({silo_placeholders}) ORDER BY data_leitura DESC LIMIT 1000",
+                    conn, params=silo_ids
+                )
+                readings_list = df_readings.to_dict(orient="records")
 
-                    # Carrega histórico de scraping
-                    df_historico = pd.read_sql_query(
-                        f"SELECT * FROM historico_scraping WHERE silo_id IN ({silo_placeholders}) ORDER BY data_tentativa DESC LIMIT 2000",
-                        conn, params=silo_ids
-                    )
-                    historico_list = df_historico.to_dict(orient="records")
-                    
-                # 4. Carrega alertas e calibrações
-                df_alertas = pd.read_sql_query(f"SELECT * FROM alertas WHERE lote_id IN ({placeholders}) ORDER BY data_alerta DESC LIMIT 200", conn, params=lote_ids)
-                alertas_list = df_alertas.to_dict(orient="records")
+                # Carrega histórico de scraping
+                df_historico = pd.read_sql_query(
+                    f"SELECT * FROM historico_scraping WHERE silo_id IN ({silo_placeholders}) ORDER BY data_tentativa DESC LIMIT 2000",
+                    conn, params=silo_ids
+                )
+                historico_list = df_historico.to_dict(orient="records")
                 
-                df_calibracoes = pd.read_sql_query(f"SELECT * FROM calibracoes WHERE lote_id IN ({placeholders}) ORDER BY data_calibracao DESC LIMIT 100", conn, params=lote_ids)
-                calibracoes_list = df_calibracoes.to_dict(orient="records")
-                
-            conn.close()
-        except Exception as e:
-            st.error(f"Erro ao carregar dados do SQLite local: {e}")
+            # 4. Carrega alertas e calibrações
+            df_alertas = pd.read_sql_query(f"SELECT * FROM alertas WHERE lote_id IN ({placeholders}) ORDER BY data_alerta DESC LIMIT 200", conn, params=lote_ids)
+            alertas_list = df_alertas.to_dict(orient="records")
+            
+            df_calibracoes = pd.read_sql_query(f"SELECT * FROM calibracoes WHERE lote_id IN ({placeholders}) ORDER BY data_calibracao DESC LIMIT 100", conn, params=lote_ids)
+            calibracoes_list = df_calibracoes.to_dict(orient="records")
+            
+        conn.close()
+    except Exception as e:
+        st.error(f"Erro ao carregar dados do SQLite local: {e}")
             
     # Converte listas para DataFrames
     df_lotes = pd.DataFrame(lotes_list)
@@ -185,6 +137,7 @@ def load_dashboard_data():
             df["data_leitura_dt"] = df[date_col].apply(parse_iso_datetime)
             
     return df_lotes, df_silos, df_readings, df_alertas, df_calibracoes, df_historico, using_supabase
+
 
 def main():
     st.set_page_config(page_title="Monitoramento de Silos - Agrisolus", layout="wide", initial_sidebar_state="expanded")

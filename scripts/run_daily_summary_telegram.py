@@ -49,9 +49,6 @@ def main():
     logger.info(f"Período hoje: de {start_today_str} até {end_today_str}")
     logger.info(f"Período 24h (SLA/Consumo): de {start_24h_str} até {end_24h_str}")
     
-    # Tenta conectar ao Supabase primeiro
-    client = db_conn.get_supabase_client()
-    
     silo_ids = []
     lote_ids = []
     
@@ -62,112 +59,62 @@ def main():
     readings_24h = []
     alertas_today = []
     
-    if client:
-        try:
-            logger.info("Buscando dados no Supabase para o resumo consolidado...")
+    try:
+        logger.info("Buscando dados no SQLite local para o resumo consolidado...")
+        conn = db_conn.get_sqlite_connection()
+        cursor = conn.cursor()
+        
+        # A. Obter lotes ativos para 'Aviário 819'
+        cursor.execute("SELECT id_lote FROM lotes WHERE aviario LIKE '%Aviário 819%'")
+        lote_ids = [row[0] for row in cursor.fetchall()]
+        
+        if lote_ids:
+            # B. Obter silos para estes lotes
+            placeholders = ",".join("?" for _ in lote_ids)
+            cursor.execute(f"SELECT id_silo FROM silos WHERE lote_id IN ({placeholders})", lote_ids)
+            silo_ids = [row[0] for row in cursor.fetchall()]
             
-            # A. Obter lotes ativos para 'Aviário 819'
-            lotes_res = client.table("lotes").select("id_lote").ilike("aviario", "%Aviário 819%").execute()
-            lote_ids = [l["id_lote"] for l in lotes_res.data]
+            # C. Total de scrapings e bem sucedidos no dia civil
+            cursor.execute(f"""
+                SELECT sucesso_conexao, achou_dados_novos FROM historico_scraping
+                WHERE data_tentativa >= ? AND data_tentativa <= ?
+            """, (start_today_str, end_today_str))
+            rows_hist = cursor.fetchall()
+            total_scrapings = len(rows_hist)
+            successful_scrapings = sum(1 for r in rows_hist if r[0] == 1)
+            new_readings_count = sum(1 for r in rows_hist if r[1] == 1)
             
-            if lote_ids:
-                # B. Obter silos para estes lotes
-                silos_res = client.table("silos").select("id_silo").in_("lote_id", lote_ids).execute()
-                silo_ids = [s["id_silo"] for s in silos_res.data]
-                
-                # C. Total de scrapings e bem sucedidos no dia civil (tabela historico_scraping)
-                hist_res = client.table("historico_scraping") \
-                    .select("sucesso_conexao, achou_dados_novos, silo_id") \
-                    .gte("data_tentativa", start_today_str) \
-                    .lte("data_tentativa", end_today_str) \
-                    .execute()
-                
-                if hist_res.data:
-                    total_scrapings = len(hist_res.data)
-                    successful_scrapings = sum(1 for h in hist_res.data if h.get("sucesso_conexao") is True)
-                    new_readings_count = sum(1 for h in hist_res.data if h.get("achou_dados_novos") is True)
-                
-                # D. Obter todas as leituras no período de 24 horas para os silos do aviário
-                if silo_ids:
-                    readings_res = client.table("leituras") \
-                        .select("silo_id, data_leitura, consumo_kg, valor_racao_kg") \
-                        .in_("silo_id", silo_ids) \
-                        .gte("data_leitura", start_24h_str) \
-                        .lte("data_leitura", end_24h_str) \
-                        .execute()
-                    readings_24h = readings_res.data
-                
-                # E. Obter alertas registrados no dia de hoje
-                alertas_res = client.table("alertas") \
-                    .select("tipo_alerta_str, mensagem, data_alerta") \
-                    .in_("lote_id", lote_ids) \
-                    .gte("data_alerta", start_today_str) \
-                    .lte("data_alerta", end_today_str) \
-                    .execute()
-                alertas_today = alertas_res.data
-                
-        except Exception as e:
-            logger.error(f"Erro ao buscar dados no Supabase: {e}. Iniciando fallback para SQLite local...")
-            client = None
-
-    # Fallback local no SQLite
-    if not client:
-        try:
-            logger.info("Buscando dados no SQLite local para o resumo consolidado...")
-            conn = db_conn.get_sqlite_connection()
-            cursor = conn.cursor()
-            
-            # A. Obter lotes ativos para 'Aviário 819'
-            cursor.execute("SELECT id_lote FROM lotes WHERE aviario LIKE '%Aviário 819%'")
-            lote_ids = [row[0] for row in cursor.fetchall()]
-            
-            if lote_ids:
-                # B. Obter silos para estes lotes
-                placeholders = ",".join("?" for _ in lote_ids)
-                cursor.execute(f"SELECT id_silo FROM silos WHERE lote_id IN ({placeholders})", lote_ids)
-                silo_ids = [row[0] for row in cursor.fetchall()]
-                
-                # C. Total de scrapings e bem sucedidos no dia civil
+            # D. Obter todas as leituras no período de 24 horas
+            if silo_ids:
+                silos_placeholders = ",".join("?" for _ in silo_ids)
                 cursor.execute(f"""
-                    SELECT sucesso_conexao, achou_dados_novos FROM historico_scraping
-                    WHERE data_tentativa >= ? AND data_tentativa <= ?
-                """, (start_today_str, end_today_str))
-                rows_hist = cursor.fetchall()
-                total_scrapings = len(rows_hist)
-                successful_scrapings = sum(1 for r in rows_hist if r[0] == 1)
-                new_readings_count = sum(1 for r in rows_hist if r[1] == 1)
-                
-                # D. Obter todas as leituras no período de 24 horas
-                if silo_ids:
-                    silos_placeholders = ",".join("?" for _ in silo_ids)
-                    cursor.execute(f"""
-                        SELECT silo_id, data_leitura, consumo_kg, valor_racao_kg FROM leituras
-                        WHERE silo_id IN ({silos_placeholders}) AND data_leitura >= ? AND data_leitura <= ?
-                    """, silo_ids + [start_24h_str, end_24h_str])
-                    rows_read = cursor.fetchall()
-                    for r in rows_read:
-                        readings_24h.append({
-                            "silo_id": r[0],
-                            "data_leitura": r[1],
-                            "consumo_kg": r[2],
-                            "valor_racao_kg": r[3]
-                        })
-                
-                # E. Obter alertas registrados no dia de hoje
-                cursor.execute(f"""
-                    SELECT tipo_alerta_str, mensagem, data_alerta FROM alertas
-                    WHERE lote_id IN ({placeholders}) AND data_alerta >= ? AND data_alerta <= ?
-                """, lote_ids + [start_today_str, end_today_str])
-                rows_al = cursor.fetchall()
-                for r in rows_al:
-                    alertas_today.append({
-                        "tipo_alerta_str": r[0],
-                        "mensagem": r[1],
-                        "data_alerta": r[2]
+                    SELECT silo_id, data_leitura, consumo_kg, valor_racao_kg FROM leituras
+                    WHERE silo_id IN ({silos_placeholders}) AND data_leitura >= ? AND data_leitura <= ?
+                """, silo_ids + [start_24h_str, end_24h_str])
+                rows_read = cursor.fetchall()
+                for r in rows_read:
+                    readings_24h.append({
+                        "silo_id": r[0],
+                        "data_leitura": r[1],
+                        "consumo_kg": r[2],
+                        "valor_racao_kg": r[3]
                     })
-            conn.close()
-        except Exception as e:
-            logger.error(f"Erro ao buscar dados no SQLite local: {e}")
+            
+            # E. Obter alertas registrados no dia de hoje
+            cursor.execute(f"""
+                SELECT tipo_alerta_str, mensagem, data_alerta FROM alertas
+                WHERE lote_id IN ({placeholders}) AND data_alerta >= ? AND data_alerta <= ?
+            """, lote_ids + [start_today_str, end_today_str])
+            rows_al = cursor.fetchall()
+            for r in rows_al:
+                alertas_today.append({
+                    "tipo_alerta_str": r[0],
+                    "mensagem": r[1],
+                    "data_alerta": r[2]
+                })
+        conn.close()
+    except Exception as e:
+        logger.error(f"Erro ao buscar dados no SQLite local: {e}")
 
     # 3. Processar métricas por silo
     silos_metrics = []

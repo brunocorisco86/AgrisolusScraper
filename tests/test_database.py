@@ -48,13 +48,3 @@ def test_sqlite_initialization(monkeypatch):
 
 
     conn.close()
-
-def test_supabase_client_without_credentials():
-    # Instancia explicitamente sem credenciais para testar o comportamento resiliente
-    db = DatabaseConnection(supabase_url="", secret_key="")
-    client = db.get_supabase_client()
-    
-    # Deve retornar None amigavelmente sem levantar exceção
-    assert client is None
-
-

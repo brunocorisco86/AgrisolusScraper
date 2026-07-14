@@ -6,7 +6,6 @@ import sqlite3
 from bs4 import BeautifulSoup
 from datetime import datetime
 from src.database.connection import DatabaseConnection
-from src.database.sync import SyncService
 from src.utils.logger import setup_logger
 from src.utils.datetime_parser import parse_iso_datetime
 
@@ -16,7 +15,7 @@ class AgrisolusScraper:
     """
     Scraper oficial para o portal Agrisolus.
     Realiza o login, navegação, extração das variáveis do silo/lotes,
-    calcula o consumo e faz a persistência resiliente (Supabase -> SQLite fallback).
+    calcula o consumo e faz a persistência no banco de dados SQLite local.
     """
     def __init__(self, db_conn: DatabaseConnection = None):
         self.db_conn = db_conn or DatabaseConnection()
@@ -129,7 +128,7 @@ class AgrisolusScraper:
     def scrape_and_persist(self, config_path="lotes_config.json"):
         """
         Lê a lista de lotes configurados, executa o scraping detalhado de cada um,
-        calcula o consumo dos silos e persiste no banco (Supabase com SQLite fallback).
+        calcula o consumo dos silos e persiste no banco de dados SQLite local.
         """
         if not os.path.exists(config_path):
             logger.warning(f"Arquivo de configuração {config_path} não encontrado. Mapeando lotes...")
@@ -165,11 +164,6 @@ class AgrisolusScraper:
                 match_id = re.search(r"idLote=(\d+)", link)
                 if match_id:
                     self._record_scraping_failure(int(match_id.group(1)))
-
-        # Tenta sincronizar dados locais acumulados se houver internet
-        logger.info("Tentando executar serviço de sincronização pós-execução do scraper...")
-        sync = SyncService(self.db_conn)
-        sync.sync_local_to_remote()
 
     def _process_lote_html(self, html_content: str, link: str):
         """
@@ -407,50 +401,9 @@ class AgrisolusScraper:
 
     def _persist_all(self, lote, silos, leituras, alertas, calibracoes, historico_scraping=None):
         """
-        Salva os dados extraídos no Supabase. Se falhar, faz o fallback para o SQLite local.
+        Salva os dados extraídos no SQLite local.
         """
-        # Tenta salvar no Supabase
-        client = self.db_conn.get_supabase_client()
-        if client:
-            try:
-                logger.info("Persistindo dados no Supabase...")
-                
-                # Lotes
-                client.table("lotes").upsert(lote).execute()
-                
-                # Silos
-                if silos:
-                    client.table("silos").upsert(silos).execute()
-                
-                # Leituras
-                if leituras:
-                    client.table("leituras").upsert(leituras, on_conflict="silo_id,data_leitura").execute()
-                
-                # Alertas
-                if alertas:
-                    client.table("alertas").upsert(alertas, on_conflict="lote_id,data_alerta").execute()
-                
-                # Calibrações
-                if calibracoes:
-                    client.table("calibracoes").upsert(calibracoes, on_conflict="lote_id,data_calibracao").execute()
-
-                # Histórico de Scraping
-                if historico_scraping:
-                    client.table("historico_scraping").upsert(historico_scraping, on_conflict="silo_id,data_tentativa").execute()
-                
-                logger.info("Dados persistidos com sucesso no Supabase!")
-                
-                # Importante: Como o método _calculate_consumo lê o histórico de leituras do SQLite local
-                # para calcular a diferença e consumo, precisamos gravar as leituras no SQLite local
-                # mesmo que o envio ao Supabase funcione, para servir de histórico local para a próxima execução.
-                self._save_to_sqlite(lote, silos, leituras, alertas=[], calibracoes=[], historico_scraping=[])
-                return
-                
-            except Exception as e:
-                logger.error(f"Falha ao persistir no Supabase (iniciando fallback local): {e}")
-
-        # Se não houver cliente ou a chamada do Supabase falhou, salva tudo localmente no SQLite
-        logger.warning("Salvando dados no buffer local do SQLite...")
+        logger.info("Salvando dados no banco local SQLite...")
         self._save_to_sqlite(lote, silos, leituras, alertas, calibracoes, historico_scraping)
 
     def _save_to_sqlite(self, lote, silos, leituras, alertas, calibracoes, historico_scraping=None):
@@ -597,34 +550,7 @@ class AgrisolusScraper:
         Verifica se a leitura informada é de fato nova (não é duplicada e tem peso diferente da última).
         Retorna True se for uma leitura nova, caso contrário False.
         """
-        client = self.db_conn.get_supabase_client()
-        
-        # 1. Verificar se silo_id + data_leitura já existe no Supabase (se online) ou no SQLite local
-        if client:
-            try:
-                # Verifica na tabela historico_scraping do Supabase
-                res_hist = client.table("historico_scraping")\
-                    .select("id")\
-                    .eq("silo_id", silo_id)\
-                    .eq("data_leitura", data_leitura)\
-                    .execute()
-                if res_hist.data and len(res_hist.data) > 0:
-                    logger.info(f"Leitura {silo_id} com data {data_leitura} já existe no histórico do Supabase. Não é dado novo.")
-                    return False
-                
-                # Verifica na tabela leituras do Supabase
-                res_leit = client.table("leituras")\
-                    .select("id")\
-                    .eq("silo_id", silo_id)\
-                    .eq("data_leitura", data_leitura)\
-                    .execute()
-                if res_leit.data and len(res_leit.data) > 0:
-                    logger.info(f"Leitura {silo_id} com data {data_leitura} já existe na tabela de leituras do Supabase. Não é dado novo.")
-                    return False
-            except Exception as e:
-                logger.error(f"Erro ao verificar unicidade da data no Supabase: {e}")
-
-        # Se não achou/erro no Supabase, ou offline, verifica no SQLite local
+        # 1. Verificar se silo_id + data_leitura já existe no SQLite local
         try:
             conn = self.db_conn.get_sqlite_connection()
             cursor = conn.cursor()
@@ -651,41 +577,22 @@ class AgrisolusScraper:
         except Exception as e:
             logger.error(f"Erro ao verificar unicidade da data no SQLite: {e}")
 
-        # 2. Comparar o peso com o peso da leitura mais recente do mesmo silo (no Supabase ou SQLite local)
-        # "Considere somente o peso de silo para tal, desconsidere os demais atributos para que o codigo considere que o dado é o mais recente"
+        # 2. Comparar o peso com o peso da leitura mais recente do mesmo silo no SQLite local
         last_peso = None
-        if client:
-            try:
-                # Busca o histórico mais recente com peso válido no Supabase
-                res_last = client.table("historico_scraping")\
-                    .select("peso_kg")\
-                    .eq("silo_id", silo_id)\
-                    .eq("sucesso_conexao", True)\
-                    .not_.is_("peso_kg", "null")\
-                    .order("data_tentativa", desc=True)\
-                    .limit(1)\
-                    .execute()
-                if res_last.data and len(res_last.data) > 0:
-                    last_peso = res_last.data[0].get("peso_kg")
-            except Exception as e:
-                logger.error(f"Erro ao obter último peso no Supabase: {e}")
-                
-        # Se não conseguiu no Supabase, ou offline, busca no SQLite local
-        if last_peso is None:
-            try:
-                conn = self.db_conn.get_sqlite_connection()
-                cursor = conn.cursor()
-                cursor.execute("""
-                    SELECT peso_kg FROM historico_scraping 
-                    WHERE silo_id = ? AND sucesso_conexao = 1 AND peso_kg IS NOT NULL 
-                    ORDER BY data_tentativa DESC LIMIT 1
-                """, (silo_id,))
-                row = cursor.fetchone()
-                if row:
-                    last_peso = row[0]
-                conn.close()
-            except Exception as e:
-                logger.error(f"Erro ao obter último peso no SQLite: {e}")
+        try:
+            conn = self.db_conn.get_sqlite_connection()
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT peso_kg FROM historico_scraping 
+                WHERE silo_id = ? AND sucesso_conexao = 1 AND peso_kg IS NOT NULL 
+                ORDER BY data_tentativa DESC LIMIT 1
+            """, (silo_id,))
+            row = cursor.fetchone()
+            if row:
+                last_peso = row[0]
+            conn.close()
+        except Exception as e:
+            logger.error(f"Erro ao obter último peso no SQLite: {e}")
                 
         # Se encontrou um peso anterior, compara
         if last_peso is not None:
@@ -749,18 +656,8 @@ class AgrisolusScraper:
 
     def _persist_historico_only(self, historico_list):
         """
-        Persiste apenas o histórico de scraping no Supabase ou no SQLite local em caso de falha.
+        Persiste apenas o histórico de scraping no SQLite local.
         """
-        client = self.db_conn.get_supabase_client()
-        if client:
-            try:
-                logger.info("Persistindo histórico de falha de scraping no Supabase...")
-                client.table("historico_scraping").upsert(historico_list).execute()
-                return
-            except Exception as e:
-                logger.error(f"Falha ao persistir histórico no Supabase (salvando localmente): {e}")
-        
-        # Fallback local
         try:
             conn = self.db_conn.get_sqlite_connection()
             cursor = conn.cursor()

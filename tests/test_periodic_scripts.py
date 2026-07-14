@@ -39,10 +39,9 @@ def setup_test_db(monkeypatch):
     if os.path.exists(TEST_DB_PATH):
         os.remove(TEST_DB_PATH)
 
-@patch("src.database.connection.DatabaseConnection.get_supabase_client", return_value=None)
 @patch("src.utils.log_monitor.CronLogMonitor.analyze_logs")
 @patch("src.bot.notifier.TelegramNotifier.send_message")
-def test_daily_summary_telegram_script(mock_send_message, mock_analyze_logs, mock_get_supabase, setup_test_db):
+def test_daily_summary_telegram_script(mock_send_message, mock_analyze_logs, setup_test_db):
     # Mock do analisador de logs para retornar dados limpos nos testes
     mock_analyze_logs.return_value = {
         "cron_active": True,
