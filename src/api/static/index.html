@@ -587,17 +587,31 @@
             <div class="card chart-section">
                 <div class="chart-controls">
                     <h2 class="section-header" style="margin-bottom: 0;">Série Temporal de Nível</h2>
-                    <div style="display: flex; gap: 10px; align-items: center;">
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
                         <select class="select-silo" id="chart-silo-select" onchange="updateChartData()">
                             <option value="combined" selected>Conjunto (Soma dos Silos)</option>
                             <option value="Silo-819-01">Silo 1 (Silo-819-01)</option>
                             <option value="Silo-819-02">Silo 2 (Silo-819-02)</option>
+                        </select>
+                        <select class="select-silo" id="chart-period-select" onchange="updatePeriodFilter()">
+                            <option value="45">Últimos 45 dias</option>
+                            <option value="15">Últimos 15 dias</option>
+                            <option value="7" selected>Últimos 7 dias</option>
+                            <option value="3">Últimos 3 dias</option>
+                            <option value="1">Hoje</option>
+                            <option value="custom">Personalizado...</option>
                         </select>
                         <div class="btn-group">
                             <button class="btn active" id="btn-raw" onclick="toggleSmoothing(false)">Bruto</button>
                             <button class="btn" id="btn-smoothed" onclick="toggleSmoothing(true)">Suavizado</button>
                         </div>
                     </div>
+                </div>
+                <div id="custom-date-container" style="display: none; gap: 8px; align-items: center; margin-top: 10px; justify-content: flex-end;">
+                    <label style="font-size: 10px; color: var(--text-muted);">De:</label>
+                    <input type="date" id="custom-start-date" class="select-silo" style="padding: 4px 8px; font-size: 11px;" onchange="refreshChartOnly()">
+                    <label style="font-size: 10px; color: var(--text-muted);">Até:</label>
+                    <input type="date" id="custom-end-date" class="select-silo" style="padding: 4px 8px; font-size: 11px;" onchange="refreshChartOnly()">
                 </div>
                 <div class="chart-container">
                     <canvas id="weightChart"></canvas>
@@ -983,13 +997,57 @@
             renderChart();
         }
 
+        function updatePeriodFilter() {
+            const period = document.getElementById('chart-period-select').value;
+            const customContainer = document.getElementById('custom-date-container');
+            if (period === 'custom') {
+                customContainer.style.display = 'flex';
+            } else {
+                customContainer.style.display = 'none';
+            }
+            renderChart();
+        }
+
+        function refreshChartOnly() {
+            renderChart();
+        }
+
+        function filterReadingsByPeriod(readings) {
+            const period = document.getElementById('chart-period-select').value;
+            if (period === 'custom') {
+                const startVal = document.getElementById('custom-start-date').value;
+                const endVal = document.getElementById('custom-end-date').value;
+                if (!startVal && !endVal) return readings;
+                
+                const start = startVal ? new Date(startVal + "T00:00:00") : new Date(0);
+                const end = endVal ? new Date(endVal + "T23:59:59") : new Date();
+                return readings.filter(r => {
+                    const d = new Date(r.data);
+                    return d >= start && d <= end;
+                });
+            }
+
+            const days = parseInt(period);
+            const startDt = new Date();
+            if (days === 1) {
+                startDt.setHours(0,0,0,0);
+            } else {
+                startDt.setDate(startDt.getDate() - days);
+            }
+
+            return readings.filter(r => new Date(r.data) >= startDt);
+        }
+
         function renderChart() {
             if (!apiData || !apiData.readings) return;
 
             const ctx = document.getElementById('weightChart').getContext('2d');
             
             // Garante ordenação cronológica (tempo mais antigo à esquerda, mais recente à direita)
-            const sortedReadings = [...apiData.readings].sort((a, b) => new Date(a.data) - new Date(b.data));
+            let sortedReadings = [...apiData.readings].sort((a, b) => new Date(a.data) - new Date(b.data));
+            
+            // Aplica filtro de período
+            sortedReadings = filterReadingsByPeriod(sortedReadings);
             
             const labels = sortedReadings.map(r => formatDateTime(r.data));
             const dataPoints = sortedReadings.map(r => showSmoothed ? r.peso_suavizado : r.peso_bruto);
