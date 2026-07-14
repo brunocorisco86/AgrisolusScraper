@@ -259,6 +259,89 @@ class SiloAnalyzer:
             "accuracy_report": report
         }
 
+    def get_combined_analysis(self, smoothing_window=3, load_threshold=400.0):
+        """
+        Calcula a série temporal do somatório de todos os silos combinados.
+        Garante alinhamento temporal via preenchimento para frente (forward fill).
+        """
+        # Busca todas as chaves de silos no banco de dados
+        conn = self.db_conn.get_sqlite_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT id_silo FROM silos")
+        silo_ids = [r[0] for r in cursor.fetchall()]
+        cursor.close()
+        conn.close()
+
+        if not silo_ids:
+            return {"readings": [], "loadings": [], "daily_consumption": {}}
+
+        # Busca leituras brutas de cada silo e monta um mapa rápido
+        silo_readings = {}
+        all_timestamps = set()
+        for s_id in silo_ids:
+            raw = self.get_raw_readings(s_id)
+            silo_readings[s_id] = {r["data"]: r["peso_bruto"] for r in raw}
+            all_timestamps.update(r["data"] for r in raw)
+
+        sorted_timestamps = sorted(list(all_timestamps))
+
+        combined = []
+        last_weights = {s_id: 0.0 for s_id in silo_ids}
+
+        for ts in sorted_timestamps:
+            for s_id in silo_ids:
+                if ts in silo_readings[s_id]:
+                    last_weights[s_id] = silo_readings[s_id][ts]
+
+            total_weight = sum(last_weights.values())
+            combined.append({
+                "data": ts,
+                "peso_bruto": total_weight
+            })
+
+        # Aplica suavização na série somada
+        smoothed = self.smooth_readings(combined, window_size=smoothing_window)
+
+        # Detecta carregamentos e calcula consumo na série combinada
+        loadings = []
+        daily_consumption = {}
+
+        for i in range(len(smoothed)):
+            current = smoothed[i]
+            current_date_str = current["data"]
+            current_dt = datetime.strptime(current_date_str, "%Y-%m-%d" + ("T%H:%M:%S" if "T" in current_date_str else " %H:%M:%S"))
+            day_str = current_dt.strftime("%Y-%m-%d")
+
+            if i == 0:
+                current["consumo_calculado"] = 0.0
+                current["abastecimento_detectado"] = 0.0
+                continue
+
+            prev = smoothed[i - 1]
+            diff = current["peso_suavizado"] - prev["peso_suavizado"]
+
+            if diff >= load_threshold:
+                current["abastecimento_detectado"] = round(diff, 2)
+                current["consumo_calculado"] = 0.0
+                loadings.append({
+                    "data": current_date_str,
+                    "peso_anterior": prev["peso_suavizado"],
+                    "peso_atual": current["peso_suavizado"],
+                    "quantidade_carregada": round(diff, 2)
+                })
+                logger.info(f"Abastecimento detectado no conjunto de silos em {current_date_str}: +{round(diff, 2)} kg.")
+            else:
+                current["abastecimento_detectado"] = 0.0
+                consumo = max(0.0, -diff)
+                current["consumo_calculado"] = round(consumo, 2)
+                daily_consumption[day_str] = round(daily_consumption.get(day_str, 0.0) + consumo, 2)
+
+        return {
+            "readings": smoothed,
+            "loadings": loadings,
+            "daily_consumption": daily_consumption
+        }
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Análise do Silo e Acurácia do Sensor (Agrisolus Scraper)")
     subparsers = parser.add_subparsers(dest="command", help="Comandos disponíveis")
