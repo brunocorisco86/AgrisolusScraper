@@ -38,8 +38,8 @@ class InvoiceCreate(BaseModel):
 # Inicializa o analisador usando o banco padrão do .env
 analyzer = SiloAnalyzer()
 
-@app.get("/")
-def read_root():
+@app.get("/api/health")
+def health_check():
     return {"message": "Agrisolus Silo Monitor API está ativa e operando."}
 
 @app.post("/api/invoices", status_code=201)
@@ -192,4 +192,4 @@ app.mount("/", StaticFiles(directory="src/api/static", html=True), name="static"
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("src.api.main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("src.api.main:app", host="0.0.0.0", port=8090, reload=True)
