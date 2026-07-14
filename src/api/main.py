@@ -53,6 +53,18 @@ def add_invoice(invoice: InvoiceCreate):
 def list_invoices():
     return analyzer.get_invoices()
 
+@app.get("/api/silos/combined/analysis")
+def get_combined_silo_analysis(
+    window: int = Query(3, description="Tamanho da janela de suavização"),
+    threshold: float = Query(400.0, description="Limite em kg para detectar abastecimento")
+):
+    try:
+        analysis = analyzer.get_combined_analysis(smoothing_window=window, load_threshold=threshold)
+        return analysis
+    except Exception as e:
+        logger.error(f"Erro na rota de análise combinada: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.get("/api/silos/{silo_id}/analysis")
 def get_silo_analysis(
     silo_id: str,
@@ -84,6 +96,34 @@ def get_silo_accuracy(
     except Exception as e:
         logger.error(f"Erro na rota de acurácia do silo {silo_id}: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/alerts")
+def get_recent_alerts(limit: int = Query(20, description="Número de alertas a retornar")):
+    db_conn = DatabaseConnection()
+    conn = db_conn.get_sqlite_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("""
+            SELECT data_alerta, tipo_alerta_str, mensagem
+            FROM alertas
+            ORDER BY data_alerta DESC
+            LIMIT ?
+        """, (limit,))
+        rows = cursor.fetchall()
+        return [
+            {
+                "data": r[0],
+                "tipo": r[1],
+                "mensagem": r[2]
+            }
+            for r in rows
+        ]
+    except Exception as e:
+        logger.error(f"Erro ao buscar alertas recentes: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        cursor.close()
+        conn.close()
 
 @app.get("/api/dashboard/stats")
 def get_dashboard_stats():
@@ -167,13 +207,25 @@ def get_dashboard_stats():
                 "previsao_esvaziamento": forecast_depletion_date
             })
             
+        # Calcula SLA de comunicação do sensor nos últimos 7 dias
+        cursor.execute("""
+            SELECT COUNT(*), SUM(CASE WHEN sucesso_conexao = 1 THEN 1 ELSE 0 END)
+            FROM historico_scraping
+            WHERE data_tentativa >= datetime('now', '-7 days')
+        """)
+        sla_row = cursor.fetchone()
+        total_attempts = sla_row[0] if sla_row else 0
+        success_attempts = sla_row[1] if sla_row and sla_row[1] is not None else 0
+        communication_sla = (success_attempts / total_attempts) * 100.0 if total_attempts > 0 else 100.0
+
         total_occupancy_pct = (total_current_weight / total_capacity) * 100.0 if total_capacity > 0 else 0.0
         
         return {
             "silos": silos_stats,
             "total_capacidade_kg": round(total_capacity, 2),
             "total_peso_atual_kg": round(total_current_weight, 2),
-            "total_ocupacao_pct": round(total_occupancy_pct, 1)
+            "total_ocupacao_pct": round(total_occupancy_pct, 1),
+            "communication_sla_pct": round(communication_sla, 1)
         }
     except Exception as e:
         logger.error(f"Erro ao carregar estatísticas do dashboard: {e}")

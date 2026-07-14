@@ -523,6 +523,18 @@
             </div>
         </header>
 
+        <!-- Alerta de Conectividade do Sensor -->
+        <div class="card" id="sensor-offline-alert" style="display: none; border: 1px solid var(--danger); background: rgba(239, 68, 68, 0.1); color: #f87171; align-items: center; justify-content: space-between; padding: 15px 20px; margin-bottom: 20px; border-radius: 12px; gap: 15px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 24px;">⚠️</span>
+                <div>
+                    <strong style="display: block; font-size: 14px; margin-bottom: 3px;">Alerta: Conectividade de Sensor Inativa</strong>
+                    <span style="font-size: 12px;" id="sensor-offline-text">Nenhuma leitura de peso recebida há mais de 2 horas.</span>
+                </div>
+            </div>
+            <button class="btn" style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #f87171; padding: 6px 12px; font-size: 11px;" onclick="refreshDashboard()">Tentar Novamente</button>
+        </div>
+
         <!-- KPI Grid -->
         <div class="kpi-grid">
             <!-- KPI Ocupação Geral -->
@@ -578,6 +590,13 @@
                 <div class="kpi-title">Acurácia do Sensor</div>
                 <div class="kpi-value" id="kpi-overall-accuracy" style="color: var(--accent);">-- %</div>
                 <div class="kpi-sub">Média dos carregamentos validados</div>
+            </div>
+
+            <!-- KPI SLA de Comunicação -->
+            <div class="card">
+                <div class="kpi-title">SLA de Comunicação</div>
+                <div class="kpi-value" id="kpi-communication-sla" style="color: #10b981;">-- %</div>
+                <div class="kpi-sub">Disponibilidade de transmissão (7d)</div>
             </div>
         </div>
 
@@ -827,6 +846,45 @@
                 document.getElementById('forecast-rate').innerText = `${rate.toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})} kg/dia`;
                 document.getElementById('forecast-days').innerText = days ? `${days.toFixed(1)} dias` : 'N/A';
                 document.getElementById('forecast-date').innerText = forecast;
+
+                // Renderiza SLA de Comunicação
+                document.getElementById('kpi-communication-sla').innerText = data.communication_sla_pct + '%';
+
+                // Verifica Inatividade do Sensor (> 2 horas)
+                let latestDate = null;
+                data.silos.forEach(s => {
+                    if (s.data_ultima_leitura) {
+                        const d = new Date(s.data_ultima_leitura.replace('T', ' '));
+                        if (!latestDate || d > latestDate) {
+                            latestDate = d;
+                        }
+                    }
+                });
+
+                const alertDiv = document.getElementById('sensor-offline-alert');
+                if (latestDate) {
+                    const now = new Date();
+                    const diffMs = now - latestDate;
+                    const diffHours = diffMs / 3600000;
+                    if (diffHours > 2) {
+                        alertDiv.style.display = 'flex';
+                        
+                        // Formata a data ISO para exibição legível
+                        const y = latestDate.getFullYear();
+                        const m = String(latestDate.getMonth() + 1).padStart(2, '0');
+                        const d = String(latestDate.getDate()).padStart(2, '0');
+                        const hh = String(latestDate.getHours()).padStart(2, '0');
+                        const mm = String(latestDate.getMinutes()).padStart(2, '0');
+                        const formattedLastRead = `${d}/${m}/${y} ${hh}:${mm}`;
+                        
+                        document.getElementById('sensor-offline-text').innerText = `Nenhuma leitura de peso recebida há mais de 2 horas. Última recebida em ${formattedLastRead} (${diffHours.toFixed(1)} horas atrás).`;
+                    } else {
+                        alertDiv.style.display = 'none';
+                    }
+                } else {
+                    alertDiv.style.display = 'flex';
+                    document.getElementById('sensor-offline-text').innerText = "Nenhuma leitura de peso registrada no banco local.";
+                }
             } catch (err) {
                 console.error("Erro ao carregar estatísticas", err);
             }

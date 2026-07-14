@@ -231,8 +231,7 @@ class AgrisolusScraper:
             for item in saldo_racao_js:
                 silo_id = item.get("Descricao")
                 capacidade = item.get("Capacidade", 0.0)
-                qty_g = item.get("Quantidade", 0.0)
-                qty_kg = qty_g / 1000.0  # O valor retornado em 'Quantidade' está em gramas
+                qty_kg = item.get("Quantidade", 0.0)  # O valor retornado em 'Quantidade' já está em quilogramas (confirmado pelo usuário)
                 data_leitura = item.get("Data")
 
                 if not silo_id or not data_leitura:
@@ -265,7 +264,7 @@ class AgrisolusScraper:
                 leituras_list.append({
                     "silo_id": silo_id,
                     "data_leitura": data_leitura,
-                    "valor_racao_g": qty_g,
+                    "valor_racao_g": qty_kg * 1000.0,
                     "valor_racao_kg": qty_kg,
                     "consumo_kg": consumo
                 })
