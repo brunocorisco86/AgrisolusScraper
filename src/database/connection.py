@@ -9,12 +9,11 @@ class DatabaseConnection:
     """
     Gerencia as conexões com o banco de dados local (SQLite).
     """
+    _initialized = False
+
     def __init__(self, sqlite_path=None):
         load_dotenv()
         self.sqlite_path = sqlite_path if sqlite_path is not None else os.getenv("SQLITE_PATH", "local_fallback.db")
-
-        logger.info("DatabaseConnection inicializada.")
-        logger.info(f"Caminho do SQLite: {self.sqlite_path}")
 
     def get_sqlite_connection(self) -> sqlite3.Connection:
         """
@@ -23,12 +22,13 @@ class DatabaseConnection:
             sqlite3.Connection
         """
         try:
-            logger.info(f"Conectando ao banco SQLite local: {self.sqlite_path}")
             conn = sqlite3.connect(self.sqlite_path)
             conn.execute("PRAGMA foreign_keys = ON;")
             
-            # Inicializa a estrutura das tabelas localmente
-            self._init_local_db(conn)
+            # Inicializa a estrutura das tabelas localmente apenas uma vez no ciclo de vida do processo
+            if not DatabaseConnection._initialized:
+                self._init_local_db(conn)
+                DatabaseConnection._initialized = True
             
             return conn
         except Exception as e:
