@@ -1110,6 +1110,18 @@
             const labels = sortedReadings.map(r => formatDateTime(r.data));
             const dataPoints = sortedReadings.map(r => showSmoothed ? r.peso_suavizado : r.peso_bruto);
 
+            // Calcula limites dinâmicos para o eixo Y com folga de 10%
+            let yMin = 0;
+            let yMax = undefined;
+            if (dataPoints.length > 0) {
+                const minVal = Math.min(...dataPoints);
+                const maxVal = Math.max(...dataPoints);
+                const range = maxVal - minVal;
+                const margin = range > 0 ? range * 0.1 : minVal * 0.05;
+                yMin = Math.max(0, Math.floor(minVal - margin));
+                yMax = Math.ceil(maxVal + margin);
+            }
+
             if (chartInstance) {
                 chartInstance.destroy();
             }
@@ -1142,7 +1154,8 @@
                             ticks: { color: '#9ca3af', font: { size: 10 } }
                         },
                         y: {
-                            min: 0,
+                            min: yMin,
+                            max: yMax,
                             grid: { color: 'rgba(255, 255, 255, 0.03)' },
                             ticks: { color: '#9ca3af', font: { size: 10 } }
                         }
