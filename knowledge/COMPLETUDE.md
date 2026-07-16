@@ -14,9 +14,9 @@ Este arquivo acompanha a taxa de conclusão de cada fase do projeto.
 | **Fase 4** | Sistema de Alertas (Telegram) | Concluído | 100% |
 | **Fase 5** | Dashboard Streamlit | Concluído | 100% |
 | **Fase 6** | Implantação Local, Testes e Otimizações | Concluído | 100% |
-| **Fase 7** | Otimizações e Observabilidade | Planejado | 0% |
+| **Fase 7** | Otimizações e Observabilidade | Em Progresso | 50% |
 
-**Progresso Total do Projeto**: 📊 **85.7%**
+**Progresso Total do Projeto**: 📊 **92.8%**
 
 ---
 
@@ -56,8 +56,10 @@ Este arquivo acompanha a taxa de conclusão de cada fase do projeto.
 - [x] Decisão pela execução nativa no host (venv) no Raspberry Pi e remoção dos arquivos Docker.
 - [x] Configuração do agendamento cron nativo no host (preferido para economia de recursos).
 
-### **Fase 7: Otimizações e Observabilidade (Melhorias de Produção)** (0%)
-- [ ] Lógica de re-tentativas automáticas de login no Scraper.
-- [ ] Rotação e limpeza do SQLite local (expurgo de logs após 90 dias).
+### **Fase 7: Otimizações e Observabilidade (Melhorias de Produção)** (50%)
+- [x] Correção do daemon de agendamento do host (uso do `cronie` no Alpine Linux VPS).
+- [x] Otimização e correção do cálculo de forecast e previsões de esvaziamento no frontend e na API.
+- [x] Implementação de script de auditoria de consistência temporal (`analyze_time_vs_weight.py`).
+- [x] Agendamento de relatórios de diagnóstico intradia por Telegram com expiração automática.
 - [ ] Monitoramento de recursos de hardware do Raspberry Pi no Telegram.
 - [ ] Tela básica de login no dashboard do Streamlit.

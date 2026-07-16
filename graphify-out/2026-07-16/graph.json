@@ -57,8 +57,7 @@
       "_origin": "ast",
       "community": 19,
       "norm_label": "1_install_env.sh",
-      "id": "scripts_deploy_1_install_env",
-      "community_name": "1_install_env.sh"
+      "id": "scripts_deploy_1_install_env"
     },
     {
       "label": "1_install_env.sh script",
@@ -72,8 +71,7 @@
       "_origin": "ast",
       "community": 19,
       "norm_label": "1_install_env.sh script",
-      "id": "scripts_deploy_1_install_env_sh__entry",
-      "community_name": "1_install_env.sh"
+      "id": "scripts_deploy_1_install_env_sh__entry"
     },
     {
       "label": "2_setup_env.sh",
@@ -87,8 +85,7 @@
       "_origin": "ast",
       "community": 20,
       "norm_label": "2_setup_env.sh",
-      "id": "scripts_deploy_2_setup_env",
-      "community_name": "2_setup_env.sh"
+      "id": "scripts_deploy_2_setup_env"
     },
     {
       "label": "2_setup_env.sh script",
@@ -102,8 +99,7 @@
       "_origin": "ast",
       "community": 20,
       "norm_label": "2_setup_env.sh script",
-      "id": "scripts_deploy_2_setup_env_sh__entry",
-      "community_name": "2_setup_env.sh"
+      "id": "scripts_deploy_2_setup_env_sh__entry"
     },
     {
       "label": "3_test_db.sh",
@@ -117,8 +113,7 @@
       "_origin": "ast",
       "community": 21,
       "norm_label": "3_test_db.sh",
-      "id": "scripts_deploy_3_test_db",
-      "community_name": "3_test_db.sh"
+      "id": "scripts_deploy_3_test_db"
     },
     {
       "label": "3_test_db.sh script",
@@ -132,8 +127,7 @@
       "_origin": "ast",
       "community": 21,
       "norm_label": "3_test_db.sh script",
-      "id": "scripts_deploy_3_test_db_sh__entry",
-      "community_name": "3_test_db.sh"
+      "id": "scripts_deploy_3_test_db_sh__entry"
     },
     {
       "label": "5_test_offline.sh",
@@ -147,8 +141,7 @@
       "_origin": "ast",
       "community": 23,
       "norm_label": "5_test_offline.sh",
-      "id": "scripts_deploy_5_test_offline",
-      "community_name": "5_test_offline.sh"
+      "id": "scripts_deploy_5_test_offline"
     },
     {
       "label": "5_test_offline.sh script",
@@ -162,8 +155,7 @@
       "_origin": "ast",
       "community": 23,
       "norm_label": "5_test_offline.sh script",
-      "id": "scripts_deploy_5_test_offline_sh__entry",
-      "community_name": "5_test_offline.sh"
+      "id": "scripts_deploy_5_test_offline_sh__entry"
     },
     {
       "label": "6_test_telegram.sh",
@@ -177,8 +169,7 @@
       "_origin": "ast",
       "community": 24,
       "norm_label": "6_test_telegram.sh",
-      "id": "scripts_deploy_6_test_telegram",
-      "community_name": "6_test_telegram.sh"
+      "id": "scripts_deploy_6_test_telegram"
     },
     {
       "label": "6_test_telegram.sh script",
@@ -192,8 +183,7 @@
       "_origin": "ast",
       "community": 24,
       "norm_label": "6_test_telegram.sh script",
-      "id": "scripts_deploy_6_test_telegram_sh__entry",
-      "community_name": "6_test_telegram.sh"
+      "id": "scripts_deploy_6_test_telegram_sh__entry"
     },
     {
       "label": "dump_all_js_variables.py",
@@ -203,8 +193,7 @@
       "_origin": "ast",
       "community": 29,
       "norm_label": "dump_all_js_variables.py",
-      "id": "scripts_dump_all_js_variables",
-      "community_name": "dump_all_js_variables.py"
+      "id": "scripts_dump_all_js_variables"
     },
     {
       "label": "generate_lotes_json.py",
@@ -214,8 +203,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "generate_lotes_json.py",
-      "id": "scripts_generate_lotes_json",
-      "community_name": "connection.py"
+      "id": "scripts_generate_lotes_json"
     },
     {
       "label": "main()",
@@ -225,8 +213,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "main()",
-      "id": "scripts_generate_lotes_json_main",
-      "community_name": "connection.py"
+      "id": "scripts_generate_lotes_json_main"
     },
     {
       "label": "inspect_details_html.py",
@@ -236,8 +223,7 @@
       "_origin": "ast",
       "community": 30,
       "norm_label": "inspect_details_html.py",
-      "id": "scripts_inspect_details_html",
-      "community_name": "inspect_details_html.py"
+      "id": "scripts_inspect_details_html"
     },
     {
       "label": "inspect_json_alerts_calibrations.py",
@@ -247,8 +233,7 @@
       "_origin": "ast",
       "community": 26,
       "norm_label": "inspect_json_alerts_calibrations.py",
-      "id": "scripts_inspect_json_alerts_calibrations",
-      "community_name": "inspect_json_alerts_calibrations.py"
+      "id": "scripts_inspect_json_alerts_calibrations"
     },
     {
       "label": "extract_js_var()",
@@ -258,8 +243,7 @@
       "_origin": "ast",
       "community": 26,
       "norm_label": "extract_js_var()",
-      "id": "scripts_inspect_json_alerts_calibrations_extract_js_var",
-      "community_name": "inspect_json_alerts_calibrations.py"
+      "id": "scripts_inspect_json_alerts_calibrations_extract_js_var"
     },
     {
       "label": "inspect_json_vars.py",
@@ -269,8 +253,7 @@
       "_origin": "ast",
       "community": 27,
       "norm_label": "inspect_json_vars.py",
-      "id": "scripts_inspect_json_vars",
-      "community_name": "inspect_json_vars.py"
+      "id": "scripts_inspect_json_vars"
     },
     {
       "label": "extract_js_var()",
@@ -280,8 +263,7 @@
       "_origin": "ast",
       "community": 27,
       "norm_label": "extract_js_var()",
-      "id": "scripts_inspect_json_vars_extract_js_var",
-      "community_name": "inspect_json_vars.py"
+      "id": "scripts_inspect_json_vars_extract_js_var"
     },
     {
       "label": "inspect_listagem.py",
@@ -291,8 +273,7 @@
       "_origin": "ast",
       "community": 31,
       "norm_label": "inspect_listagem.py",
-      "id": "scripts_inspect_listagem",
-      "community_name": "inspect_listagem.py"
+      "id": "scripts_inspect_listagem"
     },
     {
       "label": "inspect_lotes_listagem.py",
@@ -302,8 +283,7 @@
       "_origin": "ast",
       "community": 32,
       "norm_label": "inspect_lotes_listagem.py",
-      "id": "scripts_inspect_lotes_listagem",
-      "community_name": "inspect_lotes_listagem.py"
+      "id": "scripts_inspect_lotes_listagem"
     },
     {
       "label": "parse_html_test.py",
@@ -313,8 +293,7 @@
       "_origin": "ast",
       "community": 33,
       "norm_label": "parse_html_test.py",
-      "id": "scripts_parse_html_test",
-      "community_name": "parse_html_test.py"
+      "id": "scripts_parse_html_test"
     },
     {
       "label": "run_cron.sh",
@@ -328,8 +307,7 @@
       "_origin": "ast",
       "community": 14,
       "norm_label": "run_cron.sh",
-      "id": "scripts_run_cron",
-      "community_name": "run_cron.sh"
+      "id": "scripts_run_cron"
     },
     {
       "label": "run_cron.sh script",
@@ -343,8 +321,7 @@
       "_origin": "ast",
       "community": 14,
       "norm_label": "run_cron.sh script",
-      "id": "scripts_run_cron_sh__entry",
-      "community_name": "run_cron.sh"
+      "id": "scripts_run_cron_sh__entry"
     },
     {
       "label": "PYTHONPATH",
@@ -358,8 +335,7 @@
       "_origin": "ast",
       "community": 14,
       "norm_label": "pythonpath",
-      "id": "scripts_run_cron_pythonpath",
-      "community_name": "run_cron.sh"
+      "id": "scripts_run_cron_pythonpath"
     },
     {
       "label": "run_daily_summary_telegram.sh",
@@ -373,8 +349,7 @@
       "_origin": "ast",
       "community": 15,
       "norm_label": "run_daily_summary_telegram.sh",
-      "id": "scripts_run_daily_summary_telegram_sh_scripts_run_daily_summary_telegram",
-      "community_name": "run_daily_summary_telegram.sh"
+      "id": "scripts_run_daily_summary_telegram_sh_scripts_run_daily_summary_telegram"
     },
     {
       "label": "run_daily_summary_telegram.sh script",
@@ -388,8 +363,7 @@
       "_origin": "ast",
       "community": 15,
       "norm_label": "run_daily_summary_telegram.sh script",
-      "id": "scripts_run_daily_summary_telegram_sh__entry",
-      "community_name": "run_daily_summary_telegram.sh"
+      "id": "scripts_run_daily_summary_telegram_sh__entry"
     },
     {
       "label": "PYTHONPATH",
@@ -403,8 +377,7 @@
       "_origin": "ast",
       "community": 15,
       "norm_label": "pythonpath",
-      "id": "scripts_run_daily_summary_telegram_pythonpath",
-      "community_name": "run_daily_summary_telegram.sh"
+      "id": "scripts_run_daily_summary_telegram_pythonpath"
     },
     {
       "label": "run_log_monitor.py",
@@ -414,8 +387,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "run_log_monitor.py",
-      "id": "scripts_run_log_monitor_py_scripts_run_log_monitor",
-      "community_name": "connection.py"
+      "id": "scripts_run_log_monitor_py_scripts_run_log_monitor"
     },
     {
       "label": "main()",
@@ -425,8 +397,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "main()",
-      "id": "scripts_run_log_monitor_main",
-      "community_name": "connection.py"
+      "id": "scripts_run_log_monitor_main"
     },
     {
       "label": "run_log_monitor.sh",
@@ -440,8 +411,7 @@
       "_origin": "ast",
       "community": 16,
       "norm_label": "run_log_monitor.sh",
-      "id": "scripts_run_log_monitor_sh_scripts_run_log_monitor",
-      "community_name": "run_log_monitor.sh"
+      "id": "scripts_run_log_monitor_sh_scripts_run_log_monitor"
     },
     {
       "label": "run_log_monitor.sh script",
@@ -455,8 +425,7 @@
       "_origin": "ast",
       "community": 16,
       "norm_label": "run_log_monitor.sh script",
-      "id": "scripts_run_log_monitor_sh__entry",
-      "community_name": "run_log_monitor.sh"
+      "id": "scripts_run_log_monitor_sh__entry"
     },
     {
       "label": "PYTHONPATH",
@@ -470,8 +439,7 @@
       "_origin": "ast",
       "community": 16,
       "norm_label": "pythonpath",
-      "id": "scripts_run_log_monitor_pythonpath",
-      "community_name": "run_log_monitor.sh"
+      "id": "scripts_run_log_monitor_pythonpath"
     },
     {
       "label": "run_periodic_summary.py",
@@ -481,8 +449,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "run_periodic_summary.py",
-      "id": "scripts_run_periodic_summary_py_scripts_run_periodic_summary",
-      "community_name": "connection.py"
+      "id": "scripts_run_periodic_summary_py_scripts_run_periodic_summary"
     },
     {
       "label": "main()",
@@ -492,8 +459,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "main()",
-      "id": "scripts_run_periodic_summary_main",
-      "community_name": "connection.py"
+      "id": "scripts_run_periodic_summary_main"
     },
     {
       "label": "run_periodic_summary.sh",
@@ -507,8 +473,7 @@
       "_origin": "ast",
       "community": 17,
       "norm_label": "run_periodic_summary.sh",
-      "id": "scripts_run_periodic_summary_sh_scripts_run_periodic_summary",
-      "community_name": "run_periodic_summary.sh"
+      "id": "scripts_run_periodic_summary_sh_scripts_run_periodic_summary"
     },
     {
       "label": "run_periodic_summary.sh script",
@@ -522,8 +487,7 @@
       "_origin": "ast",
       "community": 17,
       "norm_label": "run_periodic_summary.sh script",
-      "id": "scripts_run_periodic_summary_sh__entry",
-      "community_name": "run_periodic_summary.sh"
+      "id": "scripts_run_periodic_summary_sh__entry"
     },
     {
       "label": "PYTHONPATH",
@@ -537,8 +501,7 @@
       "_origin": "ast",
       "community": 17,
       "norm_label": "pythonpath",
-      "id": "scripts_run_periodic_summary_pythonpath",
-      "community_name": "run_periodic_summary.sh"
+      "id": "scripts_run_periodic_summary_pythonpath"
     },
     {
       "label": "run_sla_report.py",
@@ -548,8 +511,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "run_sla_report.py",
-      "id": "scripts_run_sla_report_py_scripts_run_sla_report",
-      "community_name": "connection.py"
+      "id": "scripts_run_sla_report_py_scripts_run_sla_report"
     },
     {
       "label": "main()",
@@ -559,8 +521,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "main()",
-      "id": "scripts_run_sla_report_main",
-      "community_name": "connection.py"
+      "id": "scripts_run_sla_report_main"
     },
     {
       "label": "run_sla_report.sh",
@@ -574,8 +535,7 @@
       "_origin": "ast",
       "community": 18,
       "norm_label": "run_sla_report.sh",
-      "id": "scripts_run_sla_report_sh_scripts_run_sla_report",
-      "community_name": "run_sla_report.sh"
+      "id": "scripts_run_sla_report_sh_scripts_run_sla_report"
     },
     {
       "label": "run_sla_report.sh script",
@@ -589,8 +549,7 @@
       "_origin": "ast",
       "community": 18,
       "norm_label": "run_sla_report.sh script",
-      "id": "scripts_run_sla_report_sh__entry",
-      "community_name": "run_sla_report.sh"
+      "id": "scripts_run_sla_report_sh__entry"
     },
     {
       "label": "PYTHONPATH",
@@ -604,8 +563,7 @@
       "_origin": "ast",
       "community": 18,
       "norm_label": "pythonpath",
-      "id": "scripts_run_sla_report_pythonpath",
-      "community_name": "run_sla_report.sh"
+      "id": "scripts_run_sla_report_pythonpath"
     },
     {
       "label": "simulate_offline.py",
@@ -615,8 +573,7 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "simulate_offline.py",
-      "id": "scripts_simulate_offline",
-      "community_name": "AgrisolusScraper"
+      "id": "scripts_simulate_offline"
     },
     {
       "label": "run_simulation()",
@@ -626,8 +583,7 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "run_simulation()",
-      "id": "scripts_simulate_offline_run_simulation",
-      "community_name": "AgrisolusScraper"
+      "id": "scripts_simulate_offline_run_simulation"
     },
     {
       "label": "test_scraper.py",
@@ -637,8 +593,7 @@
       "_origin": "ast",
       "community": 34,
       "norm_label": "test_scraper.py",
-      "id": "scripts_test_scraper",
-      "community_name": "test_scraper.py"
+      "id": "scripts_test_scraper"
     },
     {
       "label": "test_telegram.py",
@@ -648,8 +603,7 @@
       "_origin": "ast",
       "community": 4,
       "norm_label": "test_telegram.py",
-      "id": "scripts_test_telegram",
-      "community_name": "TelegramNotifier"
+      "id": "scripts_test_telegram"
     },
     {
       "label": "run_telegram_commissioning()",
@@ -659,8 +613,7 @@
       "_origin": "ast",
       "community": 4,
       "norm_label": "run_telegram_commissioning()",
-      "id": "scripts_test_telegram_run_telegram_commissioning",
-      "community_name": "TelegramNotifier"
+      "id": "scripts_test_telegram_run_telegram_commissioning"
     },
     {
       "label": "__init__.py",
@@ -670,8 +623,7 @@
       "_origin": "ast",
       "community": 35,
       "norm_label": "__init__.py",
-      "id": "src_init",
-      "community_name": "__init__.py"
+      "id": "src_init"
     },
     {
       "label": "notifier.py",
@@ -681,8 +633,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "notifier.py",
-      "id": "src_bot_notifier",
-      "community_name": "connection.py"
+      "id": "src_bot_notifier"
     },
     {
       "label": "TelegramNotifier",
@@ -692,8 +643,7 @@
       "_origin": "ast",
       "community": 4,
       "norm_label": "telegramnotifier",
-      "id": "src_bot_notifier_telegramnotifier",
-      "community_name": "TelegramNotifier"
+      "id": "src_bot_notifier_telegramnotifier"
     },
     {
       "label": ".__init__()",
@@ -703,8 +653,7 @@
       "_origin": "ast",
       "community": 4,
       "norm_label": ".__init__()",
-      "id": "src_bot_notifier_telegramnotifier_init",
-      "community_name": "TelegramNotifier"
+      "id": "src_bot_notifier_telegramnotifier_init"
     },
     {
       "label": "._send_async_message()",
@@ -714,8 +663,7 @@
       "_origin": "ast",
       "community": 4,
       "norm_label": "._send_async_message()",
-      "id": "src_bot_notifier_telegramnotifier_send_async_message",
-      "community_name": "TelegramNotifier"
+      "id": "src_bot_notifier_telegramnotifier_send_async_message"
     },
     {
       "label": ".send_message()",
@@ -725,8 +673,7 @@
       "_origin": "ast",
       "community": 4,
       "norm_label": ".send_message()",
-      "id": "src_bot_notifier_telegramnotifier_send_message",
-      "community_name": "TelegramNotifier"
+      "id": "src_bot_notifier_telegramnotifier_send_message"
     },
     {
       "label": ".send_immediate_alert()",
@@ -736,8 +683,7 @@
       "_origin": "ast",
       "community": 4,
       "norm_label": ".send_immediate_alert()",
-      "id": "src_bot_notifier_telegramnotifier_send_immediate_alert",
-      "community_name": "TelegramNotifier"
+      "id": "src_bot_notifier_telegramnotifier_send_immediate_alert"
     },
     {
       "label": ".send_periodic_summary()",
@@ -747,8 +693,7 @@
       "_origin": "ast",
       "community": 4,
       "norm_label": ".send_periodic_summary()",
-      "id": "src_bot_notifier_telegramnotifier_send_periodic_summary",
-      "community_name": "TelegramNotifier"
+      "id": "src_bot_notifier_telegramnotifier_send_periodic_summary"
     },
     {
       "label": ".send_daily_sla_report()",
@@ -758,8 +703,7 @@
       "_origin": "ast",
       "community": 4,
       "norm_label": ".send_daily_sla_report()",
-      "id": "src_bot_notifier_telegramnotifier_send_daily_sla_report",
-      "community_name": "TelegramNotifier"
+      "id": "src_bot_notifier_telegramnotifier_send_daily_sla_report"
     },
     {
       "label": "Servi\u00e7o push-only para o Telegram utilizando o aiogram.     Envia alertas imedia",
@@ -769,8 +713,7 @@
       "_origin": "ast",
       "community": 4,
       "norm_label": "servico push-only para o telegram utilizando o aiogram.     envia alertas imedia",
-      "id": "src_bot_notifier_rationale_10",
-      "community_name": "TelegramNotifier"
+      "id": "src_bot_notifier_rationale_10"
     },
     {
       "label": "Envia uma mensagem assincronamente e garante que a sess\u00e3o do bot seja fechada.",
@@ -780,8 +723,7 @@
       "_origin": "ast",
       "community": 4,
       "norm_label": "envia uma mensagem assincronamente e garante que a sessao do bot seja fechada.",
-      "id": "src_bot_notifier_rationale_23",
-      "community_name": "TelegramNotifier"
+      "id": "src_bot_notifier_rationale_23"
     },
     {
       "label": "Envia uma mensagem de texto gerenciando o event loop de forma s\u00edncrona.",
@@ -791,8 +733,7 @@
       "_origin": "ast",
       "community": 4,
       "norm_label": "envia uma mensagem de texto gerenciando o event loop de forma sincrona.",
-      "id": "src_bot_notifier_rationale_49",
-      "community_name": "TelegramNotifier"
+      "id": "src_bot_notifier_rationale_49"
     },
     {
       "label": "Envia um alerta imediato de que o silo est\u00e1 sem enviar dados por mais de 2 horas",
@@ -802,8 +743,7 @@
       "_origin": "ast",
       "community": 4,
       "norm_label": "envia um alerta imediato de que o silo esta sem enviar dados por mais de 2 horas",
-      "id": "src_bot_notifier_rationale_70",
-      "community_name": "TelegramNotifier"
+      "id": "src_bot_notifier_rationale_70"
     },
     {
       "label": "Envia um resumo de ocorr\u00eancias de silos fora de envio por mais de 3 horas.",
@@ -813,8 +753,7 @@
       "_origin": "ast",
       "community": 4,
       "norm_label": "envia um resumo de ocorrencias de silos fora de envio por mais de 3 horas.",
-      "id": "src_bot_notifier_rationale_83",
-      "community_name": "TelegramNotifier"
+      "id": "src_bot_notifier_rationale_83"
     },
     {
       "label": "Envia o relat\u00f3rio di\u00e1rio de SLA, Consumo e Saldo de ra\u00e7\u00e3o \u00e0s 18:00.",
@@ -824,8 +763,7 @@
       "_origin": "ast",
       "community": 4,
       "norm_label": "envia o relatorio diario de sla, consumo e saldo de racao as 18:00.",
-      "id": "src_bot_notifier_rationale_107",
-      "community_name": "TelegramNotifier"
+      "id": "src_bot_notifier_rationale_107"
     },
     {
       "label": "Client",
@@ -835,8 +773,7 @@
       "_origin": "ast",
       "community": 28,
       "norm_label": "client",
-      "id": "client",
-      "community_name": "Client"
+      "id": "client"
     },
     {
       "label": "Connection",
@@ -846,8 +783,7 @@
       "_origin": "ast",
       "community": 8,
       "norm_label": "connection",
-      "id": "connection",
-      "community_name": ".get_sqlite_connection"
+      "id": "connection"
     },
     {
       "label": "main.py",
@@ -857,8 +793,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "main.py",
-      "id": "src_main",
-      "community_name": "connection.py"
+      "id": "src_main"
     },
     {
       "label": "run()",
@@ -868,8 +803,7 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "run()",
-      "id": "src_main_run",
-      "community_name": "AgrisolusScraper"
+      "id": "src_main_run"
     },
     {
       "label": "Ponto de entrada principal para a execu\u00e7\u00e3o hor\u00e1ria do scraper Agrisolus.",
@@ -879,8 +813,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "ponto de entrada principal para a execucao horaria do scraper agrisolus.",
-      "id": "src_main_rationale_1",
-      "community_name": "connection.py"
+      "id": "src_main_rationale_1"
     },
     {
       "label": "__init__.py",
@@ -890,8 +823,7 @@
       "_origin": "ast",
       "community": 36,
       "norm_label": "__init__.py",
-      "id": "src_utils_init",
-      "community_name": "__init__.py"
+      "id": "src_utils_init"
     },
     {
       "label": "datetime_parser.py",
@@ -901,8 +833,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "datetime_parser.py",
-      "id": "src_utils_datetime_parser",
-      "community_name": "connection.py"
+      "id": "src_utils_datetime_parser"
     },
     {
       "label": "parse_iso_datetime()",
@@ -912,8 +843,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "parse_iso_datetime()",
-      "id": "src_utils_datetime_parser_parse_iso_datetime",
-      "community_name": "connection.py"
+      "id": "src_utils_datetime_parser_parse_iso_datetime"
     },
     {
       "label": "datetime",
@@ -923,8 +853,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "datetime",
-      "id": "datetime",
-      "community_name": "connection.py"
+      "id": "datetime"
     },
     {
       "label": "Parseia datas em formato ISO (com/sem T, com/sem fuso hor\u00e1rio) com robustez.",
@@ -934,8 +863,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "parseia datas em formato iso (com/sem t, com/sem fuso horario) com robustez.",
-      "id": "src_utils_datetime_parser_rationale_5",
-      "community_name": "connection.py"
+      "id": "src_utils_datetime_parser_rationale_5"
     },
     {
       "label": "log_monitor.py",
@@ -945,8 +873,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "log_monitor.py",
-      "id": "src_utils_log_monitor",
-      "community_name": "connection.py"
+      "id": "src_utils_log_monitor"
     },
     {
       "label": "CronLogMonitor",
@@ -956,8 +883,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "cronlogmonitor",
-      "id": "src_utils_log_monitor_cronlogmonitor",
-      "community_name": "connection.py"
+      "id": "src_utils_log_monitor_cronlogmonitor"
     },
     {
       "label": ".__init__()",
@@ -967,8 +893,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": ".__init__()",
-      "id": "src_utils_log_monitor_cronlogmonitor_init",
-      "community_name": "connection.py"
+      "id": "src_utils_log_monitor_cronlogmonitor_init"
     },
     {
       "label": ".analyze_logs()",
@@ -978,8 +903,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": ".analyze_logs()",
-      "id": "src_utils_log_monitor_cronlogmonitor_analyze_logs",
-      "community_name": "connection.py"
+      "id": "src_utils_log_monitor_cronlogmonitor_analyze_logs"
     },
     {
       "label": "Servi\u00e7o de auditoria e monitoramento de logs do Cron e da Aplica\u00e7\u00e3o.     Detecta",
@@ -989,8 +913,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "servico de auditoria e monitoramento de logs do cron e da aplicacao.     detecta",
-      "id": "src_utils_log_monitor_rationale_10",
-      "community_name": "connection.py"
+      "id": "src_utils_log_monitor_rationale_10"
     },
     {
       "label": "Analisa os logs do cron_exec.log e test_run.log.         Retorna um dicion\u00e1rio c",
@@ -1000,8 +923,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "analisa os logs do cron_exec.log e test_run.log.         retorna um dicionario c",
-      "id": "src_utils_log_monitor_rationale_20",
-      "community_name": "connection.py"
+      "id": "src_utils_log_monitor_rationale_20"
     },
     {
       "label": "logger.py",
@@ -1011,8 +933,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "logger.py",
-      "id": "src_utils_logger",
-      "community_name": "connection.py"
+      "id": "src_utils_logger"
     },
     {
       "label": "setup_logger()",
@@ -1022,8 +943,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "setup_logger()",
-      "id": "src_utils_logger_setup_logger",
-      "community_name": "connection.py"
+      "id": "src_utils_logger_setup_logger"
     },
     {
       "label": "Configura o sistema de logs.     Grava os logs em um arquivo (sobrescrevendo a c",
@@ -1033,8 +953,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "configura o sistema de logs.     grava os logs em um arquivo (sobrescrevendo a c",
-      "id": "src_utils_logger_rationale_5",
-      "community_name": "connection.py"
+      "id": "src_utils_logger_rationale_5"
     },
     {
       "label": "__init__.py",
@@ -1044,8 +963,7 @@
       "_origin": "ast",
       "community": 37,
       "norm_label": "__init__.py",
-      "id": "tests_init",
-      "community_name": "__init__.py"
+      "id": "tests_init"
     },
     {
       "label": "test_basic.py",
@@ -1055,8 +973,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "test_basic.py",
-      "id": "tests_test_basic",
-      "community_name": "connection.py"
+      "id": "tests_test_basic"
     },
     {
       "label": "extract_js_var()",
@@ -1066,8 +983,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "extract_js_var()",
-      "id": "tests_test_basic_extract_js_var",
-      "community_name": "connection.py"
+      "id": "tests_test_basic_extract_js_var"
     },
     {
       "label": "test_offline_parser()",
@@ -1077,8 +993,7 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "test_offline_parser()",
-      "id": "tests_test_basic_test_offline_parser",
-      "community_name": "connection.py"
+      "id": "tests_test_basic_test_offline_parser"
     },
     {
       "label": "test_cron.py",
@@ -1088,8 +1003,7 @@
       "_origin": "ast",
       "community": 6,
       "norm_label": "test_cron.py",
-      "id": "tests_test_cron",
-      "community_name": "test_cron.py"
+      "id": "tests_test_cron"
     },
     {
       "label": "test_cron_wrappers_existence()",
@@ -1099,8 +1013,7 @@
       "_origin": "ast",
       "community": 6,
       "norm_label": "test_cron_wrappers_existence()",
-      "id": "tests_test_cron_test_cron_wrappers_existence",
-      "community_name": "test_cron.py"
+      "id": "tests_test_cron_test_cron_wrappers_existence"
     },
     {
       "label": "test_cron_wrappers_executable()",
@@ -1110,8 +1023,7 @@
       "_origin": "ast",
       "community": 6,
       "norm_label": "test_cron_wrappers_executable()",
-      "id": "tests_test_cron_test_cron_wrappers_executable",
-      "community_name": "test_cron.py"
+      "id": "tests_test_cron_test_cron_wrappers_executable"
     },
     {
       "label": "test_setup_cron_script_alignment()",
@@ -1121,8 +1033,7 @@
       "_origin": "ast",
       "community": 6,
       "norm_label": "test_setup_cron_script_alignment()",
-      "id": "tests_test_cron_test_setup_cron_script_alignment",
-      "community_name": "test_cron.py"
+      "id": "tests_test_cron_test_setup_cron_script_alignment"
     },
     {
       "label": "Verifica se todos os scripts wrappers do cron existem no diret\u00f3rio scripts/.",
@@ -1132,8 +1043,7 @@
       "_origin": "ast",
       "community": 6,
       "norm_label": "verifica se todos os scripts wrappers do cron existem no diretorio scripts/.",
-      "id": "tests_test_cron_rationale_10",
-      "community_name": "test_cron.py"
+      "id": "tests_test_cron_rationale_10"
     },
     {
       "label": "Verifica se os scripts wrappers do cron t\u00eam permiss\u00e3o de execu\u00e7\u00e3o (+x).",
@@ -1143,8 +1053,7 @@
       "_origin": "ast",
       "community": 6,
       "norm_label": "verifica se os scripts wrappers do cron tem permissao de execucao (+x).",
-      "id": "tests_test_cron_rationale_23",
-      "community_name": "test_cron.py"
+      "id": "tests_test_cron_rationale_23"
     },
     {
       "label": "Verifica se o script 4_setup_cron.sh aponta corretamente para os wrappers do cro",
@@ -1154,8 +1063,7 @@
       "_origin": "ast",
       "community": 6,
       "norm_label": "verifica se o script 4_setup_cron.sh aponta corretamente para os wrappers do cro",
-      "id": "tests_test_cron_rationale_40",
-      "community_name": "test_cron.py"
+      "id": "tests_test_cron_rationale_40"
     },
     {
       "label": "README.md",
@@ -1168,8 +1076,7 @@
       "contributor": null,
       "community": 7,
       "norm_label": "readme.md",
-      "id": "readme_file",
-      "community_name": "M\u00e9trica do SLA"
+      "id": "readme_file"
     },
     {
       "label": "M\u00e9trica do SLA",
@@ -1183,8 +1090,7 @@
       "rationale": "SLA = (Tentativas com sucesso_conexao = True e achou_dados_novos = True) / (Tentativas esperadas no per\u00edodo). Mede a conectividade e transmiss\u00e3o de dados ativa dos silos de forma cont\u00ednua.",
       "community": 7,
       "norm_label": "metrica do sla",
-      "id": "readme_sla_metric",
-      "community_name": "M\u00e9trica do SLA"
+      "id": "readme_sla_metric"
     },
     {
       "label": "Configura\u00e7\u00e3o do Cronie no Alpine Linux",
@@ -1198,8 +1104,7 @@
       "rationale": "Utiliza o daemon cronie em vez de crond do BusyBox para suportar spool files e diret\u00f3rios cron adicionais sem problemas de clustering.",
       "community": 7,
       "norm_label": "configuracao do cronie no alpine linux",
-      "id": "readme_alpine_cronie",
-      "community_name": "M\u00e9trica do SLA"
+      "id": "readme_alpine_cronie"
     },
     {
       "label": "GerarJson.md",
@@ -1212,8 +1117,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "gerarjson.md",
-      "id": "docs_gerarjson_file",
-      "community_name": "architecture.md"
+      "id": "docs_gerarjson_file"
     },
     {
       "label": "Mapeamento de Lotes",
@@ -1226,8 +1130,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "mapeamento de lotes",
-      "id": "docs_gerarjson_lote_mapping",
-      "community_name": "architecture.md"
+      "id": "docs_gerarjson_lote_mapping"
     },
     {
       "label": "COMPLETUDE.md",
@@ -1240,8 +1143,7 @@
       "contributor": null,
       "community": 10,
       "norm_label": "completude.md",
-      "id": "knowledge_completude_file",
-      "community_name": "Taxa de Conclus\u00e3o do Projeto"
+      "id": "knowledge_completude_file"
     },
     {
       "label": "Taxa de Conclus\u00e3o do Projeto",
@@ -1254,8 +1156,7 @@
       "contributor": null,
       "community": 10,
       "norm_label": "taxa de conclusao do projeto",
-      "id": "knowledge_completude_project_completeness",
-      "community_name": "Taxa de Conclus\u00e3o do Projeto"
+      "id": "knowledge_completude_project_completeness"
     },
     {
       "label": "ROADMAP.md",
@@ -1268,8 +1169,7 @@
       "contributor": null,
       "community": 10,
       "norm_label": "roadmap.md",
-      "id": "knowledge_roadmap_file",
-      "community_name": "Taxa de Conclus\u00e3o do Projeto"
+      "id": "knowledge_roadmap_file"
     },
     {
       "label": "Planejamento e Fases do Projeto",
@@ -1282,8 +1182,7 @@
       "contributor": null,
       "community": 10,
       "norm_label": "planejamento e fases do projeto",
-      "id": "knowledge_roadmap_fases_planejadas",
-      "community_name": "Taxa de Conclus\u00e3o do Projeto"
+      "id": "knowledge_roadmap_fases_planejadas"
     },
     {
       "label": "aprendizados.md",
@@ -1296,8 +1195,7 @@
       "contributor": null,
       "community": 9,
       "norm_label": "aprendizados.md",
-      "id": "knowledge_aprendizados_file",
-      "community_name": "aprendizados.md"
+      "id": "knowledge_aprendizados_file"
     },
     {
       "label": "Estrat\u00e9gia Push-Only para Telegram Bot",
@@ -1311,8 +1209,7 @@
       "rationale": "Evita overhead de RAM do bot cl\u00e1ssico (redu\u00e7\u00e3o de 100MB para 0% em standby) delegando agendamentos ao Cron nativo do SO.",
       "community": 9,
       "norm_label": "estrategia push-only para telegram bot",
-      "id": "knowledge_aprendizados_push_only_bot",
-      "community_name": "aprendizados.md"
+      "id": "knowledge_aprendizados_push_only_bot"
     },
     {
       "label": "Conversor de Datas ISO sem Timezone",
@@ -1326,8 +1223,7 @@
       "rationale": "Evita exce\u00e7\u00f5es de tipos incompat\u00edveis ao calcular diferen\u00e7as entre datas aware e naive removendo informa\u00e7\u00f5es de fuso hor\u00e1rio ap\u00f3s a convers\u00e3o.",
       "community": 9,
       "norm_label": "conversor de datas iso sem timezone",
-      "id": "knowledge_aprendizados_timezone_naive_parser",
-      "community_name": "aprendizados.md"
+      "id": "knowledge_aprendizados_timezone_naive_parser"
     },
     {
       "label": "Caminho Absoluto no SQLite",
@@ -1341,8 +1237,7 @@
       "rationale": "Impede o Cron de salvar arquivos SQLite local_fallback.db em locais arbitr\u00e1rios devidos ao diret\u00f3rio de execu\u00e7\u00e3o padr\u00e3o ser o home do usu\u00e1rio.",
       "community": 9,
       "norm_label": "caminho absoluto no sqlite",
-      "id": "knowledge_aprendizados_sqlite_path",
-      "community_name": "aprendizados.md"
+      "id": "knowledge_aprendizados_sqlite_path"
     },
     {
       "label": "Configura\u00e7\u00e3o do PYTHONPATH no Cron",
@@ -1356,8 +1251,7 @@
       "rationale": "Garante importa\u00e7\u00e3o correta de pacotes relativos via scripts chamados pelo Cron definindo PYTHONPATH e inicializadores absolutos.",
       "community": 9,
       "norm_label": "configuracao do pythonpath no cron",
-      "id": "knowledge_aprendizados_cron_pythonpath",
-      "community_name": "aprendizados.md"
+      "id": "knowledge_aprendizados_cron_pythonpath"
     },
     {
       "label": "architecture.md",
@@ -1370,8 +1264,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "architecture.md",
-      "id": "knowledge_architecture_file",
-      "community_name": "architecture.md"
+      "id": "knowledge_architecture_file"
     },
     {
       "label": "SQLite Local Fallback",
@@ -1385,8 +1278,7 @@
       "rationale": "Salva leituras localmente caso a internet ou o Supabase fiquem temporariamente offline.",
       "community": 3,
       "norm_label": "sqlite local fallback",
-      "id": "knowledge_architecture_sqlite_fallback",
-      "community_name": "architecture.md"
+      "id": "knowledge_architecture_sqlite_fallback"
     },
     {
       "label": "Servi\u00e7o de Sincroniza\u00e7\u00e3o (SyncService)",
@@ -1400,8 +1292,7 @@
       "rationale": "Faz o upload incremental dos dados do SQLite para o Supabase assim que a conex\u00e3o de internet \u00e9 restabelecida.",
       "community": 3,
       "norm_label": "servico de sincronizacao (syncservice)",
-      "id": "knowledge_architecture_sync_service",
-      "community_name": "architecture.md"
+      "id": "knowledge_architecture_sync_service"
     },
     {
       "label": "Supabase Cloud Database",
@@ -1415,8 +1306,7 @@
       "rationale": "Banco principal PostgreSQL na nuvem usando RESTful API com autentica\u00e7\u00e3o administrativa service_role para bypassar RLS.",
       "community": 3,
       "norm_label": "supabase cloud database",
-      "id": "knowledge_architecture_supabase_cloud",
-      "community_name": "architecture.md"
+      "id": "knowledge_architecture_supabase_cloud"
     },
     {
       "label": "Scraper com BeautifulSoup4",
@@ -1430,8 +1320,7 @@
       "rationale": "Desenvolvido de forma leve com requests e BeautifulSoup4 para evitar os navegadores pesados do Selenium/Playwright no limite de 1GB de RAM do Raspberry Pi.",
       "community": 3,
       "norm_label": "scraper com beautifulsoup4",
-      "id": "knowledge_architecture_beautifulsoup_scraper",
-      "community_name": "architecture.md"
+      "id": "knowledge_architecture_beautifulsoup_scraper"
     },
     {
       "label": "Notificador do Telegram (aiogram)",
@@ -1444,8 +1333,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "notificador do telegram (aiogram)",
-      "id": "knowledge_architecture_telegram_notifier",
-      "community_name": "architecture.md"
+      "id": "knowledge_architecture_telegram_notifier"
     },
     {
       "label": "Streamlit Dashboard",
@@ -1458,8 +1346,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "streamlit dashboard",
-      "id": "knowledge_architecture_streamlit_dashboard",
-      "community_name": "architecture.md"
+      "id": "knowledge_architecture_streamlit_dashboard"
     },
     {
       "label": "Tabela: LOTES",
@@ -1472,8 +1359,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "tabela: lotes",
-      "id": "knowledge_architecture_table_lotes",
-      "community_name": "architecture.md"
+      "id": "knowledge_architecture_table_lotes"
     },
     {
       "label": "Tabela: SILOS",
@@ -1486,8 +1372,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "tabela: silos",
-      "id": "knowledge_architecture_table_silos",
-      "community_name": "architecture.md"
+      "id": "knowledge_architecture_table_silos"
     },
     {
       "label": "Tabela: LEITURAS",
@@ -1500,8 +1385,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "tabela: leituras",
-      "id": "knowledge_architecture_table_leituras",
-      "community_name": "architecture.md"
+      "id": "knowledge_architecture_table_leituras"
     },
     {
       "label": "Tabela: ALERTAS",
@@ -1514,8 +1398,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "tabela: alertas",
-      "id": "knowledge_architecture_table_alertas",
-      "community_name": "architecture.md"
+      "id": "knowledge_architecture_table_alertas"
     },
     {
       "label": "Tabela: CALIBRACOES",
@@ -1528,8 +1411,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "tabela: calibracoes",
-      "id": "knowledge_architecture_table_calibracoes",
-      "community_name": "architecture.md"
+      "id": "knowledge_architecture_table_calibracoes"
     },
     {
       "label": "Tabela: HISTORICO_SCRAPING",
@@ -1542,8 +1424,7 @@
       "contributor": null,
       "community": 7,
       "norm_label": "tabela: historico_scraping",
-      "id": "knowledge_architecture_table_historico_scraping",
-      "community_name": "M\u00e9trica do SLA"
+      "id": "knowledge_architecture_table_historico_scraping"
     },
     {
       "label": "Fluxo de Dados",
@@ -1556,8 +1437,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "fluxo de dados",
-      "id": "knowledge_architecture_data_flow",
-      "community_name": "architecture.md"
+      "id": "knowledge_architecture_data_flow"
     },
     {
       "label": "Modelo MER",
@@ -1570,8 +1450,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "modelo mer",
-      "id": "knowledge_architecture_mer",
-      "community_name": "architecture.md"
+      "id": "knowledge_architecture_mer"
     },
     {
       "label": "Cron Scheduler",
@@ -1584,8 +1463,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "cron scheduler",
-      "id": "knowledge_architecture_cron_scheduler",
-      "community_name": "architecture.md"
+      "id": "knowledge_architecture_cron_scheduler"
     },
     {
       "label": "consideracoes.md",
@@ -1598,8 +1476,7 @@
       "contributor": null,
       "community": 7,
       "norm_label": "consideracoes.md",
-      "id": "knowledge_consideracoes_file",
-      "community_name": "M\u00e9trica do SLA"
+      "id": "knowledge_consideracoes_file"
     },
     {
       "label": "Decis\u00f5es e Considera\u00e7\u00f5es",
@@ -1612,8 +1489,7 @@
       "contributor": null,
       "community": 7,
       "norm_label": "decisoes e consideracoes",
-      "id": "knowledge_consideracoes_resolved_questions",
-      "community_name": "M\u00e9trica do SLA"
+      "id": "knowledge_consideracoes_resolved_questions"
     },
     {
       "label": "dashboard_community_deploy.md",
@@ -1626,8 +1502,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "dashboard_community_deploy.md",
-      "id": "knowledge_dashboard_community_deploy_file",
-      "community_name": "architecture.md"
+      "id": "knowledge_dashboard_community_deploy_file"
     },
     {
       "label": "Deploy no Streamlit Community Cloud",
@@ -1640,8 +1515,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "deploy no streamlit community cloud",
-      "id": "knowledge_dashboard_community_deploy_streamlit_cloud",
-      "community_name": "architecture.md"
+      "id": "knowledge_dashboard_community_deploy_streamlit_cloud"
     },
     {
       "label": "development_plan.md",
@@ -1654,8 +1528,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "development_plan.md",
-      "id": "knowledge_development_plan_file",
-      "community_name": "architecture.md"
+      "id": "knowledge_development_plan_file"
     },
     {
       "label": "Planejamento Arquitetural",
@@ -1668,8 +1541,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "planejamento arquitetural",
-      "id": "knowledge_development_plan_project_architecture",
-      "community_name": "architecture.md"
+      "id": "knowledge_development_plan_project_architecture"
     },
     {
       "label": "supabase_tutorial.md",
@@ -1682,8 +1554,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "supabase_tutorial.md",
-      "id": "knowledge_supabase_tutorial_file",
-      "community_name": "architecture.md"
+      "id": "knowledge_supabase_tutorial_file"
     },
     {
       "label": "Opera\u00e7\u00f5es CRUD SDK Supabase",
@@ -1696,8 +1567,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "operacoes crud sdk supabase",
-      "id": "knowledge_supabase_tutorial_sdk_operations",
-      "community_name": "architecture.md"
+      "id": "knowledge_supabase_tutorial_sdk_operations"
     },
     {
       "label": "requirements.txt",
@@ -1710,8 +1580,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "requirements.txt",
-      "id": "requirements_file",
-      "community_name": "architecture.md"
+      "id": "requirements_file"
     },
     {
       "label": "batch_details.html",
@@ -1724,8 +1593,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "batch_details.html",
-      "id": "scripts_batch_details_file",
-      "community_name": "architecture.md"
+      "id": "scripts_batch_details_file"
     },
     {
       "label": "listagem.html",
@@ -1738,8 +1606,7 @@
       "contributor": null,
       "community": 3,
       "norm_label": "listagem.html",
-      "id": "scripts_listagem_file",
-      "community_name": "architecture.md"
+      "id": "scripts_listagem_file"
     },
     {
       "label": "analyze_silos.sh",
@@ -1751,10 +1618,9 @@
         "kind": "file"
       },
       "_origin": "ast",
-      "community": 11,
-      "norm_label": "analyze_silos.sh",
       "id": "scripts_analyze_silos",
-      "community_name": "analyze_silos.sh"
+      "community": 11,
+      "norm_label": "analyze_silos.sh"
     },
     {
       "label": "analyze_silos.sh script",
@@ -1766,10 +1632,9 @@
         "kind": "bash_entrypoint"
       },
       "_origin": "ast",
-      "community": 11,
-      "norm_label": "analyze_silos.sh script",
       "id": "scripts_analyze_silos_sh__entry",
-      "community_name": "analyze_silos.sh"
+      "community": 11,
+      "norm_label": "analyze_silos.sh script"
     },
     {
       "label": "PYTHONPATH",
@@ -1781,10 +1646,9 @@
         "kind": "code"
       },
       "_origin": "ast",
-      "community": 11,
-      "norm_label": "pythonpath",
       "id": "scripts_analyze_silos_pythonpath",
-      "community_name": "analyze_silos.sh"
+      "community": 11,
+      "norm_label": "pythonpath"
     },
     {
       "label": "analyze_time_vs_weight.py",
@@ -1792,10 +1656,9 @@
       "source_file": "scripts/analyze_time_vs_weight.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "analyze_time_vs_weight.py",
       "id": "scripts_analyze_time_vs_weight",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "analyze_time_vs_weight.py"
     },
     {
       "label": "analyze()",
@@ -1803,10 +1666,9 @@
       "source_file": "scripts/analyze_time_vs_weight.py",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "analyze()",
       "id": "scripts_analyze_time_vs_weight_analyze",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "analyze()"
     },
     {
       "label": "comissioning.py",
@@ -1814,10 +1676,9 @@
       "source_file": "scripts/comissioning.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "comissioning.py",
       "id": "scripts_comissioning",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "comissioning.py"
     },
     {
       "label": "run_comissioning()",
@@ -1825,10 +1686,9 @@
       "source_file": "scripts/comissioning.py",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "run_comissioning()",
       "id": "scripts_comissioning_run_comissioning",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "run_comissioning()"
     },
     {
       "label": "4_setup_cron.sh",
@@ -1840,10 +1700,9 @@
         "kind": "file"
       },
       "_origin": "ast",
-      "community": 22,
-      "norm_label": "4_setup_cron.sh",
       "id": "scripts_deploy_4_setup_cron",
-      "community_name": "4_setup_cron.sh"
+      "community": 22,
+      "norm_label": "4_setup_cron.sh"
     },
     {
       "label": "4_setup_cron.sh script",
@@ -1855,10 +1714,9 @@
         "kind": "bash_entrypoint"
       },
       "_origin": "ast",
-      "community": 22,
-      "norm_label": "4_setup_cron.sh script",
       "id": "scripts_deploy_4_setup_cron_sh__entry",
-      "community_name": "4_setup_cron.sh"
+      "community": 22,
+      "norm_label": "4_setup_cron.sh script"
     },
     {
       "label": "post-receive",
@@ -1870,10 +1728,9 @@
         "kind": "file"
       },
       "_origin": "ast",
-      "community": 25,
-      "norm_label": "post-receive",
       "id": "scripts_deploy_post_receive",
-      "community_name": "post-receive"
+      "community": 25,
+      "norm_label": "post-receive"
     },
     {
       "label": "post-receive script",
@@ -1885,10 +1742,9 @@
         "kind": "bash_entrypoint"
       },
       "_origin": "ast",
-      "community": 25,
-      "norm_label": "post-receive script",
       "id": "scripts_deploy_post_receive__entry",
-      "community_name": "post-receive"
+      "community": 25,
+      "norm_label": "post-receive script"
     },
     {
       "label": "hermes_helper.py",
@@ -1896,10 +1752,9 @@
       "source_file": "scripts/hermes_helper.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "hermes_helper.py",
       "id": "scripts_hermes_helper",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "hermes_helper.py"
     },
     {
       "label": "get_telemetry_summary()",
@@ -1907,10 +1762,9 @@
       "source_file": "scripts/hermes_helper.py",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "get_telemetry_summary()",
       "id": "scripts_hermes_helper_get_telemetry_summary",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "get_telemetry_summary()"
     },
     {
       "label": "add_invoice()",
@@ -1918,10 +1772,9 @@
       "source_file": "scripts/hermes_helper.py",
       "source_location": "L156",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "add_invoice()",
       "id": "scripts_hermes_helper_add_invoice",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "add_invoice()"
     },
     {
       "label": "housekeep_logs.py",
@@ -1929,10 +1782,9 @@
       "source_file": "scripts/housekeep_logs.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
-      "norm_label": "housekeep_logs.py",
       "id": "scripts_housekeep_logs",
-      "community_name": "connection.py"
+      "community": 2,
+      "norm_label": "housekeep_logs.py"
     },
     {
       "label": "run_housekeeping()",
@@ -1940,10 +1792,9 @@
       "source_file": "scripts/housekeep_logs.py",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 2,
-      "norm_label": "run_housekeeping()",
       "id": "scripts_housekeep_logs_run_housekeeping",
-      "community_name": "connection.py"
+      "community": 2,
+      "norm_label": "run_housekeeping()"
     },
     {
       "label": "run_api.sh",
@@ -1955,10 +1806,9 @@
         "kind": "file"
       },
       "_origin": "ast",
-      "community": 12,
-      "norm_label": "run_api.sh",
       "id": "scripts_run_api",
-      "community_name": "run_api.sh"
+      "community": 12,
+      "norm_label": "run_api.sh"
     },
     {
       "label": "run_api.sh script",
@@ -1970,10 +1820,9 @@
         "kind": "bash_entrypoint"
       },
       "_origin": "ast",
-      "community": 12,
-      "norm_label": "run_api.sh script",
       "id": "scripts_run_api_sh__entry",
-      "community_name": "run_api.sh"
+      "community": 12,
+      "norm_label": "run_api.sh script"
     },
     {
       "label": "PYTHONPATH",
@@ -1985,10 +1834,9 @@
         "kind": "code"
       },
       "_origin": "ast",
-      "community": 12,
-      "norm_label": "pythonpath",
       "id": "scripts_run_api_pythonpath",
-      "community_name": "run_api.sh"
+      "community": 12,
+      "norm_label": "pythonpath"
     },
     {
       "label": "run_audit_telegram.sh",
@@ -2000,10 +1848,9 @@
         "kind": "file"
       },
       "_origin": "ast",
-      "community": 13,
-      "norm_label": "run_audit_telegram.sh",
       "id": "scripts_run_audit_telegram",
-      "community_name": "run_audit_telegram.sh"
+      "community": 13,
+      "norm_label": "run_audit_telegram.sh"
     },
     {
       "label": "run_audit_telegram.sh script",
@@ -2015,10 +1862,9 @@
         "kind": "bash_entrypoint"
       },
       "_origin": "ast",
-      "community": 13,
-      "norm_label": "run_audit_telegram.sh script",
       "id": "scripts_run_audit_telegram_sh__entry",
-      "community_name": "run_audit_telegram.sh"
+      "community": 13,
+      "norm_label": "run_audit_telegram.sh script"
     },
     {
       "label": "PYTHONPATH",
@@ -2030,10 +1876,9 @@
         "kind": "code"
       },
       "_origin": "ast",
-      "community": 13,
-      "norm_label": "pythonpath",
       "id": "scripts_run_audit_telegram_pythonpath",
-      "community_name": "run_audit_telegram.sh"
+      "community": 13,
+      "norm_label": "pythonpath"
     },
     {
       "label": "run_daily_summary_telegram.py",
@@ -2041,10 +1886,9 @@
       "source_file": "scripts/run_daily_summary_telegram.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
-      "norm_label": "run_daily_summary_telegram.py",
       "id": "scripts_run_daily_summary_telegram",
-      "community_name": "connection.py"
+      "community": 2,
+      "norm_label": "run_daily_summary_telegram.py"
     },
     {
       "label": "main()",
@@ -2052,10 +1896,9 @@
       "source_file": "scripts/run_daily_summary_telegram.py",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 2,
-      "norm_label": "main()",
       "id": "scripts_run_daily_summary_telegram_main",
-      "community_name": "connection.py"
+      "community": 2,
+      "norm_label": "main()"
     },
     {
       "label": "send_audit_telegram.py",
@@ -2063,10 +1906,9 @@
       "source_file": "scripts/send_audit_telegram.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
-      "norm_label": "send_audit_telegram.py",
       "id": "scripts_send_audit_telegram",
-      "community_name": "connection.py"
+      "community": 2,
+      "norm_label": "send_audit_telegram.py"
     },
     {
       "label": "run()",
@@ -2074,10 +1916,9 @@
       "source_file": "scripts/send_audit_telegram.py",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "run()",
       "id": "scripts_send_audit_telegram_run",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "run()"
     },
     {
       "label": "silo_analyzer.py",
@@ -2085,10 +1926,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "silo_analyzer.py",
       "id": "src_analysis_silo_analyzer",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "silo_analyzer.py"
     },
     {
       "label": "SiloAnalyzer",
@@ -2096,10 +1936,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "siloanalyzer",
       "id": "src_analysis_silo_analyzer_siloanalyzer",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "siloanalyzer"
     },
     {
       "label": ".__init__()",
@@ -2107,10 +1946,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": ".__init__()",
       "id": "src_analysis_silo_analyzer_siloanalyzer_init",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": ".__init__()"
     },
     {
       "label": ".insert_nota_fiscal()",
@@ -2118,10 +1956,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": ".insert_nota_fiscal()",
       "id": "src_analysis_silo_analyzer_siloanalyzer_insert_nota_fiscal",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": ".insert_nota_fiscal()"
     },
     {
       "label": ".get_invoices()",
@@ -2129,10 +1966,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L57",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": ".get_invoices()",
       "id": "src_analysis_silo_analyzer_siloanalyzer_get_invoices",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": ".get_invoices()"
     },
     {
       "label": ".get_raw_readings()",
@@ -2140,10 +1976,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L78",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": ".get_raw_readings()",
       "id": "src_analysis_silo_analyzer_siloanalyzer_get_raw_readings",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": ".get_raw_readings()"
     },
     {
       "label": ".smooth_readings()",
@@ -2151,10 +1986,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L102",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": ".smooth_readings()",
       "id": "src_analysis_silo_analyzer_siloanalyzer_smooth_readings",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": ".smooth_readings()"
     },
     {
       "label": ".analyze_silo()",
@@ -2162,10 +1996,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L127",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": ".analyze_silo()",
       "id": "src_analysis_silo_analyzer_siloanalyzer_analyze_silo",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": ".analyze_silo()"
     },
     {
       "label": ".evaluate_sensor_accuracy()",
@@ -2173,10 +2006,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L186",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": ".evaluate_sensor_accuracy()",
       "id": "src_analysis_silo_analyzer_siloanalyzer_evaluate_sensor_accuracy",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": ".evaluate_sensor_accuracy()"
     },
     {
       "label": ".get_combined_analysis()",
@@ -2184,10 +2016,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L262",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": ".get_combined_analysis()",
       "id": "src_analysis_silo_analyzer_siloanalyzer_get_combined_analysis",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": ".get_combined_analysis()"
     },
     {
       "label": "Insere os dados de uma nota fiscal de entrada de ra\u00e7\u00e3o no banco local.         d",
@@ -2195,10 +2026,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "insere os dados de uma nota fiscal de entrada de racao no banco local.         d",
       "id": "src_analysis_silo_analyzer_rationale_19",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "insere os dados de uma nota fiscal de entrada de racao no banco local.         d"
     },
     {
       "label": "Retorna todas as notas fiscais cadastradas no banco.",
@@ -2206,10 +2036,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L58",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "retorna todas as notas fiscais cadastradas no banco.",
       "id": "src_analysis_silo_analyzer_rationale_58",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "retorna todas as notas fiscais cadastradas no banco."
     },
     {
       "label": "Retorna as leituras brutas de um determinado silo ordenadas por data.",
@@ -2217,10 +2046,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L79",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "retorna as leituras brutas de um determinado silo ordenadas por data.",
       "id": "src_analysis_silo_analyzer_rationale_79",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "retorna as leituras brutas de um determinado silo ordenadas por data."
     },
     {
       "label": "Aplica m\u00e9dia m\u00f3vel simples na s\u00e9rie temporal dos pesos dos silos para suavizar o",
@@ -2228,10 +2056,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L103",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "aplica media movel simples na serie temporal dos pesos dos silos para suavizar o",
       "id": "src_analysis_silo_analyzer_rationale_103",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "aplica media movel simples na serie temporal dos pesos dos silos para suavizar o"
     },
     {
       "label": "Analisa a s\u00e9rie temporal do silo:         1. Suaviza a s\u00e9rie temporal.         2",
@@ -2239,10 +2066,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L128",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "analisa a serie temporal do silo:         1. suaviza a serie temporal.         2",
       "id": "src_analysis_silo_analyzer_rationale_128",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "analisa a serie temporal do silo:         1. suaviza a serie temporal.         2"
     },
     {
       "label": "Objetivo \u00c9pico: Calcula o n\u00edvel de acur\u00e1cia do sensor comparando as         Nota",
@@ -2250,10 +2076,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L187",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "objetivo epico: calcula o nivel de acuracia do sensor comparando as         nota",
       "id": "src_analysis_silo_analyzer_rationale_187",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "objetivo epico: calcula o nivel de acuracia do sensor comparando as         nota"
     },
     {
       "label": "Calcula a s\u00e9rie temporal do somat\u00f3rio de todos os silos combinados.         Gara",
@@ -2261,10 +2086,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L263",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "calcula a serie temporal do somatorio de todos os silos combinados.         gara",
       "id": "src_analysis_silo_analyzer_rationale_263",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "calcula a serie temporal do somatorio de todos os silos combinados.         gara"
     },
     {
       "label": "main.py",
@@ -2272,10 +2096,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
-      "norm_label": "main.py",
       "id": "src_api_main",
-      "community_name": "main.py"
+      "community": 5,
+      "norm_label": "main.py"
     },
     {
       "label": "InvoiceCreate",
@@ -2283,10 +2106,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 5,
-      "norm_label": "invoicecreate",
       "id": "src_api_main_invoicecreate",
-      "community_name": "main.py"
+      "community": 5,
+      "norm_label": "invoicecreate"
     },
     {
       "label": "BaseModel",
@@ -2294,10 +2116,9 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 5,
-      "norm_label": "basemodel",
       "id": "basemodel",
-      "community_name": "main.py"
+      "community": 5,
+      "norm_label": "basemodel"
     },
     {
       "label": "health_check()",
@@ -2305,10 +2126,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L42",
       "_origin": "ast",
-      "community": 5,
-      "norm_label": "health_check()",
       "id": "src_api_main_health_check",
-      "community_name": "main.py"
+      "community": 5,
+      "norm_label": "health_check()"
     },
     {
       "label": "add_invoice()",
@@ -2316,10 +2136,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 5,
-      "norm_label": "add_invoice()",
       "id": "src_api_main_add_invoice",
-      "community_name": "main.py"
+      "community": 5,
+      "norm_label": "add_invoice()"
     },
     {
       "label": "list_invoices()",
@@ -2327,10 +2146,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 5,
-      "norm_label": "list_invoices()",
       "id": "src_api_main_list_invoices",
-      "community_name": "main.py"
+      "community": 5,
+      "norm_label": "list_invoices()"
     },
     {
       "label": "get_combined_silo_analysis()",
@@ -2338,10 +2156,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L57",
       "_origin": "ast",
-      "community": 5,
-      "norm_label": "get_combined_silo_analysis()",
       "id": "src_api_main_get_combined_silo_analysis",
-      "community_name": "main.py"
+      "community": 5,
+      "norm_label": "get_combined_silo_analysis()"
     },
     {
       "label": "get_silo_analysis()",
@@ -2349,10 +2166,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L69",
       "_origin": "ast",
-      "community": 5,
-      "norm_label": "get_silo_analysis()",
       "id": "src_api_main_get_silo_analysis",
-      "community_name": "main.py"
+      "community": 5,
+      "norm_label": "get_silo_analysis()"
     },
     {
       "label": "get_silo_accuracy()",
@@ -2360,10 +2176,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L82",
       "_origin": "ast",
-      "community": 5,
-      "norm_label": "get_silo_accuracy()",
       "id": "src_api_main_get_silo_accuracy",
-      "community_name": "main.py"
+      "community": 5,
+      "norm_label": "get_silo_accuracy()"
     },
     {
       "label": "get_recent_alerts()",
@@ -2371,10 +2186,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L101",
       "_origin": "ast",
-      "community": 5,
-      "norm_label": "get_recent_alerts()",
       "id": "src_api_main_get_recent_alerts",
-      "community_name": "main.py"
+      "community": 5,
+      "norm_label": "get_recent_alerts()"
     },
     {
       "label": "get_dashboard_stats()",
@@ -2382,10 +2196,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L129",
       "_origin": "ast",
-      "community": 5,
-      "norm_label": "get_dashboard_stats()",
       "id": "src_api_main_get_dashboard_stats",
-      "community_name": "main.py"
+      "community": 5,
+      "norm_label": "get_dashboard_stats()"
     },
     {
       "label": "Retorna o status geral de ocupa\u00e7\u00e3o, taxas de esvaziamento, e forecasts para todo",
@@ -2393,10 +2206,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L130",
       "_origin": "ast",
-      "community": 5,
-      "norm_label": "retorna o status geral de ocupacao, taxas de esvaziamento, e forecasts para todo",
       "id": "src_api_main_rationale_130",
-      "community_name": "main.py"
+      "community": 5,
+      "norm_label": "retorna o status geral de ocupacao, taxas de esvaziamento, e forecasts para todo"
     },
     {
       "label": "app.py",
@@ -2404,10 +2216,9 @@
       "source_file": "src/dashboard/app.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "app.py",
       "id": "src_dashboard_app",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "app.py"
     },
     {
       "label": "load_dashboard_data()",
@@ -2415,10 +2226,9 @@
       "source_file": "src/dashboard/app.py",
       "source_location": "L60",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "load_dashboard_data()",
       "id": "src_dashboard_app_load_dashboard_data",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "load_dashboard_data()"
     },
     {
       "label": "main()",
@@ -2426,10 +2236,9 @@
       "source_file": "src/dashboard/app.py",
       "source_location": "L142",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "main()",
       "id": "src_dashboard_app_main",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "main()"
     },
     {
       "label": "Carrega todos os dados do banco de dados SQLite local.     Retorna dataframes fo",
@@ -2437,10 +2246,9 @@
       "source_file": "src/dashboard/app.py",
       "source_location": "L61",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "carrega todos os dados do banco de dados sqlite local.     retorna dataframes fo",
       "id": "src_dashboard_app_rationale_61",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "carrega todos os dados do banco de dados sqlite local.     retorna dataframes fo"
     },
     {
       "label": "connection.py",
@@ -2448,10 +2256,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
-      "norm_label": "connection.py",
       "id": "src_database_connection",
-      "community_name": "connection.py"
+      "community": 2,
+      "norm_label": "connection.py"
     },
     {
       "label": "DatabaseConnection",
@@ -2459,10 +2266,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "databaseconnection",
       "id": "src_database_connection_databaseconnection",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "databaseconnection"
     },
     {
       "label": ".__init__()",
@@ -2470,10 +2276,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": ".__init__()",
       "id": "src_database_connection_databaseconnection_init",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": ".__init__()"
     },
     {
       "label": ".get_sqlite_connection()",
@@ -2481,10 +2286,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 8,
-      "norm_label": ".get_sqlite_connection()",
       "id": "src_database_connection_databaseconnection_get_sqlite_connection",
-      "community_name": ".get_sqlite_connection"
+      "community": 8,
+      "norm_label": ".get_sqlite_connection()"
     },
     {
       "label": "._init_local_db()",
@@ -2492,10 +2296,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 8,
-      "norm_label": "._init_local_db()",
       "id": "src_database_connection_databaseconnection_init_local_db",
-      "community_name": ".get_sqlite_connection"
+      "community": 8,
+      "norm_label": "._init_local_db()"
     },
     {
       "label": "Gerencia as conex\u00f5es com o banco de dados local (SQLite).",
@@ -2503,10 +2306,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "gerencia as conexoes com o banco de dados local (sqlite).",
       "id": "src_database_connection_rationale_9",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "gerencia as conexoes com o banco de dados local (sqlite)."
     },
     {
       "label": "Abre e retorna uma conex\u00e3o com o SQLite local, garantindo que as tabelas estejam",
@@ -2514,10 +2316,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 8,
-      "norm_label": "abre e retorna uma conexao com o sqlite local, garantindo que as tabelas estejam",
       "id": "src_database_connection_rationale_19",
-      "community_name": ".get_sqlite_connection"
+      "community": 8,
+      "norm_label": "abre e retorna uma conexao com o sqlite local, garantindo que as tabelas estejam"
     },
     {
       "label": "Cria a estrutura de tabelas do MER definitivo no SQLite local.",
@@ -2525,10 +2326,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 8,
-      "norm_label": "cria a estrutura de tabelas do mer definitivo no sqlite local.",
       "id": "src_database_connection_rationale_39",
-      "community_name": ".get_sqlite_connection"
+      "community": 8,
+      "norm_label": "cria a estrutura de tabelas do mer definitivo no sqlite local."
     },
     {
       "label": "extractor.py",
@@ -2536,10 +2336,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "extractor.py",
       "id": "src_scraper_extractor",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "extractor.py"
     },
     {
       "label": "AgrisolusScraper",
@@ -2547,10 +2346,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "agrisolusscraper",
       "id": "src_scraper_extractor_agrisolusscraper",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "agrisolusscraper"
     },
     {
       "label": ".__init__()",
@@ -2558,10 +2356,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": ".__init__()",
       "id": "src_scraper_extractor_agrisolusscraper_init",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": ".__init__()"
     },
     {
       "label": ".login()",
@@ -2569,10 +2366,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L32",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": ".login()",
       "id": "src_scraper_extractor_agrisolusscraper_login",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": ".login()"
     },
     {
       "label": ".generate_lotes_config()",
@@ -2580,10 +2376,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L75",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": ".generate_lotes_config()",
       "id": "src_scraper_extractor_agrisolusscraper_generate_lotes_config",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": ".generate_lotes_config()"
     },
     {
       "label": ".scrape_and_persist()",
@@ -2591,10 +2386,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L128",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": ".scrape_and_persist()",
       "id": "src_scraper_extractor_agrisolusscraper_scrape_and_persist",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": ".scrape_and_persist()"
     },
     {
       "label": "._process_lote_html()",
@@ -2602,10 +2396,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L168",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "._process_lote_html()",
       "id": "src_scraper_extractor_agrisolusscraper_process_lote_html",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "._process_lote_html()"
     },
     {
       "label": "._calculate_consumo()",
@@ -2613,10 +2406,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L357",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "._calculate_consumo()",
       "id": "src_scraper_extractor_agrisolusscraper_calculate_consumo",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "._calculate_consumo()"
     },
     {
       "label": "._persist_all()",
@@ -2624,10 +2416,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L401",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "._persist_all()",
       "id": "src_scraper_extractor_agrisolusscraper_persist_all",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "._persist_all()"
     },
     {
       "label": "._save_to_sqlite()",
@@ -2635,10 +2426,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L408",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "._save_to_sqlite()",
       "id": "src_scraper_extractor_agrisolusscraper_save_to_sqlite",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "._save_to_sqlite()"
     },
     {
       "label": "._parse_html_table1()",
@@ -2646,10 +2436,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L488",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "._parse_html_table1()",
       "id": "src_scraper_extractor_agrisolusscraper_parse_html_table1",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "._parse_html_table1()"
     },
     {
       "label": "._extract_js_var()",
@@ -2657,10 +2446,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L514",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "._extract_js_var()",
       "id": "src_scraper_extractor_agrisolusscraper_extract_js_var",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "._extract_js_var()"
     },
     {
       "label": "._alert_already_sent()",
@@ -2668,10 +2456,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L529",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "._alert_already_sent()",
       "id": "src_scraper_extractor_agrisolusscraper_alert_already_sent",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "._alert_already_sent()"
     },
     {
       "label": "._is_new_reading()",
@@ -2679,10 +2466,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L547",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "._is_new_reading()",
       "id": "src_scraper_extractor_agrisolusscraper_is_new_reading",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "._is_new_reading()"
     },
     {
       "label": "._record_scraping_failure()",
@@ -2690,10 +2476,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L608",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "._record_scraping_failure()",
       "id": "src_scraper_extractor_agrisolusscraper_record_scraping_failure",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "._record_scraping_failure()"
     },
     {
       "label": ".record_global_login_failure()",
@@ -2701,10 +2486,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L638",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": ".record_global_login_failure()",
       "id": "src_scraper_extractor_agrisolusscraper_record_global_login_failure",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": ".record_global_login_failure()"
     },
     {
       "label": "._persist_historico_only()",
@@ -2712,10 +2496,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L656",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "._persist_historico_only()",
       "id": "src_scraper_extractor_agrisolusscraper_persist_historico_only",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "._persist_historico_only()"
     },
     {
       "label": "Scraper oficial para o portal Agrisolus.     Realiza o login, navega\u00e7\u00e3o, extra\u00e7\u00e3",
@@ -2723,10 +2506,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "scraper oficial para o portal agrisolus.     realiza o login, navegacao, extraca",
       "id": "src_scraper_extractor_rationale_15",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "scraper oficial para o portal agrisolus.     realiza o login, navegacao, extraca"
     },
     {
       "label": "Realiza a autentica\u00e7\u00e3o no portal Agrisolus.         Retorna True se autenticado",
@@ -2734,10 +2516,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "realiza a autenticacao no portal agrisolus.         retorna true se autenticado",
       "id": "src_scraper_extractor_rationale_33",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "realiza a autenticacao no portal agrisolus.         retorna true se autenticado"
     },
     {
       "label": "Busca os lotes ativos na listagem (/Home/Listagem) e atualiza o arquivo de confi",
@@ -2745,10 +2526,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L76",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "busca os lotes ativos na listagem (/home/listagem) e atualiza o arquivo de confi",
       "id": "src_scraper_extractor_rationale_76",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "busca os lotes ativos na listagem (/home/listagem) e atualiza o arquivo de confi"
     },
     {
       "label": "L\u00ea a lista de lotes configurados, executa o scraping detalhado de cada um,",
@@ -2756,10 +2536,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L129",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "le a lista de lotes configurados, executa o scraping detalhado de cada um,",
       "id": "src_scraper_extractor_rationale_129",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "le a lista de lotes configurados, executa o scraping detalhado de cada um,"
     },
     {
       "label": "Faz o parse do HTML de detalhes do lote, extrai as vari\u00e1veis JS         e decide",
@@ -2767,10 +2546,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L169",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "faz o parse do html de detalhes do lote, extrai as variaveis js         e decide",
       "id": "src_scraper_extractor_rationale_169",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "faz o parse do html de detalhes do lote, extrai as variaveis js         e decide"
     },
     {
       "label": "Busca o \u00faltimo peso salvo para o silo localmente (ou remotamente se poss\u00edvel)",
@@ -2778,10 +2556,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L358",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "busca o ultimo peso salvo para o silo localmente (ou remotamente se possivel)",
       "id": "src_scraper_extractor_rationale_358",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "busca o ultimo peso salvo para o silo localmente (ou remotamente se possivel)"
     },
     {
       "label": "Salva os dados extra\u00eddos no SQLite local.",
@@ -2789,10 +2566,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L402",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "salva os dados extraidos no sqlite local.",
       "id": "src_scraper_extractor_rationale_402",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "salva os dados extraidos no sqlite local."
     },
     {
       "label": "Grava os dados no banco local SQLite utilizando sintaxe ON CONFLICT / INSERT OR",
@@ -2800,10 +2576,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L409",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "grava os dados no banco local sqlite utilizando sintaxe on conflict / insert or",
       "id": "src_scraper_extractor_rationale_409",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "grava os dados no banco local sqlite utilizando sintaxe on conflict / insert or"
     },
     {
       "label": "Faz o parse da Tabela 1 (dados gerais do lote) no HTML.",
@@ -2811,10 +2586,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L489",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "faz o parse da tabela 1 (dados gerais do lote) no html.",
       "id": "src_scraper_extractor_rationale_489",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "faz o parse da tabela 1 (dados gerais do lote) no html."
     },
     {
       "label": "Extrai vari\u00e1veis declaradas no script inline em formato JSON.",
@@ -2822,10 +2596,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L515",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "extrai variaveis declaradas no script inline em formato json.",
       "id": "src_scraper_extractor_rationale_515",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "extrai variaveis declaradas no script inline em formato json."
     },
     {
       "label": "Verifica se o alerta de silo offline para este silo e data de leitura j\u00e1 existe",
@@ -2833,10 +2606,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L530",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "verifica se o alerta de silo offline para este silo e data de leitura ja existe",
       "id": "src_scraper_extractor_rationale_530",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "verifica se o alerta de silo offline para este silo e data de leitura ja existe"
     },
     {
       "label": "Verifica se a leitura informada \u00e9 de fato nova (n\u00e3o \u00e9 duplicada e tem peso difer",
@@ -2844,10 +2616,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L548",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "verifica se a leitura informada e de fato nova (nao e duplicada e tem peso difer",
       "id": "src_scraper_extractor_rationale_548",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "verifica se a leitura informada e de fato nova (nao e duplicada e tem peso difer"
     },
     {
       "label": "Registra uma tentativa de scraping falha (sem conex\u00e3o) para todos os silos assoc",
@@ -2855,10 +2626,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L609",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "registra uma tentativa de scraping falha (sem conexao) para todos os silos assoc",
       "id": "src_scraper_extractor_rationale_609",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "registra uma tentativa de scraping falha (sem conexao) para todos os silos assoc"
     },
     {
       "label": "Registra uma tentativa falha globalmente (falha de login) para todos os silos co",
@@ -2866,10 +2636,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L639",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "registra uma tentativa falha globalmente (falha de login) para todos os silos co",
       "id": "src_scraper_extractor_rationale_639",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "registra uma tentativa falha globalmente (falha de login) para todos os silos co"
     },
     {
       "label": "Persiste apenas o hist\u00f3rico de scraping no SQLite local.",
@@ -2877,10 +2646,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L657",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "persiste apenas o historico de scraping no sqlite local.",
       "id": "src_scraper_extractor_rationale_657",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "persiste apenas o historico de scraping no sqlite local."
     },
     {
       "label": "test_analyzer.py",
@@ -2888,10 +2656,9 @@
       "source_file": "tests/test_analyzer.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "test_analyzer.py",
       "id": "tests_test_analyzer",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "test_analyzer.py"
     },
     {
       "label": "temp_db()",
@@ -2899,10 +2666,9 @@
       "source_file": "tests/test_analyzer.py",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "temp_db()",
       "id": "tests_test_analyzer_temp_db",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "temp_db()"
     },
     {
       "label": "test_insert_and_get_invoices()",
@@ -2910,10 +2676,9 @@
       "source_file": "tests/test_analyzer.py",
       "source_location": "L26",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "test_insert_and_get_invoices()",
       "id": "tests_test_analyzer_test_insert_and_get_invoices",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "test_insert_and_get_invoices()"
     },
     {
       "label": "test_smooth_readings()",
@@ -2921,10 +2686,9 @@
       "source_file": "tests/test_analyzer.py",
       "source_location": "L41",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "test_smooth_readings()",
       "id": "tests_test_analyzer_test_smooth_readings",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "test_smooth_readings()"
     },
     {
       "label": "test_analyze_silo_and_accuracy()",
@@ -2932,10 +2696,9 @@
       "source_file": "tests/test_analyzer.py",
       "source_location": "L63",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "test_analyze_silo_and_accuracy()",
       "id": "tests_test_analyzer_test_analyze_silo_and_accuracy",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "test_analyze_silo_and_accuracy()"
     },
     {
       "label": "test_dashboard.py",
@@ -2943,10 +2706,9 @@
       "source_file": "tests/test_dashboard.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "test_dashboard.py",
       "id": "tests_test_dashboard",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "test_dashboard.py"
     },
     {
       "label": "setup_test_db()",
@@ -2954,10 +2716,9 @@
       "source_file": "tests/test_dashboard.py",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "setup_test_db()",
       "id": "tests_test_dashboard_setup_test_db",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "setup_test_db()"
     },
     {
       "label": "test_dashboard_loader_sqlite()",
@@ -2965,10 +2726,9 @@
       "source_file": "tests/test_dashboard.py",
       "source_location": "L44",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "test_dashboard_loader_sqlite()",
       "id": "tests_test_dashboard_test_dashboard_loader_sqlite",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "test_dashboard_loader_sqlite()"
     },
     {
       "label": "Testa se o carregador de dados do dashboard l\u00ea corretamente do SQLite local.",
@@ -2976,10 +2736,9 @@
       "source_file": "tests/test_dashboard.py",
       "source_location": "L45",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "testa se o carregador de dados do dashboard le corretamente do sqlite local.",
       "id": "tests_test_dashboard_rationale_45",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "testa se o carregador de dados do dashboard le corretamente do sqlite local."
     },
     {
       "label": "test_database.py",
@@ -2987,10 +2746,9 @@
       "source_file": "tests/test_database.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "test_database.py",
       "id": "tests_test_database",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "test_database.py"
     },
     {
       "label": "cleanup_test_db()",
@@ -2998,10 +2756,9 @@
       "source_file": "tests/test_database.py",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "cleanup_test_db()",
       "id": "tests_test_database_cleanup_test_db",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "cleanup_test_db()"
     },
     {
       "label": "test_sqlite_initialization()",
@@ -3009,10 +2766,9 @@
       "source_file": "tests/test_database.py",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "test_sqlite_initialization()",
       "id": "tests_test_database_test_sqlite_initialization",
-      "community_name": "DatabaseConnection"
+      "community": 1,
+      "norm_label": "test_sqlite_initialization()"
     },
     {
       "label": "test_periodic_scripts.py",
@@ -3020,10 +2776,9 @@
       "source_file": "tests/test_periodic_scripts.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
-      "norm_label": "test_periodic_scripts.py",
       "id": "tests_test_periodic_scripts",
-      "community_name": "connection.py"
+      "community": 2,
+      "norm_label": "test_periodic_scripts.py"
     },
     {
       "label": "setup_test_db()",
@@ -3031,10 +2786,9 @@
       "source_file": "tests/test_periodic_scripts.py",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 2,
-      "norm_label": "setup_test_db()",
       "id": "tests_test_periodic_scripts_setup_test_db",
-      "community_name": "connection.py"
+      "community": 2,
+      "norm_label": "setup_test_db()"
     },
     {
       "label": "test_daily_summary_telegram_script()",
@@ -3042,10 +2796,9 @@
       "source_file": "tests/test_periodic_scripts.py",
       "source_location": "L44",
       "_origin": "ast",
-      "community": 2,
-      "norm_label": "test_daily_summary_telegram_script()",
       "id": "tests_test_periodic_scripts_test_daily_summary_telegram_script",
-      "community_name": "connection.py"
+      "community": 2,
+      "norm_label": "test_daily_summary_telegram_script()"
     },
     {
       "label": "test_scraper.py",
@@ -3053,10 +2806,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "test_scraper.py",
       "id": "tests_test_scraper",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "test_scraper.py"
     },
     {
       "label": "test_db()",
@@ -3064,10 +2816,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "test_db()",
       "id": "tests_test_scraper_test_db",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "test_db()"
     },
     {
       "label": "test_parse_html_table1()",
@@ -3075,10 +2826,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L26",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "test_parse_html_table1()",
       "id": "tests_test_scraper_test_parse_html_table1",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "test_parse_html_table1()"
     },
     {
       "label": "test_calculate_consumo()",
@@ -3086,10 +2836,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L44",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "test_calculate_consumo()",
       "id": "tests_test_scraper_test_calculate_consumo",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "test_calculate_consumo()"
     },
     {
       "label": "test_process_lote_html_resilience()",
@@ -3097,10 +2846,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L73",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "test_process_lote_html_resilience()",
       "id": "tests_test_scraper_test_process_lote_html_resilience",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "test_process_lote_html_resilience()"
     },
     {
       "label": "test_is_new_reading_logic()",
@@ -3108,10 +2856,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L126",
       "_origin": "ast",
-      "community": 0,
-      "norm_label": "test_is_new_reading_logic()",
       "id": "tests_test_scraper_test_is_new_reading_logic",
-      "community_name": "AgrisolusScraper"
+      "community": 0,
+      "norm_label": "test_is_new_reading_logic()"
     }
   ],
   "links": [
@@ -3836,9 +3583,9 @@
       "source_file": "scripts/run_daily_summary_telegram.py",
       "source_location": "L20",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_run_daily_summary_telegram",
-      "target": "src_bot_notifier"
+      "target": "src_bot_notifier",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -3847,9 +3594,9 @@
       "source_file": "scripts/send_audit_telegram.py",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_send_audit_telegram",
-      "target": "src_bot_notifier"
+      "target": "src_bot_notifier",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4054,9 +3801,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L18",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_database_connection_databaseconnection_get_sqlite_connection",
-      "target": "connection"
+      "target": "connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4173,9 +3920,9 @@
       "source_file": "scripts/run_daily_summary_telegram.py",
       "source_location": "L22",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_run_daily_summary_telegram",
-      "target": "src_utils_datetime_parser"
+      "target": "src_utils_datetime_parser",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4184,9 +3931,9 @@
       "source_file": "src/dashboard/app.py",
       "source_location": "L19",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_dashboard_app",
-      "target": "src_utils_datetime_parser"
+      "target": "src_utils_datetime_parser",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4195,9 +3942,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L10",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor",
-      "target": "src_utils_datetime_parser"
+      "target": "src_utils_datetime_parser",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4270,9 +4017,9 @@
       "source_file": "scripts/hermes_helper.py",
       "source_location": "L9",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_hermes_helper",
-      "target": "datetime"
+      "target": "datetime",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4281,9 +4028,9 @@
       "source_file": "scripts/housekeep_logs.py",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_housekeep_logs",
-      "target": "datetime"
+      "target": "datetime",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4292,9 +4039,9 @@
       "source_file": "scripts/run_daily_summary_telegram.py",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_run_daily_summary_telegram",
-      "target": "datetime"
+      "target": "datetime",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4303,9 +4050,9 @@
       "source_file": "scripts/send_audit_telegram.py",
       "source_location": "L9",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_send_audit_telegram",
-      "target": "datetime"
+      "target": "datetime",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4314,9 +4061,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L8",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer",
-      "target": "datetime"
+      "target": "datetime",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4325,9 +4072,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L8",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main",
-      "target": "datetime"
+      "target": "datetime",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4336,9 +4083,9 @@
       "source_file": "src/dashboard/app.py",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_dashboard_app",
-      "target": "datetime"
+      "target": "datetime",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4347,9 +4094,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor",
-      "target": "datetime"
+      "target": "datetime",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4369,9 +4116,9 @@
       "source_file": "tests/test_periodic_scripts.py",
       "source_location": "L4",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_periodic_scripts",
-      "target": "datetime"
+      "target": "datetime",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4380,9 +4127,9 @@
       "source_file": "scripts/run_daily_summary_telegram.py",
       "source_location": "L23",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_run_daily_summary_telegram",
-      "target": "src_utils_log_monitor"
+      "target": "src_utils_log_monitor",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4463,9 +4210,9 @@
       "source_file": "scripts/housekeep_logs.py",
       "source_location": "L10",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_housekeep_logs",
-      "target": "src_utils_logger"
+      "target": "src_utils_logger",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4474,9 +4221,9 @@
       "source_file": "scripts/run_daily_summary_telegram.py",
       "source_location": "L21",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_run_daily_summary_telegram",
-      "target": "src_utils_logger"
+      "target": "src_utils_logger",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4485,9 +4232,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L10",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer",
-      "target": "src_utils_logger"
+      "target": "src_utils_logger",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4496,9 +4243,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main",
-      "target": "src_utils_logger"
+      "target": "src_utils_logger",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4507,9 +4254,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L4",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_database_connection",
-      "target": "src_utils_logger"
+      "target": "src_utils_logger",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -4518,9 +4265,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L9",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor",
-      "target": "src_utils_logger"
+      "target": "src_utils_logger",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5151,9 +4898,9 @@
       "source_file": "scripts/analyze_silos.sh",
       "source_location": "L11",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_analyze_silos",
-      "target": "scripts_analyze_silos_pythonpath"
+      "target": "scripts_analyze_silos_pythonpath",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5161,9 +4908,9 @@
       "source_file": "scripts/analyze_silos.sh",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_analyze_silos",
-      "target": "scripts_analyze_silos_sh__entry"
+      "target": "scripts_analyze_silos_sh__entry",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5171,9 +4918,9 @@
       "source_file": "scripts/analyze_time_vs_weight.py",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_analyze_time_vs_weight",
-      "target": "scripts_analyze_time_vs_weight_analyze"
+      "target": "scripts_analyze_time_vs_weight_analyze",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -5182,9 +4929,9 @@
       "source_file": "scripts/analyze_time_vs_weight.py",
       "source_location": "L11",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_analyze_time_vs_weight",
-      "target": "src_database_connection"
+      "target": "src_database_connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -5193,9 +4940,9 @@
       "source_file": "scripts/analyze_time_vs_weight.py",
       "source_location": "L11",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_analyze_time_vs_weight",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5204,9 +4951,9 @@
       "source_file": "scripts/analyze_time_vs_weight.py",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_analyze_time_vs_weight_analyze",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5214,9 +4961,9 @@
       "source_file": "scripts/comissioning.py",
       "source_location": "L17",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_comissioning",
-      "target": "scripts_comissioning_run_comissioning"
+      "target": "scripts_comissioning_run_comissioning",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -5225,9 +4972,9 @@
       "source_file": "scripts/comissioning.py",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_comissioning",
-      "target": "src_database_connection"
+      "target": "src_database_connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -5236,9 +4983,9 @@
       "source_file": "scripts/comissioning.py",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_comissioning",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -5247,9 +4994,9 @@
       "source_file": "scripts/comissioning.py",
       "source_location": "L15",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_comissioning",
-      "target": "src_scraper_extractor"
+      "target": "src_scraper_extractor",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -5258,9 +5005,9 @@
       "source_file": "scripts/comissioning.py",
       "source_location": "L15",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_comissioning",
-      "target": "src_scraper_extractor_agrisolusscraper"
+      "target": "src_scraper_extractor_agrisolusscraper",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5269,9 +5016,9 @@
       "source_file": "scripts/comissioning.py",
       "source_location": "L38",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_comissioning_run_comissioning",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5280,9 +5027,9 @@
       "source_file": "scripts/comissioning.py",
       "source_location": "L75",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_comissioning_run_comissioning",
-      "target": "src_scraper_extractor_agrisolusscraper"
+      "target": "src_scraper_extractor_agrisolusscraper",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5290,9 +5037,9 @@
       "source_file": "scripts/deploy/4_setup_cron.sh",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_deploy_4_setup_cron",
-      "target": "scripts_deploy_4_setup_cron_sh__entry"
+      "target": "scripts_deploy_4_setup_cron_sh__entry",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5300,9 +5047,9 @@
       "source_file": "scripts/deploy/post-receive",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_deploy_post_receive",
-      "target": "scripts_deploy_post_receive__entry"
+      "target": "scripts_deploy_post_receive__entry",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5310,9 +5057,9 @@
       "source_file": "scripts/hermes_helper.py",
       "source_location": "L156",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_hermes_helper",
-      "target": "scripts_hermes_helper_add_invoice"
+      "target": "scripts_hermes_helper_add_invoice",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5320,9 +5067,9 @@
       "source_file": "scripts/hermes_helper.py",
       "source_location": "L17",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_hermes_helper",
-      "target": "scripts_hermes_helper_get_telemetry_summary"
+      "target": "scripts_hermes_helper_get_telemetry_summary",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -5331,9 +5078,9 @@
       "source_file": "scripts/hermes_helper.py",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_hermes_helper",
-      "target": "src_analysis_silo_analyzer"
+      "target": "src_analysis_silo_analyzer",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -5342,9 +5089,9 @@
       "source_file": "scripts/hermes_helper.py",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_hermes_helper",
-      "target": "src_analysis_silo_analyzer_siloanalyzer"
+      "target": "src_analysis_silo_analyzer_siloanalyzer",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -5353,9 +5100,9 @@
       "source_file": "scripts/hermes_helper.py",
       "source_location": "L15",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_hermes_helper",
-      "target": "src_database_connection"
+      "target": "src_database_connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -5364,9 +5111,9 @@
       "source_file": "scripts/hermes_helper.py",
       "source_location": "L15",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_hermes_helper",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5375,9 +5122,9 @@
       "source_file": "scripts/hermes_helper.py",
       "source_location": "L18",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_hermes_helper_get_telemetry_summary",
-      "target": "src_analysis_silo_analyzer_siloanalyzer"
+      "target": "src_analysis_silo_analyzer_siloanalyzer",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5386,9 +5133,9 @@
       "source_file": "scripts/hermes_helper.py",
       "source_location": "L19",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_hermes_helper_get_telemetry_summary",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5397,9 +5144,9 @@
       "source_file": "scripts/hermes_helper.py",
       "source_location": "L157",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_hermes_helper_add_invoice",
-      "target": "src_analysis_silo_analyzer_siloanalyzer"
+      "target": "src_analysis_silo_analyzer_siloanalyzer",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5407,9 +5154,9 @@
       "source_file": "scripts/housekeep_logs.py",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_housekeep_logs",
-      "target": "scripts_housekeep_logs_run_housekeeping"
+      "target": "scripts_housekeep_logs_run_housekeeping",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -5417,9 +5164,9 @@
       "source_file": "scripts/run_api.sh",
       "source_location": "L11",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_run_api",
-      "target": "scripts_run_api_pythonpath"
+      "target": "scripts_run_api_pythonpath",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5427,9 +5174,9 @@
       "source_file": "scripts/run_api.sh",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_run_api",
-      "target": "scripts_run_api_sh__entry"
+      "target": "scripts_run_api_sh__entry",
+      "confidence_score": 1.0
     },
     {
       "relation": "defines",
@@ -5437,9 +5184,9 @@
       "source_file": "scripts/run_audit_telegram.sh",
       "source_location": "L8",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_run_audit_telegram",
-      "target": "scripts_run_audit_telegram_pythonpath"
+      "target": "scripts_run_audit_telegram_pythonpath",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5447,9 +5194,9 @@
       "source_file": "scripts/run_audit_telegram.sh",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_run_audit_telegram",
-      "target": "scripts_run_audit_telegram_sh__entry"
+      "target": "scripts_run_audit_telegram_sh__entry",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5457,9 +5204,9 @@
       "source_file": "scripts/run_daily_summary_telegram.py",
       "source_location": "L27",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_run_daily_summary_telegram",
-      "target": "scripts_run_daily_summary_telegram_main"
+      "target": "scripts_run_daily_summary_telegram_main",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -5468,9 +5215,9 @@
       "source_file": "scripts/run_daily_summary_telegram.py",
       "source_location": "L19",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_run_daily_summary_telegram",
-      "target": "src_database_connection"
+      "target": "src_database_connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -5479,9 +5226,9 @@
       "source_file": "scripts/run_daily_summary_telegram.py",
       "source_location": "L19",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_run_daily_summary_telegram",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -5490,9 +5237,9 @@
       "source_file": "tests/test_periodic_scripts.py",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_periodic_scripts",
-      "target": "scripts_run_daily_summary_telegram"
+      "target": "scripts_run_daily_summary_telegram",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5501,9 +5248,9 @@
       "source_file": "scripts/run_daily_summary_telegram.py",
       "source_location": "L32",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_run_daily_summary_telegram_main",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -5512,9 +5259,9 @@
       "source_file": "tests/test_periodic_scripts.py",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_periodic_scripts",
-      "target": "scripts_run_daily_summary_telegram_main"
+      "target": "scripts_run_daily_summary_telegram_main",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5522,9 +5269,9 @@
       "source_file": "scripts/send_audit_telegram.py",
       "source_location": "L19",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_send_audit_telegram",
-      "target": "scripts_send_audit_telegram_run"
+      "target": "scripts_send_audit_telegram_run",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -5533,9 +5280,9 @@
       "source_file": "scripts/send_audit_telegram.py",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_send_audit_telegram",
-      "target": "src_database_connection"
+      "target": "src_database_connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -5544,9 +5291,9 @@
       "source_file": "scripts/send_audit_telegram.py",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_send_audit_telegram",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5555,9 +5302,9 @@
       "source_file": "scripts/send_audit_telegram.py",
       "source_location": "L25",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "scripts_send_audit_telegram_run",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5565,9 +5312,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer",
-      "target": "src_analysis_silo_analyzer_siloanalyzer"
+      "target": "src_analysis_silo_analyzer_siloanalyzer",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -5576,9 +5323,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L9",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer",
-      "target": "src_database_connection"
+      "target": "src_database_connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -5587,9 +5334,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L9",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -5598,9 +5345,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L12",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main",
-      "target": "src_analysis_silo_analyzer"
+      "target": "src_analysis_silo_analyzer",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -5609,9 +5356,9 @@
       "source_file": "tests/test_analyzer.py",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_analyzer",
-      "target": "src_analysis_silo_analyzer"
+      "target": "src_analysis_silo_analyzer",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -5619,9 +5366,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L127",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_siloanalyzer",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_analyze_silo"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_analyze_silo",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -5629,9 +5376,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L186",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_siloanalyzer",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_evaluate_sensor_accuracy"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_evaluate_sensor_accuracy",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -5639,9 +5386,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L262",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_siloanalyzer",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_get_combined_analysis"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_get_combined_analysis",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -5649,9 +5396,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L57",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_siloanalyzer",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_get_invoices"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_get_invoices",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -5659,9 +5406,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L78",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_siloanalyzer",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_get_raw_readings"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_get_raw_readings",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -5669,9 +5416,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L15",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_siloanalyzer",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_init"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_init",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -5679,9 +5426,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L18",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_siloanalyzer",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_insert_nota_fiscal"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_insert_nota_fiscal",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -5689,9 +5436,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L102",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_siloanalyzer",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_smooth_readings"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_smooth_readings",
+      "confidence_score": 1.0
     },
     {
       "relation": "uses",
@@ -5699,9 +5446,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L9",
       "weight": 0.8,
-      "confidence_score": 0.5,
       "source": "src_analysis_silo_analyzer_siloanalyzer",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 0.5
     },
     {
       "relation": "imports",
@@ -5710,9 +5457,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L12",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main",
-      "target": "src_analysis_silo_analyzer_siloanalyzer"
+      "target": "src_analysis_silo_analyzer_siloanalyzer",
+      "confidence_score": 1.0
     },
     {
       "relation": "uses",
@@ -5720,9 +5467,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L12",
       "weight": 0.8,
-      "confidence_score": 0.5,
       "source": "src_api_main_invoicecreate",
-      "target": "src_analysis_silo_analyzer_siloanalyzer"
+      "target": "src_analysis_silo_analyzer_siloanalyzer",
+      "confidence_score": 0.5
     },
     {
       "relation": "imports",
@@ -5731,9 +5478,9 @@
       "source_file": "tests/test_analyzer.py",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_analyzer",
-      "target": "src_analysis_silo_analyzer_siloanalyzer"
+      "target": "src_analysis_silo_analyzer_siloanalyzer",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5742,9 +5489,9 @@
       "source_file": "tests/test_analyzer.py",
       "source_location": "L64",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_analyzer_test_analyze_silo_and_accuracy",
-      "target": "src_analysis_silo_analyzer_siloanalyzer"
+      "target": "src_analysis_silo_analyzer_siloanalyzer",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5753,9 +5500,9 @@
       "source_file": "tests/test_analyzer.py",
       "source_location": "L27",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_analyzer_test_insert_and_get_invoices",
-      "target": "src_analysis_silo_analyzer_siloanalyzer"
+      "target": "src_analysis_silo_analyzer_siloanalyzer",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5764,9 +5511,9 @@
       "source_file": "tests/test_analyzer.py",
       "source_location": "L42",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_analyzer_test_smooth_readings",
-      "target": "src_analysis_silo_analyzer_siloanalyzer"
+      "target": "src_analysis_silo_analyzer_siloanalyzer",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5785,9 +5532,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L19",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_rationale_19",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_insert_nota_fiscal"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_insert_nota_fiscal",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -5795,9 +5542,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L58",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_rationale_58",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_get_invoices"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_get_invoices",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5806,9 +5553,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L193",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_siloanalyzer_evaluate_sensor_accuracy",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_get_invoices"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_get_invoices",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -5816,9 +5563,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L79",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_rationale_79",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_get_raw_readings"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_get_raw_readings",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5827,9 +5574,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L134",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_siloanalyzer_analyze_silo",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_get_raw_readings"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_get_raw_readings",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5838,9 +5585,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L282",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_siloanalyzer_get_combined_analysis",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_get_raw_readings"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_get_raw_readings",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -5848,9 +5595,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L103",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_rationale_103",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_smooth_readings"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_smooth_readings",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5859,9 +5606,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L139",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_siloanalyzer_analyze_silo",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_smooth_readings"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_smooth_readings",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5870,9 +5617,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L303",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_siloanalyzer_get_combined_analysis",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_smooth_readings"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_smooth_readings",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -5880,9 +5627,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L128",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_rationale_128",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_analyze_silo"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_analyze_silo",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5891,9 +5638,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L191",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_siloanalyzer_evaluate_sensor_accuracy",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_analyze_silo"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_analyze_silo",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -5901,9 +5648,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L187",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_rationale_187",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_evaluate_sensor_accuracy"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_evaluate_sensor_accuracy",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -5911,9 +5658,9 @@
       "source_file": "src/analysis/silo_analyzer.py",
       "source_location": "L263",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_analysis_silo_analyzer_rationale_263",
-      "target": "src_analysis_silo_analyzer_siloanalyzer_get_combined_analysis"
+      "target": "src_analysis_silo_analyzer_siloanalyzer_get_combined_analysis",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5921,9 +5668,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L46",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main",
-      "target": "src_api_main_add_invoice"
+      "target": "src_api_main_add_invoice",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5931,9 +5678,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L57",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main",
-      "target": "src_api_main_get_combined_silo_analysis"
+      "target": "src_api_main_get_combined_silo_analysis",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5941,9 +5688,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L129",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main",
-      "target": "src_api_main_get_dashboard_stats"
+      "target": "src_api_main_get_dashboard_stats",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5951,9 +5698,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L101",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main",
-      "target": "src_api_main_get_recent_alerts"
+      "target": "src_api_main_get_recent_alerts",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5961,9 +5708,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L82",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main",
-      "target": "src_api_main_get_silo_accuracy"
+      "target": "src_api_main_get_silo_accuracy",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5971,9 +5718,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L69",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main",
-      "target": "src_api_main_get_silo_analysis"
+      "target": "src_api_main_get_silo_analysis",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5981,9 +5728,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L42",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main",
-      "target": "src_api_main_health_check"
+      "target": "src_api_main_health_check",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5991,9 +5738,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L33",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main",
-      "target": "src_api_main_invoicecreate"
+      "target": "src_api_main_invoicecreate",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -6001,9 +5748,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L53",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main",
-      "target": "src_api_main_list_invoices"
+      "target": "src_api_main_list_invoices",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -6012,9 +5759,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main",
-      "target": "src_database_connection"
+      "target": "src_database_connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -6023,9 +5770,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -6034,9 +5781,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L46",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main_add_invoice",
-      "target": "src_api_main_invoicecreate"
+      "target": "src_api_main_invoicecreate",
+      "confidence_score": 1.0
     },
     {
       "relation": "inherits",
@@ -6044,9 +5791,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L33",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main_invoicecreate",
-      "target": "basemodel"
+      "target": "basemodel",
+      "confidence_score": 1.0
     },
     {
       "relation": "uses",
@@ -6054,9 +5801,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L13",
       "weight": 0.8,
-      "confidence_score": 0.5,
       "source": "src_api_main_invoicecreate",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 0.5
     },
     {
       "relation": "calls",
@@ -6086,9 +5833,9 @@
       "source_file": "src/api/main.py",
       "source_location": "L130",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_api_main_rationale_130",
-      "target": "src_api_main_get_dashboard_stats"
+      "target": "src_api_main_get_dashboard_stats",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -6096,9 +5843,9 @@
       "source_file": "src/dashboard/app.py",
       "source_location": "L60",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_dashboard_app",
-      "target": "src_dashboard_app_load_dashboard_data"
+      "target": "src_dashboard_app_load_dashboard_data",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -6106,9 +5853,9 @@
       "source_file": "src/dashboard/app.py",
       "source_location": "L142",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_dashboard_app",
-      "target": "src_dashboard_app_main"
+      "target": "src_dashboard_app_main",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -6117,9 +5864,9 @@
       "source_file": "src/dashboard/app.py",
       "source_location": "L18",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_dashboard_app",
-      "target": "src_database_connection"
+      "target": "src_database_connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -6128,9 +5875,9 @@
       "source_file": "src/dashboard/app.py",
       "source_location": "L18",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_dashboard_app",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -6139,9 +5886,9 @@
       "source_file": "tests/test_dashboard.py",
       "source_location": "L5",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_dashboard",
-      "target": "src_dashboard_app"
+      "target": "src_dashboard_app",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6161,9 +5908,9 @@
       "source_file": "src/dashboard/app.py",
       "source_location": "L165",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_dashboard_app_main",
-      "target": "src_dashboard_app_load_dashboard_data"
+      "target": "src_dashboard_app_load_dashboard_data",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6171,9 +5918,9 @@
       "source_file": "src/dashboard/app.py",
       "source_location": "L61",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_dashboard_app_rationale_61",
-      "target": "src_dashboard_app_load_dashboard_data"
+      "target": "src_dashboard_app_load_dashboard_data",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -6182,9 +5929,9 @@
       "source_file": "tests/test_dashboard.py",
       "source_location": "L5",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_dashboard",
-      "target": "src_dashboard_app_load_dashboard_data"
+      "target": "src_dashboard_app_load_dashboard_data",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6193,9 +5940,9 @@
       "source_file": "tests/test_dashboard.py",
       "source_location": "L48",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_dashboard_test_dashboard_loader_sqlite",
-      "target": "src_dashboard_app_load_dashboard_data"
+      "target": "src_dashboard_app_load_dashboard_data",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -6203,9 +5950,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L8",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_database_connection",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -6214,9 +5961,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L8",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor",
-      "target": "src_database_connection"
+      "target": "src_database_connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -6225,9 +5972,9 @@
       "source_file": "tests/test_analyzer.py",
       "source_location": "L6",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_analyzer",
-      "target": "src_database_connection"
+      "target": "src_database_connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -6236,9 +5983,9 @@
       "source_file": "tests/test_dashboard.py",
       "source_location": "L4",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_dashboard",
-      "target": "src_database_connection"
+      "target": "src_database_connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -6247,9 +5994,9 @@
       "source_file": "tests/test_database.py",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_database",
-      "target": "src_database_connection"
+      "target": "src_database_connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -6258,9 +6005,9 @@
       "source_file": "tests/test_periodic_scripts.py",
       "source_location": "L6",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_periodic_scripts",
-      "target": "src_database_connection"
+      "target": "src_database_connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -6269,9 +6016,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L6",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_scraper",
-      "target": "src_database_connection"
+      "target": "src_database_connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6279,9 +6026,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L18",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_database_connection_databaseconnection",
-      "target": "src_database_connection_databaseconnection_get_sqlite_connection"
+      "target": "src_database_connection_databaseconnection_get_sqlite_connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6289,9 +6036,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_database_connection_databaseconnection",
-      "target": "src_database_connection_databaseconnection_init"
+      "target": "src_database_connection_databaseconnection_init",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6299,9 +6046,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L38",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_database_connection_databaseconnection",
-      "target": "src_database_connection_databaseconnection_init_local_db"
+      "target": "src_database_connection_databaseconnection_init_local_db",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6309,9 +6056,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L9",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_database_connection_rationale_9",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -6320,9 +6067,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L8",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "uses",
@@ -6330,9 +6077,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L8",
       "weight": 0.8,
-      "confidence_score": 0.5,
       "source": "src_scraper_extractor_agrisolusscraper",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 0.5
     },
     {
       "relation": "references",
@@ -6341,9 +6088,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L20",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper_init",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -6352,9 +6099,9 @@
       "source_file": "tests/test_analyzer.py",
       "source_location": "L6",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_analyzer",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6374,9 +6121,9 @@
       "source_file": "tests/test_dashboard.py",
       "source_location": "L4",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_dashboard",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6396,9 +6143,9 @@
       "source_file": "tests/test_database.py",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_database",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6407,9 +6154,9 @@
       "source_file": "tests/test_database.py",
       "source_location": "L20",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_database_test_sqlite_initialization",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -6418,9 +6165,9 @@
       "source_file": "tests/test_periodic_scripts.py",
       "source_location": "L6",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_periodic_scripts",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6440,9 +6187,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L6",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_scraper",
-      "target": "src_database_connection_databaseconnection"
+      "target": "src_database_connection_databaseconnection",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6462,9 +6209,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L30",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_database_connection_databaseconnection_get_sqlite_connection",
-      "target": "src_database_connection_databaseconnection_init_local_db"
+      "target": "src_database_connection_databaseconnection_init_local_db",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6472,9 +6219,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L19",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_database_connection_rationale_19",
-      "target": "src_database_connection_databaseconnection_get_sqlite_connection"
+      "target": "src_database_connection_databaseconnection_get_sqlite_connection",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6482,9 +6229,9 @@
       "source_file": "src/database/connection.py",
       "source_location": "L39",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_database_connection_rationale_39",
-      "target": "src_database_connection_databaseconnection_init_local_db"
+      "target": "src_database_connection_databaseconnection_init_local_db",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -6492,9 +6239,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor",
-      "target": "src_scraper_extractor_agrisolusscraper"
+      "target": "src_scraper_extractor_agrisolusscraper",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -6503,9 +6250,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_scraper",
-      "target": "src_scraper_extractor"
+      "target": "src_scraper_extractor",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6513,9 +6260,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L529",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper",
-      "target": "src_scraper_extractor_agrisolusscraper_alert_already_sent"
+      "target": "src_scraper_extractor_agrisolusscraper_alert_already_sent",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6523,9 +6270,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L357",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper",
-      "target": "src_scraper_extractor_agrisolusscraper_calculate_consumo"
+      "target": "src_scraper_extractor_agrisolusscraper_calculate_consumo",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6533,9 +6280,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L514",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper",
-      "target": "src_scraper_extractor_agrisolusscraper_extract_js_var"
+      "target": "src_scraper_extractor_agrisolusscraper_extract_js_var",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6543,9 +6290,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L75",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper",
-      "target": "src_scraper_extractor_agrisolusscraper_generate_lotes_config"
+      "target": "src_scraper_extractor_agrisolusscraper_generate_lotes_config",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6553,9 +6300,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L20",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper",
-      "target": "src_scraper_extractor_agrisolusscraper_init"
+      "target": "src_scraper_extractor_agrisolusscraper_init",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6563,9 +6310,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L547",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper",
-      "target": "src_scraper_extractor_agrisolusscraper_is_new_reading"
+      "target": "src_scraper_extractor_agrisolusscraper_is_new_reading",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6573,9 +6320,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L32",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper",
-      "target": "src_scraper_extractor_agrisolusscraper_login"
+      "target": "src_scraper_extractor_agrisolusscraper_login",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6583,9 +6330,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L488",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper",
-      "target": "src_scraper_extractor_agrisolusscraper_parse_html_table1"
+      "target": "src_scraper_extractor_agrisolusscraper_parse_html_table1",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6593,9 +6340,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L401",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper",
-      "target": "src_scraper_extractor_agrisolusscraper_persist_all"
+      "target": "src_scraper_extractor_agrisolusscraper_persist_all",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6603,9 +6350,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L656",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper",
-      "target": "src_scraper_extractor_agrisolusscraper_persist_historico_only"
+      "target": "src_scraper_extractor_agrisolusscraper_persist_historico_only",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6613,9 +6360,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L168",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper",
-      "target": "src_scraper_extractor_agrisolusscraper_process_lote_html"
+      "target": "src_scraper_extractor_agrisolusscraper_process_lote_html",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6623,9 +6370,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L638",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper",
-      "target": "src_scraper_extractor_agrisolusscraper_record_global_login_failure"
+      "target": "src_scraper_extractor_agrisolusscraper_record_global_login_failure",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6633,9 +6380,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L608",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper",
-      "target": "src_scraper_extractor_agrisolusscraper_record_scraping_failure"
+      "target": "src_scraper_extractor_agrisolusscraper_record_scraping_failure",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6643,9 +6390,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L408",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper",
-      "target": "src_scraper_extractor_agrisolusscraper_save_to_sqlite"
+      "target": "src_scraper_extractor_agrisolusscraper_save_to_sqlite",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -6653,9 +6400,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L128",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper",
-      "target": "src_scraper_extractor_agrisolusscraper_scrape_and_persist"
+      "target": "src_scraper_extractor_agrisolusscraper_scrape_and_persist",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6663,9 +6410,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L15",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_rationale_15",
-      "target": "src_scraper_extractor_agrisolusscraper"
+      "target": "src_scraper_extractor_agrisolusscraper",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -6674,9 +6421,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_scraper",
-      "target": "src_scraper_extractor_agrisolusscraper"
+      "target": "src_scraper_extractor_agrisolusscraper",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6685,9 +6432,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L45",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_scraper_test_calculate_consumo",
-      "target": "src_scraper_extractor_agrisolusscraper"
+      "target": "src_scraper_extractor_agrisolusscraper",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6696,9 +6443,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L127",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_scraper_test_is_new_reading_logic",
-      "target": "src_scraper_extractor_agrisolusscraper"
+      "target": "src_scraper_extractor_agrisolusscraper",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6707,9 +6454,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L27",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_scraper_test_parse_html_table1",
-      "target": "src_scraper_extractor_agrisolusscraper"
+      "target": "src_scraper_extractor_agrisolusscraper",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6718,9 +6465,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L74",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_scraper_test_process_lote_html_resilience",
-      "target": "src_scraper_extractor_agrisolusscraper"
+      "target": "src_scraper_extractor_agrisolusscraper",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6728,9 +6475,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L33",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_rationale_33",
-      "target": "src_scraper_extractor_agrisolusscraper_login"
+      "target": "src_scraper_extractor_agrisolusscraper_login",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6739,9 +6486,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L135",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper_scrape_and_persist",
-      "target": "src_scraper_extractor_agrisolusscraper_generate_lotes_config"
+      "target": "src_scraper_extractor_agrisolusscraper_generate_lotes_config",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6749,9 +6496,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L76",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_rationale_76",
-      "target": "src_scraper_extractor_agrisolusscraper_generate_lotes_config"
+      "target": "src_scraper_extractor_agrisolusscraper_generate_lotes_config",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6760,9 +6507,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L160",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper_scrape_and_persist",
-      "target": "src_scraper_extractor_agrisolusscraper_process_lote_html"
+      "target": "src_scraper_extractor_agrisolusscraper_process_lote_html",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6771,9 +6518,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L156",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper_scrape_and_persist",
-      "target": "src_scraper_extractor_agrisolusscraper_record_scraping_failure"
+      "target": "src_scraper_extractor_agrisolusscraper_record_scraping_failure",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6781,9 +6528,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L129",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_rationale_129",
-      "target": "src_scraper_extractor_agrisolusscraper_scrape_and_persist"
+      "target": "src_scraper_extractor_agrisolusscraper_scrape_and_persist",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6792,9 +6539,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L312",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper_process_lote_html",
-      "target": "src_scraper_extractor_agrisolusscraper_alert_already_sent"
+      "target": "src_scraper_extractor_agrisolusscraper_alert_already_sent",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6803,9 +6550,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L261",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper_process_lote_html",
-      "target": "src_scraper_extractor_agrisolusscraper_calculate_consumo"
+      "target": "src_scraper_extractor_agrisolusscraper_calculate_consumo",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6814,9 +6561,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L186",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper_process_lote_html",
-      "target": "src_scraper_extractor_agrisolusscraper_extract_js_var"
+      "target": "src_scraper_extractor_agrisolusscraper_extract_js_var",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6825,9 +6572,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L248",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper_process_lote_html",
-      "target": "src_scraper_extractor_agrisolusscraper_is_new_reading"
+      "target": "src_scraper_extractor_agrisolusscraper_is_new_reading",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6836,9 +6583,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L183",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper_process_lote_html",
-      "target": "src_scraper_extractor_agrisolusscraper_parse_html_table1"
+      "target": "src_scraper_extractor_agrisolusscraper_parse_html_table1",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6847,9 +6594,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L354",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper_process_lote_html",
-      "target": "src_scraper_extractor_agrisolusscraper_persist_all"
+      "target": "src_scraper_extractor_agrisolusscraper_persist_all",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6857,9 +6604,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L169",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_rationale_169",
-      "target": "src_scraper_extractor_agrisolusscraper_process_lote_html"
+      "target": "src_scraper_extractor_agrisolusscraper_process_lote_html",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6867,9 +6614,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L358",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_rationale_358",
-      "target": "src_scraper_extractor_agrisolusscraper_calculate_consumo"
+      "target": "src_scraper_extractor_agrisolusscraper_calculate_consumo",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6878,9 +6625,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L406",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper_persist_all",
-      "target": "src_scraper_extractor_agrisolusscraper_save_to_sqlite"
+      "target": "src_scraper_extractor_agrisolusscraper_save_to_sqlite",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6888,9 +6635,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L402",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_rationale_402",
-      "target": "src_scraper_extractor_agrisolusscraper_persist_all"
+      "target": "src_scraper_extractor_agrisolusscraper_persist_all",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6898,9 +6645,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L409",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_rationale_409",
-      "target": "src_scraper_extractor_agrisolusscraper_save_to_sqlite"
+      "target": "src_scraper_extractor_agrisolusscraper_save_to_sqlite",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6908,9 +6655,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L489",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_rationale_489",
-      "target": "src_scraper_extractor_agrisolusscraper_parse_html_table1"
+      "target": "src_scraper_extractor_agrisolusscraper_parse_html_table1",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6918,9 +6665,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L515",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_rationale_515",
-      "target": "src_scraper_extractor_agrisolusscraper_extract_js_var"
+      "target": "src_scraper_extractor_agrisolusscraper_extract_js_var",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6928,9 +6675,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L530",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_rationale_530",
-      "target": "src_scraper_extractor_agrisolusscraper_alert_already_sent"
+      "target": "src_scraper_extractor_agrisolusscraper_alert_already_sent",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6938,9 +6685,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L548",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_rationale_548",
-      "target": "src_scraper_extractor_agrisolusscraper_is_new_reading"
+      "target": "src_scraper_extractor_agrisolusscraper_is_new_reading",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6949,9 +6696,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L652",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper_record_global_login_failure",
-      "target": "src_scraper_extractor_agrisolusscraper_record_scraping_failure"
+      "target": "src_scraper_extractor_agrisolusscraper_record_scraping_failure",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6960,9 +6707,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L634",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_agrisolusscraper_record_scraping_failure",
-      "target": "src_scraper_extractor_agrisolusscraper_persist_historico_only"
+      "target": "src_scraper_extractor_agrisolusscraper_persist_historico_only",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6970,9 +6717,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L609",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_rationale_609",
-      "target": "src_scraper_extractor_agrisolusscraper_record_scraping_failure"
+      "target": "src_scraper_extractor_agrisolusscraper_record_scraping_failure",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6980,9 +6727,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L639",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_rationale_639",
-      "target": "src_scraper_extractor_agrisolusscraper_record_global_login_failure"
+      "target": "src_scraper_extractor_agrisolusscraper_record_global_login_failure",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -6990,9 +6737,9 @@
       "source_file": "src/scraper/extractor.py",
       "source_location": "L657",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "src_scraper_extractor_rationale_657",
-      "target": "src_scraper_extractor_agrisolusscraper_persist_historico_only"
+      "target": "src_scraper_extractor_agrisolusscraper_persist_historico_only",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7000,9 +6747,9 @@
       "source_file": "tests/test_analyzer.py",
       "source_location": "L10",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_analyzer",
-      "target": "tests_test_analyzer_temp_db"
+      "target": "tests_test_analyzer_temp_db",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7010,9 +6757,9 @@
       "source_file": "tests/test_analyzer.py",
       "source_location": "L63",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_analyzer",
-      "target": "tests_test_analyzer_test_analyze_silo_and_accuracy"
+      "target": "tests_test_analyzer_test_analyze_silo_and_accuracy",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7020,9 +6767,9 @@
       "source_file": "tests/test_analyzer.py",
       "source_location": "L26",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_analyzer",
-      "target": "tests_test_analyzer_test_insert_and_get_invoices"
+      "target": "tests_test_analyzer_test_insert_and_get_invoices",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7030,9 +6777,9 @@
       "source_file": "tests/test_analyzer.py",
       "source_location": "L41",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_analyzer",
-      "target": "tests_test_analyzer_test_smooth_readings"
+      "target": "tests_test_analyzer_test_smooth_readings",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7040,9 +6787,9 @@
       "source_file": "tests/test_dashboard.py",
       "source_location": "L10",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_dashboard",
-      "target": "tests_test_dashboard_setup_test_db"
+      "target": "tests_test_dashboard_setup_test_db",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7050,9 +6797,9 @@
       "source_file": "tests/test_dashboard.py",
       "source_location": "L44",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_dashboard",
-      "target": "tests_test_dashboard_test_dashboard_loader_sqlite"
+      "target": "tests_test_dashboard_test_dashboard_loader_sqlite",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -7060,9 +6807,9 @@
       "source_file": "tests/test_dashboard.py",
       "source_location": "L45",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_dashboard_rationale_45",
-      "target": "tests_test_dashboard_test_dashboard_loader_sqlite"
+      "target": "tests_test_dashboard_test_dashboard_loader_sqlite",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7070,9 +6817,9 @@
       "source_file": "tests/test_database.py",
       "source_location": "L8",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_database",
-      "target": "tests_test_database_cleanup_test_db"
+      "target": "tests_test_database_cleanup_test_db",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7080,9 +6827,9 @@
       "source_file": "tests/test_database.py",
       "source_location": "L16",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_database",
-      "target": "tests_test_database_test_sqlite_initialization"
+      "target": "tests_test_database_test_sqlite_initialization",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7090,9 +6837,9 @@
       "source_file": "tests/test_periodic_scripts.py",
       "source_location": "L12",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_periodic_scripts",
-      "target": "tests_test_periodic_scripts_setup_test_db"
+      "target": "tests_test_periodic_scripts_setup_test_db",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7100,9 +6847,9 @@
       "source_file": "tests/test_periodic_scripts.py",
       "source_location": "L44",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_periodic_scripts",
-      "target": "tests_test_periodic_scripts_test_daily_summary_telegram_script"
+      "target": "tests_test_periodic_scripts_test_daily_summary_telegram_script",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7110,9 +6857,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L44",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_scraper",
-      "target": "tests_test_scraper_test_calculate_consumo"
+      "target": "tests_test_scraper_test_calculate_consumo",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7120,9 +6867,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L12",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_scraper",
-      "target": "tests_test_scraper_test_db"
+      "target": "tests_test_scraper_test_db",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7130,9 +6877,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L126",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_scraper",
-      "target": "tests_test_scraper_test_is_new_reading_logic"
+      "target": "tests_test_scraper_test_is_new_reading_logic",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7140,9 +6887,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L26",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_scraper",
-      "target": "tests_test_scraper_test_parse_html_table1"
+      "target": "tests_test_scraper_test_parse_html_table1",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7150,9 +6897,9 @@
       "source_file": "tests/test_scraper.py",
       "source_location": "L73",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "tests_test_scraper",
-      "target": "tests_test_scraper_test_process_lote_html_resilience"
+      "target": "tests_test_scraper_test_process_lote_html_resilience",
+      "confidence_score": 1.0
     }
   ],
   "hyperedges": [

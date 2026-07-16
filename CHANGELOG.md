@@ -4,6 +4,23 @@ Todas as alterações significativas deste projeto serão documentadas neste arq
 
 ---
 
+## [1.2.0] - 2026-07-16
+
+### Adicionado
+- **Script de Diagnóstico de Consistência (`scripts/analyze_time_vs_weight.py`)**: Script utilitário para auditar se o peso dos silos varia na plataforma enquanto a data de leitura permanece estática.
+- **Rotina de Envio de Auditoria por Telegram (`scripts/send_audit_telegram.py` & `scripts/run_audit_telegram.sh`)**: Envio automático do relatório diário de telemetria às 16:00 (Brasília), com controle inteligente de expiração de uma semana (expira em 24/07/2026).
+- **Agendamento no Cron de Produção**: Inclusão de tarefa diária de auditoria às 19:00 UTC (16:00 Brasília).
+
+### Modificado / Corrigido
+- **Eixo Y Dinâmico no Gráfico**: Ajuste do Chart.js no frontend (`src/api/static/index.html`) para calcular dinamicamente os limites de mínimo e máximo com 10% de margem baseados nos pontos de dados, garantindo melhor visibilidade de oscilações intradia (com `ymin >= 0`).
+- **Previsão de Esvaziamento com Horário**: 
+  - **Backend (`src/api/main.py`)**: Alterado o formato de data de `previsao_esvaziamento` para retornar o timestamp completo em formato ISO (`YYYY-MM-DDTHH:MM:SS`).
+  - **Frontend (`src/api/static/index.html`)**: Ajustado o cálculo combinado para somar milissegundos à data atual e usar `formatDateTime` na visão de silo individual, mostrando hora e minuto aproximados para esvaziamento.
+- **Helper do Hermes (`scripts/hermes_helper.py`)**: Corrigido bug de tipo ao somar `datetime.date` com um `float` (dias restantes) na estimativa de esvaziamento.
+- **Correção do Daemon de Cron na VPS**: Desativado o daemon conflitante `crond` do BusyBox em produção e habilitado/iniciado o `cronie`, normalizando o agendamento de todas as tarefas de scraping e monitoramento de serviços.
+
+---
+
 ## [1.1.0] - 2026-07-14
 
 ### Adicionado

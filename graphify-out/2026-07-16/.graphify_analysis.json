@@ -1,0 +1,486 @@
+{
+  "communities": {
+    "0": [
+      "scripts_comissioning",
+      "scripts_comissioning_run_comissioning",
+      "scripts_simulate_offline",
+      "scripts_simulate_offline_run_simulation",
+      "src_main_run",
+      "src_scraper_extractor",
+      "src_scraper_extractor_agrisolusscraper",
+      "src_scraper_extractor_agrisolusscraper_alert_already_sent",
+      "src_scraper_extractor_agrisolusscraper_calculate_consumo",
+      "src_scraper_extractor_agrisolusscraper_extract_js_var",
+      "src_scraper_extractor_agrisolusscraper_generate_lotes_config",
+      "src_scraper_extractor_agrisolusscraper_init",
+      "src_scraper_extractor_agrisolusscraper_is_new_reading",
+      "src_scraper_extractor_agrisolusscraper_login",
+      "src_scraper_extractor_agrisolusscraper_parse_html_table1",
+      "src_scraper_extractor_agrisolusscraper_persist_all",
+      "src_scraper_extractor_agrisolusscraper_persist_historico_only",
+      "src_scraper_extractor_agrisolusscraper_process_lote_html",
+      "src_scraper_extractor_agrisolusscraper_record_global_login_failure",
+      "src_scraper_extractor_agrisolusscraper_record_scraping_failure",
+      "src_scraper_extractor_agrisolusscraper_save_to_sqlite",
+      "src_scraper_extractor_agrisolusscraper_scrape_and_persist",
+      "src_scraper_extractor_rationale_129",
+      "src_scraper_extractor_rationale_15",
+      "src_scraper_extractor_rationale_169",
+      "src_scraper_extractor_rationale_33",
+      "src_scraper_extractor_rationale_358",
+      "src_scraper_extractor_rationale_402",
+      "src_scraper_extractor_rationale_409",
+      "src_scraper_extractor_rationale_489",
+      "src_scraper_extractor_rationale_515",
+      "src_scraper_extractor_rationale_530",
+      "src_scraper_extractor_rationale_548",
+      "src_scraper_extractor_rationale_609",
+      "src_scraper_extractor_rationale_639",
+      "src_scraper_extractor_rationale_657",
+      "src_scraper_extractor_rationale_76",
+      "tests_test_scraper",
+      "tests_test_scraper_test_calculate_consumo",
+      "tests_test_scraper_test_db",
+      "tests_test_scraper_test_is_new_reading_logic",
+      "tests_test_scraper_test_parse_html_table1",
+      "tests_test_scraper_test_process_lote_html_resilience"
+    ],
+    "1": [
+      "scripts_analyze_time_vs_weight",
+      "scripts_analyze_time_vs_weight_analyze",
+      "scripts_hermes_helper",
+      "scripts_hermes_helper_add_invoice",
+      "scripts_hermes_helper_get_telemetry_summary",
+      "scripts_send_audit_telegram_run",
+      "src_analysis_silo_analyzer",
+      "src_analysis_silo_analyzer_rationale_103",
+      "src_analysis_silo_analyzer_rationale_128",
+      "src_analysis_silo_analyzer_rationale_187",
+      "src_analysis_silo_analyzer_rationale_19",
+      "src_analysis_silo_analyzer_rationale_263",
+      "src_analysis_silo_analyzer_rationale_58",
+      "src_analysis_silo_analyzer_rationale_79",
+      "src_analysis_silo_analyzer_siloanalyzer",
+      "src_analysis_silo_analyzer_siloanalyzer_analyze_silo",
+      "src_analysis_silo_analyzer_siloanalyzer_evaluate_sensor_accuracy",
+      "src_analysis_silo_analyzer_siloanalyzer_get_combined_analysis",
+      "src_analysis_silo_analyzer_siloanalyzer_get_invoices",
+      "src_analysis_silo_analyzer_siloanalyzer_get_raw_readings",
+      "src_analysis_silo_analyzer_siloanalyzer_init",
+      "src_analysis_silo_analyzer_siloanalyzer_insert_nota_fiscal",
+      "src_analysis_silo_analyzer_siloanalyzer_smooth_readings",
+      "src_dashboard_app",
+      "src_dashboard_app_load_dashboard_data",
+      "src_dashboard_app_main",
+      "src_dashboard_app_rationale_61",
+      "src_database_connection_databaseconnection",
+      "src_database_connection_databaseconnection_init",
+      "src_database_connection_rationale_9",
+      "tests_test_analyzer",
+      "tests_test_analyzer_temp_db",
+      "tests_test_analyzer_test_analyze_silo_and_accuracy",
+      "tests_test_analyzer_test_insert_and_get_invoices",
+      "tests_test_analyzer_test_smooth_readings",
+      "tests_test_dashboard",
+      "tests_test_dashboard_rationale_45",
+      "tests_test_dashboard_setup_test_db",
+      "tests_test_dashboard_test_dashboard_loader_sqlite",
+      "tests_test_database",
+      "tests_test_database_cleanup_test_db",
+      "tests_test_database_test_sqlite_initialization"
+    ],
+    "2": [
+      "datetime",
+      "scripts_generate_lotes_json",
+      "scripts_generate_lotes_json_main",
+      "scripts_housekeep_logs",
+      "scripts_housekeep_logs_run_housekeeping",
+      "scripts_run_daily_summary_telegram",
+      "scripts_run_daily_summary_telegram_main",
+      "scripts_run_log_monitor_main",
+      "scripts_run_log_monitor_py_scripts_run_log_monitor",
+      "scripts_run_periodic_summary_main",
+      "scripts_run_periodic_summary_py_scripts_run_periodic_summary",
+      "scripts_run_sla_report_main",
+      "scripts_run_sla_report_py_scripts_run_sla_report",
+      "scripts_send_audit_telegram",
+      "src_bot_notifier",
+      "src_database_connection",
+      "src_main",
+      "src_main_rationale_1",
+      "src_utils_datetime_parser",
+      "src_utils_datetime_parser_parse_iso_datetime",
+      "src_utils_datetime_parser_rationale_5",
+      "src_utils_log_monitor",
+      "src_utils_log_monitor_cronlogmonitor",
+      "src_utils_log_monitor_cronlogmonitor_analyze_logs",
+      "src_utils_log_monitor_cronlogmonitor_init",
+      "src_utils_log_monitor_rationale_10",
+      "src_utils_log_monitor_rationale_20",
+      "src_utils_logger",
+      "src_utils_logger_rationale_5",
+      "src_utils_logger_setup_logger",
+      "tests_test_basic",
+      "tests_test_basic_extract_js_var",
+      "tests_test_basic_test_offline_parser",
+      "tests_test_periodic_scripts",
+      "tests_test_periodic_scripts_setup_test_db",
+      "tests_test_periodic_scripts_test_daily_summary_telegram_script"
+    ],
+    "3": [
+      "docs_gerarjson_file",
+      "docs_gerarjson_lote_mapping",
+      "knowledge_architecture_beautifulsoup_scraper",
+      "knowledge_architecture_cron_scheduler",
+      "knowledge_architecture_data_flow",
+      "knowledge_architecture_file",
+      "knowledge_architecture_mer",
+      "knowledge_architecture_sqlite_fallback",
+      "knowledge_architecture_streamlit_dashboard",
+      "knowledge_architecture_supabase_cloud",
+      "knowledge_architecture_sync_service",
+      "knowledge_architecture_table_alertas",
+      "knowledge_architecture_table_calibracoes",
+      "knowledge_architecture_table_leituras",
+      "knowledge_architecture_table_lotes",
+      "knowledge_architecture_table_silos",
+      "knowledge_architecture_telegram_notifier",
+      "knowledge_dashboard_community_deploy_file",
+      "knowledge_dashboard_community_deploy_streamlit_cloud",
+      "knowledge_development_plan_file",
+      "knowledge_development_plan_project_architecture",
+      "knowledge_supabase_tutorial_file",
+      "knowledge_supabase_tutorial_sdk_operations",
+      "requirements_file",
+      "scripts_batch_details_file",
+      "scripts_listagem_file"
+    ],
+    "4": [
+      "scripts_test_telegram",
+      "scripts_test_telegram_run_telegram_commissioning",
+      "src_bot_notifier_rationale_10",
+      "src_bot_notifier_rationale_107",
+      "src_bot_notifier_rationale_23",
+      "src_bot_notifier_rationale_49",
+      "src_bot_notifier_rationale_70",
+      "src_bot_notifier_rationale_83",
+      "src_bot_notifier_telegramnotifier",
+      "src_bot_notifier_telegramnotifier_init",
+      "src_bot_notifier_telegramnotifier_send_async_message",
+      "src_bot_notifier_telegramnotifier_send_daily_sla_report",
+      "src_bot_notifier_telegramnotifier_send_immediate_alert",
+      "src_bot_notifier_telegramnotifier_send_message",
+      "src_bot_notifier_telegramnotifier_send_periodic_summary"
+    ],
+    "5": [
+      "basemodel",
+      "src_api_main",
+      "src_api_main_add_invoice",
+      "src_api_main_get_combined_silo_analysis",
+      "src_api_main_get_dashboard_stats",
+      "src_api_main_get_recent_alerts",
+      "src_api_main_get_silo_accuracy",
+      "src_api_main_get_silo_analysis",
+      "src_api_main_health_check",
+      "src_api_main_invoicecreate",
+      "src_api_main_list_invoices",
+      "src_api_main_rationale_130"
+    ],
+    "6": [
+      "tests_test_cron",
+      "tests_test_cron_rationale_10",
+      "tests_test_cron_rationale_23",
+      "tests_test_cron_rationale_40",
+      "tests_test_cron_test_cron_wrappers_executable",
+      "tests_test_cron_test_cron_wrappers_existence",
+      "tests_test_cron_test_setup_cron_script_alignment"
+    ],
+    "7": [
+      "knowledge_architecture_table_historico_scraping",
+      "knowledge_consideracoes_file",
+      "knowledge_consideracoes_resolved_questions",
+      "readme_alpine_cronie",
+      "readme_file",
+      "readme_sla_metric"
+    ],
+    "8": [
+      "connection",
+      "src_database_connection_databaseconnection_get_sqlite_connection",
+      "src_database_connection_databaseconnection_init_local_db",
+      "src_database_connection_rationale_19",
+      "src_database_connection_rationale_39"
+    ],
+    "9": [
+      "knowledge_aprendizados_cron_pythonpath",
+      "knowledge_aprendizados_file",
+      "knowledge_aprendizados_push_only_bot",
+      "knowledge_aprendizados_sqlite_path",
+      "knowledge_aprendizados_timezone_naive_parser"
+    ],
+    "10": [
+      "knowledge_completude_file",
+      "knowledge_completude_project_completeness",
+      "knowledge_roadmap_fases_planejadas",
+      "knowledge_roadmap_file"
+    ],
+    "11": [
+      "scripts_analyze_silos",
+      "scripts_analyze_silos_pythonpath",
+      "scripts_analyze_silos_sh__entry"
+    ],
+    "12": [
+      "scripts_run_api",
+      "scripts_run_api_pythonpath",
+      "scripts_run_api_sh__entry"
+    ],
+    "13": [
+      "scripts_run_audit_telegram",
+      "scripts_run_audit_telegram_pythonpath",
+      "scripts_run_audit_telegram_sh__entry"
+    ],
+    "14": [
+      "scripts_run_cron",
+      "scripts_run_cron_pythonpath",
+      "scripts_run_cron_sh__entry"
+    ],
+    "15": [
+      "scripts_run_daily_summary_telegram_pythonpath",
+      "scripts_run_daily_summary_telegram_sh__entry",
+      "scripts_run_daily_summary_telegram_sh_scripts_run_daily_summary_telegram"
+    ],
+    "16": [
+      "scripts_run_log_monitor_pythonpath",
+      "scripts_run_log_monitor_sh__entry",
+      "scripts_run_log_monitor_sh_scripts_run_log_monitor"
+    ],
+    "17": [
+      "scripts_run_periodic_summary_pythonpath",
+      "scripts_run_periodic_summary_sh__entry",
+      "scripts_run_periodic_summary_sh_scripts_run_periodic_summary"
+    ],
+    "18": [
+      "scripts_run_sla_report_pythonpath",
+      "scripts_run_sla_report_sh__entry",
+      "scripts_run_sla_report_sh_scripts_run_sla_report"
+    ],
+    "19": [
+      "scripts_deploy_1_install_env",
+      "scripts_deploy_1_install_env_sh__entry"
+    ],
+    "20": [
+      "scripts_deploy_2_setup_env",
+      "scripts_deploy_2_setup_env_sh__entry"
+    ],
+    "21": [
+      "scripts_deploy_3_test_db",
+      "scripts_deploy_3_test_db_sh__entry"
+    ],
+    "22": [
+      "scripts_deploy_4_setup_cron",
+      "scripts_deploy_4_setup_cron_sh__entry"
+    ],
+    "23": [
+      "scripts_deploy_5_test_offline",
+      "scripts_deploy_5_test_offline_sh__entry"
+    ],
+    "24": [
+      "scripts_deploy_6_test_telegram",
+      "scripts_deploy_6_test_telegram_sh__entry"
+    ],
+    "25": [
+      "scripts_deploy_post_receive",
+      "scripts_deploy_post_receive__entry"
+    ],
+    "26": [
+      "scripts_inspect_json_alerts_calibrations",
+      "scripts_inspect_json_alerts_calibrations_extract_js_var"
+    ],
+    "27": [
+      "scripts_inspect_json_vars",
+      "scripts_inspect_json_vars_extract_js_var"
+    ],
+    "28": [
+      "client"
+    ],
+    "29": [
+      "scripts_dump_all_js_variables"
+    ],
+    "30": [
+      "scripts_inspect_details_html"
+    ],
+    "31": [
+      "scripts_inspect_listagem"
+    ],
+    "32": [
+      "scripts_inspect_lotes_listagem"
+    ],
+    "33": [
+      "scripts_parse_html_test"
+    ],
+    "34": [
+      "scripts_test_scraper"
+    ],
+    "35": [
+      "src_init"
+    ],
+    "36": [
+      "src_utils_init"
+    ],
+    "37": [
+      "tests_init"
+    ]
+  },
+  "cohesion": {
+    "0": 0.06976744186046512,
+    "1": 0.07897793263646923,
+    "2": 0.11904761904761904,
+    "3": 0.11076923076923077,
+    "4": 0.18095238095238095,
+    "5": 0.18181818181818182,
+    "6": 0.2857142857142857,
+    "7": 0.3333333333333333,
+    "8": 0.4,
+    "9": 0.4,
+    "10": 0.5,
+    "11": 0.6666666666666666,
+    "12": 0.6666666666666666,
+    "13": 0.6666666666666666,
+    "14": 0.6666666666666666,
+    "15": 0.6666666666666666,
+    "16": 0.6666666666666666,
+    "17": 0.6666666666666666,
+    "18": 0.6666666666666666,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0,
+    "29": 1.0,
+    "30": 1.0,
+    "31": 1.0,
+    "32": 1.0,
+    "33": 1.0,
+    "34": 1.0,
+    "35": 1.0,
+    "36": 1.0,
+    "37": 1.0
+  },
+  "gods": [
+    {
+      "id": "src_database_connection_databaseconnection",
+      "label": "DatabaseConnection",
+      "degree": 45
+    },
+    {
+      "id": "src_scraper_extractor_agrisolusscraper",
+      "label": "AgrisolusScraper",
+      "degree": 29
+    },
+    {
+      "id": "src_analysis_silo_analyzer_siloanalyzer",
+      "label": "SiloAnalyzer",
+      "degree": 19
+    },
+    {
+      "id": "src_bot_notifier_telegramnotifier",
+      "label": "TelegramNotifier",
+      "degree": 17
+    },
+    {
+      "id": "src_utils_logger_setup_logger",
+      "label": "setup_logger()",
+      "degree": 10
+    },
+    {
+      "id": "src_utils_datetime_parser_parse_iso_datetime",
+      "label": "parse_iso_datetime()",
+      "degree": 8
+    },
+    {
+      "id": "knowledge_architecture_supabase_cloud",
+      "label": "Supabase Cloud Database",
+      "degree": 8
+    },
+    {
+      "id": "knowledge_architecture_beautifulsoup_scraper",
+      "label": "Scraper com BeautifulSoup4",
+      "degree": 7
+    },
+    {
+      "id": "src_utils_log_monitor_cronlogmonitor",
+      "label": "CronLogMonitor",
+      "degree": 6
+    },
+    {
+      "id": "src_dashboard_app_load_dashboard_data",
+      "label": "load_dashboard_data()",
+      "degree": 6
+    }
+  ],
+  "surprises": [
+    {
+      "source": "setup_test_db()",
+      "target": "DatabaseConnection",
+      "source_files": [
+        "tests/test_periodic_scripts.py",
+        "src/database/connection.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; bridges separate communities; peripheral node `setup_test_db()` unexpectedly reaches hub `DatabaseConnection`"
+    },
+    {
+      "source": "test_db()",
+      "target": "DatabaseConnection",
+      "source_files": [
+        "tests/test_scraper.py",
+        "src/database/connection.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; bridges separate communities; peripheral node `test_db()` unexpectedly reaches hub `DatabaseConnection`"
+    },
+    {
+      "source": "main()",
+      "target": "TelegramNotifier",
+      "source_files": [
+        "scripts/run_log_monitor.py",
+        "src/bot/notifier.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "main()",
+      "target": "TelegramNotifier",
+      "source_files": [
+        "scripts/run_periodic_summary.py",
+        "src/bot/notifier.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "main()",
+      "target": "DatabaseConnection",
+      "source_files": [
+        "scripts/run_periodic_summary.py",
+        "src/database/connection.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; bridges separate communities"
+    }
+  ],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}
