@@ -828,18 +828,20 @@
                     if (rate > 5.0 && data.total_peso_atual_kg > 0.0) {
                         days = data.total_peso_atual_kg / rate;
                         const estDt = new Date();
-                        estDt.setDate(estDt.getDate() + days);
+                        estDt.setTime(estDt.getTime() + (days * 24 * 60 * 60 * 1000));
                         const y = estDt.getFullYear();
                         const m = String(estDt.getMonth() + 1).padStart(2, '0');
                         const d = String(estDt.getDate()).padStart(2, '0');
-                        forecast = `${d}/${m}/${y}`;
+                        const hh = String(estDt.getHours()).padStart(2, '0');
+                        const mm = String(estDt.getMinutes()).padStart(2, '0');
+                        forecast = `${d}/${m}/${y} ${hh}:${mm}`;
                     }
                 } else {
                     const activeSiloData = data.silos.find(s => s.silo_id === activeSilo);
                     if (activeSiloData) {
                         rate = activeSiloData.consumo_diario_medio_kg;
                         days = activeSiloData.dias_restantes;
-                        forecast = activeSiloData.previsao_esvaziamento ? formatDate(activeSiloData.previsao_esvaziamento) : 'Sem consumo';
+                        forecast = activeSiloData.previsao_esvaziamento ? formatDateTime(activeSiloData.previsao_esvaziamento) : 'Sem consumo';
                     }
                 }
 

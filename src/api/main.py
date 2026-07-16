@@ -191,7 +191,7 @@ def get_dashboard_stats():
                 days_remaining = current_weight / avg_daily_consumption
                 # Calcula data estimada
                 est_dt = datetime.now() + timedelta(days=days_remaining)
-                forecast_depletion_date = est_dt.strftime("%Y-%m-%d")
+                forecast_depletion_date = est_dt.strftime("%Y-%m-%dT%H:%M:%S")
             
             silos_stats.append({
                 "silo_id": silo_id,
