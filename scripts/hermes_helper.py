@@ -104,8 +104,6 @@ def get_telemetry_summary():
         if avg_cons > 5.0 and total_weight > 0.0:
             days_num = total_weight / avg_cons
             days_remaining = f"{days_num:.1f} dias"
-            est_dt = datetime.now().date() + argparse.Namespace(days=days_num).days
-            # Utilizar um cálculo simples de soma de dias para o datetime
             from datetime import timedelta
             est_dt = datetime.now() + timedelta(days=days_num)
             forecast_date = est_dt.strftime("%d/%m/%Y")
